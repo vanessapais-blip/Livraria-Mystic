@@ -21,7 +21,7 @@
         }
 
         header {
-            height: 75px;
+            min-height: 75px;
             background: #303030;
             border-bottom: 1px solid #444444;
 
@@ -29,7 +29,7 @@
             align-items: center;
             justify-content: space-between;
 
-            padding: 0 40px;
+            padding: 15px 40px;
         }
 
         .logo {
@@ -81,7 +81,7 @@
 
             font-size: 15px;
 
-            margin-bottom: 35px;
+            margin-bottom: 25px;
         }
 
         .pesquisa:focus {
@@ -109,9 +109,10 @@
             cursor: pointer;
         }
 
-        .categoria:hover {
-            background: #3b3b3b;
-            color: white;
+        .categoria:hover,
+        .categoria.ativo {
+            background: #eeeeee;
+            color: #222222;
         }
 
         .titulo {
@@ -121,7 +122,6 @@
 
         .livros {
             display: grid;
-
             grid-template-columns:
                 repeat(auto-fit, minmax(190px, 1fr));
 
@@ -172,7 +172,6 @@
         .categoria-livro {
             color: #777777;
             font-size: 13px;
-
             margin-top: 7px;
         }
 
@@ -196,10 +195,36 @@
             background: #cccccc;
         }
 
+        #nenhum {
+            display: none;
+
+            color: #999999;
+            text-align: center;
+
+            padding: 40px 0;
+        }
+
         footer {
             text-align: center;
             padding: 40px;
             color: #777777;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .titulo-principal {
+                font-size: 30px;
+            }
         }
     </style>
 </head>
@@ -252,35 +277,36 @@
 
 
         <input
+            id="pesquisa"
             class="pesquisa"
             type="text"
-            placeholder="🔍 Pesquisar livros..."
+            placeholder="🔍 Pesquisar por título ou autor..."
         >
 
 
         <div class="categorias">
 
-            <button class="categoria">
+            <button class="categoria ativo" data-categoria="Todos">
                 Todos
             </button>
 
-            <button class="categoria">
+            <button class="categoria" data-categoria="Romance">
                 Romance
             </button>
 
-            <button class="categoria">
+            <button class="categoria" data-categoria="Fantasia">
                 Fantasia
             </button>
 
-            <button class="categoria">
+            <button class="categoria" data-categoria="Aventura">
                 Aventura
             </button>
 
-            <button class="categoria">
+            <button class="categoria" data-categoria="Mistério">
                 Mistério
             </button>
 
-            <button class="categoria">
+            <button class="categoria" data-categoria="Clássicos">
                 Clássicos
             </button>
 
@@ -292,10 +318,16 @@
         </h2>
 
 
-        <section class="livros">
+        <section class="livros" id="listaLivros">
 
 
-            <article class="livro">
+            <!-- LIVRO 1 -->
+
+            <article
+                class="livro"
+                data-categoria="Clássicos"
+                data-nome="O Pequeno Príncipe Antoine de Saint-Exupéry"
+            >
 
                 <div class="capa">
                     📕
@@ -323,7 +355,13 @@
             </article>
 
 
-            <article class="livro">
+            <!-- LIVRO 2 -->
+
+            <article
+                class="livro"
+                data-categoria="Fantasia"
+                data-nome="Livro de Fantasia"
+            >
 
                 <div class="capa">
                     📘
@@ -341,17 +379,20 @@
                     Fantasia
                 </p>
 
-                <a
-                    href="#"
-                    class="botao"
-                >
+                <a href="#" class="botao">
                     Em breve
                 </a>
 
             </article>
 
 
-            <article class="livro">
+            <!-- LIVRO 3 -->
+
+            <article
+                class="livro"
+                data-categoria="Aventura"
+                data-nome="Livro de Aventura"
+            >
 
                 <div class="capa">
                     📗
@@ -369,17 +410,20 @@
                     Aventura
                 </p>
 
-                <a
-                    href="#"
-                    class="botao"
-                >
+                <a href="#" class="botao">
                     Em breve
                 </a>
 
             </article>
 
 
-            <article class="livro">
+            <!-- LIVRO 4 -->
+
+            <article
+                class="livro"
+                data-categoria="Mistério"
+                data-nome="Livro de Mistério"
+            >
 
                 <div class="capa">
                     📙
@@ -397,10 +441,7 @@
                     Mistério
                 </p>
 
-                <a
-                    href="#"
-                    class="botao"
-                >
+                <a href="#" class="botao">
                     Em breve
                 </a>
 
@@ -408,6 +449,11 @@
 
 
         </section>
+
+
+        <p id="nenhum">
+            Nenhum livro encontrado.
+        </p>
 
     </main>
 
@@ -418,6 +464,84 @@
 
     </footer>
 
-</body>
 
-</html>
+    <script>
+
+        const pesquisa = document.getElementById("pesquisa");
+        const livros = document.querySelectorAll(".livro");
+        const botoesCategoria = document.querySelectorAll(".categoria");
+        const mensagemNenhum = document.getElementById("nenhum");
+
+        let categoriaAtual = "Todos";
+
+
+        function atualizarLivros() {
+
+            const texto = pesquisa.value.toLowerCase().trim();
+
+            let encontrados = 0;
+
+
+            livros.forEach(function(livro) {
+
+                const nome = livro.dataset.nome.toLowerCase();
+                const categoria = livro.dataset.categoria;
+
+                const correspondePesquisa =
+                    nome.includes(texto);
+
+                const correspondeCategoria =
+                    categoriaAtual === "Todos" ||
+                    categoria === categoriaAtual;
+
+
+                if (
+                    correspondePesquisa &&
+                    correspondeCategoria
+                ) {
+
+                    livro.style.display = "block";
+
+                    encontrados++;
+
+                } else {
+
+                    livro.style.display = "none";
+
+                }
+
+            });
+
+
+            if (encontrados === 0) {
+
+                mensagemNenhum.style.display = "block";
+
+            } else {
+
+                mensagemNenhum.style.display = "none";
+
+            }
+
+        }
+
+
+        pesquisa.addEventListener(
+            "input",
+            atualizarLivros
+        );
+
+
+        botoesCategoria.forEach(function(botao) {
+
+            botao.addEventListener(
+                "click",
+                function() {
+
+                    botoesCategoria.forEach(function(item) {
+                        item.classList.remove("ativo");
+                    });
+
+                    botao.classList.add("ativo");
+
+                    categoriaAtual =
