@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Mystic — Blogs</title>
 
   <style>
@@ -22,6 +23,7 @@
       background: #303030;
       border-bottom: 1px solid #444;
       padding: 18px 40px;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -31,7 +33,7 @@
     .logo {
       font-size: 28px;
       font-weight: bold;
-      color: white;
+      color: #ffffff;
     }
 
     nav {
@@ -41,13 +43,13 @@
     }
 
     nav a {
-      color: #ddd;
+      color: #dddddd;
       text-decoration: none;
       font-size: 15px;
     }
 
     nav a:hover {
-      color: white;
+      color: #ffffff;
     }
 
     main {
@@ -56,150 +58,29 @@
       padding: 0 25px;
     }
 
-    .topo {
+    .titulo {
       margin-bottom: 35px;
     }
 
-    .topo h1 {
-      font-size: 38px;
+    .titulo h1 {
+      font-size: 40px;
       margin-bottom: 10px;
     }
 
-    .topo p {
-      color: #aaa;
+    .titulo p {
+      color: #aaaaaa;
       font-size: 17px;
     }
 
     .blogs {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 25px;
     }
 
     .blog-card {
       background: #303030;
-      border: 1px solid #444;
+      border: 1px solid #444444;
       border-radius: 15px;
       overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-
-    .blog-card:hover {
-      transform: translateY(-4px);
-      border-color: #666;
-    }
-
-    .imagem {
-      height: 180px;
-      background: #383838;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 65px;
-    }
-
-    .conteudo {
-      padding: 22px;
-    }
-
-    .categoria {
-      color: #aaa;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .conteudo h2 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .conteudo p {
-      color: #bbb;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .ler {
-      display: inline-block;
-      padding: 10px 16px;
-      background: #444;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-    }
-
-    .ler:hover {
-      background: #555;
-    }
-
-    footer {
-      text-align: center;
-      color: #999;
-      padding: 35px 20px;
-      margin-top: 50px;
-      border-top: 1px solid #444;
-    }
-
-    @media (max-width: 700px) {
-      header {
-        padding: 18px 20px;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .topo h1 {
-        font-size: 32px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="logo">Mystic</div>
-
-    <nav>
-      <a href="home.html">Início</a>
-      <a href="livros.html">Livros</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="redacoes.html">Redações</a>
-      <a href="perfil.html">👤 Meu perfil</a>
-    </nav>
-  </header>
-
-  <main>
-
-    <div class="topo">
-      <h1>Blogs</h1>
-      <p>Descubra artigos sobre literatura, leitura, autores e histórias.</p>
-    </div>
-
-    <section class="blogs">
-
-      <div class="blog-card">
-        <div class="imagem">📚</div>
-
-        <div class="conteudo">
-          <div class="categoria">Literatura</div>
-
-          <h2>5 livros que todo leitor deveria conhecer</h2>
-
-          <p>
-            Algumas histórias conseguem atravessar gerações e continuar
-            despertando novas interpretações.
-          </p>
-
-          <a href="blog.html" class="ler">Ler artigo</a>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="imagem">🔎</div>
-
-        <div class="conteudo">
-          <div class="categoria">Leitura</div>
-
-          <h2
+      min
