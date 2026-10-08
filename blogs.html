@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mystic - Blog</title>
+    <title>Mystic - Blogs</title>
 
     <style>
         * {
@@ -53,73 +53,94 @@
         }
 
         main {
-            max-width: 850px;
+            max-width: 1100px;
             margin: auto;
-            padding: 60px 25px;
+            padding: 50px 25px;
         }
 
-        .voltar {
-            display: inline-block;
-
-            color: #bbbbbb;
-            text-decoration: none;
-
-            margin-bottom: 35px;
+        .titulo-principal {
+            font-size: 36px;
+            margin-bottom: 10px;
         }
 
-        .voltar:hover {
-            color: white;
-        }
-
-        .categoria {
-            color: #999999;
-            font-size: 13px;
-            margin-bottom: 12px;
-        }
-
-        h1 {
-            font-size: 40px;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
-
-        .subtitulo {
+        .descricao {
             color: #999999;
             font-size: 17px;
-            line-height: 1.6;
             margin-bottom: 40px;
         }
 
-        .imagem {
-            height: 280px;
+        .blogs {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
 
+            gap: 25px;
+        }
+
+        .blog {
             background: #303030;
             border: 1px solid #404040;
             border-radius: 12px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .blog:hover {
+            transform: translateY(-4px);
+            border-color: #666666;
+        }
+
+        .imagem-blog {
+            height: 180px;
+
+            background: #3b3b3b;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            font-size: 80px;
-
-            margin-bottom: 40px;
+            font-size: 60px;
         }
 
-        .texto {
-            color: #cccccc;
-            font-size: 17px;
-            line-height: 1.8;
+        .conteudo-blog {
+            padding: 20px;
         }
 
-        .texto p {
-            margin-bottom: 25px;
+        .categoria {
+            color: #999999;
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
-        .texto h2 {
-            color: #eeeeee;
-            font-size: 25px;
-            margin: 35px 0 15px;
+        .blog h2 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .blog p {
+            color: #999999;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .botao {
+            display: block;
+
+            margin-top: 18px;
+            padding: 10px;
+
+            background: #eeeeee;
+            color: #222222;
+
+            text-align: center;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+        }
+
+        .botao:hover {
+            background: #cccccc;
         }
 
         footer {
@@ -140,7 +161,7 @@
                 gap: 15px;
             }
 
-            h1 {
+            .titulo-principal {
                 font-size: 30px;
             }
         }
@@ -185,98 +206,139 @@
 
     <main>
 
-        <a href="blogs.html" class="voltar">
-            ← Voltar para Blogs
-        </a>
-
-
-        <div class="categoria">
-            LITERATURA
-        </div>
-
-
-        <h1>
-            5 livros que todo leitor deveria conhecer
+        <h1 class="titulo-principal">
+            Blogs
         </h1>
 
-
-        <p class="subtitulo">
-            Uma seleção de obras marcantes para quem quer
-            descobrir novos mundos através da leitura.
+        <p class="descricao">
+            Descubra histórias, curiosidades e conteúdos sobre literatura.
         </p>
 
 
-        <div class="imagem">
-            📚
-        </div>
+        <section class="blogs">
 
 
-        <article class="texto">
+            <article class="blog">
 
-            <p>
-                A literatura permite conhecer diferentes épocas,
-                culturas, personagens e maneiras de enxergar o mundo.
-                Por isso, algumas obras acabam se tornando referências
-                para diferentes gerações de leitores.
-            </p>
+                <div class="imagem-blog">
+                    📚
+                </div>
 
+                <div class="conteudo-blog">
 
-            <h2>
-                1. O Pequeno Príncipe
-            </h2>
+                    <div class="categoria">
+                        LITERATURA
+                    </div>
 
-            <p>
-                A obra de Antoine de Saint-Exupéry apresenta uma
-                narrativa aparentemente simples, mas cheia de
-                reflexões sobre amizade, relações humanas e
-                crescimento.
-            </p>
+                    <h2>
+                        5 livros que todo leitor deveria conhecer
+                    </h2>
 
+                    <p>
+                        Uma seleção de obras marcantes para quem
+                        quer descobrir novos mundos através da leitura.
+                    </p>
 
-            <h2>
-                2. Aventuras e descobertas
-            </h2>
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
 
-            <p>
-                Livros de aventura podem transportar o leitor para
-                lugares imaginários e apresentar personagens que
-                enfrentam desafios, escolhas e descobertas.
-            </p>
+                </div>
+
+            </article>
 
 
-            <h2>
-                3. Grandes clássicos
-            </h2>
+            <article class="blog">
 
-            <p>
-                Os clássicos continuam sendo lidos porque muitas
-                de suas questões permanecem relevantes mesmo depois
-                de muitos anos.
-            </p>
+                <div class="imagem-blog">
+                    ✍️
+                </div>
+
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        LEITURA
+                    </div>
+
+                    <h2>
+                        Como escolher seu próximo livro
+                    </h2>
+
+                    <p>
+                        Algumas maneiras simples de encontrar
+                        uma leitura que combine com seus interesses.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
 
 
-            <h2>
-                4. Histórias que despertam reflexão
-            </h2>
+            <article class="blog">
 
-            <p>
-                Uma boa leitura não precisa apenas contar uma história.
-                Ela também pode provocar perguntas e incentivar o
-                leitor a pensar sobre diferentes assuntos.
-            </p>
+                <div class="imagem-blog">
+                    🕯️
+                </div>
+
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        CURIOSIDADES
+                    </div>
+
+                    <h2>
+                        Curiosidades sobre grandes escritores
+                    </h2>
+
+                    <p>
+                        Conheça fatos interessantes sobre autores
+                        que marcaram a história da literatura.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
 
 
-            <h2>
-                5. Encontrando seu próprio estilo
-            </h2>
+            <article class="blog">
 
-            <p>
-                Não existe uma única forma correta de gostar de livros.
-                Experimentar diferentes gêneros é uma maneira de
-                descobrir quais histórias mais combinam com cada leitor.
-            </p>
+                <div class="imagem-blog">
+                    🌙
+                </div>
 
-        </article>
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        MISTICISMO
+                    </div>
+
+                    <h2>
+                        Por que histórias misteriosas nos atraem?
+                    </h2>
+
+                    <p>
+                        Uma reflexão sobre o fascínio humano por
+                        mistério, suspense e histórias desconhecidas.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </section>
 
     </main>
 
