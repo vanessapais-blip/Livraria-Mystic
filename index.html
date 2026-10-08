@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,23 +16,24 @@
 
         body {
             min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background: #252525;
+            background: #242424;
             color: #eeeeee;
+            font-family: Arial, sans-serif;
 
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
         }
 
         .login {
             width: 90%;
             max-width: 400px;
-            background: #303030;
             padding: 40px;
+
+            background: #303030;
             border-radius: 18px;
 
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
         }
 
         .logo {
@@ -41,62 +43,65 @@
 
         .logo h1 {
             font-size: 42px;
-            font-weight: 600;
-            letter-spacing: 2px;
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .logo p {
+            color: #999999;
             margin-top: 5px;
-            color: #aaaaaa;
-            font-size: 15px;
         }
 
-        .login h2 {
-            font-size: 24px;
+        h2 {
             margin-bottom: 25px;
+            font-size: 24px;
         }
 
         .campo {
             margin-bottom: 18px;
         }
 
-        .campo label {
+        label {
             display: block;
             margin-bottom: 7px;
             color: #cccccc;
         }
 
-        .campo input {
+        input {
             width: 100%;
             padding: 13px;
-            border: 1px solid #555555;
-            border-radius: 8px;
 
             background: #222222;
             color: white;
 
+            border: 1px solid #4a4a4a;
+            border-radius: 8px;
+
             font-size: 15px;
-            outline: none;
         }
 
-        .campo input:focus {
+        input:focus {
+            outline: none;
             border-color: #888888;
         }
 
         .entrar {
+            display: block;
             width: 100%;
-            padding: 14px;
 
-            border: none;
-            border-radius: 8px;
+            padding: 14px;
 
             background: #eeeeee;
             color: #222222;
 
-            font-size: 16px;
+            border-radius: 8px;
+
+            text-align: center;
+            text-decoration: none;
+
             font-weight: bold;
 
-            cursor: pointer;
+            margin-top: 25px;
         }
 
         .entrar:hover {
@@ -106,6 +111,7 @@
         .cadastro {
             text-align: center;
             margin-top: 22px;
+
             color: #999999;
             font-size: 14px;
         }
@@ -114,16 +120,60 @@
             color: #eeeeee;
             text-decoration: none;
         }
-
-        .cadastro a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
+
 
 <body>
 
     <div class="login">
 
         <div class="logo">
-            <h1>Myst
+            <h1>Mystic</h1>
+            <p>Livraria</p>
+        </div>
+
+
+        <h2>Entrar</h2>
+
+
+        <div class="campo">
+            <label for="email">E-mail</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Digite seu e-mail"
+            >
+        </div>
+
+
+        <div class="campo">
+            <label for="senha">Senha</label>
+
+            <input
+                type="password"
+                id="senha"
+                placeholder="Digite sua senha"
+            >
+        </div>
+
+
+        <a href="home.html" class="entrar">
+            Entrar
+        </a>
+
+
+        <div class="cadastro">
+            Ainda não possui uma conta?
+
+            <a href="#">
+                Criar conta
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
