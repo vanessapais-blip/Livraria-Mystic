@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configurações — Mystic</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #242424;
+            color: #eee;
+        }
+
+        /* CABEÇALHO */
+
+        header {
+            background: #303030;
+            border-bottom: 1px solid #444;
+
+            padding: 18px 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+
+            color: #eee;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #ccc;
+            text-decoration: none;
+
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /* CONTAINER */
+
+        .container {
+            max-width: 900px;
+
+            margin: 40px auto;
+
+            padding: 0 20px;
+        }
+
+        /* TÍTULO */
+
+        .cabecalho {
+            margin-bottom: 30px;
+        }
+
+        .cabecalho h1 {
+            font-size: 28px;
+
+            margin-bottom: 8px;
+        }
+
+        .cabecalho p {
+            color: #999;
+
+            font-size: 15px;
+        }
+
+        /* CONFIGURAÇÕES */
+
+        .configuracoes {
+            background: #303030;
+
+            border: 1px solid #444;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+        }
+
+        .config-item {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 22px;
+
+            border-bottom: 1px solid #444;
+        }
+
+        .config-item:last-child {
+            border-bottom: none;
+        }
+
+        .config-info {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+        .icone {
+            width: 45px;
+            height: 45px;
+
+            background: #3b3b3b;
+
+            border: 1px solid #4a4a4a;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+        .config-texto strong {
+            display: block;
+
+            margin-bottom: 5px;
+
+            font-size: 16px;
+        }
+
+        .config-texto span {
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+        }
+
+        /* BOTÕES */
+
+        .botao {
+            background: #444;
+
+            border: 1px solid #555;
+
+            color: #eee;
+
+            padding: 9px 15px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            white-space: nowrap;
+        }
+
+        .botao:hover {
+            background: #555;
+        }
+
+        .botao-perigo {
+            color: #ff8a8a;
+        }
+
+        /* PESQUISA */
+
+        .pesquisa {
+            margin-top: 30px;
+
+            background: #303030;
+
+            border: 1px solid #444;
+
+            border-radius: 12px;
+
+            padding: 25px;
+        }
+
+        .pesquisa h2 {
+            font-size: 20px;
+
+            margin-bottom: 8px;
+        }
+
+        .pesquisa p {
+            color: #999;
+
+            font-size: 14px;
+
+            margin-bottom: 18px;
+        }
+
+        .barra-pesquisa {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .barra-pesquisa input {
+            flex: 1;
+
+            background: #242424;
+
+            border: 1px solid #555;
+
+            color: #eee;
+
+            padding: 12px 15px;
+
+            border-radius: 8px;
+
+            outline: none;
+        }
+
+        .barra-pesquisa input:focus {
+            border-color: #777;
+        }
+
+        .barra-pesquisa button {
+            background: #444;
+
+            border: 1px solid #555;
+
+            color: #eee;
+
+            padding: 0 18px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+        }
+
+        .barra-pesquisa button:hover {
+            background: #555;
+        }
+
+        /* VOLTAR */
+
+        .voltar {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            color: #aaa;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+        .voltar:hover {
+            color: white;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            text-align: center;
+
+            color: #777;
+
+            padding: 40px 20px;
+
+            margin-top: 50px;
+
+            border-top: 1px solid #444;
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 650px) {
+
+            header {
+                padding: 18px 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+            .config-item {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .barra-pesquisa {
+                flex-direction: column;
+            }
+
+            .barra-pesquisa button {
+                padding: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- CABEÇALHO -->
+
+<header>
+
+    <a href="home.html" class="logo">
+        Mystic
+    </a>
+
+
+    <nav>
+
+        <a href="home.html">
+            Início
+        </a>
+
+        <a href="livros.html">
+            Livros
+        </a>
+
+        <a href="blogs.html">
+            Blogs
+        </a>
+
+        <a href="redacoes.html">
+            Redações
+        </a>
+
+        <a href="perfil.html">
+            Meu perfil
+        </a>
+
+        <a href="configuracoes.html">
+            ⚙️ Configurações
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<div class="container">
+
+
+    <!-- TÍTULO -->
+
+    <section class="cabecalho">
+
+        <h1>
+            ⚙️ Configurações
+        </h1>
+
+        <p>
+            Gerencie as configurações da sua conta na Mystic.
+        </p>
+
+    </section>
+
+
+
+    <!-- CONFIGURAÇÕES -->
+
+    <section class="configuracoes">
+
+
+        <!-- CONTA -->
+
+        <div class="config-item">
+
+            <div class="config-info">
+
+                <div class="icone">
+                    👤
+                </div>
+
+                <div class="config-texto">
+
+                    <strong>
+                        Conta e perfil
+                    </strong>
+
+                    <span>
+                        Altere seu nome, descrição e informações pessoais.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <a href="perfil.html" class="botao">
+                Editar
+            </a>
+
+        </div>
+
+
+
+        <!-- APARÊNCIA -->
+
+        <div class="config-item">
+
+            <div class="config-info">
+
+                <div class="icone">
+                    🎨
+                </div>
+
+                <div class="config-texto">
+
+                    <strong>
+                        Aparência
+                    </strong>
+
+                    <span>
+                        Personalize a aparência da Mystic.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button class="botao">
+                Configurar
+            </button>
+
+        </div>
+
+
+
+        <!-- NOTIFICAÇÕES -->
+
+        <div class="config-item">
+
+            <div class="config-info">
+
+                <div class="icone">
+                    🔔
+                </div>
+
+                <div class="config-texto">
+
+                    <strong>
+                        Notificações
+                    </strong>
+
+                    <span>
+                        Controle as notificações que deseja receber.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button class="botao">
+                Configurar
+            </button>
+
+        </div>
+
+
+
+        <!-- PRIVACIDADE -->
+
+        <div class="config-item">
+
+            <div class="config-info">
+
+                <div class="icone">
+                    🔒
+                </div>
+
+                <div class="config-texto">
+
+                    <strong>
+                        Privacidade
+                    </strong>
+
+                    <span>
+                        Controle a privacidade das suas informações.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button class="botao">
+                Configurar
+            </button>
+
+        </div>
+
+
+
+        <!-- PESQUISA -->
+
+        <div class="config-item">
+
+            <div class="config-info">
+
+                <div class="icone">
+                    🔍
+                </div>
+
+                <div class="config-texto">
+
+                    <strong>
+                        Pesquisa
+                    </strong>
+
+                    <span>
+                        Pesquise livros, blogs e redações na Mystic.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <a href="home.html" class="botao">
+                Pesquisar
+            </a>
+
+        </div>
+
+
+
+        <!-- SAIR -->
+
+        <div class="config-item">
+
+            <div class="config-info">
+
+                <div class="icone">
+                    🚪
+                </div>
+
+                <div class="config-texto">
+
+                    <strong>
+                        Sair da conta
+                    </strong>
+
+                    <span>
+                        Sair da sua conta neste dispositivo.
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button class="botao botao-perigo">
+                Sair
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- PESQUISA -->
+
+    <section class="pesquisa">
+
+        <h2>
+            🔍 Pesquisa
+        </h2>
+
+        <p>
+            Encontre livros, blogs e redações dentro da Mystic.
+        </p>
+
+
+        <div class="barra-pesquisa">
+
+            <input
+                type="text"
+                placeholder="O que você está procurando?"
+            >
+
+            <button>
+                🔍
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- VOLTAR -->
+
+    <a href="perfil.html" class="voltar">
+        ← Voltar para meu perfil
+    </a>
+
+</div>
+
+
+
+<!-- RODAPÉ -->
+
+<footer>
+
+    Mystic — Livraria
+
+</footer>
+
+
+</body>
+
+</html>
