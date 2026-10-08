@@ -1,354 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystic — Blogs</title>
 
-    <title>Mystic - Blogs</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: #242424;
+      color: #f2f2f2;
+    }
 
-        body {
-            background: #242424;
-            color: #eeeeee;
-            font-family: Arial, sans-serif;
-        }
+    header {
+      background: #303030;
+      border-bottom: 1px solid #444;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
 
-        header {
-            min-height: 75px;
-            background: #303030;
-            border-bottom: 1px solid #444444;
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-            padding: 15px 40px;
-        }
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 15px;
+    }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 500;
-        }
+    nav a:hover {
+      color: white;
+    }
 
-        nav {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
+    main {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 25px;
+    }
 
-        nav a {
-            color: #bbbbbb;
-            text-decoration: none;
-        }
+    .topo {
+      margin-bottom: 35px;
+    }
 
-        nav a:hover {
-            color: white;
-        }
+    .topo h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
 
-        main {
-            max-width: 1100px;
-            margin: auto;
-            padding: 50px 25px;
-        }
+    .topo p {
+      color: #aaa;
+      font-size: 17px;
+    }
 
-        .titulo-principal {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
+    .blogs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
 
-        .descricao {
-            color: #999999;
-            font-size: 17px;
-            margin-bottom: 40px;
-        }
+    .blog-card {
+      background: #303030;
+      border: 1px solid #444;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
 
-        .blogs {
-            display: grid;
-            grid-template-columns:
-                repeat(auto-fit, minmax(280px, 1fr));
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: #666;
+    }
 
-            gap: 25px;
-        }
+    .imagem {
+      height: 180px;
+      background: #383838;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 65px;
+    }
 
-        .blog {
-            background: #303030;
-            border: 1px solid #404040;
-            border-radius: 12px;
-            overflow: hidden;
-            transition: 0.2s;
-        }
+    .conteudo {
+      padding: 22px;
+    }
 
-        .blog:hover {
-            transform: translateY(-4px);
-            border-color: #666666;
-        }
+    .categoria {
+      color: #aaa;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
 
-        .imagem-blog {
-            height: 180px;
+    .conteudo h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
 
-            background: #3b3b3b;
+    .conteudo p {
+      color: #bbb;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .ler {
+      display: inline-block;
+      padding: 10px 16px;
+      background: #444;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
 
-            font-size: 60px;
-        }
+    .ler:hover {
+      background: #555;
+    }
 
-        .conteudo-blog {
-            padding: 20px;
-        }
+    footer {
+      text-align: center;
+      color: #999;
+      padding: 35px 20px;
+      margin-top: 50px;
+      border-top: 1px solid #444;
+    }
 
-        .categoria {
-            color: #999999;
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
+    @media (max-width: 700px) {
+      header {
+        padding: 18px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-        .blog h2 {
-            font-size: 21px;
-            margin-bottom: 10px;
-        }
-
-        .blog p {
-            color: #999999;
-            line-height: 1.5;
-            font-size: 14px;
-        }
-
-        .botao {
-            display: block;
-
-            margin-top: 18px;
-            padding: 10px;
-
-            background: #eeeeee;
-            color: #222222;
-
-            text-align: center;
-
-            border-radius: 7px;
-
-            text-decoration: none;
-        }
-
-        .botao:hover {
-            background: #cccccc;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #777777;
-        }
-
-        @media (max-width: 700px) {
-
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav {
-                justify-content: center;
-                gap: 15px;
-            }
-
-            .titulo-principal {
-                font-size: 30px;
-            }
-        }
-    </style>
+      .topo h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-    <header>
+  <header>
+    <div class="logo">Mystic</div>
 
-        <div class="logo">
-            Mystic
+    <nav>
+      <a href="home.html">Início</a>
+      <a href="livros.html">Livros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="redacoes.html">Redações</a>
+      <a href="perfil.html">👤 Meu perfil</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="topo">
+      <h1>Blogs</h1>
+      <p>Descubra artigos sobre literatura, leitura, autores e histórias.</p>
+    </div>
+
+    <section class="blogs">
+
+      <div class="blog-card">
+        <div class="imagem">📚</div>
+
+        <div class="conteudo">
+          <div class="categoria">Literatura</div>
+
+          <h2>5 livros que todo leitor deveria conhecer</h2>
+
+          <p>
+            Algumas histórias conseguem atravessar gerações e continuar
+            despertando novas interpretações.
+          </p>
+
+          <a href="blog.html" class="ler">Ler artigo</a>
         </div>
+      </div>
 
-        <nav>
+      <div class="blog-card">
+        <div class="imagem">🔎</div>
 
-            <a href="home.html">
-                Início
-            </a>
+        <div class="conteudo">
+          <div class="categoria">Leitura</div>
 
-            <a href="livros.html">
-                Livros
-            </a>
-
-            <a href="blogs.html">
-                Blogs
-            </a>
-
-            <a href="redacoes.html">
-                Redações
-            </a>
-
-            <a href="perfil.html">
-                👤 Meu perfil
-            </a>
-
-        </nav>
-
-    </header>
-
-
-    <main>
-
-        <h1 class="titulo-principal">
-            Blogs
-        </h1>
-
-        <p class="descricao">
-            Descubra histórias, curiosidades e conteúdos sobre literatura.
-        </p>
-
-
-        <section class="blogs">
-
-
-            <article class="blog">
-
-                <div class="imagem-blog">
-                    📚
-                </div>
-
-                <div class="conteudo-blog">
-
-                    <div class="categoria">
-                        LITERATURA
-                    </div>
-
-                    <h2>
-                        5 livros que todo leitor deveria conhecer
-                    </h2>
-
-                    <p>
-                        Uma seleção de obras marcantes para quem
-                        quer descobrir novos mundos através da leitura.
-                    </p>
-
-                    <a href="#" class="botao">
-                        Ler artigo
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="blog">
-
-                <div class="imagem-blog">
-                    ✍️
-                </div>
-
-                <div class="conteudo-blog">
-
-                    <div class="categoria">
-                        LEITURA
-                    </div>
-
-                    <h2>
-                        Como escolher seu próximo livro
-                    </h2>
-
-                    <p>
-                        Algumas maneiras simples de encontrar
-                        uma leitura que combine com seus interesses.
-                    </p>
-
-                    <a href="#" class="botao">
-                        Ler artigo
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="blog">
-
-                <div class="imagem-blog">
-                    🕯️
-                </div>
-
-                <div class="conteudo-blog">
-
-                    <div class="categoria">
-                        CURIOSIDADES
-                    </div>
-
-                    <h2>
-                        Curiosidades sobre grandes escritores
-                    </h2>
-
-                    <p>
-                        Conheça fatos interessantes sobre autores
-                        que marcaram a história da literatura.
-                    </p>
-
-                    <a href="#" class="botao">
-                        Ler artigo
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="blog">
-
-                <div class="imagem-blog">
-                    🌙
-                </div>
-
-                <div class="conteudo-blog">
-
-                    <div class="categoria">
-                        MISTICISMO
-                    </div>
-
-                    <h2>
-                        Por que histórias misteriosas nos atraem?
-                    </h2>
-
-                    <p>
-                        Uma reflexão sobre o fascínio humano por
-                        mistério, suspense e histórias desconhecidas.
-                    </p>
-
-                    <a href="#" class="botao">
-                        Ler artigo
-                    </a>
-
-                </div>
-
-            </article>
-
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        Mystic — Livraria
-
-    </footer>
-
-</body>
-
-</html>
+          <h2
