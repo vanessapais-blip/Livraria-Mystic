@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Meu perfil — Mystic</title>
 
     <style>
@@ -87,7 +88,7 @@
 
         .opcoes {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
             margin-top: 25px;
         }
@@ -166,6 +167,55 @@
             background: #444;
         }
 
+        /* CONFIGURAÇÕES */
+
+        .configuracoes {
+            background: #303030;
+            border: 1px solid #444;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .config-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .config-item:last-child {
+            border-bottom: none;
+        }
+
+        .config-texto strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .config-texto span {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .botao {
+            background: #444;
+            border: 1px solid #555;
+            color: #eee;
+            padding: 9px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background: #555;
+        }
+
+        .botao-perigo {
+            color: #ff8a8a;
+        }
+
         footer {
             text-align: center;
             color: #777;
@@ -174,7 +224,13 @@
             border-top: 1px solid #444;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 850px) {
+            .opcoes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
             header {
                 padding: 18px 20px;
                 flex-direction: column;
@@ -191,6 +247,11 @@
             .cards {
                 grid-template-columns: 1fr;
             }
+
+            .config-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -198,6 +259,7 @@
 <body>
 
 <header>
+
     <a href="home.html" class="logo">Mystic</a>
 
     <nav>
@@ -207,33 +269,68 @@
         <a href="redacoes.html">Redações</a>
         <a href="perfil.html">Meu perfil</a>
     </nav>
+
 </header>
+
 
 <div class="container">
 
+    <!-- PERFIL -->
+
     <section class="perfil">
 
-        <div class="avatar">👤</div>
+        <div class="avatar">
+            👤
+        </div>
 
         <h1>Meu perfil</h1>
 
         <p>Bem-vindo ao seu espaço na Mystic.</p>
 
+
         <div class="opcoes">
 
             <a href="#" class="opcao">
+
                 <strong>✏️ Editar perfil</strong>
-                <span>Alterar nome, descrição e perfil.</span>
+
+                <span>
+                    Alterar nome, descrição e perfil.
+                </span>
+
             </a>
+
 
             <a href="#minhas-redacoes" class="opcao">
+
                 <strong>📝 Minhas redações</strong>
-                <span>Veja as redações que você criou.</span>
+
+                <span>
+                    Veja as redações que você criou.
+                </span>
+
             </a>
 
+
             <a href="#meus-blogs" class="opcao">
+
                 <strong>✍️ Meus blogs</strong>
-                <span>Veja os blogs que você escreveu.</span>
+
+                <span>
+                    Veja os blogs que você escreveu.
+                </span>
+
+            </a>
+
+
+            <a href="#configuracoes" class="opcao">
+
+                <strong>⚙️ Configurações</strong>
+
+                <span>
+                    Gerencie as configurações da sua conta.
+                </span>
+
             </a>
 
         </div>
@@ -241,86 +338,218 @@
     </section>
 
 
-    <!-- MINHAS REDAÇÕES -->
+    <!-- REDAÇÕES -->
 
     <h2 class="titulo" id="minhas-redacoes">
         Minhas redações
     </h2>
 
+
     <section class="cards">
 
         <article class="card">
 
-            <div class="categoria">Educação</div>
+            <div class="categoria">
+                Educação
+            </div>
 
-            <h3>A importância da leitura</h3>
+            <h3>
+                A importância da leitura
+            </h3>
 
             <p>
                 Uma reflexão sobre como a leitura pode contribuir
                 para o conhecimento e o desenvolvimento pessoal.
             </p>
 
-            <a href="#">Ver redação</a>
+            <a href="#">
+                Ver redação
+            </a>
 
         </article>
 
 
         <article class="card">
 
-            <div class="categoria">Tecnologia</div>
+            <div class="categoria">
+                Tecnologia
+            </div>
 
-            <h3>Tecnologia na sociedade</h3>
+            <h3>
+                Tecnologia na sociedade
+            </h3>
 
             <p>
                 Uma reflexão sobre os impactos da tecnologia
                 no cotidiano das pessoas.
             </p>
 
-            <a href="#">Ver redação</a>
+            <a href="#">
+                Ver redação
+            </a>
 
         </article>
 
     </section>
 
 
-    <!-- MEUS BLOGS -->
+    <!-- BLOGS -->
 
     <h2 class="titulo" id="meus-blogs">
         Meus blogs
     </h2>
 
+
     <section class="cards">
 
         <article class="card">
 
-            <div class="categoria">Literatura</div>
+            <div class="categoria">
+                Literatura
+            </div>
 
-            <h3>5 livros que todo leitor deveria conhecer</h3>
+            <h3>
+                5 livros que todo leitor deveria conhecer
+            </h3>
 
             <p>
                 Uma lista de livros que podem marcar a experiência
                 de qualquer leitor e despertar novas descobertas.
             </p>
 
-            <a href="blog.html">Ver blog</a>
+            <a href="blog.html">
+                Ver blog
+            </a>
 
         </article>
 
 
         <article class="card">
 
-            <div class="categoria">Leitura</div>
+            <div class="categoria">
+                Leitura
+            </div>
 
-            <h3>Como escolher seu próximo livro</h3>
+            <h3>
+                Como escolher seu próximo livro
+            </h3>
 
             <p>
                 Algumas dicas para encontrar uma história que
                 combine com seu estilo e seus interesses.
             </p>
 
-            <a href="#">Ver blog</a>
+            <a href="#">
+                Ver blog
+            </a>
 
         </article>
+
+    </section>
+
+
+    <!-- CONFIGURAÇÕES -->
+
+    <h2 class="titulo" id="configuracoes">
+        ⚙️ Configurações
+    </h2>
+
+
+    <section class="configuracoes">
+
+        <div class="config-item">
+
+            <div class="config-texto">
+
+                <strong>👤 Dados do perfil</strong>
+
+                <span>
+                    Altere seu nome, descrição e informações do perfil.
+                </span>
+
+            </div>
+
+            <button class="botao">
+                Editar
+            </button>
+
+        </div>
+
+
+        <div class="config-item">
+
+            <div class="config-texto">
+
+                <strong>🎨 Aparência</strong>
+
+                <span>
+                    Personalize a aparência da Mystic.
+                </span>
+
+            </div>
+
+            <button class="botao">
+                Configurar
+            </button>
+
+        </div>
+
+
+        <div class="config-item">
+
+            <div class="config-texto">
+
+                <strong>🔔 Notificações</strong>
+
+                <span>
+                    Controle quais notificações você deseja receber.
+                </span>
+
+            </div>
+
+            <button class="botao">
+                Configurar
+            </button>
+
+        </div>
+
+
+        <div class="config-item">
+
+            <div class="config-texto">
+
+                <strong>🔒 Privacidade</strong>
+
+                <span>
+                    Controle a privacidade das suas informações.
+                </span>
+
+            </div>
+
+            <button class="botao">
+                Configurar
+            </button>
+
+        </div>
+
+
+        <div class="config-item">
+
+            <div class="config-texto">
+
+                <strong>🚪 Sair da conta</strong>
+
+                <span>
+                    Sair da sua conta neste dispositivo.
+                </span>
+
+            </div>
+
+            <button class="botao botao-perigo">
+                Sair
+            </button>
+
+        </div>
 
     </section>
 
