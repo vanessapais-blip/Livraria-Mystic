@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>Meu perfil — Mystic</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,10 +21,13 @@
             color: #eee;
         }
 
+        /* CABEÇALHO */
+
         header {
             background: #303030;
             border-bottom: 1px solid #444;
             padding: 18px 40px;
+
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -50,6 +55,8 @@
             color: white;
         }
 
+        /* CONTAINER */
+
         .container {
             max-width: 1000px;
             margin: 40px auto;
@@ -62,62 +69,97 @@
             background: #303030;
             border: 1px solid #444;
             border-radius: 12px;
-            padding: 30px;
+
+            padding: 35px;
+
             text-align: center;
-            margin-bottom: 30px;
+
+            margin-bottom: 40px;
         }
 
         .avatar {
-            width: 90px;
-            height: 90px;
+            width: 100px;
+            height: 100px;
+
             border-radius: 50%;
+
             background: #444;
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 42px;
-            margin: 0 auto 15px;
+
+            font-size: 48px;
+
+            margin: 0 auto 18px;
         }
 
         .perfil h1 {
-            font-size: 26px;
+            font-size: 28px;
             margin-bottom: 8px;
         }
 
-        .perfil p {
+        .perfil-descricao {
             color: #999;
+            font-size: 15px;
+            margin-bottom: 25px;
         }
 
-        /* OPÇÕES DO PERFIL */
+        /* BOTÃO EDITAR */
 
-        .opcoes {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-top: 25px;
-        }
+        .editar {
+            display: inline-block;
 
-        .opcao {
-            background: #383838;
-            border: 1px solid #4a4a4a;
-            border-radius: 10px;
-            padding: 18px;
+            padding: 10px 18px;
+
+            background: #444;
+            border: 1px solid #555;
+
             color: #eee;
             text-decoration: none;
+
+            border-radius: 8px;
+
             transition: 0.2s;
         }
 
-        .opcao:hover {
-            background: #444;
+        .editar:hover {
+            background: #555;
         }
 
-        .opcao strong {
+        /* ESTATÍSTICAS */
+
+        .estatisticas {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .estatistica {
+            background: #383838;
+
+            border: 1px solid #4a4a4a;
+
+            border-radius: 10px;
+
+            padding: 18px;
+        }
+
+        .estatistica strong {
             display: block;
-            margin-bottom: 6px;
+
+            font-size: 22px;
+
+            margin-bottom: 5px;
         }
 
-        .opcao span {
+        .estatistica span {
             color: #999;
+
             font-size: 13px;
         }
 
@@ -125,6 +167,7 @@
 
         .titulo {
             font-size: 23px;
+
             margin: 40px 0 18px;
         }
 
@@ -132,42 +175,59 @@
 
         .cards {
             display: grid;
+
             grid-template-columns: repeat(2, 1fr);
+
             gap: 20px;
         }
 
         .card {
             background: #303030;
+
             border: 1px solid #444;
+
             border-radius: 12px;
+
             padding: 22px;
         }
 
         .categoria {
             color: #999;
+
             font-size: 13px;
+
             margin-bottom: 10px;
         }
 
         .card h3 {
-            margin-bottom: 10px;
             font-size: 19px;
+
+            margin-bottom: 10px;
         }
 
         .card p {
             color: #aaa;
+
             line-height: 1.5;
+
             font-size: 14px;
         }
 
         .card a {
             display: inline-block;
+
             margin-top: 15px;
+
             color: #eee;
+
             text-decoration: none;
+
             border: 1px solid #555;
+
             padding: 8px 13px;
+
             border-radius: 7px;
+
             font-size: 13px;
         }
 
@@ -175,105 +235,54 @@
             background: #444;
         }
 
-        /* CONFIGURAÇÕES */
-
-        .configuracoes {
-            background: #303030;
-            border: 1px solid #444;
-            border-radius: 12px;
-            padding: 25px;
-        }
-
-        .config-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-            padding: 18px 0;
-            border-bottom: 1px solid #444;
-        }
-
-        .config-item:last-child {
-            border-bottom: none;
-        }
-
-        .config-texto strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .config-texto span {
-            color: #999;
-            font-size: 13px;
-        }
-
-        .botao {
-            background: #444;
-            border: 1px solid #555;
-            color: #eee;
-            padding: 9px 15px;
-            border-radius: 7px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 13px;
-        }
-
-        .botao:hover {
-            background: #555;
-        }
-
-        .botao-perigo {
-            color: #ff8a8a;
-        }
-
         /* RODAPÉ */
 
         footer {
             text-align: center;
+
             color: #777;
+
             padding: 40px 20px;
+
             margin-top: 50px;
+
             border-top: 1px solid #444;
         }
 
         /* CELULAR */
 
-        @media (max-width: 850px) {
-
-            .opcoes {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 700px) {
 
             header {
                 padding: 18px 20px;
+
                 flex-direction: column;
+
                 gap: 15px;
             }
 
             nav {
                 flex-wrap: wrap;
+
                 justify-content: center;
+
                 gap: 15px;
             }
 
-            .opcoes,
             .cards {
                 grid-template-columns: 1fr;
             }
 
-            .config-item {
-                align-items: flex-start;
-                flex-direction: column;
+            .estatisticas {
+                grid-template-columns: 1fr;
             }
 
         }
 
     </style>
+
 </head>
+
 
 <body>
 
@@ -316,7 +325,7 @@
 <div class="container">
 
 
-    <!-- PERFIL -->
+    <!-- INFORMAÇÕES DO PERFIL -->
 
     <section class="perfil">
 
@@ -328,73 +337,56 @@
             Meu perfil
         </h1>
 
-        <p>
+        <p class="perfil-descricao">
             Bem-vindo ao seu espaço na Mystic.
         </p>
 
+        <a href="#" class="editar">
+            ✏️ Editar perfil
+        </a>
 
-        <div class="opcoes">
 
+        <!-- ESTATÍSTICAS -->
 
-            <!-- EDITAR PERFIL -->
+        <div class="estatisticas">
 
-            <a href="#" class="opcao">
+            <div class="estatistica">
 
                 <strong>
-                    ✏️ Editar perfil
+                    2
                 </strong>
 
                 <span>
-                    Alterar nome, descrição e perfil.
+                    Redações
                 </span>
 
-            </a>
+            </div>
 
 
-            <!-- REDAÇÕES -->
-
-            <a href="#minhas-redacoes" class="opcao">
+            <div class="estatistica">
 
                 <strong>
-                    📝 Minhas redações
+                    2
                 </strong>
 
                 <span>
-                    Veja as redações que você criou.
+                    Blogs
                 </span>
 
-            </a>
+            </div>
 
 
-            <!-- BLOGS -->
-
-            <a href="#meus-blogs" class="opcao">
+            <div class="estatistica">
 
                 <strong>
-                    ✍️ Meus blogs
+                    0
                 </strong>
 
                 <span>
-                    Veja os blogs que você escreveu.
+                    Comentários
                 </span>
 
-            </a>
-
-
-            <!-- CONFIGURAÇÕES -->
-
-            <a href="#configuracoes" class="opcao">
-
-                <strong>
-                    ⚙️ Configurações
-                </strong>
-
-                <span>
-                    Gerencie as configurações da sua conta.
-                </span>
-
-            </a>
-
+            </div>
 
         </div>
 
@@ -405,7 +397,7 @@
     <!-- MINHAS REDAÇÕES -->
 
     <h2 class="titulo" id="minhas-redacoes">
-        Minhas redações
+        📝 Minhas redações
     </h2>
 
 
@@ -463,7 +455,7 @@
     <!-- MEUS BLOGS -->
 
     <h2 class="titulo" id="meus-blogs">
-        Meus blogs
+        ✍️ Meus blogs
     </h2>
 
 
@@ -516,160 +508,7 @@
 
     </section>
 
-
-
-    <!-- CONFIGURAÇÕES -->
-
-    <h2 class="titulo" id="configuracoes">
-        ⚙️ Configurações
-    </h2>
-
-
-    <section class="configuracoes">
-
-
-        <!-- DADOS DO PERFIL -->
-
-        <div class="config-item">
-
-            <div class="config-texto">
-
-                <strong>
-                    👤 Dados do perfil
-                </strong>
-
-                <span>
-                    Altere seu nome, descrição e informações do perfil.
-                </span>
-
-            </div>
-
-            <button class="botao">
-                Editar
-            </button>
-
-        </div>
-
-
-        <!-- APARÊNCIA -->
-
-        <div class="config-item">
-
-            <div class="config-texto">
-
-                <strong>
-                    🎨 Aparência
-                </strong>
-
-                <span>
-                    Personalize a aparência da Mystic.
-                </span>
-
-            </div>
-
-            <button class="botao">
-                Configurar
-            </button>
-
-        </div>
-
-
-        <!-- NOTIFICAÇÕES -->
-
-        <div class="config-item">
-
-            <div class="config-texto">
-
-                <strong>
-                    🔔 Notificações
-                </strong>
-
-                <span>
-                    Controle quais notificações você deseja receber.
-                </span>
-
-            </div>
-
-            <button class="botao">
-                Configurar
-            </button>
-
-        </div>
-
-
-        <!-- PRIVACIDADE -->
-
-        <div class="config-item">
-
-            <div class="config-texto">
-
-                <strong>
-                    🔒 Privacidade
-                </strong>
-
-                <span>
-                    Controle a privacidade das suas informações.
-                </span>
-
-            </div>
-
-            <button class="botao">
-                Configurar
-            </button>
-
-        </div>
-
-
-        <!-- PESQUISA -->
-
-        <div class="config-item">
-
-            <div class="config-texto">
-
-                <strong>
-                    🔍 Pesquisa
-                </strong>
-
-                <span>
-                    Pesquise livros, blogs e redações na Mystic.
-                </span>
-
-            </div>
-
-            <a href="home.html" class="botao">
-                Pesquisar
-            </a>
-
-        </div>
-
-
-        <!-- SAIR DA CONTA -->
-
-        <div class="config-item">
-
-            <div class="config-texto">
-
-                <strong>
-                    🚪 Sair da conta
-                </strong>
-
-                <span>
-                    Sair da sua conta neste dispositivo.
-                </span>
-
-            </div>
-
-            <button class="botao botao-perigo">
-                Sair
-            </button>
-
-        </div>
-
-
-    </section>
-
 </div>
-
 
 
 <!-- RODAPÉ -->
@@ -682,4 +521,5 @@
 
 
 </body>
+
 </html>
