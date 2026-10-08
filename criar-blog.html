@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mystic — Escrever Blog</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #242424;
+      color: #f2f2f2;
+    }
+
+    header {
+      background: #303030;
+      border-bottom: 1px solid #444;
+      padding: 18px 40px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 50px auto;
+      padding: 0 25px;
+    }
+
+    .voltar {
+      display: inline-block;
+      color: #bbb;
+      text-decoration: none;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .descricao {
+      color: #aaa;
+      margin-bottom: 35px;
+    }
+
+    .formulario {
+      background: #303030;
+      border: 1px solid #444;
+      border-radius: 15px;
+      padding: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #242424;
+      color: white;
+      border: 1px solid #555;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 15px;
+      margin-bottom: 22px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 300px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #777;
+    }
+
+    .publicar {
+      width: 100%;
+      padding: 14px;
+
+      border: none;
+      border-radius: 8px;
+
+      background: #444;
+      color: white;
+
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .publicar:hover {
+      background: #555;
+    }
+
+    .mensagem {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      background: #383838;
+      color: #ddd;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      color: #999;
+      padding: 35px 20px;
+      margin-top: 50px;
+      border-top: 1px solid #444;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        padding: 18px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .formulario {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+
+    <div class="logo">
+      Mystic
+    </div>
+
+    <nav>
+      <a href="home.html">Início</a>
+      <a href="livros.html">Livros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="redacoes.html">Redações</a>
+      <a href="perfil.html">👤 Meu perfil</a>
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <a href="home.html" class="voltar">
+      ← Voltar para o início
+    </a>
+
+    <h1>
+      Escrever um Blog
+    </h1>
+
+    <p class="descricao">
+      Crie seu próprio artigo para compartilhar ideias, histórias e opiniões
+      com a comunidade Mystic.
+    </p>
+
+
+    <div class="formulario">
+
+      <form id="formBlog">
+
+        <label for="titulo">
+          Título do blog
+        </label>
+
+        <input
+          type="text"
+          id="titulo"
+          placeholder="Digite o título do seu blog"
+          required
+        >
+
+
+        <label for="categoria">
+          Categoria
+        </label>
+
+        <select id="categoria" required>
+
+          <option value="">
+            Escolha uma categoria
+          </option>
+
+          <option value="Literatura">
+            Literatura
+          </option>
+
+          <option value="Leitura">
+            Leitura
+          </option>
+
+          <option value="Curiosidades">
+            Curiosidades
+          </option>
+
+          <option value="Misticismo">
+            Misticismo
+          </option>
+
+          <option value="Outros">
+            Outros
+          </option>
+
+        </select>
+
+
+        <label for="autor">
+          Autor
+        </label>
+
+        <input
+          type="text"
+          id="autor"
+          placeholder="Digite seu nome"
+          required
+        >
+
+
+        <label for="conteudo">
+          Seu texto
+        </label>
+
+        <textarea
+          id="conteudo"
+          placeholder="Escreva seu blog aqui..."
+          required
+        ></textarea>
+
+
+        <button
+          type="submit"
+          class="publicar"
+        >
+          Publicar blog
+        </button>
+
+      </form>
+
+
+      <div
+        class="mensagem"
+        id="mensagem"
+      >
+        Seu blog foi preparado para publicação.
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <footer>
+    Mystic — Livraria
+  </footer>
+
+
+  <script>
+
+    document
+      .getElementById("formBlog")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const mensagem =
+          document.getElementById("mensagem");
+
+        mensagem.style.display = "block";
+
+        mensagem.textContent =
+          "Seu blog foi preparado para publicação.";
+
+      });
+
+  </script>
+
+</body>
+</html>
