@@ -56,6 +56,8 @@
             padding: 0 20px;
         }
 
+        /* PERFIL */
+
         .perfil {
             background: #303030;
             border: 1px solid #444;
@@ -85,6 +87,8 @@
         .perfil p {
             color: #999;
         }
+
+        /* OPÇÕES DO PERFIL */
 
         .opcoes {
             display: grid;
@@ -117,10 +121,14 @@
             font-size: 13px;
         }
 
+        /* TÍTULOS */
+
         .titulo {
             font-size: 23px;
             margin: 40px 0 18px;
         }
+
+        /* CARDS */
 
         .cards {
             display: grid;
@@ -206,6 +214,8 @@
             padding: 9px 15px;
             border-radius: 7px;
             cursor: pointer;
+            text-decoration: none;
+            font-size: 13px;
         }
 
         .botao:hover {
@@ -216,6 +226,8 @@
             color: #ff8a8a;
         }
 
+        /* RODAPÉ */
+
         footer {
             text-align: center;
             color: #777;
@@ -224,13 +236,18 @@
             border-top: 1px solid #444;
         }
 
+        /* CELULAR */
+
         @media (max-width: 850px) {
+
             .opcoes {
                 grid-template-columns: repeat(2, 1fr);
             }
+
         }
 
         @media (max-width: 600px) {
+
             header {
                 padding: 18px 20px;
                 flex-direction: column;
@@ -252,28 +269,52 @@
                 align-items: flex-start;
                 flex-direction: column;
             }
+
         }
+
     </style>
 </head>
 
 <body>
 
+
+<!-- CABEÇALHO -->
+
 <header>
 
-    <a href="home.html" class="logo">Mystic</a>
+    <a href="home.html" class="logo">
+        Mystic
+    </a>
 
     <nav>
-        <a href="home.html">Início</a>
-        <a href="livros.html">Livros</a>
-        <a href="blogs.html">Blogs</a>
-        <a href="redacoes.html">Redações</a>
-        <a href="perfil.html">Meu perfil</a>
+
+        <a href="home.html">
+            Início
+        </a>
+
+        <a href="livros.html">
+            Livros
+        </a>
+
+        <a href="blogs.html">
+            Blogs
+        </a>
+
+        <a href="redacoes.html">
+            Redações
+        </a>
+
+        <a href="perfil.html">
+            Meu perfil
+        </a>
+
     </nav>
 
 </header>
 
 
 <div class="container">
+
 
     <!-- PERFIL -->
 
@@ -283,16 +324,25 @@
             👤
         </div>
 
-        <h1>Meu perfil</h1>
+        <h1>
+            Meu perfil
+        </h1>
 
-        <p>Bem-vindo ao seu espaço na Mystic.</p>
+        <p>
+            Bem-vindo ao seu espaço na Mystic.
+        </p>
 
 
         <div class="opcoes">
 
+
+            <!-- EDITAR PERFIL -->
+
             <a href="#" class="opcao">
 
-                <strong>✏️ Editar perfil</strong>
+                <strong>
+                    ✏️ Editar perfil
+                </strong>
 
                 <span>
                     Alterar nome, descrição e perfil.
@@ -301,9 +351,13 @@
             </a>
 
 
+            <!-- REDAÇÕES -->
+
             <a href="#minhas-redacoes" class="opcao">
 
-                <strong>📝 Minhas redações</strong>
+                <strong>
+                    📝 Minhas redações
+                </strong>
 
                 <span>
                     Veja as redações que você criou.
@@ -312,9 +366,13 @@
             </a>
 
 
+            <!-- BLOGS -->
+
             <a href="#meus-blogs" class="opcao">
 
-                <strong>✍️ Meus blogs</strong>
+                <strong>
+                    ✍️ Meus blogs
+                </strong>
 
                 <span>
                     Veja os blogs que você escreveu.
@@ -323,9 +381,13 @@
             </a>
 
 
+            <!-- CONFIGURAÇÕES -->
+
             <a href="#configuracoes" class="opcao">
 
-                <strong>⚙️ Configurações</strong>
+                <strong>
+                    ⚙️ Configurações
+                </strong>
 
                 <span>
                     Gerencie as configurações da sua conta.
@@ -333,12 +395,14 @@
 
             </a>
 
+
         </div>
 
     </section>
 
 
-    <!-- REDAÇÕES -->
+
+    <!-- MINHAS REDAÇÕES -->
 
     <h2 class="titulo" id="minhas-redacoes">
         Minhas redações
@@ -346,6 +410,7 @@
 
 
     <section class="cards">
+
 
         <article class="card">
 
@@ -390,10 +455,12 @@
 
         </article>
 
+
     </section>
 
 
-    <!-- BLOGS -->
+
+    <!-- MEUS BLOGS -->
 
     <h2 class="titulo" id="meus-blogs">
         Meus blogs
@@ -401,6 +468,7 @@
 
 
     <section class="cards">
+
 
         <article class="card">
 
@@ -445,7 +513,9 @@
 
         </article>
 
+
     </section>
+
 
 
     <!-- CONFIGURAÇÕES -->
@@ -457,11 +527,16 @@
 
     <section class="configuracoes">
 
+
+        <!-- DADOS DO PERFIL -->
+
         <div class="config-item">
 
             <div class="config-texto">
 
-                <strong>👤 Dados do perfil</strong>
+                <strong>
+                    👤 Dados do perfil
+                </strong>
 
                 <span>
                     Altere seu nome, descrição e informações do perfil.
@@ -476,11 +551,15 @@
         </div>
 
 
+        <!-- APARÊNCIA -->
+
         <div class="config-item">
 
             <div class="config-texto">
 
-                <strong>🎨 Aparência</strong>
+                <strong>
+                    🎨 Aparência
+                </strong>
 
                 <span>
                     Personalize a aparência da Mystic.
@@ -495,11 +574,15 @@
         </div>
 
 
+        <!-- NOTIFICAÇÕES -->
+
         <div class="config-item">
 
             <div class="config-texto">
 
-                <strong>🔔 Notificações</strong>
+                <strong>
+                    🔔 Notificações
+                </strong>
 
                 <span>
                     Controle quais notificações você deseja receber.
@@ -514,11 +597,15 @@
         </div>
 
 
+        <!-- PRIVACIDADE -->
+
         <div class="config-item">
 
             <div class="config-texto">
 
-                <strong>🔒 Privacidade</strong>
+                <strong>
+                    🔒 Privacidade
+                </strong>
 
                 <span>
                     Controle a privacidade das suas informações.
@@ -533,11 +620,38 @@
         </div>
 
 
+        <!-- PESQUISA -->
+
         <div class="config-item">
 
             <div class="config-texto">
 
-                <strong>🚪 Sair da conta</strong>
+                <strong>
+                    🔍 Pesquisa
+                </strong>
+
+                <span>
+                    Pesquise livros, blogs e redações na Mystic.
+                </span>
+
+            </div>
+
+            <a href="home.html" class="botao">
+                Pesquisar
+            </a>
+
+        </div>
+
+
+        <!-- SAIR DA CONTA -->
+
+        <div class="config-item">
+
+            <div class="config-texto">
+
+                <strong>
+                    🚪 Sair da conta
+                </strong>
 
                 <span>
                     Sair da sua conta neste dispositivo.
@@ -551,14 +665,21 @@
 
         </div>
 
+
     </section>
 
 </div>
 
 
+
+<!-- RODAPÉ -->
+
 <footer>
+
     Mystic — Livraria
+
 </footer>
+
 
 </body>
 </html>
