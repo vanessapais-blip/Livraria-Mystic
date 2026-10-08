@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystic - Redações</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #242424;
+            color: #eeeeee;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            min-height: 75px;
+            background: #303030;
+            border-bottom: 1px solid #444444;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 15px 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #bbbbbb;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 25px;
+        }
+
+        .titulo-principal {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .descricao {
+            color: #999999;
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        .pesquisa {
+            width: 100%;
+            padding: 15px;
+
+            background: #303030;
+            color: white;
+
+            border: 1px solid #444444;
+            border-radius: 9px;
+
+            font-size: 15px;
+
+            margin-bottom: 35px;
+        }
+
+        .pesquisa:focus {
+            outline: none;
+            border-color: #777777;
+        }
+
+        .redacoes {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 25px;
+        }
+
+        .redacao {
+            background: #303030;
+
+            border: 1px solid #404040;
+            border-radius: 12px;
+
+            padding: 25px;
+
+            transition: 0.2s;
+        }
+
+        .redacao:hover {
+            transform: translateY(-4px);
+            border-color: #666666;
+        }
+
+        .icone {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .categoria {
+            color: #999999;
+            font-size: 13px;
+
+            margin-bottom: 10px;
+        }
+
+        .redacao h2 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .redacao p {
+            color: #999999;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .botao {
+            display: block;
+
+            margin-top: 20px;
+            padding: 10px;
+
+            background: #eeeeee;
+            color: #222222;
+
+            text-align: center;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+        }
+
+        .botao:hover {
+            background: #cccccc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777777;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .titulo-principal {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            Mystic
+        </div>
+
+        <nav>
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="livros.html">
+                Livros
+            </a>
+
+            <a href="blogs.html">
+                Blogs
+            </a>
+
+            <a href="redacoes.html">
+                Redações
+            </a>
+
+            <a href="perfil.html">
+                👤 Meu perfil
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <h1 class="titulo-principal">
+            Redações
+        </h1>
+
+        <p class="descricao">
+            Leia, explore e descubra diferentes ideias e formas de escrita.
+        </p>
+
+
+        <input
+            class="pesquisa"
+            id="pesquisa"
+            type="text"
+            placeholder="🔍 Pesquisar redações..."
+        >
+
+
+        <section class="redacoes" id="listaRedacoes">
+
+
+            <article
+                class="redacao"
+                data-nome="A importância da leitura"
+            >
+
+                <div class="icone">
+                    📚
+                </div>
+
+                <div class="categoria">
+                    EDUCAÇÃO
+                </div>
+
+                <h2>
+                    A importância da leitura
+                </h2>
+
+                <p>
+                    Uma reflexão sobre como a leitura pode contribuir
+                    para o conhecimento, a criatividade e a formação
+                    de novos pensamentos.
+                </p>
+
+                <a href="#" class="botao">
+                    Ler redação
+                </a>
+
+            </article>
+
+
+            <article
+                class="redacao"
+                data-nome="Tecnologia na sociedade"
+            >
+
+                <div class="icone">
+                    💻
+                </div>
+
+                <div class="categoria">
+                    TECNOLOGIA
+                </div>
+
+                <h2>
+                    Tecnologia na sociedade
+                </h2>
+
+                <p>
+                    Uma análise sobre a presença da tecnologia
+                    no cotidiano e suas influências na sociedade.
+                </p>
+
+                <a href="#" class="botao">
+                    Ler redação
+                </a>
+
+            </article>
+
+
+            <article
+                class="redacao"
+                data-nome="Preservação do meio ambiente"
+            >
+
+                <div class="icone">
+                    🌱
+                </div>
+
+                <div class="categoria">
+                    MEIO AMBIENTE
+                </div>
+
+                <h2>
+                    Preservação do meio ambiente
+                </h2>
+
+                <p>
+                    Uma reflexão sobre a importância de preservar
+                    os recursos naturais e cuidar do planeta.
+                </p>
+
+                <a href="#" class="botao">
+                    Ler redação
+                </a>
+
+            </article>
+
+
+            <article
+                class="redacao"
+                data-nome="O papel dos jovens na sociedade"
+            >
+
+                <div class="icone">
+                    🧑‍🎓
+                </div>
+
+                <div class="categoria">
+                    SOCIEDADE
+                </div>
+
+                <h2>
+                    O papel dos jovens na sociedade
+                </h2>
+
+                <p>
+                    Uma discussão sobre participação, educação
+                    e responsabilidade dos jovens na sociedade.
+                </p>
+
+                <a href="#" class="botao">
+                    Ler redação
+                </a>
+
+            </article>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        Mystic — Livraria
+
+    </footer>
+
+
+    <script>
+
+        const pesquisa =
+            document.getElementById("pesquisa");
+
+        const redacoes =
+            document.querySelectorAll(".redacao");
+
+
+        pesquisa.addEventListener("input", function() {
+
+            const texto =
+                pesquisa.value.toLowerCase().trim();
+
+            redacoes.forEach(function(redacao) {
+
+                const nome =
+                    redacao.dataset.nome.toLowerCase();
+
+                if (nome.includes(texto)) {
+
+                    redacao.style.display = "block";
+
+                } else {
+
+                    redacao.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
