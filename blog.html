@@ -1,292 +1,260 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystic — 5 livros que todo leitor deveria conhecer</title>
 
-    <title>Mystic - Blog</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      font-family: Arial, sans-serif;
+      background: #242424;
+      color: #f2f2f2;
+      line-height: 1.7;
+    }
 
-        body {
-            background: #242424;
-            color: #eeeeee;
-            font-family: Arial, sans-serif;
-        }
+    header {
+      background: #303030;
+      border-bottom: 1px solid #444;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
 
-        header {
-            min-height: 75px;
-            background: #303030;
-            border-bottom: 1px solid #444444;
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: white;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-            padding: 15px 40px;
-        }
+    nav a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 15px;
+    }
 
-        .logo {
-            font-size: 28px;
-            font-weight: 500;
-        }
+    nav a:hover {
+      color: white;
+    }
 
-        nav {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
+    main {
+      max-width: 850px;
+      margin: 50px auto;
+      padding: 0 25px;
+    }
 
-        nav a {
-            color: #bbbbbb;
-            text-decoration: none;
-        }
+    .voltar {
+      display: inline-block;
+      color: #bbb;
+      text-decoration: none;
+      margin-bottom: 30px;
+    }
 
-        nav a:hover {
-            color: white;
-        }
+    .voltar:hover {
+      color: white;
+    }
 
-        main {
-            max-width: 850px;
-            margin: auto;
-            padding: 60px 25px;
-        }
+    .categoria {
+      color: #999;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
 
-        .voltar {
-            display: inline-block;
+    h1 {
+      font-size: 42px;
+      line-height: 1.2;
+      margin-bottom: 15px;
+    }
 
-            color: #bbbbbb;
-            text-decoration: none;
+    .subtitulo {
+      color: #aaa;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
 
-            margin-bottom: 35px;
-        }
+    .imagem {
+      height: 260px;
+      background: #303030;
+      border: 1px solid #444;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 90px;
+      margin-bottom: 35px;
+    }
 
-        .voltar:hover {
-            color: white;
-        }
+    article {
+      background: #303030;
+      border: 1px solid #444;
+      border-radius: 15px;
+      padding: 35px;
+    }
 
-        .categoria {
-            color: #999999;
-            font-size: 13px;
-            margin-bottom: 12px;
-        }
+    article h2 {
+      font-size: 25px;
+      margin-top: 30px;
+      margin-bottom: 12px;
+    }
 
-        h1 {
-            font-size: 40px;
-            line-height: 1.2;
-            margin-bottom: 15px;
-        }
+    article h2:first-child {
+      margin-top: 0;
+    }
 
-        .subtitulo {
-            color: #999999;
-            font-size: 17px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
+    article p {
+      color: #ddd;
+      margin-bottom: 18px;
+    }
 
-        .imagem {
-            height: 280px;
+    .autor {
+      color: #999;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
 
-            background: #303030;
-            border: 1px solid #404040;
-            border-radius: 12px;
+    footer {
+      text-align: center;
+      color: #999;
+      padding: 35px 20px;
+      margin-top: 50px;
+      border-top: 1px solid #444;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    @media (max-width: 700px) {
+      header {
+        padding: 18px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-            font-size: 80px;
+      h1 {
+        font-size: 32px;
+      }
 
-            margin-bottom: 40px;
-        }
-
-        .texto {
-            color: #cccccc;
-            font-size: 17px;
-            line-height: 1.8;
-        }
-
-        .texto p {
-            margin-bottom: 25px;
-        }
-
-        .texto h2 {
-            color: #eeeeee;
-            font-size: 25px;
-            margin: 35px 0 15px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: #777777;
-        }
-
-        @media (max-width: 700px) {
-
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            nav {
-                justify-content: center;
-                gap: 15px;
-            }
-
-            h1 {
-                font-size: 30px;
-            }
-        }
-    </style>
+      article {
+        padding: 25px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
-    <header>
+  <header>
+    <div class="logo">Mystic</div>
 
-        <div class="logo">
-            Mystic
-        </div>
+    <nav>
+      <a href="home.html">Início</a>
+      <a href="livros.html">Livros</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="redacoes.html">Redações</a>
+      <a href="perfil.html">👤 Meu perfil</a>
+    </nav>
+  </header>
 
-        <nav>
+  <main>
 
-            <a href="home.html">
-                Início
-            </a>
+    <a href="blogs.html" class="voltar">← Voltar para Blogs</a>
 
-            <a href="livros.html">
-                Livros
-            </a>
+    <div class="categoria">Literatura</div>
 
-            <a href="blogs.html">
-                Blogs
-            </a>
+    <h1>5 livros que todo leitor deveria conhecer</h1>
 
-            <a href="redacoes.html">
-                Redações
-            </a>
+    <p class="subtitulo">
+      Algumas histórias conseguem atravessar gerações e continuar
+      despertando novas interpretações.
+    </p>
 
-            <a href="perfil.html">
-                👤 Meu perfil
-            </a>
+    <p class="autor">
+      Por Mystic • Literatura
+    </p>
 
-        </nav>
+    <div class="imagem">
+      📚
+    </div>
 
-    </header>
+    <article>
 
+      <h2>Por que conhecer diferentes livros?</h2>
 
-    <main>
+      <p>
+        A literatura apresenta diferentes culturas, épocas, personagens e
+        maneiras de enxergar o mundo. Por isso, conhecer obras variadas pode
+        ajudar o leitor a descobrir novos assuntos e também novos estilos de
+        leitura.
+      </p>
 
-        <a href="blogs.html" class="voltar">
-            ← Voltar para Blogs
-        </a>
+      <h2>1. O Pequeno Príncipe</h2>
 
+      <p>
+        Escrito por Antoine de Saint-Exupéry, O Pequeno Príncipe é uma obra
+        conhecida por sua narrativa simples e por suas reflexões sobre
+        amizade, responsabilidade, relações humanas e a forma como enxergamos
+        o mundo.
+      </p>
 
-        <div class="categoria">
-            LITERATURA
-        </div>
+      <h2>2. Histórias de aventura</h2>
 
+      <p>
+        Para quem gosta de ação e descobertas, os livros de aventura podem ser
+        uma excelente escolha. Viagens, desafios e lugares desconhecidos
+        ajudam a criar histórias que prendem a atenção do leitor.
+      </p>
 
-        <h1>
-            5 livros que todo leitor deveria conhecer
-        </h1>
+      <h2>3. Os clássicos</h2>
 
+      <p>
+        Os clássicos da literatura continuam sendo lidos porque apresentam
+        temas que muitas vezes permanecem atuais. Além de contar histórias,
+        essas obras também podem ajudar a compreender diferentes momentos da
+        história e da sociedade.
+      </p>
 
-        <p class="subtitulo">
-            Uma seleção de obras marcantes para quem quer
-            descobrir novos mundos através da leitura.
-        </p>
+      <h2>4. Histórias que fazem refletir</h2>
 
+      <p>
+        Alguns livros não precisam de grandes aventuras para serem marcantes.
+        Histórias sobre escolhas, sentimentos, relações e problemas do
+        cotidiano também podem provocar reflexões importantes.
+      </p>
 
-        <div class="imagem">
-            📚
-        </div>
+      <h2>5. Encontre seu próprio estilo</h2>
 
+      <p>
+        Não existe apenas um gênero literário que todos precisam gostar.
+        Romance, fantasia, mistério, aventura, ficção e clássicos oferecem
+        experiências diferentes.
+      </p>
 
-        <article class="texto">
+      <p>
+        O mais importante é experimentar. Ao conhecer diferentes livros, cada
+        leitor pode descobrir quais histórias despertam sua curiosidade e
+        vontade de continuar lendo.
+      </p>
 
-            <p>
-                A literatura permite conhecer diferentes épocas,
-                culturas, personagens e maneiras de enxergar o mundo.
-                Por isso, algumas obras acabam se tornando referências
-                para diferentes gerações de leitores.
-            </p>
+    </article>
 
+  </main>
 
-            <h2>
-                1. O Pequeno Príncipe
-            </h2>
-
-            <p>
-                A obra de Antoine de Saint-Exupéry apresenta uma
-                narrativa aparentemente simples, mas cheia de
-                reflexões sobre amizade, relações humanas e
-                crescimento.
-            </p>
-
-
-            <h2>
-                2. Aventuras e descobertas
-            </h2>
-
-            <p>
-                Livros de aventura podem transportar o leitor para
-                lugares imaginários e apresentar personagens que
-                enfrentam desafios, escolhas e descobertas.
-            </p>
-
-
-            <h2>
-                3. Grandes clássicos
-            </h2>
-
-            <p>
-                Os clássicos continuam sendo lidos porque muitas
-                de suas questões permanecem relevantes mesmo depois
-                de muitos anos.
-            </p>
-
-
-            <h2>
-                4. Histórias que despertam reflexão
-            </h2>
-
-            <p>
-                Uma boa leitura não precisa apenas contar uma história.
-                Ela também pode provocar perguntas e incentivar o
-                leitor a pensar sobre diferentes assuntos.
-            </p>
-
-
-            <h2>
-                5. Encontrando seu próprio estilo
-            </h2>
-
-            <p>
-                Não existe uma única forma correta de gostar de livros.
-                Experimentar diferentes gêneros é uma maneira de
-                descobrir quais histórias mais combinam com cada leitor.
-            </p>
-
-        </article>
-
-    </main>
-
-
-    <footer>
-
-        Mystic — Livraria
-
-    </footer>
+  <footer>
+    Mystic — Livraria
+  </footer>
 
 </body>
-
 </html>
