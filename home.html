@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystic - Livraria</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #202020;
+            color: #eeeeee;
+        }
+
+        header {
+            height: 75px;
+            background: #292929;
+            border-bottom: 1px solid #3d3d3d;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #cccccc;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        .conteudo {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 25px;
+        }
+
+        .boas-vindas {
+            margin-bottom: 45px;
+        }
+
+        .boas-vindas h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .boas-vindas p {
+            color: #999999;
+            font-size: 17px;
+        }
+
+        .pesquisa {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 40px;
+
+            background: #292929;
+            color: white;
+
+            border: 1px solid #444444;
+            border-radius: 10px;
+
+            font-size: 15px;
+        }
+
+        .titulo {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .livros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+        }
+
+        .livro {
+            background: #292929;
+            padding: 15px;
+            border-radius: 12px;
+
+            border: 1px solid #383838;
+
+            transition: 0.2s;
+        }
+
+        .livro:hover {
+            transform: translateY(-4px);
+            border-color: #555555;
+        }
+
+        .capa {
+            height: 240px;
+            background: #3a3a3a;
+
+            border-radius: 8px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+        }
+
+        .livro h3 {
+            margin-bottom: 7px;
+        }
+
+        .livro p {
+            color: #999999;
+            font-size: 14px;
+        }
+
+        .botao {
+            display: block;
+
+            margin-top: 15px;
+            padding: 10px;
+
+            background: #eeeeee;
+            color: #222222;
+
+            text-align: center;
+            text-decoration: none;
+
+            border-radius: 7px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            Mystic
+        </div>
+
+        <nav>
+            <a href="home.html">Início</a>
+            <a href="#">Livros</a>
+            <a href="#">Blogs</a>
+            <a href="#">Redações</a>
+        </nav>
+
+    </header>
+
+
+    <main class="conteudo">
+
+        <section class="boas-vindas">
+
+            <h1>Bem-vindo à Mystic</h1>
+
+            <p>
+                Encontre livros, histórias, redações e muito mais.
+            </p>
+
+        </section>
+
+
+        <input
+            class="pesquisa"
+            type="text"
+            placeholder="🔍 Pesquisar livros..."
+        >
+
+
+        <h2 class="titulo">
+            Livros em destaque
+        </h2>
+
+
+        <section class="livros">
+
+            <article class="livro">
+
+                <div class="capa">
+                    📕
+                </div>
+
+                <h3>
+                    O Pequeno Príncipe
+                </h3>
+
+                <p>
+                    Antoine de Saint-Exupéry
+                </p>
+
+                <a class="botao" href="#">
+                    Ver livro
+                </a>
+
+            </article>
+
+
+            <article class="livro">
+
+                <div class="capa">
+                    📘
+                </div>
+
+                <h3>
+                    Livro em destaque
+                </h3>
+
+                <p>
+                    Autor
+                </p>
+
+                <a class="botao" href="#">
+                    Ver livro
+                </a>
+
+            </article>
+
+
+            <article class="livro">
+
+                <div class="capa">
+                    📗
+                </div>
+
+                <h3>
+                    Livro em destaque
+                </h3>
+
+                <p>
+                    Autor
+                </p>
+
+                <a class="botao" href="#">
+                    Ver livro
+                </a>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        Mystic — Livraria
+    </footer>
+
+</body>
+</html>
