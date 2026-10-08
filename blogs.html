@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystic - Blogs</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #242424;
+            color: #eeeeee;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            min-height: 75px;
+            background: #303030;
+            border-bottom: 1px solid #444444;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 15px 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #bbbbbb;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 25px;
+        }
+
+        .titulo-principal {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .descricao {
+            color: #999999;
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        .blogs {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 25px;
+        }
+
+        .blog {
+            background: #303030;
+            border: 1px solid #404040;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .blog:hover {
+            transform: translateY(-4px);
+            border-color: #666666;
+        }
+
+        .imagem-blog {
+            height: 180px;
+
+            background: #3b3b3b;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 60px;
+        }
+
+        .conteudo-blog {
+            padding: 20px;
+        }
+
+        .categoria {
+            color: #999999;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .blog h2 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .blog p {
+            color: #999999;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .botao {
+            display: block;
+
+            margin-top: 18px;
+            padding: 10px;
+
+            background: #eeeeee;
+            color: #222222;
+
+            text-align: center;
+
+            border-radius: 7px;
+
+            text-decoration: none;
+        }
+
+        .botao:hover {
+            background: #cccccc;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777777;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .titulo-principal {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            Mystic
+        </div>
+
+        <nav>
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="livros.html">
+                Livros
+            </a>
+
+            <a href="blogs.html">
+                Blogs
+            </a>
+
+            <a href="redacoes.html">
+                Redações
+            </a>
+
+            <a href="perfil.html">
+                👤 Meu perfil
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <h1 class="titulo-principal">
+            Blogs
+        </h1>
+
+        <p class="descricao">
+            Descubra histórias, curiosidades e conteúdos sobre literatura.
+        </p>
+
+
+        <section class="blogs">
+
+
+            <article class="blog">
+
+                <div class="imagem-blog">
+                    📚
+                </div>
+
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        LITERATURA
+                    </div>
+
+                    <h2>
+                        5 livros que todo leitor deveria conhecer
+                    </h2>
+
+                    <p>
+                        Uma seleção de obras marcantes para quem
+                        quer descobrir novos mundos através da leitura.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog">
+
+                <div class="imagem-blog">
+                    ✍️
+                </div>
+
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        LEITURA
+                    </div>
+
+                    <h2>
+                        Como escolher seu próximo livro
+                    </h2>
+
+                    <p>
+                        Algumas maneiras simples de encontrar
+                        uma leitura que combine com seus interesses.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog">
+
+                <div class="imagem-blog">
+                    🕯️
+                </div>
+
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        CURIOSIDADES
+                    </div>
+
+                    <h2>
+                        Curiosidades sobre grandes escritores
+                    </h2>
+
+                    <p>
+                        Conheça fatos interessantes sobre autores
+                        que marcaram a história da literatura.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <article class="blog">
+
+                <div class="imagem-blog">
+                    🌙
+                </div>
+
+                <div class="conteudo-blog">
+
+                    <div class="categoria">
+                        MISTICISMO
+                    </div>
+
+                    <h2>
+                        Por que histórias misteriosas nos atraem?
+                    </h2>
+
+                    <p>
+                        Uma reflexão sobre o fascínio humano por
+                        mistério, suspense e histórias desconhecidas.
+                    </p>
+
+                    <a href="#" class="botao">
+                        Ler artigo
+                    </a>
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        Mystic — Livraria
+
+    </footer>
+
+</body>
+
+</html>
