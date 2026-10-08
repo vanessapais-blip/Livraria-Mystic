@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mystic - Blog</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #242424;
+            color: #eeeeee;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            min-height: 75px;
+            background: #303030;
+            border-bottom: 1px solid #444444;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 15px 40px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #bbbbbb;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        main {
+            max-width: 850px;
+            margin: auto;
+            padding: 60px 25px;
+        }
+
+        .voltar {
+            display: inline-block;
+
+            color: #bbbbbb;
+            text-decoration: none;
+
+            margin-bottom: 35px;
+        }
+
+        .voltar:hover {
+            color: white;
+        }
+
+        .categoria {
+            color: #999999;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .subtitulo {
+            color: #999999;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .imagem {
+            height: 280px;
+
+            background: #303030;
+            border: 1px solid #404040;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 80px;
+
+            margin-bottom: 40px;
+        }
+
+        .texto {
+            color: #cccccc;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .texto p {
+            margin-bottom: 25px;
+        }
+
+        .texto h2 {
+            color: #eeeeee;
+            font-size: 25px;
+            margin: 35px 0 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #777777;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            Mystic
+        </div>
+
+        <nav>
+
+            <a href="home.html">
+                Início
+            </a>
+
+            <a href="livros.html">
+                Livros
+            </a>
+
+            <a href="blogs.html">
+                Blogs
+            </a>
+
+            <a href="redacoes.html">
+                Redações
+            </a>
+
+            <a href="perfil.html">
+                👤 Meu perfil
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <a href="blogs.html" class="voltar">
+            ← Voltar para Blogs
+        </a>
+
+
+        <div class="categoria">
+            LITERATURA
+        </div>
+
+
+        <h1>
+            5 livros que todo leitor deveria conhecer
+        </h1>
+
+
+        <p class="subtitulo">
+            Uma seleção de obras marcantes para quem quer
+            descobrir novos mundos através da leitura.
+        </p>
+
+
+        <div class="imagem">
+            📚
+        </div>
+
+
+        <article class="texto">
+
+            <p>
+                A literatura permite conhecer diferentes épocas,
+                culturas, personagens e maneiras de enxergar o mundo.
+                Por isso, algumas obras acabam se tornando referências
+                para diferentes gerações de leitores.
+            </p>
+
+
+            <h2>
+                1. O Pequeno Príncipe
+            </h2>
+
+            <p>
+                A obra de Antoine de Saint-Exupéry apresenta uma
+                narrativa aparentemente simples, mas cheia de
+                reflexões sobre amizade, relações humanas e
+                crescimento.
+            </p>
+
+
+            <h2>
+                2. Aventuras e descobertas
+            </h2>
+
+            <p>
+                Livros de aventura podem transportar o leitor para
+                lugares imaginários e apresentar personagens que
+                enfrentam desafios, escolhas e descobertas.
+            </p>
+
+
+            <h2>
+                3. Grandes clássicos
+            </h2>
+
+            <p>
+                Os clássicos continuam sendo lidos porque muitas
+                de suas questões permanecem relevantes mesmo depois
+                de muitos anos.
+            </p>
+
+
+            <h2>
+                4. Histórias que despertam reflexão
+            </h2>
+
+            <p>
+                Uma boa leitura não precisa apenas contar uma história.
+                Ela também pode provocar perguntas e incentivar o
+                leitor a pensar sobre diferentes assuntos.
+            </p>
+
+
+            <h2>
+                5. Encontrando seu próprio estilo
+            </h2>
+
+            <p>
+                Não existe uma única forma correta de gostar de livros.
+                Experimentar diferentes gêneros é uma maneira de
+                descobrir quais histórias mais combinam com cada leitor.
+            </p>
+
+        </article>
+
+    </main>
+
+
+    <footer>
+
+        Mystic — Livraria
+
+    </footer>
+
+</body>
+
+</html>
