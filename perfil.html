@@ -90,3 +90,125 @@
             cursor: pointer;
             font-size: 15px;
         }
+
+        button:hover {
+            background: #cccccc;
+        }
+
+        .editar {
+            display: none;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 7px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #555;
+            background: #222;
+            color: white;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .salvar {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="marca">Mystic</div>
+    <a href="home.html" class="voltar">← Voltar</a>
+</header>
+
+<main>
+
+    <section class="perfil">
+
+        <div class="foto">👤</div>
+
+        <h1 id="nome">Seu Nome</h1>
+
+        <div class="usuario" id="usuario">@seuusuario</div>
+
+        <p class="descricao" id="descricao">
+            Ainda não há uma descrição.
+        </p>
+
+        <button onclick="abrirEdicao()">Editar perfil</button>
+
+        <div class="editar" id="editar">
+
+            <label>Nome</label>
+            <input type="text" id="novoNome" placeholder="Seu nome">
+
+            <label>Nome de usuário</label>
+            <input type="text" id="novoUsuario" placeholder="@seuusuario">
+
+            <label>Descrição</label>
+            <textarea id="novaDescricao" placeholder="Fale um pouco sobre você..."></textarea>
+
+            <button class="salvar" onclick="salvarPerfil()">
+                Salvar alterações
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+
+function abrirEdicao() {
+    document.getElementById("editar").style.display = "block";
+
+    document.getElementById("novoNome").value =
+        document.getElementById("nome").textContent;
+
+    document.getElementById("novoUsuario").value =
+        document.getElementById("usuario").textContent;
+
+    document.getElementById("novaDescricao").value =
+        document.getElementById("descricao").textContent.trim();
+}
+
+function salvarPerfil() {
+
+    let nome = document.getElementById("novoNome").value;
+    let usuario = document.getElementById("novoUsuario").value;
+    let descricao = document.getElementById("novaDescricao").value;
+
+    if (nome.trim() !== "") {
+        document.getElementById("nome").textContent = nome;
+    }
+
+    if (usuario.trim() !== "") {
+        document.getElementById("usuario").textContent = usuario;
+    }
+
+    if (descricao.trim() !== "") {
+        document.getElementById("descricao").textContent = descricao;
+    }
+
+    document.getElementById("editar").style.display = "none";
+}
+
+</script>
+
+</body>
+</html>
