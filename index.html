@@ -14,7 +14,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #000;
+      background: #000000;
       color: #d4af37;
       font-family: Arial, sans-serif;
     }
@@ -41,20 +41,27 @@
 
     .logo h2 {
       color: #d4af37;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
       font-weight: normal;
+      text-align: center;
       margin-top: 10px;
     }
 
     h3 {
       color: #d4af37;
-      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
       font-weight: normal;
+      text-align: left;
+      margin: 0 0 12px;
     }
 
     label {
       display: block;
       margin: 12px 0 6px;
       color: #d4af37;
+      font-size: 14px;
     }
 
     input[type="email"],
@@ -63,10 +70,11 @@
       width: 100%;
       padding: 10px;
       box-sizing: border-box;
-      border: 1px solid #555;
+      border: 1px solid #555555;
       border-radius: 5px;
-      background: #222;
-      color: #eee;
+      background: #222222;
+      color: #eeeeee;
+      font-family: Arial, sans-serif;
       font-size: 14px;
     }
 
@@ -81,7 +89,8 @@
       border: none;
       border-radius: 5px;
       background: #d4af37;
-      color: #000;
+      color: #000000;
+      font-family: Arial, sans-serif;
       font-size: 15px;
       cursor: pointer;
     }
@@ -127,7 +136,7 @@
     .captcha {
       margin-top: 18px;
       padding: 12px;
-      border: 1px solid #555;
+      border: 1px solid #555555;
       border-radius: 5px;
       background: #272727;
     }
@@ -165,10 +174,6 @@
       font-size: 13px;
     }
 
-    .captcha input {
-      margin-top: 10px;
-    }
-
     .mensagem {
       color: #d4af37;
       text-align: center;
@@ -178,14 +183,26 @@
     .oculto {
       display: none;
     }
+
+    .aviso {
+      color: #eeeeee;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
   </style>
 </head>
 
 <body>
   <main class="login">
+
     <header class="logo">
-      <img src="logo-mystic.jpg" alt="Logo da livraria"
-           onerror="this.style.display='none'">
+      <img
+        src="logo-mystic.jpg"
+        alt="Logo da livraria"
+        onerror="this.style.display='none'"
+      >
       <h2>Livraria</h2>
     </header>
 
@@ -220,13 +237,16 @@
           <p class="captcha-titulo">Verificação de segurança</p>
 
           <div class="captcha-desafio">
-            <span id="codigoCaptcha" aria-label="Código de verificação"></span>
+            <span
+              id="codigoCaptcha"
+              aria-label="Código de verificação"
+            ></span>
+
             <button
               type="button"
               class="botao-atualizar"
               id="atualizarCaptcha"
               aria-label="Gerar novo código"
-              title="Gerar outro código"
             >↻ Novo</button>
           </div>
 
@@ -259,6 +279,7 @@
         <input
           type="email"
           id="emailCadastro"
+          placeholder="Digite seu e-mail"
           autocomplete="email"
           required
         >
@@ -267,6 +288,7 @@
         <input
           type="password"
           id="senhaCadastro"
+          placeholder="Mínimo de 6 caracteres"
           autocomplete="new-password"
           minlength="6"
           required
@@ -276,6 +298,7 @@
         <input
           type="password"
           id="confirmarSenha"
+          placeholder="Digite a senha novamente"
           autocomplete="new-password"
           minlength="6"
           required
@@ -289,15 +312,27 @@
         <a href="#" id="voltarLogin">Voltar para entrar</a>
       </div>
     </section>
+
+    <p class="aviso">
+      Versão de demonstração local.
+    </p>
+
   </main>
 
   <script>
     const CHAVE_CONTAS = "mysticContas";
+    const CHAVE_SESSAO = "mysticSessao";
+    const CHAVE_LEMBRAR = "mysticLembrar";
+
     let codigoAtual = "";
 
     function obterContas() {
       try {
-        return JSON.parse(localStorage.getItem(CHAVE_CONTAS) || "{}");
+        const dados = JSON.parse(
+          localStorage.getItem(CHAVE_CONTAS) || "{}"
+        );
+
+        return dados && typeof dados === "object" ? dados : {};
       } catch {
         return {};
       }
@@ -319,102 +354,133 @@
 
     gerarCaptcha();
 
-    document.getElementById("atualizarCaptcha").addEventListener(
-      "click",
-      gerarCaptcha
-    );
+    document
+      .getElementById("atualizarCaptcha")
+      .addEventListener("click", gerarCaptcha);
 
-    document.getElementById("abrirCadastro").addEventListener("click", (e) => {
-      e.preventDefault();
-      document.getElementById("areaLogin").classList.add("oculto");
-      document.getElementById("areaCadastro").classList.remove("oculto");
-    });
-
-    document.getElementById("voltarLogin").addEventListener("click", (e) => {
-      e.preventDefault();
-      document.getElementById("areaCadastro").classList.add("oculto");
-      document.getElementById("areaLogin").classList.remove("oculto");
-    });
-
-    document.getElementById("formCadastro").addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById("emailCadastro").value.trim().toLowerCase();
-      const senha = document.getElementById("senhaCadastro").value;
-      const confirmar = document.getElementById("confirmarSenha").value;
-      const contas = obterContas();
-      const mensagem = document.getElementById("mensagemCadastro");
-
-      if (senha !== confirmar) {
-        mensagem.textContent = "As senhas não coincidem.";
-        return;
-      }
-
-      if (contas[email]) {
-        mensagem.textContent = "Este e-mail já está cadastrado.";
-        return;
-      }
-
-      // Demonstração local: não usar para contas reais.
-      contas[email] = { senha: senha };
-
-      try {
-        localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
-        mensagem.textContent = "Conta criada. Você já pode entrar.";
-        document.getElementById("formCadastro").reset();
-      } catch {
-        mensagem.textContent = "Não foi possível salvar a conta.";
-      }
-    });
-
-    document.getElementById("formLogin").addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const mensagem = document.getElementById("mensagemLogin");
-      const email = document.getElementById("emailLogin").value.trim().toLowerCase();
-      const senha = document.getElementById("senhaLogin").value;
-      const resposta = document.getElementById("respostaCaptcha").value.trim().toUpperCase();
-      const lembrar = document.getElementById("lembrar").checked;
-
-      if (resposta !== codigoAtual) {
-        mensagem.textContent = "Código incorreto. Tente o novo código.";
-        gerarCaptcha();
-        return;
-      }
-
-      const contas = obterContas();
-
-      if (!contas[email] || contas[email].senha !== senha) {
-        mensagem.textContent = "E-mail ou senha incorretos.";
-        gerarCaptcha();
-        return;
-      }
-
-      const sessao = JSON.stringify({
-        email: email,
-        autenticado: true
+    document
+      .getElementById("abrirCadastro")
+      .addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("areaLogin").classList.add("oculto");
+        document.getElementById("areaCadastro").classList.remove("oculto");
       });
 
-      try {
-        if (lembrar) {
-          localStorage.setItem("mysticLembrar", sessao);
-          sessionStorage.removeItem("mysticSessao");
-        } else {
-          sessionStorage.setItem("mysticSessao", sessao);
-          localStorage.removeItem("mysticLembrar");
+    document
+      .getElementById("voltarLogin")
+      .addEventListener("click", function (e) {
+        e.preventDefault();
+        document.getElementById("areaCadastro").classList.add("oculto");
+        document.getElementById("areaLogin").classList.remove("oculto");
+      });
+
+    document
+      .getElementById("formCadastro")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document
+          .getElementById("emailCadastro")
+          .value.trim().toLowerCase();
+
+        const senha = document.getElementById("senhaCadastro").value;
+        const confirmar = document.getElementById("confirmarSenha").value;
+        const mensagem = document.getElementById("mensagemCadastro");
+        const contas = obterContas();
+
+        if (senha.length < 6) {
+          mensagem.textContent =
+            "A senha precisa ter pelo menos 6 caracteres.";
+          return;
         }
-      } catch {
-        mensagem.textContent = "Não foi possível salvar a sessão.";
-        return;
-      }
 
-      window.location.href = "home.html";
-    });
+        if (senha !== confirmar) {
+          mensagem.textContent = "As senhas não coincidem.";
+          return;
+        }
 
-    document.getElementById("esqueciSenha").addEventListener("click", (e) => {
-      e.preventDefault();
-      alert("A recuperação de senha ainda não está configurada.");
-    });
+        if (contas[email]) {
+          mensagem.textContent = "Este e-mail já está cadastrado.";
+          return;
+        }
+
+        /*
+         * Demonstração local apenas.
+         * Não armazenar senhas assim em um site real.
+         */
+        contas[email] = { senha: senha };
+
+        try {
+          localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
+          mensagem.textContent = "Conta criada. Você já pode entrar.";
+          document.getElementById("formCadastro").reset();
+        } catch {
+          mensagem.textContent = "Não foi possível salvar a conta.";
+        }
+      });
+
+    document
+      .getElementById("formLogin")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const mensagem = document.getElementById("mensagemLogin");
+        const email = document
+          .getElementById("emailLogin")
+          .value.trim().toLowerCase();
+
+        const senha = document.getElementById("senhaLogin").value;
+        const resposta = document
+          .getElementById("respostaCaptcha")
+          .value.trim().toUpperCase();
+
+        const lembrar = document.getElementById("lembrar").checked;
+
+        if (resposta !== codigoAtual) {
+          mensagem.textContent =
+            "Código incorreto. Um novo código foi gerado.";
+          gerarCaptcha();
+          return;
+        }
+
+        const contas = obterContas();
+
+        if (!contas[email] || contas[email].senha !== senha) {
+          mensagem.textContent = "E-mail ou senha incorretos.";
+          gerarCaptcha();
+          return;
+        }
+
+        const sessao = JSON.stringify({
+          email: email,
+          autenticado: true
+        });
+
+        try {
+          if (lembrar) {
+            localStorage.setItem(CHAVE_LEMBRAR, sessao);
+            sessionStorage.removeItem(CHAVE_SESSAO);
+          } else {
+            sessionStorage.setItem(CHAVE_SESSAO, sessao);
+            localStorage.removeItem(CHAVE_LEMBRAR);
+          }
+        } catch {
+          mensagem.textContent = "Não foi possível salvar a sessão.";
+          return;
+        }
+
+        window.location.href = "home.html";
+      });
+
+    document
+      .getElementById("esqueciSenha")
+      .addEventListener("click", function (e) {
+        e.preventDefault();
+
+        alert(
+          "A recuperação de senha ainda não está configurada."
+        );
+      });
   </script>
 </body>
 </html>
