@@ -8,30 +8,28 @@
 <style>
 :root {
     color-scheme: dark;
-    --fundo: #10131b;
-    --painel: #171c27;
-    --painel2: #1d2432;
-    --borda: #2b3446;
-    --texto: #eef2ff;
-    --secundario: #9ca8bd;
-    --campo: #111722;
+    --fundo: #000000;
+    --painel: #111111;
+    --painel2: #1b1b1b;
+    --borda: #333333;
+    --texto: #eeeeee;
+    --secundario: #aaaaaa;
+    --campo: #090909;
     --destaque: #7774ff;
 }
 
 body.claro {
     color-scheme: light;
-    --fundo: #f2f4f8;
+    --fundo: #f2f2f2;
     --painel: #ffffff;
-    --painel2: #f7f8fc;
-    --borda: #dce1eb;
-    --texto: #202638;
-    --secundario: #626d80;
+    --painel2: #f7f7f7;
+    --borda: #dddddd;
+    --texto: #222222;
+    --secundario: #666666;
     --campo: #ffffff;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -61,13 +59,8 @@ a {
     text-decoration: none;
 }
 
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
+button, input, select { font: inherit; }
+button { cursor: pointer; }
 
 header {
     position: sticky;
@@ -87,9 +80,7 @@ header {
     white-space: nowrap;
 }
 
-.logo span {
-    color: var(--destaque);
-}
+.logo span { color: #ffffff; }
 
 nav {
     display: flex;
@@ -97,6 +88,8 @@ nav {
     color: var(--secundario);
     font-size: 14px;
 }
+
+nav a:hover { color: var(--texto); }
 
 .busca-topo {
     margin-left: auto;
@@ -114,6 +107,13 @@ select {
     background: var(--campo);
     color: var(--texto);
 }
+
+input[type="file] {
+    max-width: 100%;
+    color: var(--texto);
+}
+
+input::placeholder { color: var(--secundario); }
 
 .layout {
     display: grid;
@@ -166,10 +166,6 @@ main {
     font-size: 13px;
 }
 
-.busca-principal {
-    width: min(380px, 100%);
-}
-
 .colunas {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -196,9 +192,7 @@ main {
     font-size: 18px;
 }
 
-.descricao {
-    margin: 0 0 14px;
-}
+.descricao { margin: 0 0 14px; }
 
 .item {
     display: flex;
@@ -209,9 +203,7 @@ main {
     border-top: 1px solid var(--borda);
 }
 
-.item:first-of-type {
-    border-top: 0;
-}
+.item:first-of-type { border-top: 0; }
 
 .info {
     flex: 1;
@@ -230,9 +222,7 @@ main {
     margin-top: 3px;
 }
 
-.item select {
-    max-width: 240px;
-}
+.item select { max-width: 240px; }
 
 input[type="checkbox"],
 input[type="radio"] {
@@ -243,6 +233,7 @@ input[type="radio"] {
 }
 
 .botao {
+    display: inline-block;
     padding: 9px 12px;
     border: 1px solid var(--borda);
     border-radius: 8px;
@@ -251,13 +242,8 @@ input[type="radio"] {
     font-size: 13px;
 }
 
-.botao:hover {
-    border-color: var(--destaque);
-}
-
-.perigo {
-    color: #ff7777;
-}
+.botao:hover { border-color: var(--destaque); }
+.perigo { color: #ff7777; }
 
 .temas {
     display: grid;
@@ -274,18 +260,14 @@ input[type="radio"] {
     border-radius: 10px;
 }
 
-.temas button.selecionado {
-    border: 2px solid var(--destaque);
-}
+.temas button.selecionado { border: 2px solid var(--destaque); }
 
 .temas strong, .temas small {
     display: block;
     margin-top: 5px;
 }
 
-.temas small {
-    color: var(--secundario);
-}
+.temas small { color: var(--secundario); }
 
 .sons {
     display: grid;
@@ -299,9 +281,7 @@ input[type="radio"] {
     font-size: 13px;
 }
 
-.som button {
-    margin-left: auto;
-}
+.som button { margin-left: auto; }
 
 .aviso {
     padding: 12px;
@@ -346,9 +326,7 @@ input[type="radio"] {
     color: var(--secundario);
 }
 
-.oculto {
-    display: none !important;
-}
+.oculto { display: none !important; }
 
 .status {
     color: var(--secundario);
@@ -365,9 +343,7 @@ footer {
 }
 
 @media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
+    .layout { grid-template-columns: 1fr; }
 
     aside {
         display: flex;
@@ -377,33 +353,24 @@ footer {
         border-bottom: 1px solid var(--borda);
     }
 
-    aside a {
-        white-space: nowrap;
-    }
-
-    .colunas {
-        grid-template-columns: 1fr;
-    }
-
-    nav {
-        display: none;
-    }
+    aside a { white-space: nowrap; }
+    .colunas { grid-template-columns: 1fr; }
+    nav { display: none; }
 }
 
 @media (max-width: 550px) {
-    header {
-        padding: 12px;
-    }
+    header { padding: 12px; gap: 10px; }
+
+    .logo { font-size: 21px; }
 
     .busca-topo {
         max-width: none;
         width: auto;
+        min-width: 0;
         flex: 1;
     }
 
-    main {
-        padding: 15px 12px;
-    }
+    main { padding: 15px 12px; }
 
     .titulo {
         align-items: stretch;
@@ -419,6 +386,9 @@ footer {
         max-width: none;
         width: 100%;
     }
+
+    .som { flex-wrap: wrap; }
+    .som button { margin-left: auto; }
 }
 </style>
 </head>
@@ -458,9 +428,6 @@ footer {
             <h1>⚙ Configurações</h1>
             <p>Personalize sua experiência na Mystic.</p>
         </div>
-        <input class="busca-principal" id="buscaPrincipal"
-               type="search" placeholder="Pesquisar uma configuração..."
-               aria-label="Pesquisar uma configuração">
     </div>
 
     <p id="status" class="status" aria-live="polite"></p>
@@ -472,6 +439,7 @@ footer {
                  data-palavras="conta perfil sair sessão">
             <h2>♙ Conta e perfil</h2>
             <p class="descricao">Gerencie sua conta.</p>
+
             <div class="item">
                 <div class="info">
                     <strong>Meu perfil</strong>
@@ -479,12 +447,13 @@ footer {
                 </div>
                 <a class="botao" href="perfil.html">Abrir perfil</a>
             </div>
+
             <div class="item">
                 <div class="info">
                     <strong>Sair da conta</strong>
                     <small>Encerra a sessão neste navegador.</small>
                 </div>
-                <button class="botao perigo" id="sair">Sair</button>
+                <button class="botao perigo" id="sair" type="button">Sair</button>
             </div>
         </section>
 
@@ -492,12 +461,14 @@ footer {
                  data-palavras="aparência tema claro escuro cores">
             <h2>◉ Aparência</h2>
             <p class="descricao">Escolha as cores da Mystic.</p>
+
             <div class="temas">
                 <button id="temaEscuro" type="button">
                     <span style="font-size:25px">☾</span>
                     <strong>Escuro</strong>
                     <small>Visual escuro</small>
                 </button>
+
                 <button id="temaClaro" type="button">
                     <span style="font-size:25px">☼</span>
                     <strong>Claro</strong>
@@ -513,6 +484,240 @@ footer {
 
             <div class="item">
                 <div class="info"><strong>Tamanho do texto</strong></div>
+                <select id="tamanhoFonte">
+                    <option value="pequena">Pequeno</option>
+                    <option value="normal">Normal</option>
+                    <option value="grande">Grande</option>
+                    <option value="extra">Extra grande</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Fonte</strong></div>
+                <select id="tipoFonte">
+                    <option value="padrao">Padrão</option>
+                    <option value="arial">Arial</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="verdana">Verdana</option>
+                    <option value="mono">Monoespaçada</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Espaçamento entre linhas</strong></div>
+                <select id="espacamento">
+                    <option value="normal">Normal</option>
+                    <option value="medio">Médio</option>
+                    <option value="amplo">Amplo</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Negrito</strong></div>
+                <input type="checkbox" id="negrito" aria-label="Negrito">
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Itálico</strong></div>
+                <input type="checkbox" id="italico" aria-label="Itálico">
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Sublinhar links</strong></div>
+                <input type="checkbox" id="sublinhar" aria-label="Sublinhar links">
+            </div>
+
+            <button class="botao" id="restaurarTexto" type="button">
+                Restaurar texto padrão
+            </button>
+        </section>
+
+        <section class="card pesquisavel" id="notificacoes"
+                 data-palavras="notificações sons áudio música toque arquivo celular personalizado">
+            <h2>♧ Notificações e sons</h2>
+            <p class="descricao">Escolha e teste seus sons de notificação.</p>
+
+            <div class="item">
+                <div class="info">
+                    <strong>Notificações ativadas</strong>
+                    <small>Salva sua preferência para futuras notificações.</small>
+                </div>
+                <input type="checkbox" id="notificacoesAtivas" checked>
+            </div>
+
+            <div class="item">
+                <div class="info">
+                    <strong>Sons ativados</strong>
+                    <small>Permite testar os sons abaixo.</small>
+                </div>
+                <input type="checkbox" id="sonsAtivos" checked>
+            </div>
+
+            <p><strong>Som padrão</strong></p>
+
+            <div class="sons">
+                <label class="som">
+                    <input type="radio" name="som" value="padrao" checked>
+                    Mystic padrão
+                    <button class="botao testarSom" data-som="padrao" type="button">▶ Testar</button>
+                </label>
+
+                <label class="som">
+                    <input type="radio" name="som" value="sininho">
+                    Sininho
+                    <button class="botao testarSom" data-som="sininho" type="button">▶ Testar</button>
+                </label>
+
+                <label class="som">
+                    <input type="radio" name="som" value="suave">
+                    Toque suave
+                    <button class="botao testarSom" data-som="suave" type="button">▶ Testar</button>
+                </label>
+
+                <label class="som">
+                    <input type="radio" name="som" value="alerta">
+                    Alerta
+                    <button class="botao testarSom" data-som="alerta" type="button">▶ Testar</button>
+                </label>
+
+                <label class="som">
+                    <input type="radio" name="som" value="personalizado">
+                    Meu arquivo de áudio
+                </label>
+            </div>
+
+            <div class="item">
+                <div class="info">
+                    <strong>Escolher áudio do celular ou computador</strong>
+                    <small>Selecione um arquivo de áudio permitido pelo seu dispositivo.</small>
+                </div>
+                <input type="file" id="arquivoSom" accept="audio/*"
+                       aria-label="Escolher arquivo de áudio">
+            </div>
+
+            <p id="nomeSom" class="status">Nenhum arquivo escolhido.</p>
+            <audio id="audioPersonalizado"></audio>
+
+            <button class="botao" id="testarPersonalizado" type="button">
+                ▶ Testar meu áudio
+            </button>
+
+            <div class="aviso">
+                Os sons padrão são gerados pela página. O áudio personalizado
+                pode ser testado enquanto a página está aberta. Para receber
+                notificações reais em segundo plano, será necessária integração adicional.
+            </div>
+        </section>
+    </div>
+
+    <div class="coluna">
+
+        <section class="card pesquisavel" id="idioma"
+                 data-palavras="idioma língua região fuso horário data hora">
+            <h2>◎ Idioma e região</h2>
+            <p class="descricao">Escolha idioma, fuso e formatos.</p>
+
+            <div class="item">
+                <div class="info"><strong>Idioma</strong></div>
+                <select id="idiomaPreferido">
+                    <option value="pt-BR">Português (Brasil)</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                    <option value="zh">中文</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Fuso horário</strong></div>
+                <select id="fuso">
+                    <option value="auto">Detectar automaticamente</option>
+                    <option value="America/Sao_Paulo">Brasília / São Paulo</option>
+                    <option value="America/Manaus">Manaus</option>
+                    <option value="America/Rio_Branco">Rio Branco</option>
+                    <option value="America/Noronha">Fernando de Noronha</option>
+                    <option value="America/New_York">Nova York</option>
+                    <option value="Europe/Lisbon">Lisboa</option>
+                    <option value="Europe/London">Londres</option>
+                    <option value="Europe/Paris">Paris</option>
+                    <option value="Asia/Tokyo">Tóquio</option>
+                    <option value="Australia/Sydney">Sydney</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info">
+                    <strong>Horário atual</strong>
+                    <small id="horarioAtual">Calculando...</small>
+                </div>
+                <button class="botao" id="detectarFuso" type="button">Usar meu fuso</button>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Formato de hora</strong></div>
+                <select id="formatoHora">
+                    <option value="24">24 horas</option>
+                    <option value="12">12 horas (AM/PM)</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Formato de data</strong></div>
+                <select id="formatoData">
+                    <option value="local">Automático</option>
+                    <option value="DMY">DD/MM/AAAA</option>
+                    <option value="MDY">MM/DD/AAAA</option>
+                    <option value="YMD">AAAA-MM-DD</option>
+                </select>
+            </div>
+
+            <p class="aviso">
+                A escolha do idioma fica salva, mas a tradução de todas as páginas
+                precisa ser implementada separadamente.
+            </p>
+        </section>
+
+        <section class="card pesquisavel" id="privacidade"
+                 data-palavras="privacidade segurança online perfil mensagens bloqueio restrição">
+            <h2>♢ Privacidade e segurança</h2>
+            <p class="descricao">Configure suas preferências de privacidade.</p>
+
+            <div class="item">
+                <div class="info"><strong>Mostrar status online</strong></div>
+                <input type="checkbox" id="mostrarOnline" checked>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Permitir registro de visitas ao perfil</strong></div>
+                <input type="checkbox" id="visitasPerfil" checked>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Quem pode enviar mensagens</strong></div>
+                <select id="quemMensagem">
+                    <option value="todos">Todos</option>
+                    <option value="conexoes">Pessoas com conexão</option>
+                    <option value="ninguem">Ninguém</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info"><strong>Visibilidade do perfil</strong></div>
+                <select id="visibilidadePerfil">
+                    <option value="publico">Público</option>
+                    <option value="privado">Privado</option>
+                </select>
+            </div>
+
+            <div class="item">
+                <div class="info">
+                    <strong>Contas bloqueadas</strong>
+                    <small>O bloqueio real exige integração en do texto</strong></div>
                 <select id="tamanhoFonte">
                     <option value="pequena">Pequeno</option>
                     <option value="normal">Normal</option>
