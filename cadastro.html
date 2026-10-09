@@ -1,586 +1,697 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090909">
 
-    <title>Criar Conta | Livraria Mystic</title>
+  <title>Criar Conta | Livraria Mystic</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      --fundo: #090909;
+      --cartao: #151515;
+      --dourado: #d4af67;
+      --dourado-claro: #f0d99b;
+      --texto: #f5f0e6;
+      --texto-suave: #aaa49a;
+      --borda: #3a3124;
+      --erro: #ff8888;
+      --sucesso: #9ce3aa;
+    }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 15px;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #f5f0e6;
-            background:
-                radial-gradient(circle at top, #302719 0%, transparent 40%),
-                linear-gradient(135deg, #080808, #17130d, #050505);
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 460px;
-            padding: 35px;
-            background: rgba(15, 15, 15, 0.97);
-            border: 1px solid #b99a50;
-            border-radius: 20px;
-            box-shadow: 0 0 35px rgba(201, 166, 76, 0.12);
-        }
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: radial-gradient(
+        ellipse at top,
+        #292114 0,
+        #111 42%,
+        var(--fundo) 78%
+      );
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        .logo {
-            display: block;
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 20px;
-            object-fit: cover;
-            border: 2px solid #c9a64c;
-            border-radius: 20px;
-            box-shadow: 0 0 18px rgba(201, 166, 76, 0.2);
-        }
+    .container {
+      width: 100%;
+      max-width: 460px;
+      padding: 32px;
+      background: rgba(21, 21, 21, 0.97);
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.6);
+    }
 
-        h1 {
-            color: #d6b65c;
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
+    .logo-area {
+      text-align: center;
+      margin-bottom: 25px;
+    }
 
-        .subtitulo {
-            color: #bdb5a4;
-            text-align: center;
-            font-size: 14px;
-            margin-bottom: 28px;
-            line-height: 1.5;
-        }
+    .logo {
+      display: block;
+      width: 130px;
+      height: 130px;
+      max-width: 70%;
+      object-fit: cover;
+      margin: 0 auto 14px;
+      border: 2px solid var(--dourado);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(212, 175, 103, 0.15);
+    }
 
-        .campo {
-            margin-bottom: 18px;
-        }
+    .marca {
+      color: var(--dourado);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #d6b65c;
-            font-size: 14px;
-            font-weight: bold;
-        }
+    .subtitulo {
+      margin-top: 9px;
+      color: var(--texto-suave);
+      font-size: 13px;
+      line-height: 1.5;
+    }
 
-        input {
-            width: 100%;
-            padding: 13px 14px;
-            background: #090909;
-            border: 1px solid #49412f;
-            border-radius: 9px;
-            outline: none;
-            color: #ffffff;
-            font-size: 15px;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+    h1 {
+      margin-bottom: 9px;
+      color: var(--dourado-claro);
+      font-size: 25px;
+      text-align: center;
+    }
 
-        input:focus {
-            border-color: #d6b65c;
-            box-shadow: 0 0 8px rgba(214, 182, 92, 0.18);
-        }
+    .descricao {
+      margin-bottom: 25px;
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
 
-        input::placeholder {
-            color: #777064;
-        }
+    .campo {
+      margin-bottom: 17px;
+    }
 
-        .senha-container {
-            position: relative;
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--texto);
+      font-size: 13px;
+      font-weight: bold;
+    }
 
-        .senha-container input {
-            padding-right: 75px;
-        }
+    input {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      padding: 13px 14px;
+      background: #0c0c0c;
+      border: 1px solid #484033;
+      border-radius: 9px;
+      color: var(--texto);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
 
-        .mostrar-senha {
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%);
-            border: none;
-            background: transparent;
-            color: #d6b65c;
-            cursor: pointer;
-            font-size: 12px;
-        }
+    input:focus {
+      border-color: var(--dourado);
+      box-shadow: 0 0 0 3px rgba(212, 175, 103, 0.12);
+    }
 
-        .mostrar-senha:hover {
-            color: #f3d985;
-        }
+    input::placeholder {
+      color: #77716a;
+    }
 
-        .requisitos {
-            margin-top: 7px;
-            color: #938b7b;
-            font-size: 12px;
-            line-height: 1.5;
-        }
+    .senha-wrapper {
+      position: relative;
+    }
 
-        .botao {
-            width: 100%;
-            padding: 14px;
-            margin-top: 8px;
-            border: none;
-            border-radius: 9px;
-            background: linear-gradient(135deg, #d8ba68, #a98531);
-            color: #17130a;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s, filter 0.2s;
-        }
+    .senha-wrapper input {
+      padding-right: 78px;
+    }
 
-        .botao:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
+    .mostrar-senha {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--dourado);
+      font-size: 12px;
+      cursor: pointer;
+    }
 
-        .botao:disabled {
-            opacity: 0.6;
-            cursor: wait;
-            transform: none;
-        }
+    .mostrar-senha:hover {
+      color: var(--dourado-claro);
+    }
 
-        .mensagem {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 14px;
-            line-height: 1.5;
-        }
+    .ajuda {
+      margin-top: 7px;
+      color: var(--texto-suave);
+      font-size: 11px;
+      line-height: 1.5;
+    }
 
-        .mensagem.erro {
-            display: block;
-            color: #ffb8b8;
-            background: #321515;
-            border: 1px solid #753434;
-        }
+    .botao {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      padding: 14px;
+      background: linear-gradient(
+        135deg,
+        var(--dourado-claro),
+        var(--dourado)
+      );
+      border: none;
+      border-radius: 9px;
+      color: #17130b;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.2s;
+    }
 
-        .mensagem.sucesso {
-            display: block;
-            color: #d8f5d0;
-            background: #142616;
-            border: 1px solid #315c35;
-        }
+    .botao:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
 
-        .rodape {
-            margin-top: 24px;
-            text-align: center;
-            color: #bdb5a4;
-            font-size: 14px;
-            line-height: 1.8;
-        }
+    .botao:disabled {
+      opacity: 0.65;
+      cursor: wait;
+      transform: none;
+    }
 
-        .rodape a {
-            color: #d6b65c;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    .mensagem {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
 
-        .rodape a:hover {
-            text-decoration: underline;
-        }
+    .mensagem.erro {
+      display: block;
+      color: var(--erro);
+      background: rgba(255, 119, 119, 0.06);
+      border: 1px solid rgba(255, 119, 119, 0.25);
+    }
 
-        .aviso {
-            margin-top: 20px;
-            color: #777064;
-            font-size: 11px;
-            line-height: 1.5;
-            text-align: center;
-        }
+    .mensagem.sucesso {
+      display: block;
+      color: var(--sucesso);
+      background: rgba(139, 224, 160, 0.06);
+      border: 1px solid rgba(139, 224, 160, 0.25);
+    }
 
-        @media (max-width: 480px) {
-            .container {
-                padding: 25px 20px;
-            }
+    .rodape {
+      margin-top: 24px;
+      padding-top: 19px;
+      border-top: 1px solid var(--borda);
+      color: var(--texto-suave);
+      font-size: 13px;
+      line-height: 1.9;
+      text-align: center;
+    }
 
-            .logo {
-                width: 120px;
-                height: 120px;
-            }
+    .rodape a {
+      display: inline-block;
+      margin-top: 5px;
+      padding: 5px 12px;
+      border: 1px solid var(--dourado);
+      border-radius: 7px;
+      color: var(--dourado);
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
 
-            h1 {
-                font-size: 25px;
-            }
-        }
-    </style>
+    .rodape a:hover {
+      background: var(--dourado);
+      color: #111;
+    }
+
+    .aviso {
+      margin-top: 17px;
+      color: #77716a;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 14px;
+      }
+
+      .container {
+        padding: 25px 21px;
+      }
+
+      .marca {
+        font-size: 21px;
+      }
+
+      .logo {
+        width: 115px;
+        height: 115px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <main class="container">
+  <main class="container">
 
-        <!-- Logo da Livraria Mystic -->
-        <img
-            src="logo-mystic.jpg"
-            alt="Logo da Livraria Mystic"
-            class="logo"
-            onerror="this.style.display='none'"
+    <header class="logo-area">
+
+      <img
+        class="logo"
+        src="logo-mystic.jpg"
+        alt="Logo da Livraria Mystic"
+        onerror="this.style.display='none'"
+      >
+
+      <div class="marca">LIVRARIA MYSTIC</div>
+
+      <p class="subtitulo">
+        Sua próxima história começa com você.
+      </p>
+
+    </header>
+
+    <h1>Criar minha conta</h1>
+
+    <p class="descricao">
+      Faça parte do universo Mystic e descubra novas histórias.
+    </p>
+
+    <form id="formCadastro">
+
+      <div class="campo">
+        <label for="nome">Nome completo</label>
+
+        <input
+          type="text"
+          id="nome"
+          name="nome"
+          placeholder="Digite seu nome"
+          minlength="2"
+          maxlength="100"
+          autocomplete="name"
+          required
         >
+      </div>
 
-        <h1>Criar Conta</h1>
+      <div class="campo">
+        <label for="email">E-mail</label>
 
-        <p class="subtitulo">
-            Entre para o universo da Livraria Mystic
-            e descubra sua próxima história.
-        </p>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="seuemail@exemplo.com"
+          maxlength="254"
+          autocomplete="email"
+          required
+        >
+      </div>
 
-        <!-- Formulário de cadastro -->
-        <form id="formCadastro">
+      <div class="campo">
+        <label for="senha">Criar senha</label>
 
-            <div class="campo">
-                <label for="nome">Nome completo</label>
+        <div class="senha-wrapper">
 
-                <input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Digite seu nome"
-                    minlength="2"
-                    maxlength="100"
-                    autocomplete="name"
-                    required
-                >
-            </div>
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="Crie uma senha"
+            minlength="8"
+            maxlength="128"
+            autocomplete="new-password"
+            required
+          >
 
-            <div class="campo">
-                <label for="email">E-mail</label>
+          <button
+            type="button"
+            class="mostrar-senha"
+            data-alvo="senha"
+          >
+            Mostrar
+          </button>
 
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="seuemail@exemplo.com"
-                    maxlength="254"
-                    autocomplete="email"
-                    required
-                >
-            </div>
-
-            <div class="campo">
-                <label for="senha">Criar senha</label>
-
-                <div class="senha-container">
-                    <input
-                        type="password"
-                        id="senha"
-                        name="senha"
-                        placeholder="Crie uma senha"
-                        minlength="8"
-                        maxlength="128"
-                        autocomplete="new-password"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="mostrar-senha"
-                        data-alvo="senha"
-                    >
-                        Mostrar
-                    </button>
-                </div>
-
-                <p class="requisitos">
-                    A senha deve ter pelo menos 8 caracteres.
-                </p>
-            </div>
-
-            <div class="campo">
-                <label for="confirmarSenha">Confirmar senha</label>
-
-                <div class="senha-container">
-                    <input
-                        type="password"
-                        id="confirmarSenha"
-                        name="confirmarSenha"
-                        placeholder="Digite a senha novamente"
-                        minlength="8"
-                        maxlength="128"
-                        autocomplete="new-password"
-                        required
-                    >
-
-                    <button
-                        type="button"
-                        class="mostrar-senha"
-                        data-alvo="confirmarSenha"
-                    >
-                        Mostrar
-                    </button>
-                </div>
-            </div>
-
-            <button type="submit" class="botao" id="botaoCadastro">
-                Criar minha conta
-            </button>
-
-            <div
-                id="mensagem"
-                class="mensagem"
-                role="status"
-                aria-live="polite"
-            ></div>
-
-        </form>
-
-        <div class="rodape">
-            Já possui uma conta?<br>
-            <a href="index.html">Entrar na minha conta</a>
         </div>
 
-        <p class="aviso">
-            Ao criar uma conta, seus dados serão armazenados
-            neste navegador. Este sistema é demonstrativo e
-            não substitui uma autenticação segura em servidor.
+        <p class="ajuda">
+          Utilize pelo menos 8 caracteres.
         </p>
+      </div>
 
-    </main>
+      <div class="campo">
+        <label for="confirmarSenha">Confirmar senha</label>
 
-    <script>
-        // Elementos do formulário
-        const formulario = document.getElementById("formCadastro");
-        const botaoCadastro = document.getElementById("botaoCadastro");
-        const mensagem = document.getElementById("mensagem");
+        <div class="senha-wrapper">
 
-        // Mostra ou esconde a senha
-        document.querySelectorAll(".mostrar-senha").forEach(function (botao) {
-            botao.addEventListener("click", function () {
-                const campo = document.getElementById(
-                    botao.getAttribute("data-alvo")
-                );
+          <input
+            type="password"
+            id="confirmarSenha"
+            name="confirmarSenha"
+            placeholder="Digite a senha novamente"
+            minlength="8"
+            maxlength="128"
+            autocomplete="new-password"
+            required
+          >
 
-                if (campo.type === "password") {
-                    campo.type = "text";
-                    botao.textContent = "Ocultar";
-                } else {
-                    campo.type = "password";
-                    botao.textContent = "Mostrar";
-                }
-            });
-        });
+          <button
+            type="button"
+            class="mostrar-senha"
+            data-alvo="confirmarSenha"
+          >
+            Mostrar
+          </button>
 
-        // Exibe mensagens ao usuário
-        function mostrarMensagem(texto, tipo) {
-            mensagem.textContent = texto;
-            mensagem.className = "mensagem " + tipo;
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="botao"
+        id="botaoCadastro"
+      >
+        Criar minha conta
+      </button>
+
+      <div
+        id="mensagem"
+        class="mensagem"
+        role="status"
+        aria-live="polite"
+      ></div>
+
+    </form>
+
+    <div class="rodape">
+      Já possui uma conta?<br>
+
+      <a href="index.html">
+        Voltar para o login
+      </a>
+    </div>
+
+    <p class="aviso">
+      Este cadastro salva os dados neste navegador.
+      Para uma loja real, utilize um serviço de autenticação
+      seguro com armazenamento em servidor.
+    </p>
+
+  </main>
+
+  <script>
+    "use strict";
+
+    const CHAVE_CONTAS = "mysticContas";
+
+    const formulario = document.getElementById("formCadastro");
+    const campoNome = document.getElementById("nome");
+    const campoEmail = document.getElementById("email");
+    const campoSenha = document.getElementById("senha");
+    const campoConfirmarSenha = document.getElementById("confirmarSenha");
+    const botaoCadastro = document.getElementById("botaoCadastro");
+    const mensagem = document.getElementById("mensagem");
+
+    let cadastroEmAndamento = false;
+
+    // Mostrar ou ocultar as senhas.
+    document.querySelectorAll(".mostrar-senha").forEach(function (botao) {
+      botao.addEventListener("click", function () {
+        const campo = document.getElementById(
+          this.getAttribute("data-alvo")
+        );
+
+        if (campo.type === "password") {
+          campo.type = "text";
+          this.textContent = "Ocultar";
+        } else {
+          campo.type = "password";
+          this.textContent = "Mostrar";
+        }
+      });
+    });
+
+    // Apresentar mensagens no formulário.
+    function mostrarMensagem(texto, tipo) {
+      mensagem.textContent = texto;
+      mensagem.className = "mensagem " + tipo;
+    }
+
+    function limparMensagem() {
+      mensagem.textContent = "";
+      mensagem.className = "mensagem";
+    }
+
+    // Ler contas já cadastradas.
+    function lerContas() {
+      const dados = localStorage.getItem(CHAVE_CONTAS);
+
+      if (!dados) {
+        return [];
+      }
+
+      const contas = JSON.parse(dados);
+
+      if (!Array.isArray(contas)) {
+        throw new Error("DADOS_INVALIDOS");
+      }
+
+      return contas;
+    }
+
+    // Converter bytes em Base64.
+    function bytesParaBase64(bytes) {
+      let binario = "";
+
+      for (let i = 0; i < bytes.length; i++) {
+        binario += String.fromCharCode(bytes[i]);
+      }
+
+      return btoa(binario);
+    }
+
+    // Gerar hash da senha com PBKDF2-SHA-256.
+    async function gerarHashSenha(senha, salt) {
+      if (!window.crypto || !window.crypto.subtle) {
+        throw new Error("CRIPTOGRAFIA_INDISPONIVEL");
+      }
+
+      const codificador = new TextEncoder();
+
+      const chave = await crypto.subtle.importKey(
+        "raw",
+        codificador.encode(senha),
+        "PBKDF2",
+        false,
+        ["deriveBits"]
+      );
+
+      const resultado = await crypto.subtle.deriveBits(
+        {
+          name: "PBKDF2",
+          salt: salt,
+          iterations: 210000,
+          hash: "SHA-256"
+        },
+        chave,
+        256
+      );
+
+      return bytesParaBase64(new Uint8Array(resultado));
+    }
+
+    // Verificar se o e-mail já está cadastrado.
+    function emailJaExiste(contas, email) {
+      return contas.some(function (conta) {
+        return (
+          conta &&
+          typeof conta.email === "string" &&
+          conta.email.trim().toLowerCase() === email
+        );
+      });
+    }
+
+    // Criar uma nova conta.
+    formulario.addEventListener("submit", async function (evento) {
+      evento.preventDefault();
+
+      if (cadastroEmAndamento) {
+        return;
+      }
+
+      limparMensagem();
+
+      const nome = campoNome.value.trim();
+      const email = campoEmail.value.trim().toLowerCase();
+      const senha = campoSenha.value;
+      const confirmarSenha = campoConfirmarSenha.value;
+
+      // Validar os campos.
+      if (!nome || !email || !senha || !confirmarSenha) {
+        mostrarMensagem(
+          "Preencha todos os campos para continuar.",
+          "erro"
+        );
+        return;
+      }
+
+      if (nome.length < 2) {
+        mostrarMensagem(
+          "Digite um nome com pelo menos 2 caracteres.",
+          "erro"
+        );
+        return;
+      }
+
+      if (senha.length < 8) {
+        mostrarMensagem(
+          "A senha precisa ter pelo menos 8 caracteres.",
+          "erro"
+        );
+        return;
+      }
+
+      if (senha.length > 128) {
+        mostrarMensagem(
+          "A senha não pode ultrapassar 128 caracteres.",
+          "erro"
+        );
+        return;
+      }
+
+      if (senha !== confirmarSenha) {
+        mostrarMensagem(
+          "As senhas não correspondem. Digite novamente.",
+          "erro"
+        );
+        return;
+      }
+
+      cadastroEmAndamento = true;
+      botaoCadastro.disabled = true;
+      botaoCadastro.textContent = "Criando conta...";
+
+      try {
+        // Recuperar a lista atual de contas.
+        const contas = lerContas();
+
+        // Impedir o uso de um e-mail já cadastrado.
+        if (emailJaExiste(contas, email)) {
+          mostrarMensagem(
+            "Este e-mail já está cadastrado. Volte ao login para entrar.",
+            "erro"
+          );
+          return;
         }
 
-        // Lê as contas já cadastradas
-        function lerContas() {
-            const dados = localStorage.getItem("mysticContas");
-
-            if (!dados) {
-                return [];
-            }
-
-            const contas = JSON.parse(dados);
-
-            if (!Array.isArray(contas)) {
-                throw new Error("Os dados das contas estão em formato inválido.");
-            }
-
-            return contas;
+        if (
+          !window.crypto ||
+          !window.crypto.getRandomValues ||
+          !window.crypto.subtle
+        ) {
+          throw new Error("CRIPTOGRAFIA_INDISPONIVEL");
         }
 
-        // Converte bytes em Base64
-        function paraBase64(bytes) {
-            let binario = "";
+        // Criar salt aleatório para a senha.
+        const salt = crypto.getRandomValues(new Uint8Array(16));
 
-            for (let i = 0; i < bytes.length; i++) {
-                binario += String.fromCharCode(bytes[i]);
-            }
+        // Gerar o hash da senha.
+        const senhaHash = await gerarHashSenha(senha, salt);
 
-            return btoa(binario);
+        // Preparar os dados da conta.
+        const novaConta = {
+          nome: nome,
+          email: email,
+          salt: bytesParaBase64(salt),
+          senhaHash: senhaHash,
+          algoritmo: "PBKDF2-SHA-256",
+          iteracoes: 210000,
+          criadoEm: new Date().toISOString()
+        };
+
+        // Acrescentar a conta à lista.
+        contas.push(novaConta);
+
+        // Salvar todas as contas no navegador.
+        localStorage.setItem(
+          CHAVE_CONTAS,
+          JSON.stringify(contas)
+        );
+
+        mostrarMensagem(
+          "Conta criada com sucesso! Você será encaminhado para o login.",
+          "sucesso"
+        );
+
+        botaoCadastro.textContent = "Conta criada!";
+
+        // Ir para o login após concluir o cadastro.
+        setTimeout(function () {
+          window.location.href = "index.html?cadastro=sucesso";
+        }, 1200);
+
+      } catch (erro) {
+        console.error("Erro ao criar conta:", erro);
+
+        if (erro.message === "CRIPTOGRAFIA_INDISPONIVEL") {
+          mostrarMensagem(
+            "Não foi possível ativar a proteção da senha. " +
+            "Abra o projeto pelo Live Server do VS Code ou por HTTPS.",
+            "erro"
+          );
+        } else if (erro.name === "QuotaExceededError") {
+          mostrarMensagem(
+            "O navegador não tem espaço disponível para salvar a conta.",
+            "erro"
+          );
+        } else if (erro.message === "DADOS_INVALIDOS") {
+          mostrarMensagem(
+            "Os dados das contas estão inválidos. Verifique o armazenamento do navegador.",
+            "erro"
+          );
+        } else {
+          mostrarMensagem(
+            "Ocorreu um erro ao criar a conta. Tente novamente.",
+            "erro"
+          );
         }
 
-        // Gera um hash seguro da senha usando PBKDF2
-        async function criarHashSenha(senha, salt) {
-            const codificador = new TextEncoder();
+      } finally {
+        cadastroEmAndamento = false;
 
-            const chave = await crypto.subtle.importKey(
-                "raw",
-                codificador.encode(senha),
-                "PBKDF2",
-                false,
-                ["deriveBits"]
-            );
-
-            const resultado = await crypto.subtle.deriveBits(
-                {
-                    name: "PBKDF2",
-                    salt: salt,
-                    iterations: 210000,
-                    hash: "SHA-256"
-                },
-                chave,
-                256
-            );
-
-            return paraBase64(new Uint8Array(resultado));
+        if (botaoCadastro.textContent === "Criando conta...") {
+          botaoCadastro.textContent = "Criar minha conta";
         }
 
-        // Cadastra uma nova conta
-        formulario.addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            if (botaoCadastro.disabled) {
-                return;
-            }
-
-            const nome = document.getElementById("nome").value.trim();
-            const email = document.getElementById("email")
-                .value.trim().toLowerCase();
-            const senha = document.getElementById("senha").value;
-            const confirmarSenha =
-                document.getElementById("confirmarSenha").value;
-
-            mensagem.className = "mensagem";
-            mensagem.textContent = "";
-
-            // Verifica os campos
-            if (!nome || !email || !senha || !confirmarSenha) {
-                mostrarMensagem(
-                    "Preencha todos os campos para continuar.",
-                    "erro"
-                );
-                return;
-            }
-
-            if (nome.length < 2) {
-                mostrarMensagem(
-                    "Digite seu nome completo corretamente.",
-                    "erro"
-                );
-                return;
-            }
-
-            if (senha.length < 8) {
-                mostrarMensagem(
-                    "Sua senha precisa ter pelo menos 8 caracteres.",
-                    "erro"
-                );
-                return;
-            }
-
-            if (senha.length > 128) {
-                mostrarMensagem(
-                    "Sua senha não pode ultrapassar 128 caracteres.",
-                    "erro"
-                );
-                return;
-            }
-
-            if (senha !== confirmarSenha) {
-                mostrarMensagem(
-                    "As senhas não correspondem. Tente novamente.",
-                    "erro"
-                );
-                return;
-            }
-
-            botaoCadastro.disabled = true;
-            botaoCadastro.textContent = "Criando conta...";
-
-            try {
-                // Recupera as contas existentes
-                const contas = lerContas();
-
-                // Verifica se o e-mail já foi cadastrado
-                const emailExiste = contas.some(function (conta) {
-                    return typeof conta.email === "string" &&
-                        conta.email.trim().toLowerCase() === email;
-                });
-
-                if (emailExiste) {
-                    mostrarMensagem(
-                        "Este e-mail já está cadastrado. Entre na sua conta.",
-                        "erro"
-                    );
-                    return;
-                }
-
-                // Confere se o navegador oferece os recursos necessários
-                if (
-                    !window.crypto ||
-                    !window.crypto.subtle ||
-                    !window.crypto.getRandomValues
-                ) {
-                    throw new Error(
-                        "Este navegador não oferece os recursos necessários. " +
-                        "Abra a página usando HTTPS ou um servidor local."
-                    );
-                }
-
-                // Cria um salt aleatório para proteger a senha
-                const salt = crypto.getRandomValues(new Uint8Array(16));
-
-                // Gera o hash da senha
-                const senhaHash = await criarHashSenha(senha, salt);
-
-                // Prepara os dados da nova conta
-                const novaConta = {
-                    nome: nome,
-                    email: email,
-                    salt: paraBase64(salt),
-                    senhaHash: senhaHash,
-                    algoritmo: "PBKDF2-SHA-256",
-                    iteracoes: 210000,
-                    criadoEm: new Date().toISOString()
-                };
-
-                // Acrescenta a conta à lista existente
-                contas.push(novaConta);
-
-                // Salva todas as contas no navegador
-                localStorage.setItem(
-                    "mysticContas",
-                    JSON.stringify(contas)
-                );
-
-                mostrarMensagem(
-                    "Conta criada com sucesso! Redirecionando para o login...",
-                    "sucesso"
-                );
-
-                botaoCadastro.textContent = "Conta criada!";
-
-                // Encaminha a pessoa para a página de login
-                setTimeout(function () {
-                    window.location.href = "index.html?cadastro=sucesso";
-                }, 1200);
-
-            } catch (erro) {
-                console.error("Erro ao cadastrar conta:", erro);
-
-                mostrarMensagem(
-                    erro.name === "QuotaExceededError"
-                        ? "Não há espaço disponível para salvar a conta neste navegador."
-                        : "Não foi possível criar a conta. Verifique se o navegador permite salvar dados e tente novamente.",
-                    "erro"
-                );
-
-            } finally {
-                botaoCadastro.disabled = false;
-
-                if (botaoCadastro.textContent === "Criando conta...") {
-                    botaoCadastro.textContent = "Criar minha conta";
-                }
-            }
-        });
-    </script>
+        botaoCadastro.disabled = false;
+      }
+    });
+  </script>
 
 </body>
 </html>
