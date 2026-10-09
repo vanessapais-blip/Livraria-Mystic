@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Mystic — Blogs</title>
+  <title>Mystic — Meu Caderno</title>
 
   <style>
     * {
@@ -13,343 +12,1253 @@
       padding: 0;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #242424;
-      color: #f2f2f2;
+    :root {
+      --fundo: #242424;
+      --painel: #303030;
+      --cartao: #383838;
+      --borda: #484848;
+      --texto: #f2f2f2;
+      --suave: #b8b8b8;
+      --dourado: #d4af37;
     }
 
-    header {
-      background: #303030;
-      border-bottom: 1px solid #444;
-      padding: 18px 40px;
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+      min-height: 100vh;
+    }
 
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .topo {
+      min-height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 28px;
+      background: var(--painel);
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .voltar {
+      color: var(--dourado);
+      font-size: 28px;
+      text-decoration: none;
     }
 
     .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #ffffff;
+      color: var(--dourado);
+      font-family: Georgia, serif;
+      font-size: 30px;
     }
 
-    nav {
+    .cabecalho-titulo {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cabecalho-titulo h1 {
+      color: var(--dourado);
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .cabecalho-titulo p {
+      color: var(--suave);
+      font-size: 13px;
+    }
+
+    .pesquisa {
+      width: 230px;
+      padding: 11px 14px;
+      background: #242424;
+      color: white;
+      border: 1px solid var(--borda);
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .pesquisa:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--dourado);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      min-height: calc(100vh - 76px);
+    }
+
+    .lateral {
+      padding: 22px 16px;
+      border-right: 1px solid var(--borda);
+      background: #272727;
+    }
+
+    .pena {
       display: flex;
-      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 18px;
+      color: var(--dourado);
+      background: var(--painel);
+      border: 1px solid var(--dourado);
+      border-radius: 12px;
+      font-size: 30px;
+    }
+
+    .pena:hover,
+    .atalho:hover {
+      background: #414141;
+    }
+
+    .atalhos {
+      display: grid;
+      gap: 8px;
+    }
+
+    .atalho {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--texto);
+      text-align: left;
+    }
+
+    .atalho .icone {
+      color: var(--dourado);
+      font-size: 22px;
+      min-width: 28px;
+    }
+
+    .atalho strong {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .atalho small {
+      color: var(--suave);
+      line-height: 1.4;
+    }
+
+    .conteudo-principal {
+      width: 100%;
+      max-width: 1500px;
+      min-width: 0;
+      padding: 28px;
+      margin: 0 auto;
+    }
+
+    .secao {
+      background: var(--painel);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .titulo-secao {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
     }
 
-    nav a {
-      color: #dddddd;
+    .titulo-secao h2 {
+      color: var(--dourado);
+      font-size: 21px;
+    }
+
+    .link-simples {
+      color: var(--suave);
       text-decoration: none;
+      background: none;
+      border: none;
+    }
+
+    .link-simples:hover {
+      color: var(--dourado);
+    }
+
+    .destaques {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .texto-card {
+      display: flex;
+      gap: 13px;
+      min-width: 0;
+      padding: 14px;
+      background: #292929;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+    }
+
+    .miniatura {
+      display: grid;
+      place-items: center;
+      width: 65px;
+      min-width: 65px;
+      min-height: 90px;
+      background: var(--cartao);
+      border-radius: 8px;
+      font-size: 29px;
+    }
+
+    .texto-info {
+      min-width: 0;
+    }
+
+    .texto-info h3 {
       font-size: 15px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
     }
 
-    nav a:hover {
-      color: #ffffff;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: 50px auto;
-      padding: 0 25px;
-    }
-
-    .titulo {
-      margin-bottom: 35px;
-    }
-
-    .titulo h1 {
-      font-size: 40px;
+    .texto-info p {
+      color: var(--suave);
+      font-size: 13px;
+      line-height: 1.5;
       margin-bottom: 10px;
     }
 
-    .titulo p {
-      color: #aaaaaa;
-      font-size: 17px;
+    .etiqueta {
+      display: inline-block;
+      padding: 5px 9px;
+      background: #424242;
+      border-radius: 20px;
+      font-size: 11px;
+      color: #e2e2e2;
     }
 
-    .blogs {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-    }
-
-    .blog-card {
-      background: #303030;
-      border: 1px solid #444444;
-      border-radius: 15px;
-      overflow: hidden;
-      min-height: 400px;
-
+    .filtro-linha {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
-    .imagem {
-      height: 190px;
-      background: #383838;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      font-size: 70px;
+    .filtro-linha input,
+    .filtro-linha select,
+    .campo {
+      min-width: 0;
+      padding: 11px 12px;
+      background: #242424;
+      color: var(--texto);
+      border: 1px solid var(--borda);
+      border-radius: 8px;
     }
 
-    .conteudo {
-      padding: 25px;
-
-      display: flex;
-      flex-direction: column;
+    .filtro-linha input {
       flex: 1;
     }
 
-    .categoria {
-      color: #999999;
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+    .categorias {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .categoria-card {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      min-height: 155px;
+      padding: 20px;
+      color: var(--texto);
+      background: var(--painel);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      text-align: left;
+      transition: border-color .2s, background .2s;
+    }
+
+    .categoria-card:hover {
+      border-color: var(--dourado);
+      background: #353535;
+    }
+
+    .categoria-icone {
+      color: var(--dourado);
+      font-size: 30px;
+    }
+
+    .categoria-card strong {
+      font-size: 15px;
+    }
+
+    .categoria-card small {
+      color: var(--suave);
+      line-height: 1.4;
+    }
+
+    .dica {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      margin-top: 20px;
+      background: var(--painel);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+    }
+
+    .dica-icone {
+      font-size: 28px;
+    }
+
+    .dica strong {
+      display: block;
+      color: var(--dourado);
+      margin-bottom: 6px;
+    }
+
+    .dica p {
+      color: var(--suave);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .botao-criar {
+      position: fixed;
+      right: 28px;
+      bottom: 26px;
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      border: none;
+      border-radius: 50%;
+      background: var(--dourado);
+      color: #202020;
+      font-size: 36px;
+      font-weight: bold;
+      box-shadow: 0 4px 18px #0006;
+      z-index: 20;
+    }
+
+    .botao-criar:hover {
+      background: #e6c34d;
+    }
+
+    .rodape {
+      text-align: center;
+      color: #999;
+      padding: 24px;
+      border-top: 1px solid var(--borda);
+    }
+
+    .tela {
+      display: none;
+    }
+
+    .tela.ativa {
+      display: block;
+    }
+
+    .editor {
+      display: grid;
+      gap: 15px;
+    }
+
+    .editor label {
+      display: grid;
+      gap: 8px;
+      color: var(--dourado);
+      font-size: 14px;
+    }
+
+    .editor input,
+    .editor select,
+    .editor textarea {
+      width: 100%;
+      padding: 13px;
+      color: var(--texto);
+      background: #242424;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+    }
+
+    .editor textarea {
+      min-height: 260px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .acoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .botao {
+      padding: 11px 17px;
+      color: var(--texto);
+      background: #444;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+    }
+
+    .botao.principal {
+      background: var(--dourado);
+      color: #202020;
+      border-color: var(--dourado);
+      font-weight: bold;
+    }
+
+    .voltar-secao {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--dourado);
+      background: none;
+      border: none;
+      font-size: 15px;
+    }
+
+    .lista-textos {
+      display: grid;
+      gap: 12px;
+    }
+
+    .texto-salvo {
+      padding: 16px;
+      background: #292929;
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+    }
+
+    .texto-salvo h3 {
+      margin-bottom: 8px;
+    }
+
+    .texto-salvo p {
+      color: var(--suave);
+      line-height: 1.5;
+      margin-bottom: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .dicionario-resultado {
+      margin-top: 18px;
+      padding: 18px;
+      background: #292929;
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      line-height: 1.7;
+    }
+
+    .dicionario-resultado h3 {
+      color: var(--dourado);
       margin-bottom: 10px;
     }
 
-    .conteudo h2 {
-      font-size: 23px;
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-
-    .conteudo p {
-      color: #bbbbbb;
+    .aviso {
+      color: var(--suave);
       line-height: 1.6;
-      margin-bottom: 22px;
     }
 
-    .ler {
-      display: inline-block;
-      width: fit-content;
-
-      padding: 10px 18px;
-
-      background: #444444;
-      color: #ffffff;
-
-      text-decoration: none;
-      border-radius: 8px;
-
-      margin-top: auto;
+    .menu-fechar {
+      display: none;
     }
 
-    .ler:hover {
-      background: #555555;
-    }
-
-    footer {
-      text-align: center;
-      color: #999999;
-
-      padding: 35px 20px;
-      margin-top: 50px;
-
-      border-top: 1px solid #444444;
-    }
-
-    @media (max-width: 700px) {
-
-      header {
-        padding: 18px 20px;
-
-        flex-direction: column;
-        align-items: flex-start;
+    @media (max-width: 1050px) {
+      .layout {
+        grid-template-columns: 205px minmax(0, 1fr);
       }
 
-      .blogs {
+      .conteudo-principal {
+        padding: 20px;
+      }
+
+      .destaques {
         grid-template-columns: 1fr;
       }
 
-      .titulo h1 {
-        font-size: 32px;
+      .categorias {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pesquisa {
+        width: 180px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topo {
+        padding: 13px 16px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 23px;
+      }
+
+      .marca {
+        gap: 9px;
+      }
+
+      .cabecalho-titulo {
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .cabecalho-titulo h1 {
+        font-size: 24px;
+      }
+
+      .cabecalho-titulo p {
+        font-size: 12px;
+      }
+
+      .pesquisa {
+        width: 100%;
+        order: 4;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      .lateral {
+        position: fixed;
+        z-index: 50;
+        inset: 0 auto 0 0;
+        width: min(300px, 85vw);
+        overflow-y: auto;
+        box-shadow: 8px 0 25px #0007;
+        transform: translateX(-110%);
+        transition: transform .25s ease;
+      }
+
+      .lateral.aberta {
+        transform: translateX(0);
+      }
+
+      .menu-fechar {
+        display: block;
+        margin-left: auto;
+        margin-bottom: 15px;
+        padding: 6px 10px;
+        background: transparent;
+        color: var(--texto);
+        border: 1px solid var(--borda);
+        border-radius: 7px;
+      }
+
+      .pena {
+        margin-bottom: 18px;
+      }
+
+      .conteudo-principal {
+        padding: 18px 13px 90px;
+      }
+
+      .secao {
+        padding: 15px;
+        margin-bottom: 18px;
+      }
+
+      .titulo-secao h2 {
+        font-size: 19px;
+      }
+
+      .texto-card {
+        padding: 11px;
+      }
+
+      .miniatura {
+        width: 55px;
+        min-width: 55px;
+        min-height: 78px;
+      }
+
+      .categorias {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .categoria-card {
+        min-height: 135px;
+        padding: 14px 12px;
+      }
+
+      .categoria-card strong {
+        font-size: 14px;
+      }
+
+      .categoria-card small {
+        font-size: 12px;
+      }
+
+      .filtro-linha {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .botao-criar {
+        width: 56px;
+        height: 56px;
+        right: 17px;
+        bottom: 18px;
+      }
+
+      .dica {
+        align-items: flex-start;
+        padding: 14px;
+      }
+
+      .rodape {
+        padding: 20px 12px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .categorias {
+        grid-template-columns: 1fr;
+      }
+
+      .texto-card {
+        gap: 9px;
+      }
+
+      .miniatura {
+        width: 46px;
+        min-width: 46px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition-duration: .01ms !important;
       }
     }
   </style>
 </head>
 
 <body>
+  <header class="topo">
+    <a class="marca" href="home.html" aria-label="Voltar para a página inicial">
+      <span class="voltar">←</span>
+      <span class="logo">Mystic</span>
+    </a>
 
-  <header>
-
-    <div class="logo">
-      Mystic
+    <div class="cabecalho-titulo">
+      <h1>Meu Caderno</h1>
+      <p>Seus textos, ideias e histórias em um só lugar.</p>
     </div>
 
-    <nav>
-      <a href="home.html">Início</a>
-      <a href="livros.html">Livros</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="redacoes.html">Redações</a>
-      <a href="perfil.html">👤 Meu perfil</a>
-    </nav>
-
+    <input
+      class="pesquisa"
+      id="pesquisa"
+      type="search"
+      placeholder="⌕ Pesquisar textos..."
+      aria-label="Pesquisar textos"
+    >
   </header>
 
+  <div class="layout">
+    <aside class="lateral" id="menuLateral" aria-label="Menu do caderno">
+      <button class="menu-fechar" id="fecharMenu" type="button">Fechar ✕</button>
 
-  <main>
+      <button
+        class="pena"
+        id="botaoPena"
+        type="button"
+        aria-label="Abrir opções do caderno"
+        aria-expanded="true"
+      >✒</button>
 
-    <div class="titulo">
+      <nav class="atalhos" id="atalhos">
+        <button class="atalho" type="button" data-tela="recentes">
+          <span class="icone">◷</span>
+          <span>
+            <strong>Recentes</strong>
+            <small>Seus últimos textos.</small>
+          </span>
+        </button>
 
-      <h1>Blogs</h1>
+        <button class="atalho" type="button" data-tela="rascunhos">
+          <span class="icone">▤</span>
+          <span>
+            <strong>Continuar escrevendo</strong>
+            <small>Rascunhos e textos inacabados.</small>
+          </span>
+        </button>
 
-      <p>
-        Descubra artigos sobre literatura, leitura, autores e histórias.
-      </p>
+        <button class="atalho" type="button" data-tela="dicionario">
+          <span class="icone">♧</span>
+          <span>
+            <strong>Dicionário</strong>
+            <small>Pesquise o significado de palavras.</small>
+          </span>
+        </button>
+      </nav>
+    </aside>
 
-    </div>
-
-
-    <section class="blogs">
-
-
-      <!-- BLOG 1 -->
-
-      <div class="blog-card">
-
-        <div class="imagem">
-          📚
-        </div>
-
-        <div class="conteudo">
-
-          <div class="categoria">
-            Literatura
+    <main class="conteudo-principal">
+      <section class="tela ativa" id="inicio">
+        <section class="secao">
+          <div class="titulo-secao">
+            <h2>★ Textos em destaque</h2>
+            <button class="link-simples" id="verDestaques" type="button">Ver todos →</button>
           </div>
 
-          <h2>
-            5 livros que todo leitor deveria conhecer
-          </h2>
+          <div class="destaques">
+            <article class="texto-card">
+              <div class="miniatura" aria-hidden="true">📚</div>
+              <div class="texto-info">
+                <h3>O poder das palavras</h3>
+                <p>A escrita é uma forma de expressão. Cada palavra pode carregar um universo.</p>
+                <span class="etiqueta">Reflexão</span>
+              </div>
+            </article>
 
-          <p>
-            Algumas histórias conseguem atravessar gerações e continuar
-            despertando novas interpretações.
-          </p>
+            <article class="texto-card">
+              <div class="miniatura" aria-hidden="true">🌲</div>
+              <div class="texto-info">
+                <h3>Entre o real e o imaginário</h3>
+                <p>Às vezes, a linha entre o que é real e o que é sonho é mais fina do que parece.</p>
+                <span class="etiqueta">Crônica</span>
+              </div>
+            </article>
 
-          <a href="blog.html" class="ler">
-            Ler artigo
-          </a>
+            <article class="texto-card">
+              <div class="miniatura" aria-hidden="true">🌙</div>
+              <div class="texto-info">
+                <h3>Sonhos não têm fim</h3>
+                <p>Talvez os sonhos sejam outra forma de realidade.</p>
+                <span class="etiqueta">Poesia</span>
+              </div>
+            </article>
+          </div>
+        </section>
 
-        </div>
-
-      </div>
-
-
-      <!-- BLOG 2 -->
-
-      <div class="blog-card">
-
-        <div class="imagem">
-          🔎
-        </div>
-
-        <div class="conteudo">
-
-          <div class="categoria">
-            Leitura
+        <section class="secao">
+          <div class="titulo-secao">
+            <h2>Tipos de texto</h2>
           </div>
 
-          <h2>
-            Como escolher seu próximo livro
-          </h2>
-
-          <p>
-            Encontrar um novo livro pode ser mais fácil quando você conhece
-            seus interesses, seus gêneros favoritos e o tipo de história que
-            deseja ler.
-          </p>
-
-          <a href="#" class="ler">
-            Ler artigo
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <!-- BLOG 3 -->
-
-      <div class="blog-card">
-
-        <div class="imagem">
-          ✍️
-        </div>
-
-        <div class="conteudo">
-
-          <div class="categoria">
-            Curiosidades
+          <div class="filtro-linha">
+            <input id="pesquisaCategoria" type="search" placeholder="Pesquisar uma categoria...">
+            <select id="filtroCategoria" aria-label="Filtrar categoria">
+              <option value="todas">Todas as categorias</option>
+              <option>Redações</option>
+              <option>Contos</option>
+              <option>Poemas</option>
+              <option>Crônicas</option>
+              <option>Fanfic</option>
+              <option>Artigos</option>
+              <option>Diários</option>
+              <option>Outros</option>
+            </select>
           </div>
 
-          <h2>
-            Curiosidades sobre grandes escritores
-          </h2>
+          <div class="categorias" id="categorias">
+            <button class="categoria-card" data-categoria="Redações" type="button">
+              <span class="categoria-icone">✎</span>
+              <strong>Redações</strong>
+              <small>Textos formais e acadêmicos.</small>
+            </button>
 
-          <p>
-            Conheça fatos interessantes sobre autores que marcaram a história
-            da literatura e influenciaram gerações de leitores.
-          </p>
+            <button class="categoria-card" data-categoria="Contos" type="button">
+              <span class="categoria-icone">♧</span>
+              <strong>Contos</strong>
+              <small>Histórias curtas e envolventes.</small>
+            </button>
 
-          <a href="#" class="ler">
-            Ler artigo
-          </a>
+            <button class="categoria-card" data-categoria="Poemas" type="button">
+              <span class="categoria-icone">✒</span>
+              <strong>Poemas</strong>
+              <small>Palavras que tocam a alma.</small>
+            </button>
 
-        </div>
+            <button class="categoria-card" data-categoria="Crônicas" type="button">
+              <span class="categoria-icone">✎</span>
+              <strong>Crônicas</strong>
+              <small>O cotidiano em forma de texto.</small>
+            </button>
 
-      </div>
+            <button class="categoria-card" data-categoria="Fanfic" type="button">
+              <span class="categoria-icone">♧</span>
+              <strong>Fanfic</strong>
+              <small>Universos que ganham vida.</small>
+            </button>
 
+            <button class="categoria-card" data-categoria="Artigos" type="button">
+              <span class="categoria-icone">▤</span>
+              <strong>Artigos</strong>
+              <small>Ideias, análises e reflexões.</small>
+            </button>
 
-      <!-- BLOG 4 -->
+            <button class="categoria-card" data-categoria="Diários" type="button">
+              <span class="categoria-icone">♡</span>
+              <strong>Diários</strong>
+              <small>Seus pensamentos e registros.</small>
+            </button>
 
-      <div class="blog-card">
-
-        <div class="imagem">
-          🌙
-        </div>
-
-        <div class="conteudo">
-
-          <div class="categoria">
-            Misticismo
+            <button class="categoria-card" data-categoria="Outros" type="button">
+              <span class="categoria-icone">▧</span>
+              <strong>Outros</strong>
+              <small>Textos que não se encaixam nas demais.</small>
+            </button>
           </div>
 
-          <h2>
-            Por que histórias misteriosas nos atraem?
-          </h2>
+          <div class="dica">
+            <span class="dica-icone">✧</span>
+            <div>
+              <strong>Organize suas ideias</strong>
+              <p>Use o menu da pena para encontrar seus textos recentes, retomar rascunhos ou consultar o dicionário.</p>
+            </div>
+          </div>
+        </section>
+      </section>
 
-          <p>
-            Uma reflexão sobre o fascínio humano por mistérios, enigmas,
-            acontecimentos desconhecidos e histórias surpreendentes.
+      <section class="tela" id="editor">
+        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <section class="secao">
+          <div class="titulo-secao">
+            <h2 id="tituloEditor">Novo texto</h2>
+          </div>
+
+          <form class="editor" id="formTexto">
+            <label>
+              Título
+              <input id="tituloTexto" type="text" maxlength="120" placeholder="Dê um título ao seu texto..." required>
+            </label>
+
+            <label>
+              Categoria
+              <select id="categoriaTexto" required>
+                <option value="">Selecione uma categoria</option>
+                <option>Redações</option>
+                <option>Contos</option>
+                <option>Poemas</option>
+                <option>Crônicas</option>
+                <option>Fanfic</option>
+                <option>Artigos</option>
+                <option>Diários</option>
+                <option>Outros</option>
+              </select>
+            </label>
+
+            <label>
+              Seu texto
+              <textarea id="corpoTexto" placeholder="Comece a escrever aqui..." required></textarea>
+            </label>
+
+            <label>
+              <span style="color: var(--suave)">Estado do texto</span>
+              <select id="estadoTexto">
+                <option value="rascunho">Salvar como rascunho</option>
+                <option value="publicado">Concluir texto</option>
+              </select>
+            </label>
+
+            <div class="acoes">
+              <button class="botao principal" type="submit">Salvar texto</button>
+              <button class="botao" id="limparEditor" type="button">Limpar</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <section class="tela" id="recentes">
+        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <section class="secao">
+          <div class="titulo-secao"><h2>Recentes</h2></div>
+          <div class="lista-textos" id="listaRecentes"></div>
+        </section>
+      </section>
+
+      <section class="tela" id="rascunhos">
+        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <section class="secao">
+          <div class="titulo-secao"><h2>Continuar escrevendo</h2></div>
+          <div class="lista-textos" id="listaRascunhos"></div>
+        </section>
+      </section>
+
+      <section class="tela" id="todos">
+        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <section class="secao">
+          <div class="titulo-secao"><h2>Todos os textos</h2></div>
+          <div class="lista-textos" id="listaTodos"></div>
+        </section>
+      </section>
+
+      <section class="tela" id="dicionario">
+        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <section class="secao">
+          <div class="titulo-secao"><h2>Dicionário</h2></div>
+          <p class="aviso" style="margin-bottom: 16px">
+            Pesquise uma palavra para consultar sua definição. A consulta precisa de conexão com a internet.
           </p>
 
-          <a href="#" class="ler">
-            Ler artigo
-          </a>
+          <form class="filtro-linha" id="formDicionario">
+            <input id="palavra" type="search" placeholder="Digite uma palavra..." required>
+            <button class="botao principal" type="submit">Pesquisar</button>
+          </form>
 
-        </div>
+          <div id="resultadoDicionario" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+  </div>
 
-      </div>
+  <button class="botao-criar" id="criarTexto" type="button" aria-label="Criar novo texto">+</button>
 
+  <footer class="rodape">Mystic — Livraria</footer>
 
-    </section>
+  <script>
+    const menu = document.getElementById('menuLateral');
+    const botaoPena = document.getElementById('botaoPena');
+    const fecharMenu = document.getElementById('fecharMenu');
+    const atalhos = document.getElementById('atalhos');
 
-  </main>
+    function alternarMenu() {
+      if (window.innerWidth <= 700) {
+        menu.classList.toggle('aberta');
+      } else {
+        atalhos.hidden = !atalhos.hidden;
+      }
+      botaoPena.setAttribute('aria-expanded', String(
+        window.innerWidth <= 700
+          ? menu.classList.contains('aberta')
+          : !atalhos.hidden
+      ));
+    }
 
+    botaoPena.addEventListener('click', alternarMenu);
+    fecharMenu.addEventListener('click', () => menu.classList.remove('aberta'));
 
-  <footer>
-    Mystic — Livraria
-  </footer>
+    document.addEventListener('click', event => {
+      if (
+        window.innerWidth <= 700 &&
+        menu.classList.contains('aberta') &&
+        !menu.contains(event.target)
+      ) {
+        menu.classList.remove('aberta');
+      }
+    });
 
+    const telas = document.querySelectorAll('.tela');
 
+    function mostrarTela(id) {
+      telas.forEach(tela => tela.classList.toggle('ativa', tela.id === id));
+      menu.classList.remove('aberta');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      atualizarListas();
+    }
+
+    document.querySelectorAll('[data-tela]').forEach(botao => {
+      botao.addEventListener('click', () => mostrarTela(botao.dataset.tela));
+    });
+
+    document.querySelectorAll('[data-voltar]').forEach(botao => {
+      botao.addEventListener('click', () => mostrarTela('inicio'));
+    });
+
+    document.getElementById('criarTexto').addEventListener('click', () => {
+      prepararEditor();
+      mostrarTela('editor');
+      document.getElementById('tituloTexto').focus();
+    });
+
+    document.querySelectorAll('.categoria-card').forEach(botao => {
+      botao.addEventListener('click', () => {
+        prepararEditor(botao.dataset.categoria);
+        mostrarTela('editor');
+        document.getElementById('tituloTexto').focus();
+      });
+    });
+
+    document.getElementById('verDestaques').addEventListener('click', () => {
+      mostrarTela('todos');
+    });
+
+    let editandoId = null;
+
+    function prepararEditor(categoria = '') {
+      editandoId = null;
+      document.getElementById('formTexto').reset();
+      document.getElementById('categoriaTexto').value = categoria;
+      document.getElementById('tituloEditor').textContent = 'Novo texto';
+    }
+
+    function obterTextos() {
+      try {
+        return JSON.parse(localStorage.getItem('mysticCaderno') || '[]');
+      } catch {
+        return [];
+      }
+    }
+
+    function guardarTextos(textos) {
+      try {
+        localStorage.setItem('mysticCaderno', JSON.stringify(textos));
+        return true;
+      } catch {
+        alert('Não foi possível salvar. Verifique o espaço disponível no navegador.');
+        return false;
+      }
+    }
+
+    document.getElementById('formTexto').addEventListener('submit', event => {
+      event.preventDefault();
+
+      const textos = obterTextos();
+      const titulo = document.getElementById('tituloTexto').value.trim();
+      const categoria = document.getElementById('categoriaTexto').value;
+      const corpo = document.getElementById('corpoTexto').value.trim();
+      const estado = document.getElementById('estadoTexto').value;
+
+      if (!titulo || !categoria || !corpo) return;
+
+      const agora = new Date().toISOString();
+      const texto = {
+        id: editandoId || (Date.now().toString() + Math.random().toString(16).slice(2)),
+        titulo,
+        categoria,
+        corpo,
+        estado,
+        atualizado: agora
+      };
+
+      const indice = textos.findIndex(item => item.id === editandoId);
+
+      if (indice >= 0) {
+        textos[indice] = texto;
+      } else {
+        textos.unshift(texto);
+      }
+
+      if (guardarTextos(textos)) {
+        prepararEditor();
+        atualizarListas();
+        mostrarTela(estado === 'rascunho' ? 'rascunhos' : 'recentes');
+      }
+    });
+
+    document.getElementById('limparEditor').addEventListener('click', () => {
+      if (confirm('Deseja limpar o conteúdo deste formulário?')) {
+        prepararEditor();
+      }
+    });
+
+    function editarTexto(id) {
+      const texto = obterTextos().find(item => item.id === id);
+      if (!texto) return;
+
+      editandoId = id;
+      document.getElementById('tituloTexto').value = texto.titulo;
+      document.getElementById('categoriaTexto').value = texto.categoria;
+      document.getElementById('corpoTexto').value = texto.corpo;
+      document.getElementById('estadoTexto').value = texto.estado;
+      document.getElementById('tituloEditor').textContent = 'Editar texto';
+      mostrarTela('editor');
+    }
+
+    function excluirTexto(id) {
+      if (!confirm('Deseja excluir este texto?')) return;
+      const textos = obterTextos().filter(item => item.id !== id);
+      if (guardarTextos(textos)) atualizarListas();
+    }
+
+    function criarCartaoTexto(texto) {
+      const artigo = document.createElement('article');
+      artigo.className = 'texto-salvo';
+
+      const titulo = document.createElement('h3');
+      titulo.textContent = texto.titulo;
+
+      const meta = document.createElement('p');
+      meta.textContent = texto.categoria + ' · ' +
+        (texto.estado === 'rascunho' ? 'Rascunho' : 'Concluído');
+
+      const trecho = document.createElement('p');
+      trecho.textContent = texto.corpo.length > 180
+        ? texto.corpo.slice(0, 180) + '…'
+        : texto.corpo;
+
+      const acoes = document.createElement('div');
+      acoes.className = 'acoes';
+
+      const editar = document.createElement('button');
+      editar.className = 'botao';
+      editar.textContent = 'Editar';
+      editar.type = 'button';
+      editar.addEventListener('click', () => editarTexto(texto.id));
+
+      const excluir = document.createElement('button');
+      excluir.className = 'botao';
+      excluir.textContent = 'Excluir';
+      excluir.type = 'button';
+      excluir.addEventListener('click', () => excluirTexto(texto.id));
+
+      acoes.append(editar, excluir);
+      artigo.append(titulo, meta, trecho, acoes);
+      return artigo;
+    }
+
+    function preencherLista(id, textos) {
+      const lista = document.getElementById(id);
+      lista.replaceChildren();
+
+      if (!textos.length) {
+        const vazio = document.createElement('p');
+        vazio.className = 'aviso';
+        vazio.textContent = 'Ainda não há textos aqui. Use o botão + para começar.';
+        lista.appendChild(vazio);
+        return;
+      }
+
+      textos.forEach(texto => lista.appendChild(criarCartaoTexto(texto)));
+    }
+
+    function atualizarListas() {
+      const textos = obterTextos().sort((a, b) =>
+        new Date(b.atualizado) - new Date(a.atualizado)
+      );
+      preencherLista('listaRecentes', textos);
+      preencherLista('listaRascunhos', textos.filter(t => t.estado === 'rascunho'));
+      preencherLista('listaTodos', textos);
+    }
+
+    function filtrarCategorias() {
+      const termo = document.getElementById('pesquisaCategoria').value.toLowerCase().trim();
+      const categoria = document.getElementById('filtroCategoria').value;
+
+      document.querySelectorAll('.categoria-card').forEach(card => {
+        const nome = card.dataset.categoria.toLowerCase();
+        const combinaNome = nome.includes(termo);
+        const combinaCategoria = categoria === 'todas' || card.dataset.categoria === categoria;
+        card.hidden = !(combinaNome && combinaCategoria);
+      });
+    }
+
+    document.getElementById('pesquisaCategoria').addEventListener('input', filtrarCategorias);
+    document.getElementById('filtroCategoria').addEventListener('change', filtrarCategorias);
+
+    document.getElementById('pesquisa').addEventListener('input', event => {
+      const termo = event.target.value.toLowerCase().trim();
+
+      document.querySelectorAll('.texto-card').forEach(card => {
+        card.hidden = !card.textContent.toLowerCase().includes(termo);
+      });
+
+      document.querySelectorAll('.categoria-card').forEach(card => {
+        card.hidden = !card.textContent.toLowerCase().includes(termo);
+      });
+    });
+
+    document.getElementById('formDicionario').addEventListener('submit', async event => {
+      event.preventDefault();
+
+      const palavra = document.getElementById('palavra').value.trim();
+      const resultado = document.getElementById('resultadoDicionario');
+      resultado.replaceChildren();
+
+      const carregando = document.createElement('p');
+      carregando.className = 'aviso';
+      carregando.textContent = 'Consultando o dicionário...';
+      resultado.appendChild(carregando);
+
+      try {
+        const resposta = await fetch(
+          'https://api.dictionaryapi.dev/api/v2/entries/pt/' + encodeURIComponent(palavra)
+        );
+
+        if (!resposta.ok) throw new Error('Palavra não encontrada');
+
+        const dados = await resposta.json();
+        const entrada = dados[0];
+        const cartao = document.createElement('div');
+        cartao.className = 'dicionario-resultado';
+
+        const titulo = document.createElement('h3');
+        titulo.textContent = entrada.word || palavra;
+        cartao.appendChild(titulo);
+
+        (entrada.meanings || []).forEach(significado => {
+          const classe = document.createElement('p');
+          classe.innerHTML = '<strong>Classe gramatical:</strong> ';
+          classe.appendChild(document.createTextNode(significado.partOfSpeech || 'Não informada'));
+          cartao.appendChild(classe);
+
+          (significado.definitions || []).slice(0, 3).forEach(def => {
+            const definicao = document.createElement('p');
+            definicao.style.marginTop = '8px';
+            definicao.textContent = '• ' + (def.definition || 'Definição indisponível');
+            cartao.appendChild(definicao);
+
+            if (def.example) {
+              const exemplo = document.createElement('p');
+              exemplo.style.color = 'var(--suave)';
+              exemplo.textContent = 'Exemplo: “' + def.example + '”';
+              cartao.appendChild(exemplo);
+            }
+          });
+        });
+
+        resultado.replaceChildren(cartao);
+      } catch {
+        resultado.replaceChildren();
+        const erro = document.createElement('p');
+        erro.className = 'aviso';
+        erro.textContent = 'Não foi possível encontrar essa palavra. Confira a escrita ou tente novamente mais tarde.';
+        resultado.appendChild(erro);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 700) {
+        menu.classList.remove('aberta');
+      }
+    });
+
+    atualizarListas();
+  </script>
 </body>
 </html>
