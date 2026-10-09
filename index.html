@@ -3,105 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mystic — Entrar</title>
+  <title>Livraria</title>
 
   <style>
-    :root {
-      /* Paleta original preservada */
-      --fundo: #000000;
-      --cartao: #303030;
-      --texto: #eeeeee;
-      --dourado: #d4af37;
-      --borda: #555555;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
+      padding: 20px;
       min-height: 100vh;
-      padding: 24px;
+      box-sizing: border-box;
       display: flex;
-      align-items: center;
       justify-content: center;
-      background: var(--fundo);
-      color: var(--dourado);
-      font-family: Arial, Helvetica, sans-serif;
+      align-items: center;
+      background: #000;
+      color: #d4af37;
+      font-family: Arial, sans-serif;
     }
 
     .login {
       width: 100%;
-      max-width: 390px;
-      padding: 30px;
-      background: var(--cartao);
-      border-radius: 12px;
-      border: 1px solid var(--borda);
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      max-width: 350px;
+      padding: 25px;
+      box-sizing: border-box;
+      background: #303030;
+      border-radius: 10px;
     }
 
     .logo {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 25px;
     }
 
     .logo img {
-      display: block;
-      width: 110px;
-      height: 110px;
+      max-width: 120px;
+      max-height: 120px;
       object-fit: contain;
-      margin: 0 auto 12px;
     }
 
-    .logo h1 {
-      margin: 0;
-      color: #ffffff;
-      font-size: 32px;
-      letter-spacing: 3px;
+    .logo h2 {
+      color: #d4af37;
+      font-weight: normal;
+      margin-top: 10px;
     }
 
-    .logo p {
-      color: var(--dourado);
-      margin-bottom: 0;
-    }
-
-    h2 {
-      color: var(--dourado);
+    h3 {
+      color: #d4af37;
       text-align: center;
-      margin-bottom: 22px;
+      font-weight: normal;
     }
 
     label {
       display: block;
-      margin: 14px 0 7px;
-      color: var(--dourado);
-      font-size: 14px;
+      margin: 12px 0 6px;
+      color: #d4af37;
     }
 
     input[type="email"],
     input[type="password"],
     input[type="text"] {
       width: 100%;
-      padding: 12px;
-      border: 1px solid var(--borda);
-      border-radius: 6px;
-      background: #222222;
-      color: var(--texto);
-      font-size: 15px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background: #222;
+      color: #eee;
+      font-size: 14px;
     }
 
     input:focus {
-      outline: 2px solid var(--dourado);
-      outline-offset: 2px;
+      outline: 1px solid #d4af37;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 5px;
+      background: #d4af37;
+      color: #000;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #c19b2e;
+    }
+
+    a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .links {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 2;
     }
 
     .opcao {
       display: flex;
       align-items: center;
-      gap: 9px;
-      margin-top: 16px;
-      color: var(--dourado);
+      gap: 8px;
+      margin-top: 12px;
+      color: #d4af37;
       font-size: 14px;
     }
 
@@ -111,62 +121,62 @@
     }
 
     input[type="checkbox"] {
-      accent-color: var(--dourado);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
+      accent-color: #d4af37;
     }
 
-    .botao {
-      width: 100%;
-      margin-top: 20px;
+    .captcha {
+      margin-top: 18px;
       padding: 12px;
-      border: 1px solid var(--dourado);
-      border-radius: 6px;
-      background: #222222;
-      color: var(--dourado);
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+      border: 1px solid #555;
+      border-radius: 5px;
+      background: #272727;
     }
 
-    .botao:hover {
-      background: #3a3a3a;
+    .captcha-titulo {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: #d4af37;
     }
 
-    .links {
-      margin-top: 20px;
+    .captcha-desafio {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    #codigoCaptcha {
+      flex: 1;
+      padding: 10px 5px;
+      background: #383838;
+      border-radius: 4px;
+      color: #d4af37;
       text-align: center;
-      font-size: 14px;
-      line-height: 2;
+      font-size: 19px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      user-select: none;
     }
 
-    a {
-      color: var(--dourado);
-      text-decoration: none;
+    .botao-atualizar {
+      width: auto;
+      margin: 0;
+      padding: 9px 11px;
+      font-size: 13px;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .captcha input {
+      margin-top: 10px;
     }
 
     .mensagem {
-      margin-top: 14px;
-      font-size: 14px;
+      color: #d4af37;
       text-align: center;
-      line-height: 1.5;
+      font-size: 13px;
     }
 
     .oculto {
       display: none;
-    }
-
-    .aviso {
-      margin-top: 18px;
-      color: var(--texto);
-      font-size: 11px;
-      line-height: 1.5;
-      text-align: center;
     }
   </style>
 </head>
@@ -174,22 +184,21 @@
 <body>
   <main class="login">
     <header class="logo">
-      <img src="logo-mystic.jpg" alt="Logo da Mystic"
+      <img src="logo-mystic.jpg" alt="Logo da livraria"
            onerror="this.style.display='none'">
-      <h1>Mystic</h1>
-      <p>Sua biblioteca começa aqui.</p>
+      <h2>Livraria</h2>
     </header>
 
     <section id="areaLogin">
-      <h2>Entrar</h2>
+      <h3>Entrar</h3>
 
       <form id="formLogin">
         <label for="emailLogin">E-mail</label>
         <input
           type="email"
           id="emailLogin"
-          autocomplete="email"
           placeholder="Digite seu e-mail"
+          autocomplete="email"
           required
         >
 
@@ -197,8 +206,8 @@
         <input
           type="password"
           id="senhaLogin"
-          autocomplete="current-password"
           placeholder="Digite sua senha"
+          autocomplete="current-password"
           required
         >
 
@@ -207,12 +216,31 @@
           <label for="lembrar">Lembrar de mim</label>
         </div>
 
-        <div class="opcao">
-          <input type="checkbox" id="naoSouRobo" required>
-          <label for="naoSouRobo">Não sou um robô</label>
+        <div class="captcha">
+          <p class="captcha-titulo">Verificação de segurança</p>
+
+          <div class="captcha-desafio">
+            <span id="codigoCaptcha" aria-label="Código de verificação"></span>
+            <button
+              type="button"
+              class="botao-atualizar"
+              id="atualizarCaptcha"
+              aria-label="Gerar novo código"
+              title="Gerar outro código"
+            >↻ Novo</button>
+          </div>
+
+          <label for="respostaCaptcha">Digite o código exibido</label>
+          <input
+            type="text"
+            id="respostaCaptcha"
+            placeholder="Código de verificação"
+            autocomplete="off"
+            required
+          >
         </div>
 
-        <button class="botao" type="submit">Entrar</button>
+        <button type="submit">Entrar</button>
         <p id="mensagemLogin" class="mensagem" role="status"></p>
       </form>
 
@@ -224,7 +252,7 @@
     </section>
 
     <section id="areaCadastro" class="oculto">
-      <h2>Criar conta</h2>
+      <h3>Criar conta</h3>
 
       <form id="formCadastro">
         <label for="emailCadastro">E-mail</label>
@@ -232,17 +260,15 @@
           type="email"
           id="emailCadastro"
           autocomplete="email"
-          placeholder="Digite seu e-mail"
           required
         >
 
-        <label for="senhaCadastro">Criar senha</label>
+        <label for="senhaCadastro">Senha</label>
         <input
           type="password"
           id="senhaCadastro"
           autocomplete="new-password"
           minlength="6"
-          placeholder="Mínimo de 6 caracteres"
           required
         >
 
@@ -251,11 +277,11 @@
           type="password"
           id="confirmarSenha"
           autocomplete="new-password"
-          placeholder="Digite a senha novamente"
+          minlength="6"
           required
         >
 
-        <button class="botao" type="submit">Criar conta</button>
+        <button type="submit">Cadastrar</button>
         <p id="mensagemCadastro" class="mensagem" role="status"></p>
       </form>
 
@@ -263,208 +289,132 @@
         <a href="#" id="voltarLogin">Voltar para entrar</a>
       </div>
     </section>
-
-    <p class="aviso">
-      Demonstração local: este sistema ainda não possui autenticação
-      segura nem verificação profissional contra robôs.
-    </p>
   </main>
 
   <script>
     const CHAVE_CONTAS = "mysticContas";
-    const CHAVE_SESSAO = "mysticSessao";
-    const CHAVE_LEMBRAR = "mysticLembrar";
+    let codigoAtual = "";
 
     function obterContas() {
       try {
-        const contas = JSON.parse(
-          localStorage.getItem(CHAVE_CONTAS) || "{}"
-        );
-
-        return contas && typeof contas === "object" ? contas : {};
+        return JSON.parse(localStorage.getItem(CHAVE_CONTAS) || "{}");
       } catch {
         return {};
       }
     }
 
-    function mostrarMensagem(id, texto) {
-      document.getElementById(id).textContent = texto;
+    function gerarCaptcha() {
+      const caracteres = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      codigoAtual = "";
+
+      for (let i = 0; i < 6; i++) {
+        codigoAtual += caracteres[
+          Math.floor(Math.random() * caracteres.length)
+        ];
+      }
+
+      document.getElementById("codigoCaptcha").textContent = codigoAtual;
+      document.getElementById("respostaCaptcha").value = "";
     }
 
-    function emailNormalizado(email) {
-      return email.trim().toLowerCase();
-    }
+    gerarCaptcha();
 
-    function abrirLogin() {
-      document.getElementById("areaLogin").classList.remove("oculto");
-      document.getElementById("areaCadastro").classList.add("oculto");
-    }
-
-    function abrirCadastro() {
-      document.getElementById("areaLogin").classList.add("oculto");
-      document.getElementById("areaCadastro").classList.remove("oculto");
-    }
+    document.getElementById("atualizarCaptcha").addEventListener(
+      "click",
+      gerarCaptcha
+    );
 
     document.getElementById("abrirCadastro").addEventListener("click", (e) => {
       e.preventDefault();
-      abrirCadastro();
+      document.getElementById("areaLogin").classList.add("oculto");
+      document.getElementById("areaCadastro").classList.remove("oculto");
     });
 
     document.getElementById("voltarLogin").addEventListener("click", (e) => {
       e.preventDefault();
-      abrirLogin();
+      document.getElementById("areaCadastro").classList.add("oculto");
+      document.getElementById("areaLogin").classList.remove("oculto");
     });
 
     document.getElementById("formCadastro").addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const email = emailNormalizado(
-        document.getElementById("emailCadastro").value
-      );
+      const email = document.getElementById("emailCadastro").value.trim().toLowerCase();
       const senha = document.getElementById("senhaCadastro").value;
       const confirmar = document.getElementById("confirmarSenha").value;
       const contas = obterContas();
-
-      if (senha.length < 6) {
-        mostrarMensagem(
-          "mensagemCadastro",
-          "A senha precisa ter pelo menos 6 caracteres."
-        );
-        return;
-      }
+      const mensagem = document.getElementById("mensagemCadastro");
 
       if (senha !== confirmar) {
-        mostrarMensagem("mensagemCadastro", "As senhas não coincidem.");
+        mensagem.textContent = "As senhas não coincidem.";
         return;
       }
 
       if (contas[email]) {
-        mostrarMensagem(
-          "mensagemCadastro",
-          "Já existe uma conta cadastrada com esse e-mail."
-        );
+        mensagem.textContent = "Este e-mail já está cadastrado.";
         return;
       }
 
-      /*
-       * ATENÇÃO: armazenamento local apenas para demonstração.
-       * Não use este método para contas reais.
-       */
+      // Demonstração local: não usar para contas reais.
       contas[email] = { senha: senha };
 
       try {
         localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
+        mensagem.textContent = "Conta criada. Você já pode entrar.";
+        document.getElementById("formCadastro").reset();
       } catch {
-        mostrarMensagem(
-          "mensagemCadastro",
-          "Não foi possível salvar a conta neste navegador."
-        );
-        return;
+        mensagem.textContent = "Não foi possível salvar a conta.";
       }
-
-      document.getElementById("formCadastro").reset();
-      mostrarMensagem(
-        "mensagemCadastro",
-        "Conta criada. Agora você pode entrar."
-      );
     });
 
     document.getElementById("formLogin").addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const email = emailNormalizado(
-        document.getElementById("emailLogin").value
-      );
+      const mensagem = document.getElementById("mensagemLogin");
+      const email = document.getElementById("emailLogin").value.trim().toLowerCase();
       const senha = document.getElementById("senhaLogin").value;
+      const resposta = document.getElementById("respostaCaptcha").value.trim().toUpperCase();
       const lembrar = document.getElementById("lembrar").checked;
-      const verificado = document.getElementById("naoSouRobo").checked;
+
+      if (resposta !== codigoAtual) {
+        mensagem.textContent = "Código incorreto. Tente o novo código.";
+        gerarCaptcha();
+        return;
+      }
+
       const contas = obterContas();
 
-      if (!verificado) {
-        mostrarMensagem(
-          "mensagemLogin",
-          "Marque a caixa de verificação para continuar."
-        );
-        return;
-      }
-
       if (!contas[email] || contas[email].senha !== senha) {
-        mostrarMensagem(
-          "mensagemLogin",
-          "E-mail ou senha incorretos."
-        );
+        mensagem.textContent = "E-mail ou senha incorretos.";
+        gerarCaptcha();
         return;
       }
 
-      const dadosSessao = JSON.stringify({
+      const sessao = JSON.stringify({
         email: email,
         autenticado: true
       });
 
       try {
         if (lembrar) {
-          localStorage.setItem(CHAVE_LEMBRAR, dadosSessao);
-          sessionStorage.removeItem(CHAVE_SESSAO);
+          localStorage.setItem("mysticLembrar", sessao);
+          sessionStorage.removeItem("mysticSessao");
         } else {
-          sessionStorage.setItem(CHAVE_SESSAO, dadosSessao);
-          localStorage.removeItem(CHAVE_LEMBRAR);
+          sessionStorage.setItem("mysticSessao", sessao);
+          localStorage.removeItem("mysticLembrar");
         }
       } catch {
-        mostrarMensagem(
-          "mensagemLogin",
-          "Não foi possível salvar a sessão."
-        );
+        mensagem.textContent = "Não foi possível salvar a sessão.";
         return;
       }
-
-      mostrarMensagem("mensagemLogin", "Login realizado. Abrindo a Mystic...");
 
       window.location.href = "home.html";
     });
 
     document.getElementById("esqueciSenha").addEventListener("click", (e) => {
       e.preventDefault();
-
-      alert(
-        "A recuperação de senha ainda não está disponível. " +
-        "Ela precisará de um serviço seguro de autenticação e e-mail."
-      );
+      alert("A recuperação de senha ainda não está configurada.");
     });
-
-    /*
-     * A sessão pode ser consultada por outros arquivos HTML
-     * do mesmo site e da mesma origem.
-     */
-    function obterSessaoMystic() {
-      try {
-        const lembrada = localStorage.getItem(CHAVE_LEMBRAR);
-        const temporaria = sessionStorage.getItem(CHAVE_SESSAO);
-        const dados = lembrada || temporaria;
-
-        return dados ? JSON.parse(dados) : null;
-      } catch {
-        return null;
-      }
-    }
-
-    // Expõe uma função para o próximo arquivo da Mystic.
-    window.obterSessaoMystic = obterSessaoMystic;
-
-    // Preenche o e-mail quando a opção "Lembrar de mim" estiver ativa.
-    try {
-      const sessao = localStorage.getItem(CHAVE_LEMBRAR);
-
-      if (sessao) {
-        const dados = JSON.parse(sessao);
-
-        if (dados && dados.email) {
-          document.getElementById("emailLogin").value = dados.email;
-          document.getElementById("lembrar").checked = true;
-        }
-      }
-    } catch {
-      localStorage.removeItem(CHAVE_LEMBRAR);
-    }
   </script>
 </body>
 </html>
