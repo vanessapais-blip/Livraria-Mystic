@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Livraria</title>
+  <title>Livraria Mystic</title>
 
   <style>
     body {
@@ -16,16 +16,17 @@
       align-items: center;
       background: #000000;
       color: #d4af37;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Arial, sans-serif;
     }
 
     .login {
       width: 100%;
-      max-width: 350px;
+      max-width: 360px;
       padding: 25px;
       box-sizing: border-box;
       background: #303030;
-      border-radius: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
     .logo {
@@ -41,62 +42,100 @@
 
     .logo h2 {
       color: #d4af37;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-      font-weight: normal;
-      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
       margin-top: 10px;
+      letter-spacing: 1px;
     }
 
     h3 {
       color: #d4af37;
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      font-weight: normal;
-      text-align: left;
-      margin: 0 0 12px;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 0 20px;
     }
 
     label {
       display: block;
-      margin: 12px 0 6px;
+      margin: 16px 0 6px;
       color: #d4af37;
       font-size: 14px;
     }
 
-    input[type="email"],
-    input[type="password"],
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      box-sizing: border-box;
-      border: 1px solid #555555;
-      border-radius: 5px;
-      background: #222222;
-      color: #eeeeee;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
+    .campo-senha {
+      position: relative;
     }
 
-    input:focus {
-      outline: 1px solid #d4af37;
+    .campo-senha input {
+      padding-right: 45px;
+    }
+
+    .botao-ver-senha {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: #999;
+      font-size: 18px;
+      padding: 0;
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .botao-ver-senha:hover {
+      background: transparent;
+      color: #d4af37;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid #555555;
+      border-radius: 6px;
+      background: #222222;
+      color: #eeeeee;
+      font-size: 15px;
+      transition: border-color 0.2s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #d4af37;
+      box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+    }
+
+    select {
+      cursor: pointer;
     }
 
     button {
       width: 100%;
-      padding: 11px;
-      margin-top: 18px;
+      padding: 12px;
+      margin-top: 20px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       background: #d4af37;
       color: #000000;
-      font-family: Arial, sans-serif;
-      font-size: 15px;
+      font-size: 16px;
+      font-weight: 500;
       cursor: pointer;
+      transition: background 0.2s ease;
     }
 
     button:hover {
       background: #c19b2e;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
 
     a {
@@ -109,7 +148,7 @@
     }
 
     .links {
-      margin-top: 18px;
+      margin-top: 20px;
       text-align: center;
       font-size: 14px;
       line-height: 2;
@@ -119,7 +158,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 12px;
+      margin-top: 16px;
       color: #d4af37;
       font-size: 14px;
     }
@@ -131,27 +170,31 @@
 
     input[type="checkbox"] {
       accent-color: #d4af37;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
     }
 
     .captcha {
-      margin-top: 18px;
-      padding: 12px;
+      margin-top: 20px;
+      padding: 16px;
       border: 1px solid #555555;
-      border-radius: 5px;
+      border-radius: 6px;
       background: #272727;
     }
 
     .captcha-titulo {
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       font-size: 13px;
       color: #d4af37;
+      font-weight: 500;
     }
 
     .captcha-desafio {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
     }
 
     #codigoCaptcha {
@@ -161,35 +204,95 @@
       border-radius: 4px;
       color: #d4af37;
       text-align: center;
-      font-size: 19px;
+      font-size: 20px;
       font-weight: bold;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       user-select: none;
+      font-family: monospace;
     }
 
     .botao-atualizar {
       width: auto;
       margin: 0;
-      padding: 9px 11px;
+      padding: 10px 12px;
       font-size: 13px;
+      background: #444;
+      color: #d4af37;
+    }
+
+    .botao-atualizar:hover {
+      background: #555;
     }
 
     .mensagem {
-      color: #d4af37;
       text-align: center;
-      font-size: 13px;
+      font-size: 14px;
+      margin-top: 12px;
+      min-height: 20px;
+    }
+
+    .mensagem.sucesso {
+      color: #4ade80;
+    }
+
+    .mensagem.erro {
+      color: #f87171;
     }
 
     .oculto {
-      display: none;
+      display: none !important;
     }
 
     .aviso {
-      color: #eeeeee;
+      color: #999;
       text-align: center;
       font-size: 11px;
       line-height: 1.5;
-      margin-top: 18px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #444;
+    }
+
+    .selecao-conta {
+      margin-bottom: 5px;
+    }
+
+    .acoes-conta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .botao-esquecer-conta {
+      background: transparent;
+      color: #999;
+      border: none;
+      width: auto;
+      padding: 0;
+      font-size: 12px;
+      text-decoration: underline;
+      margin: 0;
+    }
+
+    .botao-esquecer-conta:hover {
+      color: #f87171;
+      background: transparent;
+    }
+
+    .sem-contas {
+      color: #777;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    @media (max-width: 400px) {
+      body {
+        padding: 15px;
+      }
+      .login {
+        padding: 20px 15px;
+      }
     }
   </style>
 </head>
@@ -200,68 +303,67 @@
     <header class="logo">
       <img
         src="logo-mystic.jpg"
-        alt="Logo da livraria"
+        alt="Logo da Livraria Mystic"
         onerror="this.style.display='none'"
       >
-      <h2>Livraria</h2>
+      <h2>Livraria Mystic</h2>
     </header>
 
+    <!-- Área de Login -->
     <section id="areaLogin">
-      <h3>Entrar</h3>
+      <h3>Entrar na sua conta</h3>
+
+      <!-- Contas Lembradas -->
+      <div id="caixaContasSalvas" class="selecao-conta oculto">
+        <label for="contasSalvas">📋 Contas lembradas</label>
+        <select id="contasSalvas">
+          <option value="">-- Selecione uma conta --</option>
+        </select>
+        <div class="acoes-conta">
+          <span></span>
+          <button type="button" id="esquecerConta" class="botao-esquecer-conta">Esquecer esta conta</button>
+        </div>
+      </div>
 
       <form id="formLogin">
         <label for="emailLogin">E-mail</label>
         <input
           type="email"
           id="emailLogin"
-          placeholder="Digite seu e-mail"
+          placeholder="seu@email.com"
           autocomplete="email"
           required
         >
 
         <label for="senhaLogin">Senha</label>
-        <input
-          type="password"
-          id="senhaLogin"
-          placeholder="Digite sua senha"
-          autocomplete="current-password"
-          required
-        >
+        <div class="campo-senha">
+          <input
+            type="password"
+            id="senhaLogin"
+            placeholder="Sua senha"
+            autocomplete="current-password"
+            required
+          >
+          <button type="button" class="botao-ver-senha" id="verSenhaLogin" aria-label="Mostrar senha">👁️</button>
+        </div>
 
         <div class="opcao">
-          <input type="checkbox" id="lembrar">
-          <label for="lembrar">Lembrar de mim</label>
+          <input type="checkbox" id="lembrarConta" checked>
+          <label for="lembrarConta">💾 Lembrar minha conta neste navegador</label>
         </div>
 
         <div class="captcha">
-          <p class="captcha-titulo">Verificação de segurança</p>
-
+          <p class="captcha-titulo">🔒 Verificação de segurança</p>
           <div class="captcha-desafio">
-            <span
-              id="codigoCaptcha"
-              aria-label="Código de verificação"
-            ></span>
-
-            <button
-              type="button"
-              class="botao-atualizar"
-              id="atualizarCaptcha"
-              aria-label="Gerar novo código"
-            >↻ Novo</button>
+            <span id="codigoCaptcha" aria-label="Código de verificação"></span>
+            <button type="button" class="botao-atualizar" id="atualizarCaptcha" aria-label="Gerar novo código">↻ Novo</button>
           </div>
-
-          <label for="respostaCaptcha">Digite o código exibido</label>
-          <input
-            type="text"
-            id="respostaCaptcha"
-            placeholder="Código de verificação"
-            autocomplete="off"
-            required
-          >
+          <label for="respostaCaptcha">Digite o código acima</label>
+          <input type="text" id="respostaCaptcha" placeholder="Digite sem espaços" autocomplete="off" required>
         </div>
 
         <button type="submit">Entrar</button>
-        <p id="mensagemLogin" class="mensagem" role="status"></p>
+        <p id="mensagemLogin" class="mensagem" role="status" aria-live="polite"></p>
       </form>
 
       <div class="links">
@@ -271,167 +373,320 @@
       </div>
     </section>
 
+    <!-- Área de Cadastro -->
     <section id="areaCadastro" class="oculto">
-      <h3>Criar conta</h3>
+      <h3>Criar nova conta</h3>
 
       <form id="formCadastro">
         <label for="emailCadastro">E-mail</label>
         <input
           type="email"
           id="emailCadastro"
-          placeholder="Digite seu e-mail"
+          placeholder="seu@email.com"
           autocomplete="email"
           required
         >
 
         <label for="senhaCadastro">Senha</label>
-        <input
-          type="password"
-          id="senhaCadastro"
-          placeholder="Mínimo de 6 caracteres"
-          autocomplete="new-password"
-          minlength="6"
-          required
-        >
+        <div class="campo-senha">
+          <input
+            type="password"
+            id="senhaCadastro"
+            placeholder="Mínimo de 6 caracteres"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+          <button type="button" class="botao-ver-senha" id="verSenhaCadastro" aria-label="Mostrar senha">👁️</button>
+        </div>
 
         <label for="confirmarSenha">Confirmar senha</label>
-        <input
-          type="password"
-          id="confirmarSenha"
-          placeholder="Digite a senha novamente"
-          autocomplete="new-password"
-          minlength="6"
-          required
-        >
+        <div class="campo-senha">
+          <input
+            type="password"
+            id="confirmarSenha"
+            placeholder="Digite a senha novamente"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+          <button type="button" class="botao-ver-senha" id="verConfirmarSenha" aria-label="Mostrar senha">👁️</button>
+        </div>
 
-        <button type="submit">Cadastrar</button>
-        <p id="mensagemCadastro" class="mensagem" role="status"></p>
+        <button type="submit">Criar conta</button>
+        <p id="mensagemCadastro" class="mensagem" role="status" aria-live="polite"></p>
       </form>
 
       <div class="links">
-        <a href="#" id="voltarLogin">Voltar para entrar</a>
+        <a href="#" id="voltarLogin">← Voltar para o login</a>
       </div>
     </section>
 
     <p class="aviso">
-      Versão de demonstração local.
+      ⚠️ Versão de demonstração local.<br>
+      As contas ficam salvas no seu navegador.
     </p>
 
   </main>
 
   <script>
-    const CHAVE_CONTAS = "mysticContas";
+    // === CHAVES DE ARMAZENAMENTO ===
+    const CHAVE_CONTAS = "mysticContas";       // Todas as contas cadastradas
+    const CHAVE_CONTAS_LEMBRADAS = "mysticContasLembradas"; // Contas que o usuário pediu para lembrar
     const CHAVE_SESSAO = "mysticSessao";
-    const CHAVE_LEMBRAR = "mysticLembrar";
 
     let codigoAtual = "";
 
-    function obterContas() {
-      try {
-        const dados = JSON.parse(
-          localStorage.getItem(CHAVE_CONTAS) || "{}"
-        );
+    // === FUNÇÕES AUXILIARES ===
+    function mostrarMensagem(elemento, texto, tipo = "info") {
+      elemento.textContent = texto;
+      elemento.className = `mensagem ${tipo}`;
+      if (texto) {
+        setTimeout(() => {
+          elemento.textContent = "";
+          elemento.className = "mensagem";
+        }, 5000);
+      }
+    }
 
-        return dados && typeof dados === "object" ? dados : {};
+    function validarEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    // === MOSTRAR/OCULTAR SENHA ===
+    function configurarBotaoVerSenha(botaoId, inputId) {
+      const botao = document.getElementById(botaoId);
+      const input = document.getElementById(inputId);
+      
+      botao.addEventListener("click", function () {
+        const estaVisivel = input.type === "text";
+        input.type = estaVisivel ? "password" : "text";
+        botao.textContent = estaVisivel ? "👁️" : "🙈";
+        botao.setAttribute("aria-label", estaVisivel ? "Mostrar senha" : "Ocultar senha");
+      });
+    }
+
+    // === GERENCIAMENTO DE CONTAS SALVAS ===
+    function obterContasCadastradas() {
+      try {
+        const dados = localStorage.getItem(CHAVE_CONTAS);
+        return dados ? JSON.parse(dados) : {};
       } catch {
         return {};
       }
     }
 
+    function obterContasLembradas() {
+      try {
+        const dados = localStorage.getItem(CHAVE_CONTAS_LEMBRADAS);
+        return dados ? JSON.parse(dados) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function salvarContaLembrada(email) {
+      let contas = obterContasLembradas();
+      email = email.trim().toLowerCase();
+      
+      // Remove se já existir para adicionar no topo
+      contas = contas.filter(c => c !== email);
+      contas.unshift(email); // Adiciona no início
+      
+      // Limita a 5 contas salvas
+      if (contas.length > 5) contas = contas.slice(0, 5);
+      
+      localStorage.setItem(CHAVE_CONTAS_LEMBRADAS, JSON.stringify(contas));
+      atualizarListaContasSalvas();
+    }
+
+    function esquecerConta(email) {
+      let contas = obterContasLembradas();
+      contas = contas.filter(c => c !== email);
+      localStorage.setItem(CHAVE_CONTAS_LEMBRADAS, JSON.stringify(contas));
+      atualizarListaContasSalvas();
+      document.getElementById("emailLogin").value = "";
+      document.getElementById("senhaLogin").value = "";
+    }
+
+    function atualizarListaContasSalvas() {
+      const contas = obterContasLembradas();
+      const caixa = document.getElementById("caixaContasSalvas");
+      const select = document.getElementById("contasSalvas");
+      
+      select.innerHTML = '<option value="">-- Selecione uma conta --</option>';
+      
+      if (contas.length === 0) {
+        caixa.classList.add("oculto");
+        return;
+      }
+      
+      caixa.classList.remove("oculto");
+      contas.forEach(email => {
+        const opcao = document.createElement("option");
+        opcao.value = email;
+        opcao.textContent = email;
+        select.appendChild(opcao);
+      });
+    }
+
+    // Preenche os campos ao selecionar uma conta
+    document.getElementById("contasSalvas").addEventListener("change", function () {
+      const email = this.value;
+      if (email) {
+        document.getElementById("emailLogin").value = email;
+        document.getElementById("senhaLogin").focus();
+      }
+    });
+
+    // Esquecer conta selecionada
+    document.getElementById("esquecerConta").addEventListener("click", function () {
+      const email = document.getElementById("contasSalvas").value;
+      if (email && confirm(`Tem certeza que deseja esquecer a conta:\n${email} ?`)) {
+        esquecerConta(email);
+      }
+    });
+
+    // === CAPTCHA ===
     function gerarCaptcha() {
       const caracteres = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
       codigoAtual = "";
-
       for (let i = 0; i < 6; i++) {
-        codigoAtual += caracteres[
-          Math.floor(Math.random() * caracteres.length)
-        ];
+        codigoAtual += caracteres[Math.floor(Math.random() * caracteres.length)];
       }
-
       document.getElementById("codigoCaptcha").textContent = codigoAtual;
       document.getElementById("respostaCaptcha").value = "";
     }
 
+    // === INICIALIZAÇÃO ===
+    configurarBotaoVerSenha("verSenhaLogin", "senhaLogin");
+    configurarBotaoVerSenha("verSenhaCadastro", "senhaCadastro");
+    configurarBotaoVerSenha("verConfirmarSenha", "confirmarSenha");
+    atualizarListaContasSalvas();
     gerarCaptcha();
 
-    document
-      .getElementById("atualizarCaptcha")
-      .addEventListener("click", gerarCaptcha);
+    // === NAVEGAÇÃO ===
+    document.getElementById("atualizarCaptcha").addEventListener("click", gerarCaptcha);
 
-    document
-      .getElementById("abrirCadastro")
-      .addEventListener("click", function (e) {
-        e.preventDefault();
-        document.getElementById("areaLogin").classList.add("oculto");
-        document.getElementById("areaCadastro").classList.remove("oculto");
+    document.getElementById("abrirCadastro").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("areaLogin").classList.add("oculto");
+      document.getElementById("areaCadastro").classList.remove("oculto");
+      document.getElementById("emailCadastro").focus();
+    });
+
+    document.getElementById("voltarLogin").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("areaCadastro").classList.add("oculto");
+      document.getElementById("areaLogin").classList.remove("oculto");
+      document.getElementById("emailLogin").focus();
+      gerarCaptcha();
+    });
+
+    // === CADASTRO ===
+    document.getElementById("formCadastro").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("emailCadastro").value.trim().toLowerCase();
+      const senha = document.getElementById("senhaCadastro").value;
+      const confirmar = document.getElementById("confirmarSenha").value;
+      const mensagem = document.getElementById("mensagemCadastro");
+      const contas = obterContasCadastradas();
+
+      if (!validarEmail(email)) {
+        mostrarMensagem(mensagem, "❌ Digite um e-mail válido.", "erro");
+        return;
+      }
+      if (senha.length < 6) {
+        mostrarMensagem(mensagem, "❌ A senha precisa ter pelo menos 6 caracteres.", "erro");
+        return;
+      }
+      if (senha !== confirmar) {
+        mostrarMensagem(mensagem, "❌ As senhas não coincidem.", "erro");
+        return;
+      }
+      if (contas[email]) {
+        mostrarMensagem(mensagem, "❌ Este e-mail já está cadastrado.", "erro");
+        return;
+      }
+
+      // ⚠️ DEMONSTRAÇÃO APENAS — NÃO USAR EM PRODUÇÃO
+      contas[email] = { senha: senha, criadoEm: new Date().toISOString() };
+      
+      try {
+        localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
+        mostrarMensagem(mensagem, "✅ Conta criada! Você já pode entrar.", "sucesso");
+        
+        setTimeout(() => {
+          document.getElementById("voltarLogin").click();
+          document.getElementById("emailLogin").value = email;
+          // Automaticamente salva na lista de contas lembradas
+          salvarContaLembrada(email);
+        }, 1800);
+      } catch {
+        mostrarMensagem(mensagem, "❌ Não foi possível salvar a conta.", "erro");
+      }
+    });
+
+    // === LOGIN ===
+    document.getElementById("formLogin").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const mensagem = document.getElementById("mensagemLogin");
+      const email = document.getElementById("emailLogin").value.trim().toLowerCase();
+      const senha = document.getElementById("senhaLogin").value;
+      const resposta = document.getElementById("respostaCaptcha").value.trim().toUpperCase();
+      const lembrar = document.getElementById("lembrarConta").checked;
+      const contas = obterContasCadastradas();
+
+      if (!email || !senha) {
+        mostrarMensagem(mensagem, "❌ Preencha e-mail e senha.", "erro");
+        return;
+      }
+
+      if (resposta !== codigoAtual) {
+        mostrarMensagem(mensagem, "❌ Código incorreto.", "erro");
+        gerarCaptcha();
+        return;
+      }
+
+      if (!contas[email] || contas[email].senha !== senha) {
+        mostrarMensagem(mensagem, "❌ E-mail ou senha incorretos.", "erro");
+        gerarCaptcha();
+        return;
+      }
+
+      // Salva na lista de contas lembradas se a opção estiver marcada
+      if (lembrar) {
+        salvarContaLembrada(email);
+      } else {
+        // Remove da lista se o usuário pediu para não lembrar
+        esquecerConta(email);
+      }
+
+      // Cria sessão
+      const sessao = JSON.stringify({
+        email: email,
+        autenticado: true,
+        logadoEm: new Date().toISOString()
       });
+      sessionStorage.setItem(CHAVE_SESSAO, sessao);
 
-    document
-      .getElementById("voltarLogin")
-      .addEventListener("click", function (e) {
-        e.preventDefault();
-        document.getElementById("areaCadastro").classList.add("oculto");
-        document.getElementById("areaLogin").classList.remove("oculto");
-      });
+      mostrarMensagem(mensagem, "✅ Entrando...", "sucesso");
+      setTimeout(() => {
+        window.location.href = "home.html";
+      }, 600);
+    });
 
-    document
-      .getElementById("formCadastro")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const email = document
-          .getElementById("emailCadastro")
-          .value.trim().toLowerCase();
-
-        const senha = document.getElementById("senhaCadastro").value;
-        const confirmar = document.getElementById("confirmarSenha").value;
-        const mensagem = document.getElementById("mensagemCadastro");
-        const contas = obterContas();
-
-        if (senha.length < 6) {
-          mensagem.textContent =
-            "A senha precisa ter pelo menos 6 caracteres.";
-          return;
-        }
-
-        if (senha !== confirmar) {
-          mensagem.textContent = "As senhas não coincidem.";
-          return;
-        }
-
-        if (contas[email]) {
-          mensagem.textContent = "Este e-mail já está cadastrado.";
-          return;
-        }
-
-        /*
-         * Demonstração local apenas.
-         * Não armazenar senhas assim em um site real.
-         */
-        contas[email] = { senha: senha };
-
-        try {
-          localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
-          mensagem.textContent = "Conta criada. Você já pode entrar.";
-          document.getElementById("formCadastro").reset();
-        } catch {
-          mensagem.textContent = "Não foi possível salvar a conta.";
-        }
-      });
-
-    document
-      .getElementById("formLogin")
-      .addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const mensagem = document.getElementById("mensagemLogin");
-        const email = document
-          .getElementById("emailLogin")
-          .value.trim().toLowerCase();
-
-        const senha = document.getElementById("senhaLogin").value;
-        const resposta = document
-          .getElementById("respostaCaptcha")
+    // === ESQUECI MINHA SENHA ===
+    document.getElementById("esqueciSenha").addEventListener("click", function (e) {
+      e.preventDefault();
+      alert("⚠️ A recuperação de senha ainda não está configurada.\n\nEm um sistema real, isso enviaria um link para seu e-mail.");
+    });
+  </script>
+</body>
+</html>
+"respostaCaptcha")
           .value.trim().toUpperCase();
 
         const lembrar = document.getElementById("lembrar").checked;
