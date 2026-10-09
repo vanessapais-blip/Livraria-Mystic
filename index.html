@@ -1,327 +1,470 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mystic — Livraria</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystic — Entrar</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    :root {
+      /* Paleta original preservada */
+      --fundo: #000000;
+      --cartao: #303030;
+      --texto: #eeeeee;
+      --dourado: #d4af37;
+      --borda: #555555;
+    }
 
-        body {
-            min-height: 100vh;
-            background: #000;
-            color: #eee;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .login {
-            width: 100%;
-            max-width: 400px;
-            padding: 35px;
-            background: #303030;
-            border-radius: 18px;
-            box-shadow: 0 10px 35px #0008;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--fundo);
+      color: var(--dourado);
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    .login {
+      width: 100%;
+      max-width: 390px;
+      padding: 30px;
+      background: var(--cartao);
+      border-radius: 12px;
+      border: 1px solid var(--borda);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    }
 
-        .logo img {
-            width: 220px;
-            max-width: 100%;
-            display: block;
-            margin: 0 auto 10px;
-        }
+    .logo {
+      text-align: center;
+      margin-bottom: 24px;
+    }
 
-        .logo p {
-            color: #999;
-        }
+    .logo img {
+      display: block;
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      margin: 0 auto 12px;
+    }
 
-        h2 {
-            margin-bottom: 24px;
-            font-size: 24px;
-        }
+    .logo h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 32px;
+      letter-spacing: 3px;
+    }
 
-        .campo {
-            margin-bottom: 18px;
-        }
+    .logo p {
+      color: var(--dourado);
+      margin-bottom: 0;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 7px;
-            color: #ccc;
-        }
+    h2 {
+      color: var(--dourado);
+      text-align: center;
+      margin-bottom: 22px;
+    }
 
-        input {
-            width: 100%;
-            padding: 13px;
-            background: #222;
-            color: white;
-            border: 1px solid #4a4a4a;
-            border-radius: 8px;
-            font-size: 15px;
-        }
+    label {
+      display: block;
+      margin: 14px 0 7px;
+      color: var(--dourado);
+      font-size: 14px;
+    }
 
-        input:focus {
-            outline: none;
-            border-color: #aaa;
-        }
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--borda);
+      border-radius: 6px;
+      background: #222222;
+      color: var(--texto);
+      font-size: 15px;
+    }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            background: #eee;
-            color: #222;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+    input:focus {
+      outline: 2px solid var(--dourado);
+      outline-offset: 2px;
+    }
 
-        button:hover {
-            background: #ccc;
-        }
+    .opcao {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 16px;
+      color: var(--dourado);
+      font-size: 14px;
+    }
 
-        .cadastro {
-            text-align: center;
-            margin-top: 22px;
-            color: #999;
-            font-size: 14px;
-            line-height: 1.8;
-        }
+    .opcao label {
+      margin: 0;
+      cursor: pointer;
+    }
 
-        .cadastro a {
-            color: #eee;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    input[type="checkbox"] {
+      accent-color: var(--dourado);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
 
-        .cadastro a:hover {
-            text-decoration: underline;
-        }
+    .botao {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      border: 1px solid var(--dourado);
+      border-radius: 6px;
+      background: #222222;
+      color: var(--dourado);
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        .mensagem {
-            margin-top: 15px;
-            font-size: 14px;
-            line-height: 1.5;
-            overflow-wrap: anywhere;
-        }
+    .botao:hover {
+      background: #3a3a3a;
+    }
 
-        .escondido {
-            display: none;
-        }
-    </style>
+    .links {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    a {
+      color: var(--dourado);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .mensagem {
+      margin-top: 14px;
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .oculto {
+      display: none;
+    }
+
+    .aviso {
+      margin-top: 18px;
+      color: var(--texto);
+      font-size: 11px;
+      line-height: 1.5;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
-    <main class="login">
-        <div class="logo">
-            <img src="logo-mystic.jpg" alt="Logo Mystic">
-            <p>Livraria</p>
+  <main class="login">
+    <header class="logo">
+      <img src="logo-mystic.jpg" alt="Logo da Mystic"
+           onerror="this.style.display='none'">
+      <h1>Mystic</h1>
+      <p>Sua biblioteca começa aqui.</p>
+    </header>
+
+    <section id="areaLogin">
+      <h2>Entrar</h2>
+
+      <form id="formLogin">
+        <label for="emailLogin">E-mail</label>
+        <input
+          type="email"
+          id="emailLogin"
+          autocomplete="email"
+          placeholder="Digite seu e-mail"
+          required
+        >
+
+        <label for="senhaLogin">Senha</label>
+        <input
+          type="password"
+          id="senhaLogin"
+          autocomplete="current-password"
+          placeholder="Digite sua senha"
+          required
+        >
+
+        <div class="opcao">
+          <input type="checkbox" id="lembrar">
+          <label for="lembrar">Lembrar de mim</label>
         </div>
 
-        <section id="telaLogin">
-            <h2>Entrar</h2>
+        <div class="opcao">
+          <input type="checkbox" id="naoSouRobo" required>
+          <label for="naoSouRobo">Não sou um robô</label>
+        </div>
 
-            <form id="formLogin">
-                <div class="campo">
-                    <label for="emailLogin">E-mail</label>
-                    <input
-                        type="email"
-                        id="emailLogin"
-                        placeholder="Digite seu e-mail"
-                        autocomplete="email"
-                        required
-                    >
-                </div>
+        <button class="botao" type="submit">Entrar</button>
+        <p id="mensagemLogin" class="mensagem" role="status"></p>
+      </form>
 
-                <div class="campo">
-                    <label for="senhaLogin">Senha</label>
-                    <input
-                        type="password"
-                        id="senhaLogin"
-                        placeholder="Digite sua senha"
-                        autocomplete="current-password"
-                        required
-                    >
-                </div>
+      <div class="links">
+        <a href="#" id="abrirCadastro">Criar uma conta</a>
+        <br>
+        <a href="#" id="esqueciSenha">Esqueci minha senha</a>
+      </div>
+    </section>
 
-                <button type="submit">Entrar</button>
-            </form>
+    <section id="areaCadastro" class="oculto">
+      <h2>Criar conta</h2>
 
-            <div class="cadastro">
-                Ainda não possui uma conta?
-                <a id="abrirCadastro">Criar conta</a>
-                <br>
-                <a id="esqueciSenha">Esqueci minha senha</a>
-            </div>
-        </section>
+      <form id="formCadastro">
+        <label for="emailCadastro">E-mail</label>
+        <input
+          type="email"
+          id="emailCadastro"
+          autocomplete="email"
+          placeholder="Digite seu e-mail"
+          required
+        >
 
-        <section id="telaCadastro" class="escondido">
-            <h2>Criar conta</h2>
+        <label for="senhaCadastro">Criar senha</label>
+        <input
+          type="password"
+          id="senhaCadastro"
+          autocomplete="new-password"
+          minlength="6"
+          placeholder="Mínimo de 6 caracteres"
+          required
+        >
 
-            <form id="formCadastro">
-                <div class="campo">
-                    <label for="emailCadastro">E-mail</label>
-                    <input
-                        type="email"
-                        id="emailCadastro"
-                        placeholder="Digite seu e-mail"
-                        autocomplete="email"
-                        required
-                    >
-                </div>
+        <label for="confirmarSenha">Confirmar senha</label>
+        <input
+          type="password"
+          id="confirmarSenha"
+          autocomplete="new-password"
+          placeholder="Digite a senha novamente"
+          required
+        >
 
-                <div class="campo">
-                    <label for="senhaCadastro">Criar senha</label>
-                    <input
-                        type="password"
-                        id="senhaCadastro"
-                        placeholder="Mínimo de 8 caracteres"
-                        minlength="8"
-                        autocomplete="new-password"
-                        required
-                    >
-                </div>
+        <button class="botao" type="submit">Criar conta</button>
+        <p id="mensagemCadastro" class="mensagem" role="status"></p>
+      </form>
 
-                <div class="campo">
-                    <label for="confirmarSenha">Confirmar senha</label>
-                    <input
-                        type="password"
-                        id="confirmarSenha"
-                        placeholder="Digite a senha novamente"
-                        minlength="8"
-                        autocomplete="new-password"
-                        required
-                    >
-                </div>
+      <div class="links">
+        <a href="#" id="voltarLogin">Voltar para entrar</a>
+      </div>
+    </section>
 
-                <button type="submit">Criar minha conta</button>
-            </form>
+    <p class="aviso">
+      Demonstração local: este sistema ainda não possui autenticação
+      segura nem verificação profissional contra robôs.
+    </p>
+  </main>
 
-            <div class="cadastro">
-                Já possui uma conta?
-                <a id="voltarLogin">Entrar</a>
-            </div>
-        </section>
+  <script>
+    const CHAVE_CONTAS = "mysticContas";
+    const CHAVE_SESSAO = "mysticSessao";
+    const CHAVE_LEMBRAR = "mysticLembrar";
 
-        <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
-    </main>
+    function obterContas() {
+      try {
+        const contas = JSON.parse(
+          localStorage.getItem(CHAVE_CONTAS) || "{}"
+        );
 
-    <script>
-        const telaLogin = document.getElementById("telaLogin");
-        const telaCadastro = document.getElementById("telaCadastro");
-        const mensagem = document.getElementById("mensagem");
+        return contas && typeof contas === "object" ? contas : {};
+      } catch {
+        return {};
+      }
+    }
 
-        function mostrarMensagem(texto) {
-            mensagem.textContent = texto;
+    function mostrarMensagem(id, texto) {
+      document.getElementById(id).textContent = texto;
+    }
+
+    function emailNormalizado(email) {
+      return email.trim().toLowerCase();
+    }
+
+    function abrirLogin() {
+      document.getElementById("areaLogin").classList.remove("oculto");
+      document.getElementById("areaCadastro").classList.add("oculto");
+    }
+
+    function abrirCadastro() {
+      document.getElementById("areaLogin").classList.add("oculto");
+      document.getElementById("areaCadastro").classList.remove("oculto");
+    }
+
+    document.getElementById("abrirCadastro").addEventListener("click", (e) => {
+      e.preventDefault();
+      abrirCadastro();
+    });
+
+    document.getElementById("voltarLogin").addEventListener("click", (e) => {
+      e.preventDefault();
+      abrirLogin();
+    });
+
+    document.getElementById("formCadastro").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = emailNormalizado(
+        document.getElementById("emailCadastro").value
+      );
+      const senha = document.getElementById("senhaCadastro").value;
+      const confirmar = document.getElementById("confirmarSenha").value;
+      const contas = obterContas();
+
+      if (senha.length < 6) {
+        mostrarMensagem(
+          "mensagemCadastro",
+          "A senha precisa ter pelo menos 6 caracteres."
+        );
+        return;
+      }
+
+      if (senha !== confirmar) {
+        mostrarMensagem("mensagemCadastro", "As senhas não coincidem.");
+        return;
+      }
+
+      if (contas[email]) {
+        mostrarMensagem(
+          "mensagemCadastro",
+          "Já existe uma conta cadastrada com esse e-mail."
+        );
+        return;
+      }
+
+      /*
+       * ATENÇÃO: armazenamento local apenas para demonstração.
+       * Não use este método para contas reais.
+       */
+      contas[email] = { senha: senha };
+
+      try {
+        localStorage.setItem(CHAVE_CONTAS, JSON.stringify(contas));
+      } catch {
+        mostrarMensagem(
+          "mensagemCadastro",
+          "Não foi possível salvar a conta neste navegador."
+        );
+        return;
+      }
+
+      document.getElementById("formCadastro").reset();
+      mostrarMensagem(
+        "mensagemCadastro",
+        "Conta criada. Agora você pode entrar."
+      );
+    });
+
+    document.getElementById("formLogin").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const email = emailNormalizado(
+        document.getElementById("emailLogin").value
+      );
+      const senha = document.getElementById("senhaLogin").value;
+      const lembrar = document.getElementById("lembrar").checked;
+      const verificado = document.getElementById("naoSouRobo").checked;
+      const contas = obterContas();
+
+      if (!verificado) {
+        mostrarMensagem(
+          "mensagemLogin",
+          "Marque a caixa de verificação para continuar."
+        );
+        return;
+      }
+
+      if (!contas[email] || contas[email].senha !== senha) {
+        mostrarMensagem(
+          "mensagemLogin",
+          "E-mail ou senha incorretos."
+        );
+        return;
+      }
+
+      const dadosSessao = JSON.stringify({
+        email: email,
+        autenticado: true
+      });
+
+      try {
+        if (lembrar) {
+          localStorage.setItem(CHAVE_LEMBRAR, dadosSessao);
+          sessionStorage.removeItem(CHAVE_SESSAO);
+        } else {
+          sessionStorage.setItem(CHAVE_SESSAO, dadosSessao);
+          localStorage.removeItem(CHAVE_LEMBRAR);
         }
+      } catch {
+        mostrarMensagem(
+          "mensagemLogin",
+          "Não foi possível salvar a sessão."
+        );
+        return;
+      }
 
-        function obterContas() {
-            try {
-                return JSON.parse(
-                    localStorage.getItem("mysticContas") || "{}"
-                );
-            } catch {
-                return {};
-            }
+      mostrarMensagem("mensagemLogin", "Login realizado. Abrindo a Mystic...");
+
+      window.location.href = "home.html";
+    });
+
+    document.getElementById("esqueciSenha").addEventListener("click", (e) => {
+      e.preventDefault();
+
+      alert(
+        "A recuperação de senha ainda não está disponível. " +
+        "Ela precisará de um serviço seguro de autenticação e e-mail."
+      );
+    });
+
+    /*
+     * A sessão pode ser consultada por outros arquivos HTML
+     * do mesmo site e da mesma origem.
+     */
+    function obterSessaoMystic() {
+      try {
+        const lembrada = localStorage.getItem(CHAVE_LEMBRAR);
+        const temporaria = sessionStorage.getItem(CHAVE_SESSAO);
+        const dados = lembrada || temporaria;
+
+        return dados ? JSON.parse(dados) : null;
+      } catch {
+        return null;
+      }
+    }
+
+    // Expõe uma função para o próximo arquivo da Mystic.
+    window.obterSessaoMystic = obterSessaoMystic;
+
+    // Preenche o e-mail quando a opção "Lembrar de mim" estiver ativa.
+    try {
+      const sessao = localStorage.getItem(CHAVE_LEMBRAR);
+
+      if (sessao) {
+        const dados = JSON.parse(sessao);
+
+        if (dados && dados.email) {
+          document.getElementById("emailLogin").value = dados.email;
+          document.getElementById("lembrar").checked = true;
         }
-
-        document.getElementById("abrirCadastro").addEventListener("click", () => {
-            telaLogin.classList.add("escondido");
-            telaCadastro.classList.remove("escondido");
-            mostrarMensagem("");
-        });
-
-        document.getElementById("voltarLogin").addEventListener("click", () => {
-            telaCadastro.classList.add("escondido");
-            telaLogin.classList.remove("escondido");
-            mostrarMensagem("");
-        });
-
-        document.getElementById("formCadastro").addEventListener("submit", (evento) => {
-            evento.preventDefault();
-
-            const email = document.getElementById("emailCadastro")
-                .value.trim().toLowerCase();
-            const senha = document.getElementById("senhaCadastro").value;
-            const confirmar = document.getElementById("confirmarSenha").value;
-
-            if (senha.length < 8) {
-                mostrarMensagem("A senha precisa ter pelo menos 8 caracteres.");
-                return;
-            }
-
-            if (senha !== confirmar) {
-                mostrarMensagem("As senhas não são iguais.");
-                return;
-            }
-
-            const contas = obterContas();
-
-            if (contas[email]) {
-                mostrarMensagem("Já existe uma conta cadastrada com esse e-mail.");
-                return;
-            }
-
-            // Demonstração local: não use senhas reais neste sistema.
-            contas[email] = { senha: senha };
-
-            try {
-                localStorage.setItem("mysticContas", JSON.stringify(contas));
-            } catch {
-                mostrarMensagem("Não foi possível salvar a conta neste navegador.");
-                return;
-            }
-
-            document.getElementById("emailLogin").value = email;
-            document.getElementById("senhaLogin").value = "";
-            document.getElementById("formCadastro").reset();
-
-            telaCadastro.classList.add("escondido");
-            telaLogin.classList.remove("escondido");
-            mostrarMensagem("Conta criada neste navegador! Agora entre com seu e-mail e senha.");
-        });
-
-        document.getElementById("formLogin").addEventListener("submit", (evento) => {
-            evento.preventDefault();
-
-            const email = document.getElementById("emailLogin")
-                .value.trim().toLowerCase();
-            const senha = document.getElementById("senhaLogin").value;
-            const contas = obterContas();
-
-            if (!contas[email] || contas[email].senha !== senha) {
-                mostrarMensagem("E-mail ou senha incorretos. Confira os dados ou crie uma conta.");
-                return;
-            }
-
-            // Marca uma sessão simples neste navegador.
-            sessionStorage.setItem("mysticLogado", "true");
-            sessionStorage.setItem("mysticEmail", email);
-
-            window.location.href = "home.html";
-        });
-
-        document.getElementById("esqueciSenha").addEventListener("click", () => {
-            mostrarMensagem(
-                "A recuperação automática de senha precisa de um serviço de e-mail. " +
-                "Nesta versão sem servidor, use uma conta de teste e não uma senha real."
-            );
-        });
-    </script>
+      }
+    } catch {
+      localStorage.removeItem(CHAVE_LEMBRAR);
+    }
+  </script>
 </body>
-    </html>
+</html>
