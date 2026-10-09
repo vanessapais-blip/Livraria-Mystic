@@ -4,26 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#242424">
+  <meta name="theme-color" content="#0c0f13">
   <title>Configurações | Mystic Livraria</title>
 
   <style>
     :root {
-      --fundo: #202020;
-      --painel: #2b2b2b;
-      --painel-2: #333333;
-      --texto: #f5f0e6;
-      --texto-suave: #bcb8af;
-      --dourado: #d5ad59;
-      --dourado-hover: #edc875;
-      --borda: #45413a;
-      --sombra: 0 8px 25px rgba(0, 0, 0, .18);
+      color-scheme: dark;
+      --bg: #0c0f13;
+      --panel: #151a20;
+      --panel2: #1c2229;
+      --border: #2b333d;
+      --text: #f4f4f5;
+      --muted: #a6adb8;
+      --field: #10151b;
+      --gold: #f2bd4b;
+      --goldbg: #49391a;
     }
 
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     html {
@@ -31,20 +30,23 @@
     }
 
     body {
-      background: var(--fundo);
-      color: var(--texto);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      transition: background .2s, color .2s;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 Arial, Helvetica, sans-serif;
     }
 
-    button, input, select, textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
+    body.light {
+      color-scheme: light;
+      --bg: #f2f3f5;
+      --panel: #ffffff;
+      --panel2: #f5f6f8;
+      --border: #d9dde3;
+      --text: #22262c;
+      --muted: #626b77;
+      --field: #ffffff;
+      --gold: #b78319;
+      --goldbg: #f7edda;
     }
 
     a {
@@ -52,471 +54,871 @@
       text-decoration: none;
     }
 
-    .topo {
-      min-height: 78px;
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    header {
+      min-height: 58px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 16px 5%;
-      border-bottom: 1px solid var(--borda);
-      background: #262626;
+      gap: 18px;
+      padding: 10px 22px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 5;
     }
 
     .logo {
       display: flex;
       align-items: center;
-      gap: 11px;
-      color: #fff;
-      font-size: 25px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      white-space: nowrap;
+      gap: 8px;
+      min-width: 165px;
+      font: bold 25px Georgia, serif;
+      color: var(--text);
     }
 
-    .logo-simbolo {
-      color: var(--dourado);
-      font-size: 29px;
+    .logo .book {
+      color: var(--gold);
+      font: 26px Arial, sans-serif;
     }
 
-    .busca {
-      width: min(380px, 45%);
-      padding: 11px 15px;
-      color: var(--texto);
-      background: #1c1c1c;
-      border: 1px solid var(--borda);
-      border-radius: 9px;
-      outline: none;
+    .actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
     }
 
-    .busca:focus,
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--dourado);
-      outline: 2px solid rgba(213, 173, 89, .15);
+    .search {
+      width: min(270px, 35vw);
+    }
+
+    input[type="search"],
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    select,
+    textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--field);
+      color: var(--text);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--muted);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .gold {
+      color: var(--gold);
+      font-size: 20px;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--panel2);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
     }
 
     .layout {
-      width: min(1400px, 100%);
-      margin: 0 auto;
-      padding: 30px 24px 45px;
       display: grid;
-      grid-template-columns: 235px minmax(0, 1fr);
-      align-items: start;
-      gap: 28px;
+      grid-template-columns: 205px minmax(0, 1fr);
+      min-height: calc(100vh - 58px);
     }
 
-    .sidebar {
-      position: sticky;
-      top: 20px;
-      padding: 20px 12px;
-      background: var(--painel);
-      border: 1px solid var(--borda);
-      border-radius: 14px;
+    aside {
+      padding: 18px 9px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
     }
 
-    .sidebar h2 {
-      padding: 0 10px 15px;
-      color: var(--dourado);
-      font-size: 13px;
+    .menu-titulo {
+      padding: 0 11px 10px;
+      color: var(--gold);
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1.3px;
+      letter-spacing: 1px;
     }
 
-    .nav-links {
+    aside nav {
       display: grid;
-      gap: 5px;
+      gap: 4px;
     }
 
-    .nav-links a {
-      display: block;
-      padding: 10px 12px;
-      color: var(--texto-suave);
+    aside a {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 11px;
       border-radius: 8px;
-      transition: .2s;
+      color: var(--muted);
+      font-size: 13px;
     }
 
-    .nav-links a:hover {
-      color: var(--dourado);
-      background: rgba(213, 173, 89, .09);
+    aside a i {
+      width: 18px;
+      text-align: center;
+      color: var(--gold);
+      font-style: normal;
+      font-size: 17px;
+    }
+
+    aside a:hover,
+    aside a.active {
+      background: var(--goldbg);
+      color: var(--text);
+    }
+
+    aside a.active {
+      border: 1px solid #8d6a25;
     }
 
     main {
+      width: 100%;
+      max-width: 1450px;
+      margin: 0 auto;
+      padding: 22px 24px 30px;
       min-width: 0;
     }
 
-    .titulo-pagina {
-      margin-bottom: 23px;
+    .title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
-    .titulo-pagina h1 {
-      margin-bottom: 5px;
-      font-size: clamp(26px, 3vw, 34px);
-      line-height: 1.25;
+    .title .gear {
+      font-size: 28px;
+      color: var(--gold);
     }
 
-    .titulo-pagina p {
-      color: var(--texto-suave);
+    .title h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .title p,
+    .desc {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 4px 0 0;
     }
 
     .status {
-      margin-bottom: 16px;
-      padding: 10px 14px;
-      color: var(--dourado-hover);
-      background: rgba(213, 173, 89, .09);
-      border: 1px solid var(--borda);
-      border-radius: 8px;
+      color: var(--gold);
+      font-size: 12px;
+      min-height: 18px;
+      margin: 0 0 12px;
     }
 
-    [hidden] {
-      display: none !important;
-    }
-
-    .colunas {
+    .columns {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
       align-items: start;
-      gap: 20px;
     }
 
-    .coluna {
+    .column {
       display: grid;
-      align-content: start;
-      gap: 20px;
+      gap: 14px;
       min-width: 0;
     }
 
     .card {
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--panel);
       min-width: 0;
-      padding: 22px;
-      background: var(--painel);
-      border: 1px solid var(--borda);
-      border-radius: 13px;
-      box-shadow: var(--sombra);
-      scroll-margin-top: 20px;
+      scroll-margin-top: 75px;
+    }
+
+    .head {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 13px;
+    }
+
+    .head .icon {
+      font-size: 25px;
+      color: var(--gold);
+      min-width: 26px;
+      text-align: center;
+      line-height: 1.15;
     }
 
     .card h2 {
-      margin-bottom: 6px;
-      font-size: 19px;
+      font-size: 15px;
+      margin: 0 0 3px;
     }
 
-    .descricao {
-      margin-bottom: 17px;
-      color: var(--texto-suave);
-      font-size: 13px;
-    }
-
-    .setting-row {
+    .item {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--borda);
+      gap: 12px;
+      padding: 11px 0;
+      border-top: 1px solid var(--border);
     }
 
-    .setting-row:first-of-type {
-      padding-top: 5px;
-    }
-
-    .setting-row:last-child {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .setting-row > div {
+    .info {
+      flex: 1;
       min-width: 0;
     }
 
-    .setting-row p {
-      margin-top: 3px;
-      color: var(--texto-suave);
+    .info strong {
+      display: block;
       font-size: 12px;
     }
 
-    .campo {
-      width: 100%;
-      min-width: 0;
-      margin-top: 7px;
-      padding: 10px 12px;
-      color: var(--texto);
-      background: #202020;
-      border: 1px solid var(--borda);
-      border-radius: 7px;
-    }
-
-    .campo-grupo {
-      padding: 13px 0;
-      border-bottom: 1px solid var(--borda);
-    }
-
-    .campo-grupo:last-child {
-      border-bottom: none;
-    }
-
-    .campo-grupo label.titulo-campo {
+    .info small {
       display: block;
-      font-weight: 600;
+      color: var(--muted);
+      font-size: 11px;
+      margin-top: 3px;
     }
 
-    .opcoes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .opcao {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--texto-suave);
-      cursor: pointer;
+    .item select {
+      max-width: 190px;
+      font-size: 12px;
+      padding: 8px;
     }
 
     input[type="checkbox"],
     input[type="radio"] {
-      accent-color: var(--dourado);
-      cursor: pointer;
+      accent-color: var(--gold);
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
     }
 
-    .botao {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      padding: 9px 13px;
-      color: var(--texto);
-      background: var(--painel-2);
-      border: 1px solid var(--borda);
-      border-radius: 7px;
-      transition: .2s;
+      padding: 8px 11px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--panel2);
+      color: var(--text);
+      font-size: 12px;
+      white-space: nowrap;
     }
 
-    .botao:hover {
-      border-color: var(--dourado);
-      color: var(--dourado-hover);
+    .btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
-    .botao-dourado {
+    .btn-primary {
+      background: var(--gold);
+      border-color: var(--gold);
       color: #211b10;
-      background: var(--dourado);
-      border-color: var(--dourado);
-      font-weight: 700;
+      font-weight: bold;
     }
 
-    .botao-dourado:hover {
+    .btn-primary:hover {
       color: #211b10;
-      background: var(--dourado-hover);
+      filter: brightness(1.08);
     }
 
-    .botoes {
-      display: flex;
-      flex-wrap: wrap;
+    .danger {
+      color: #ff8888;
+    }
+
+    .themes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 9px;
-      margin-top: 12px;
     }
 
-    .largura-total {
-      margin-top: 20px;
+    .theme {
+      position: relative;
+      min-height: 112px;
+      padding: 12px;
+      text-align: left;
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
     }
 
-    .rodape {
-      padding: 22px;
-      color: var(--texto-suave);
-      text-align: center;
-      border-top: 1px solid var(--borda);
+    .theme.selected {
+      border: 2px solid var(--gold);
+      padding: 11px;
+    }
+
+    .theme .symbol {
+      display: block;
+      font-size: 27px;
+      margin-bottom: 5px;
+    }
+
+    .theme strong,
+    .theme small {
+      display: block;
+    }
+
+    .theme strong {
       font-size: 12px;
     }
 
-    /* Tema claro */
-    body.tema-claro {
-      --fundo: #f3f0e9;
-      --painel: #fffdf8;
-      --painel-2: #eee8dc;
-      --texto: #28251f;
-      --texto-suave: #6f6a60;
-      --borda: #ded5c5;
-      --sombra: 0 8px 25px rgba(0, 0, 0, .05);
+    .theme small {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
     }
 
-    body.tema-claro .topo {
-      background: #fffdf8;
+    .check {
+      display: none;
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      color: var(--gold);
     }
 
-    body.tema-claro .logo {
-      color: #28251f;
+    .theme.selected .check {
+      display: block;
     }
 
-    body.tema-claro .busca,
-    body.tema-claro .campo {
-      color: var(--texto);
-      background: #fff;
+    .theme-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 130px;
+      gap: 12px;
     }
 
-    body.fonte-pequena {
-      font-size: 13px;
+    .wallpaper {
+      height: 78px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: radial-gradient(ellipse at 70% 15%, #57431d, #171717 40%, #08090b 80%);
+      margin: 5px 0 7px;
     }
 
-    body.fonte-grande {
-      font-size: 17px;
+    .wall-label {
+      font-size: 11px;
+      color: var(--muted);
     }
 
-    body.fonte-extra-grande {
+    .notice {
+      padding: 10px 11px;
+      margin-top: 10px;
+      background: var(--panel2);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .formats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    .segments {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .segments button {
+      flex: 1;
+      min-width: 55px;
+      padding: 8px 5px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--panel2);
+      color: var(--text);
+      font-size: 11px;
+    }
+
+    .segments button.selected {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: var(--goldbg);
+    }
+
+    .styles {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .styles label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .styles input {
+      width: 15px;
+      height: 15px;
+    }
+
+    .storage {
+      display: grid;
+      grid-template-columns: 75px 1fr;
+      gap: 14px;
+      align-items: center;
+      margin: 8px 0 12px;
+    }
+
+    .ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--gold) 0%, var(--border) 0% 100%);
+      position: relative;
+      font-weight: bold;
+    }
+
+    .ring::before {
+      content: "";
+      position: absolute;
+      inset: 6px;
+      border-radius: 50%;
+      background: var(--panel);
+    }
+
+    .ring span {
+      position: relative;
+    }
+
+    .legend {
+      display: grid;
+      gap: 5px;
+    }
+
+    .legend div {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .book-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .book-info {
+      display: flex;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .book-icon {
       font-size: 19px;
+      color: var(--gold);
     }
 
-    body.fonte-arial {
+    .book-row strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .book-row small {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .device-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini {
+      display: flex;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .mini b {
+      display: block;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .full-width {
+      margin-top: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    body.small {
+      font-size: 12px;
+    }
+
+    body.large {
+      font-size: 16px;
+    }
+
+    body.xlarge {
+      font-size: 18px;
+    }
+
+    body.font-arial {
       font-family: Arial, sans-serif;
     }
 
-    body.fonte-georgia {
+    body.font-georgia {
       font-family: Georgia, serif;
     }
 
-    body.fonte-verdana {
+    body.font-verdana {
       font-family: Verdana, sans-serif;
     }
 
-    body.fonte-mono {
-      font-family: "Courier New", monospace;
+    body.font-mono {
+      font-family: monospace;
     }
 
-    body.espacamento-medio {
-      line-height: 1.9;
+    body.spacing-medium {
+      line-height: 1.8;
     }
 
-    body.espacamento-amplo {
-      line-height: 2.2;
+    body.spacing-wide {
+      line-height: 2.1;
     }
 
-    body.sem-animacoes *,
-    body.sem-animacoes *::before,
-    body.sem-animacoes *::after {
-      scroll-behavior: auto !important;
+    body.no-animations *,
+    body.no-animations *::before,
+    body.no-animations *::after {
       animation: none !important;
       transition: none !important;
+      scroll-behavior: auto !important;
     }
 
-    body.texto-negrito {
-      font-weight: 700;
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 24px;
+      border-top: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--muted);
+      font-size: 12px;
     }
 
-    body.texto-italico {
-      font-style: italic;
+    footer a {
+      color: var(--gold);
     }
 
-    body.texto-sublinhado a {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 950px) {
+    @media (max-width: 900px) {
       .layout {
-        grid-template-columns: 190px minmax(0, 1fr);
-        gap: 18px;
-        padding: 22px 16px;
-      }
-
-      .colunas {
         grid-template-columns: 1fr;
       }
 
-      .card {
-        padding: 18px;
+      aside {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+        padding: 8px;
+      }
+
+      aside nav {
+        display: flex;
+        gap: 4px;
+        overflow-x: auto;
+      }
+
+      aside a {
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .columns {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: 16px;
       }
     }
 
-    @media (max-width: 650px) {
-      .topo {
+    @media (max-width: 580px) {
+      header {
+        padding: 10px 12px;
+        gap: 8px;
         flex-wrap: wrap;
-        padding: 14px 16px;
       }
 
       .logo {
+        min-width: 0;
         font-size: 22px;
       }
 
-      .busca {
-        width: 100%;
-        max-width: none;
-        order: 2;
+      .actions {
+        gap: 9px;
       }
 
-      .layout {
+      .search {
+        width: 42vw;
+      }
+
+      main {
+        padding: 13px 10px;
+      }
+
+      .theme-wrap {
         grid-template-columns: 1fr;
-        padding: 18px 12px 30px;
       }
 
-      .sidebar {
-        position: static;
-        padding: 14px;
+      .wallpaper {
+        height: 55px;
       }
 
-      .nav-links {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .item {
+        gap: 8px;
       }
 
-      .titulo-pagina h1 {
-        font-size: 27px;
+      .item select {
+        max-width: 48%;
       }
 
-      .card {
-        padding: 16px;
+      .formats,
+      .device-grid {
+        grid-template-columns: 1fr;
       }
 
-      .setting-row {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .setting-row .botao {
-        width: 100%;
+      footer {
+        padding: 14px 12px;
+        flex-wrap: wrap;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="topo">
-    <a class="logo" href="index.html" aria-label="Mystic Livraria - página inicial">
-      <span class="logo-simbolo">✦</span>
+  <header>
+    <a href="home.html" class="logo" aria-label="Mystic Livraria">
+      <span class="book" aria-hidden="true">◧</span>
       <span>Mystic</span>
     </a>
 
-    <input
-      class="busca"
-      id="buscaTopo"
-      type="search"
-      placeholder="Buscar configuração..."
-      aria-label="Buscar configuração"
-    >
+    <div class="actions">
+      <input
+        class="search"
+        id="buscaTopo"
+        type="search"
+        placeholder="Buscar configurações..."
+        aria-label="Buscar configurações"
+      >
+      <span class="gold" aria-hidden="true">♧</span>
+      <span class="avatar" aria-hidden="true">●</span>
+    </div>
   </header>
 
   <div class="layout">
-    <aside class="sidebar">
-      <h2>Configurações</h2>
-
-      <nav class="nav-links" aria-label="Navegação das configurações">
-        <a href="#conta">Minha conta</a>
-        <a href="#aparencia">Aparência</a>
-        <a href="#texto">Leitura e texto</a>
-        <a href="#notificacoes">Notificações</a>
-        <a href="#idioma">Idioma e horário</a>
-        <a href="#privacidade">Privacidade</a>
-        <a href="#dados">Armazenamento</a>
-        <a href="#dispositivo">Dispositivo</a>
+    <aside aria-label="Menu de configurações">
+      <p class="menu-titulo">Configurações</p>
+      <nav>
+        <a href="#conta"><i aria-hidden="true">♙</i>Conta e perfil</a>
+        <a href="#aparencia"><i aria-hidden="true">◉</i>Aparência</a>
+        <a href="#notificacoes"><i aria-hidden="true">♧</i>Notificações</a>
+        <a href="#privacidade"><i aria-hidden="true">♢</i>Privacidade</a>
+        <a href="#idioma"><i aria-hidden="true">◎</i>Idioma e região</a>
+        <a href="#texto" class="active"><i aria-hidden="true">Aa</i>Texto e fonte</a>
+        <a href="#dados"><i aria-hidden="true">▤</i>Armazenamento e dados</a>
+        <a href="#dispositivo"><i aria-hidden="true">▣</i>Dispositivo e sessão</a>
+        <a href="#pesquisa"><i aria-hidden="true">⌕</i>Pesquisa</a>
       </nav>
     </aside>
 
     <main>
-      <div class="titulo-pagina">
-        <h1>Configurações</h1>
-        <p>Personalize sua experiência na Mystic Livraria.</p>
+      <div class="title">
+        <span class="gear" aria-hidden="true">⚙</span>
+        <div>
+          <h1>Configurações</h1>
+          <p>Personalize sua experiência na Mystic Livraria.</p>
+        </div>
       </div>
 
-      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+      <p id="avisoSalvo" class="status" role="status" aria-live="polite"></p>
+
+      <div class="columns">
+        <div class="column">
+
+          <section class="card searchable" id="conta" data-words="conta perfil sair">
+            <div class="head">
+              <span class="icon" aria-hidden="true">♙</span>
+              <div>
+                <h2>Conta e perfil</h2>
+                <p class="desc">Gerencie as opções relacionadas ao seu perfil.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Meu perfil</strong>
+                <small>Consulte ou edite suas informações pessoais.</small>
+              </div>
+              <a class="btn" href="perfil.html">Abrir perfil</a>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Sair da conta</strong>
+                <small>Encerra a sessão neste navegador.</small>
+              </div>
+              <button class="btn danger" id="sair" type="button">Sair</button>
+            </div>
+          </section>
+
+          <section class="card searchable" id="aparencia" data-words="aparência tema claro escuro cores papel parede">
+            <div class="head">
+              <span class="icon" aria-hidden="true">☷</span>
+              <div>
+                <h2>Aparência</h2>
+                <p class="desc">Escolha o tema e personalize a aparência da página.</p>
+              </div>
+            </div>
+
+            <strong style="font-size:12px;display:block;margin-bottom:7px">Tema</strong>
+            <div class="themes">
+              <button class="theme selected" id="temaEscuro" type="button" aria-pressed="true">
+                <span class="check" aria-hidden="true">●</span>
+                <span class="symbol" aria-hidden="true">☾</span>
+                <strong>Escuro</strong>
+                <small>Uma aparência escura com detalhes dourados.</small>
+              </button>
+
+              <button class="theme" id="temaClaro" type="button" aria-pressed="false">
+                <span class="check" aria-hidden="true">●</span>
+                <span class="symbol" aria-hidden="true">☼</span>
+                <strong>Claro</strong>
+                <small>Uma aparência clara e iluminada.</small>
+              </button>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Reduzir animações</strong>
+                <small>Desativa as transições e animações da página.</small>
+              </div>
+              <input id="reduzirAnimacoes" type="checkbox" aria-label="Reduzir animações">
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Cor de destaque</strong>
+                <small>Escolha a cor usada nos detalhes da interface.</small>
+              </div>
+              <select id="corDestaque" aria-label="Cor de destaque">
+                <option value="dourado">Dourado</option>
+                <option value="azul">Azul</option>
+                <option value="verde">Verde</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-top:13px">
+              <label for="arquivoWallpaper">Imagem de fundo opcional</label>
+              <div id="wallpaper" class="wallpaper" aria-label="Prévia do fundo"></div>
+              <input id="arquivoWallpaper" type="file" accept="image/*">
+              <p class="desc">A imagem escolhida é aplicada apenas à prévia desta página e não é enviada a um servidor.</p>
+            </div>
+          </section>
+
+          <section class="card searchable" id="texto" data-words="texto fonte leitura tamanho espaçamento negrito itálico sublinhado">
+            <div class="head">
+              <span class="icon" aria-hidden="true">Aa</span>
+              <div>
+                <h2>Texto e fonte</h2>
+                <p class="desc">Ajuste a leitura para deixá-la mais confortável.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="tamanhoFonte">Tamanho do texto</label>
+              <select id="tamanhoFonte">
+                <option value="normal">Normal</option>
+                <option value="small">Pequeno</option>
+                <option value="large">Grande</option>
+                <option value="xlarge">Muito grande</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-top:12px">
+              <label for="fonte">Tipo de fonte</label>
+              <select id="fonte">
+                <option value="default">Padrão</option>
+                <option value="arial">Arial</option>
+                <option value="georgia">Georgia</option>
+                <option value="verdana">Verdana</option>
+                <option value="mono">Monoespaçada</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-top:12px">
+              <label>Espaçamento entre linhas</label>
+              <div class="segments">
+                <button type="button" data-spacing="normal" class="selected">Normal</button>
+                <button type="button" data-spacing="medium">Médio</button>
+                <button type="button" data-spacing="wide">Amplo</button>
+              </dividden></div>
 
       <div class="colunas">
         <div class="coluna">
