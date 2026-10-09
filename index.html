@@ -221,6 +221,7 @@
     }
 
     .botao {
+      display: block;
       width: 100%;
       padding: 14px;
       background: linear-gradient(
@@ -280,7 +281,19 @@
     }
 
     .cadastro a {
+      display: inline-block;
+      padding: 5px 12px;
+      margin-top: 5px;
+      border: 1px solid var(--dourado);
+      border-radius: 7px;
       font-weight: bold;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .cadastro a:hover {
+      background: var(--dourado);
+      color: #111;
+      text-decoration: none;
     }
 
     .rodape {
@@ -419,7 +432,8 @@
     <div class="cadastro">
       Ainda não tem uma conta?<br>
 
-      <a href="cadrastro.html">
+      <!-- ESTE LINK ABRE A PÁGINA DE CADASTRO -->
+      <a href="cadastro.html">
         Criar minha conta
       </a>
     </div>
@@ -448,6 +462,7 @@
 
     let numero1;
     let numero2;
+    let tentativaEmAndamento = false;
 
     document.getElementById("ano").textContent =
       new Date().getFullYear();
@@ -577,7 +592,7 @@
         }
       }
 
-      // Compatibilidade com cadastros antigos.
+      // Compatibilidade com cadastros antigos que salvaram senha em texto.
       return senhaSalva === senhaDigitada;
     }
 
@@ -607,7 +622,7 @@
       if (typeof salvo === "string") {
         campoEmail.value = salvo;
         checkboxLembrar.checked = true;
-      } else if (salvo && salvo.email) {
+      } else if (salvo && typeof salvo.email === "string") {
         campoEmail.value = salvo.email;
         checkboxLembrar.checked = true;
       }
@@ -617,7 +632,7 @@
       if (checkboxLembrar.checked) {
         localStorage.setItem(
           CHAVE_LEMBRADAS,
-          JSON.stringify({ email })
+          JSON.stringify({ email: email })
         );
       } else {
         localStorage.removeItem(CHAVE_LEMBRADAS);
@@ -639,13 +654,18 @@
         evento.preventDefault();
 
         mostrarMensagem(
-          "A recuperação automática de senha ainda não está configurada. " +
-          "Esta página não envia e-mails nem altera sua senha."
+          "A recuperação de senha ainda não está configurada. " +
+          "Entre em contato com o responsável pelo site para obter ajuda."
         );
       });
 
     formulario.addEventListener("submit", async function (evento) {
       evento.preventDefault();
+
+      if (tentativaEmAndamento) {
+        return;
+      }
+
       limparMensagem();
 
       const email = campoEmail.value.trim().toLowerCase();
@@ -664,6 +684,7 @@
         return;
       }
 
+      tentativaEmAndamento = true;
       botaoEntrar.disabled = true;
       botaoEntrar.textContent = "Verificando...";
 
@@ -712,10 +733,12 @@
         window.location.href = "home.html";
 
       } catch (erro) {
+        console.error("Erro durante o login:", erro);
+
         if (erro.message === "CRIPTOGRAFIA_INDISPONIVEL") {
           mostrarMensagem(
-            "Abra o projeto usando um servidor local, como o Live Server, " +
-            "para habilitar a verificação segura de senhas."
+            "Para verificar as senhas, abra o projeto usando HTTPS " +
+            "ou um servidor local, como o Live Server do VS Code."
           );
         } else {
           mostrarMensagem(
@@ -723,11 +746,13 @@
           );
         }
       } finally {
+        tentativaEmAndamento = false;
         botaoEntrar.disabled = false;
         botaoEntrar.textContent = "Entrar na minha conta";
       }
     });
 
+    // Informa quando o cadastro foi concluído.
     const parametros = new URLSearchParams(window.location.search);
 
     if (parametros.get("cadastro") === "sucesso") {
