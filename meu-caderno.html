@@ -469,6 +469,7 @@
 
     .texto-salvo h3 {
       margin-bottom: 8px;
+      overflow-wrap: anywhere;
     }
 
     .texto-salvo p {
@@ -492,6 +493,10 @@
       margin-bottom: 10px;
     }
 
+    .dicionario-resultado p {
+      overflow-wrap: anywhere;
+    }
+
     .aviso {
       color: var(--suave);
       line-height: 1.6;
@@ -499,6 +504,10 @@
 
     .menu-fechar {
       display: none;
+    }
+
+    [hidden] {
+      display: none !important;
     }
 
     @media (max-width: 1050px) {
@@ -700,7 +709,9 @@
 
   <div class="layout">
     <aside class="lateral" id="menuLateral" aria-label="Menu do caderno">
-      <button class="menu-fechar" id="fecharMenu" type="button">Fechar ✕</button>
+      <button class="menu-fechar" id="fecharMenu" type="button">
+        Fechar ✕
+      </button>
 
       <button
         class="pena"
@@ -742,7 +753,9 @@
         <section class="secao">
           <div class="titulo-secao">
             <h2>★ Textos em destaque</h2>
-            <button class="link-simples" id="verDestaques" type="button">Ver todos →</button>
+            <button class="link-simples" id="verDestaques" type="button">
+              Ver todos →
+            </button>
           </div>
 
           <div class="destaques">
@@ -781,7 +794,13 @@
           </div>
 
           <div class="filtro-linha">
-            <input id="pesquisaCategoria" type="search" placeholder="Pesquisar uma categoria...">
+            <input
+              id="pesquisaCategoria"
+              type="search"
+              placeholder="Pesquisar uma categoria..."
+              aria-label="Pesquisar uma categoria"
+            >
+
             <select id="filtroCategoria" aria-label="Filtrar categoria">
               <option value="todas">Todas as categorias</option>
               <option>Redações</option>
@@ -856,7 +875,10 @@
       </section>
 
       <section class="tela" id="editor">
-        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <button class="voltar-secao" type="button" data-voltar>
+          ← Voltar ao caderno
+        </button>
+
         <section class="secao">
           <div class="titulo-secao">
             <h2 id="tituloEditor">Novo texto</h2>
@@ -865,7 +887,13 @@
           <form class="editor" id="formTexto">
             <label>
               Título
-              <input id="tituloTexto" type="text" maxlength="120" placeholder="Dê um título ao seu texto..." required>
+              <input
+                id="tituloTexto"
+                type="text"
+                maxlength="120"
+                placeholder="Dê um título ao seu texto..."
+                required
+              >
             </label>
 
             <label>
@@ -885,7 +913,11 @@
 
             <label>
               Seu texto
-              <textarea id="corpoTexto" placeholder="Comece a escrever aqui..." required></textarea>
+              <textarea
+                id="corpoTexto"
+                placeholder="Comece a escrever aqui..."
+                required
+              ></textarea>
             </label>
 
             <label>
@@ -905,7 +937,10 @@
       </section>
 
       <section class="tela" id="recentes">
-        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <button class="voltar-secao" type="button" data-voltar>
+          ← Voltar ao caderno
+        </button>
+
         <section class="secao">
           <div class="titulo-secao"><h2>Recentes</h2></div>
           <div class="lista-textos" id="listaRecentes"></div>
@@ -913,7 +948,10 @@
       </section>
 
       <section class="tela" id="rascunhos">
-        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <button class="voltar-secao" type="button" data-voltar>
+          ← Voltar ao caderno
+        </button>
+
         <section class="secao">
           <div class="titulo-secao"><h2>Continuar escrevendo</h2></div>
           <div class="lista-textos" id="listaRascunhos"></div>
@@ -921,7 +959,10 @@
       </section>
 
       <section class="tela" id="todos">
-        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <button class="voltar-secao" type="button" data-voltar>
+          ← Voltar ao caderno
+        </button>
+
         <section class="secao">
           <div class="titulo-secao"><h2>Todos os textos</h2></div>
           <div class="lista-textos" id="listaTodos"></div>
@@ -929,15 +970,26 @@
       </section>
 
       <section class="tela" id="dicionario">
-        <button class="voltar-secao" type="button" data-voltar>← Voltar ao caderno</button>
+        <button class="voltar-secao" type="button" data-voltar>
+          ← Voltar ao caderno
+        </button>
+
         <section class="secao">
           <div class="titulo-secao"><h2>Dicionário</h2></div>
+
           <p class="aviso" style="margin-bottom: 16px">
-            Pesquise uma palavra para consultar sua definição. A consulta precisa de conexão com a internet.
+            Pesquise uma palavra para consultar sua definição.
+            A consulta precisa de conexão com a internet.
           </p>
 
           <form class="filtro-linha" id="formDicionario">
-            <input id="palavra" type="search" placeholder="Digite uma palavra..." required>
+            <input
+              id="palavra"
+              type="search"
+              placeholder="Digite uma palavra..."
+              aria-label="Palavra para pesquisar"
+              required
+            >
             <button class="botao principal" type="submit">Pesquisar</button>
           </form>
 
@@ -947,7 +999,12 @@
     </main>
   </div>
 
-  <button class="botao-criar" id="criarTexto" type="button" aria-label="Criar novo texto">+</button>
+  <button
+    class="botao-criar"
+    id="criarTexto"
+    type="button"
+    aria-label="Criar novo texto"
+  >+</button>
 
   <footer class="rodape">Mystic — Livraria</footer>
 
@@ -963,15 +1020,23 @@
       } else {
         atalhos.hidden = !atalhos.hidden;
       }
-      botaoPena.setAttribute('aria-expanded', String(
-        window.innerWidth <= 700
-          ? menu.classList.contains('aberta')
-          : !atalhos.hidden
-      ));
+
+      botaoPena.setAttribute(
+        'aria-expanded',
+        String(
+          window.innerWidth <= 700
+            ? menu.classList.contains('aberta')
+            : !atalhos.hidden
+        )
+      );
     }
 
     botaoPena.addEventListener('click', alternarMenu);
-    fecharMenu.addEventListener('click', () => menu.classList.remove('aberta'));
+
+    fecharMenu.addEventListener('click', () => {
+      menu.classList.remove('aberta');
+      botaoPena.setAttribute('aria-expanded', 'false');
+    });
 
     document.addEventListener('click', event => {
       if (
@@ -980,20 +1045,31 @@
         !menu.contains(event.target)
       ) {
         menu.classList.remove('aberta');
+        botaoPena.setAttribute('aria-expanded', 'false');
       }
     });
 
     const telas = document.querySelectorAll('.tela');
 
     function mostrarTela(id) {
-      telas.forEach(tela => tela.classList.toggle('ativa', tela.id === id));
+      telas.forEach(tela => {
+        tela.classList.toggle('ativa', tela.id === id);
+      });
+
       menu.classList.remove('aberta');
+      botaoPena.setAttribute(
+        'aria-expanded',
+        String(window.innerWidth > 700 && !atalhos.hidden)
+      );
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
       atualizarListas();
     }
 
     document.querySelectorAll('[data-tela]').forEach(botao => {
-      botao.addEventListener('click', () => mostrarTela(botao.dataset.tela));
+      botao.addEventListener('click', () => {
+        mostrarTela(botao.dataset.tela);
+      });
     });
 
     document.querySelectorAll('[data-voltar]').forEach(botao => {
@@ -1057,8 +1133,10 @@
       if (!titulo || !categoria || !corpo) return;
 
       const agora = new Date().toISOString();
+
       const texto = {
-        id: editandoId || (Date.now().toString() + Math.random().toString(16).slice(2)),
+        id: editandoId ||
+          (Date.now().toString() + Math.random().toString(16).slice(2)),
         titulo,
         categoria,
         corpo,
@@ -1092,18 +1170,24 @@
       if (!texto) return;
 
       editandoId = id;
+
       document.getElementById('tituloTexto').value = texto.titulo;
       document.getElementById('categoriaTexto').value = texto.categoria;
       document.getElementById('corpoTexto').value = texto.corpo;
       document.getElementById('estadoTexto').value = texto.estado;
       document.getElementById('tituloEditor').textContent = 'Editar texto';
+
       mostrarTela('editor');
     }
 
     function excluirTexto(id) {
       if (!confirm('Deseja excluir este texto?')) return;
+
       const textos = obterTextos().filter(item => item.id !== id);
-      if (guardarTextos(textos)) atualizarListas();
+
+      if (guardarTextos(textos)) {
+        atualizarListas();
+      }
     }
 
     function criarCartaoTexto(texto) {
@@ -1139,6 +1223,7 @@
 
       acoes.append(editar, excluir);
       artigo.append(titulo, meta, trecho, acoes);
+
       return artigo;
     }
 
@@ -1149,37 +1234,52 @@
       if (!textos.length) {
         const vazio = document.createElement('p');
         vazio.className = 'aviso';
-        vazio.textContent = 'Ainda não há textos aqui. Use o botão + para começar.';
+        vazio.textContent =
+          'Ainda não há textos aqui. Use o botão + para começar.';
         lista.appendChild(vazio);
         return;
       }
 
-      textos.forEach(texto => lista.appendChild(criarCartaoTexto(texto)));
+      textos.forEach(texto => {
+        lista.appendChild(criarCartaoTexto(texto));
+      });
     }
 
     function atualizarListas() {
       const textos = obterTextos().sort((a, b) =>
         new Date(b.atualizado) - new Date(a.atualizado)
       );
+
       preencherLista('listaRecentes', textos);
-      preencherLista('listaRascunhos', textos.filter(t => t.estado === 'rascunho'));
+      preencherLista(
+        'listaRascunhos',
+        textos.filter(texto => texto.estado === 'rascunho')
+      );
       preencherLista('listaTodos', textos);
     }
 
     function filtrarCategorias() {
-      const termo = document.getElementById('pesquisaCategoria').value.toLowerCase().trim();
+      const termo = document
+        .getElementById('pesquisaCategoria')
+        .value.toLowerCase().trim();
+
       const categoria = document.getElementById('filtroCategoria').value;
 
       document.querySelectorAll('.categoria-card').forEach(card => {
         const nome = card.dataset.categoria.toLowerCase();
         const combinaNome = nome.includes(termo);
-        const combinaCategoria = categoria === 'todas' || card.dataset.categoria === categoria;
+        const combinaCategoria =
+          categoria === 'todas' || card.dataset.categoria === categoria;
+
         card.hidden = !(combinaNome && combinaCategoria);
       });
     }
 
-    document.getElementById('pesquisaCategoria').addEventListener('input', filtrarCategorias);
-    document.getElementById('filtroCategoria').addEventListener('change', filtrarCategorias);
+    document.getElementById('pesquisaCategoria')
+      .addEventListener('input', filtrarCategorias);
+
+    document.getElementById('filtroCategoria')
+      .addEventListener('change', filtrarCategorias);
 
     document.getElementById('pesquisa').addEventListener('input', event => {
       const termo = event.target.value.toLowerCase().trim();
@@ -1193,68 +1293,134 @@
       });
     });
 
-    document.getElementById('formDicionario').addEventListener('submit', async event => {
-      event.preventDefault();
+    // DICIONÁRIO
+    document.getElementById('formDicionario')
+      .addEventListener('submit', async event => {
+        event.preventDefault();
 
-      const palavra = document.getElementById('palavra').value.trim();
-      const resultado = document.getElementById('resultadoDicionario');
-      resultado.replaceChildren();
+        const palavra = document.getElementById('palavra').value.trim();
+        const resultado = document.getElementById('resultadoDicionario');
 
-      const carregando = document.createElement('p');
-      carregando.className = 'aviso';
-      carregando.textContent = 'Consultando o dicionário...';
-      resultado.appendChild(carregando);
-
-      try {
-        const resposta = await fetch(
-          'https://api.dictionaryapi.dev/api/v2/entries/pt/' + encodeURIComponent(palavra)
-        );
-
-        if (!resposta.ok) throw new Error('Palavra não encontrada');
-
-        const dados = await resposta.json();
-        const entrada = dados[0];
-        const cartao = document.createElement('div');
-        cartao.className = 'dicionario-resultado';
-
-        const titulo = document.createElement('h3');
-        titulo.textContent = entrada.word || palavra;
-        cartao.appendChild(titulo);
-
-        (entrada.meanings || []).forEach(significado => {
-          const classe = document.createElement('p');
-          classe.innerHTML = '<strong>Classe gramatical:</strong> ';
-          classe.appendChild(document.createTextNode(significado.partOfSpeech || 'Não informada'));
-          cartao.appendChild(classe);
-
-          (significado.definitions || []).slice(0, 3).forEach(def => {
-            const definicao = document.createElement('p');
-            definicao.style.marginTop = '8px';
-            definicao.textContent = '• ' + (def.definition || 'Definição indisponível');
-            cartao.appendChild(definicao);
-
-            if (def.example) {
-              const exemplo = document.createElement('p');
-              exemplo.style.color = 'var(--suave)';
-              exemplo.textContent = 'Exemplo: “' + def.example + '”';
-              cartao.appendChild(exemplo);
-            }
-          });
-        });
-
-        resultado.replaceChildren(cartao);
-      } catch {
         resultado.replaceChildren();
-        const erro = document.createElement('p');
-        erro.className = 'aviso';
-        erro.textContent = 'Não foi possível encontrar essa palavra. Confira a escrita ou tente novamente mais tarde.';
-        resultado.appendChild(erro);
-      }
-    });
+
+        if (!palavra) return;
+
+        const carregando = document.createElement('p');
+        carregando.className = 'aviso';
+        carregando.textContent = 'Consultando o dicionário...';
+        resultado.appendChild(carregando);
+
+        try {
+          const resposta = await fetch(
+            'https://api.dictionaryapi.dev/api/v2/entries/pt/' +
+            encodeURIComponent(palavra),
+            {
+              headers: {
+                Accept: 'application/json'
+              }
+            }
+          );
+
+          if (!resposta.ok) {
+            if (resposta.status === 404) {
+              throw new Error(
+                'Palavra não encontrada. Confira a escrita ou tente outra palavra.'
+              );
+            }
+
+            throw new Error(
+              'O serviço do dicionário está indisponível. Tente novamente mais tarde.'
+            );
+          }
+
+          const dados = await resposta.json();
+          const entrada = dados?.[0];
+
+          if (!entrada) {
+            throw new Error('Nenhuma definição foi encontrada.');
+          }
+
+          const cartao = document.createElement('div');
+          cartao.className = 'dicionario-resultado';
+
+          const titulo = document.createElement('h3');
+          titulo.textContent = entrada.word || palavra;
+          cartao.appendChild(titulo);
+
+          const significados = entrada.meanings || [];
+
+          if (significados.length === 0) {
+            throw new Error(
+              'Não há definições disponíveis para essa palavra.'
+            );
+          }
+
+          significados.forEach(significado => {
+            const classe = document.createElement('p');
+            const rotulo = document.createElement('strong');
+
+            rotulo.textContent = 'Classe gramatical: ';
+
+            classe.append(
+              rotulo,
+              document.createTextNode(
+                significado.partOfSpeech || 'Não informada'
+              )
+            );
+
+            cartao.appendChild(classe);
+
+            (significado.definitions || []).slice(0, 3).forEach(def => {
+              const definicao = document.createElement('p');
+              definicao.style.marginTop = '8px';
+              definicao.textContent = '• ' +
+                (def.definition || 'Definição indisponível.');
+
+              cartao.appendChild(definicao);
+
+              if (def.example) {
+                const exemplo = document.createElement('p');
+                exemplo.style.color = 'var(--suave)';
+                exemplo.style.marginTop = '5px';
+                exemplo.textContent = 'Exemplo: “' + def.example + '”';
+
+                cartao.appendChild(exemplo);
+              }
+            });
+          });
+
+          resultado.replaceChildren(cartao);
+
+        } catch (erro) {
+          resultado.replaceChildren();
+
+          const mensagem = document.createElement('p');
+          mensagem.className = 'aviso';
+
+          if (erro instanceof TypeError) {
+            mensagem.textContent =
+              'Não foi possível conectar ao dicionário. Verifique sua internet ou tente abrir a página em outro navegador.';
+          } else {
+            mensagem.textContent = erro.message ||
+              'Ocorreu um erro ao consultar o dicionário. Tente novamente.';
+          }
+
+          resultado.appendChild(mensagem);
+        }
+      });
 
     window.addEventListener('resize', () => {
       if (window.innerWidth > 700) {
         menu.classList.remove('aberta');
+        botaoPena.setAttribute(
+          'aria-expanded',
+          String(!atalhos.hidden)
+        );
+      } else {
+        botaoPena.setAttribute(
+          'aria-expanded',
+          String(menu.classList.contains('aberta'))
+        );
       }
     });
 
