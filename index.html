@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Mystic - Livraria</title>
+    <title>Mystic — Livraria</title>
 
     <style>
         * {
@@ -16,44 +14,42 @@
 
         body {
             min-height: 100vh;
-            background: #000000;
-            color: #eeeeee;
+            background: #000;
+            color: #eee;
             font-family: Arial, sans-serif;
-
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .login {
-            width: 90%;
+            width: 100%;
             max-width: 400px;
-            padding: 40px;
-
+            padding: 35px;
             background: #303030;
             border-radius: 18px;
-
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+            box-shadow: 0 10px 35px #0008;
         }
 
         .logo {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
-        .logo h1 {
-            font-size: 42px;
-            font-weight: 500;
-            letter-spacing: 1px;
+        .logo img {
+            width: 220px;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto 10px;
         }
 
         .logo p {
-            color: #999999;
-            margin-top: 5px;
+            color: #999;
         }
 
         h2 {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
             font-size: 24px;
         }
 
@@ -64,116 +60,268 @@
         label {
             display: block;
             margin-bottom: 7px;
-            color: #cccccc;
+            color: #ccc;
         }
 
         input {
             width: 100%;
             padding: 13px;
-
-            background: #222222;
+            background: #222;
             color: white;
-
             border: 1px solid #4a4a4a;
             border-radius: 8px;
-
             font-size: 15px;
         }
 
         input:focus {
             outline: none;
-            border-color: #888888;
+            border-color: #aaa;
         }
 
-        .entrar {
-            display: block;
+        button {
             width: 100%;
-
             padding: 14px;
-
-            background: #eeeeee;
-            color: #222222;
-
+            background: #eee;
+            color: #222;
+            border: none;
             border-radius: 8px;
-
-            text-align: center;
-            text-decoration: none;
-
+            font-size: 15px;
             font-weight: bold;
-
-            margin-top: 25px;
+            cursor: pointer;
+            margin-top: 10px;
         }
 
-        .entrar:hover {
-            background: #cccccc;
+        button:hover {
+            background: #ccc;
         }
 
         .cadastro {
             text-align: center;
             margin-top: 22px;
-
-            color: #999999;
+            color: #999;
             font-size: 14px;
+            line-height: 1.8;
         }
 
         .cadastro a {
-            color: #eeeeee;
+            color: #eee;
             text-decoration: none;
+            cursor: pointer;
+        }
+
+        .cadastro a:hover {
+            text-decoration: underline;
+        }
+
+        .mensagem {
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .escondido {
+            display: none;
         }
     </style>
 </head>
 
-
 <body>
-
-    <div class="login">
-
+    <main class="login">
         <div class="logo">
-          <img src="logo-mystic.jpg" alt="Logo Mystic" style="width:220px; max-width:100%; display:block; margin:0 auto 10px;">
-<p>Livraria</p>
+            <img src="logo-mystic.jpg" alt="Logo Mystic">
+            <p>Livraria</p>
         </div>
 
+        <section id="telaLogin">
+            <h2>Entrar</h2>
 
-        <h2>Entrar</h2>
+            <form id="formLogin">
+                <div class="campo">
+                    <label for="emailLogin">E-mail</label>
+                    <input
+                        type="email"
+                        id="emailLogin"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
 
+                <div class="campo">
+                    <label for="senhaLogin">Senha</label>
+                    <input
+                        type="password"
+                        id="senhaLogin"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
 
-        <div class="campo">
-            <label for="email">E-mail</label>
+                <button type="submit">Entrar</button>
+            </form>
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Digite seu e-mail"
-            >
-        </div>
+            <div class="cadastro">
+                Ainda não possui uma conta?
+                <a id="abrirCadastro">Criar conta</a>
+                <br>
+                <a id="esqueciSenha">Esqueci minha senha</a>
+            </div>
+        </section>
 
+        <section id="telaCadastro" class="escondido">
+            <h2>Criar conta</h2>
 
-        <div class="campo">
-            <label for="senha">Senha</label>
+            <form id="formCadastro">
+                <div class="campo">
+                    <label for="emailCadastro">E-mail</label>
+                    <input
+                        type="email"
+                        id="emailCadastro"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
 
-            <input
-                type="password"
-                id="senha"
-                placeholder="Digite sua senha"
-            >
-        </div>
+                <div class="campo">
+                    <label for="senhaCadastro">Criar senha</label>
+                    <input
+                        type="password"
+                        id="senhaCadastro"
+                        placeholder="Mínimo de 8 caracteres"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
 
+                <div class="campo">
+                    <label for="confirmarSenha">Confirmar senha</label>
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        placeholder="Digite a senha novamente"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
 
-        <a href="home.html" class="entrar">
-            Entrar
-        </a>
+                <button type="submit">Criar minha conta</button>
+            </form>
 
+            <div class="cadastro">
+                Já possui uma conta?
+                <a id="voltarLogin">Entrar</a>
+            </div>
+        </section>
 
-        <div class="cadastro">
-            Ainda não possui uma conta?
+        <p id="mensagem" class="mensagem" role="status" aria-live="polite"></p>
+    </main>
 
-            <a href="#">
-                Criar conta
-            </a>
-        </div>
+    <script>
+        const telaLogin = document.getElementById("telaLogin");
+        const telaCadastro = document.getElementById("telaCadastro");
+        const mensagem = document.getElementById("mensagem");
 
-    </div>
+        function mostrarMensagem(texto) {
+            mensagem.textContent = texto;
+        }
 
+        function obterContas() {
+            try {
+                return JSON.parse(
+                    localStorage.getItem("mysticContas") || "{}"
+                );
+            } catch {
+                return {};
+            }
+        }
+
+        document.getElementById("abrirCadastro").addEventListener("click", () => {
+            telaLogin.classList.add("escondido");
+            telaCadastro.classList.remove("escondido");
+            mostrarMensagem("");
+        });
+
+        document.getElementById("voltarLogin").addEventListener("click", () => {
+            telaCadastro.classList.add("escondido");
+            telaLogin.classList.remove("escondido");
+            mostrarMensagem("");
+        });
+
+        document.getElementById("formCadastro").addEventListener("submit", (evento) => {
+            evento.preventDefault();
+
+            const email = document.getElementById("emailCadastro")
+                .value.trim().toLowerCase();
+            const senha = document.getElementById("senhaCadastro").value;
+            const confirmar = document.getElementById("confirmarSenha").value;
+
+            if (senha.length < 8) {
+                mostrarMensagem("A senha precisa ter pelo menos 8 caracteres.");
+                return;
+            }
+
+            if (senha !== confirmar) {
+                mostrarMensagem("As senhas não são iguais.");
+                return;
+            }
+
+            const contas = obterContas();
+
+            if (contas[email]) {
+                mostrarMensagem("Já existe uma conta cadastrada com esse e-mail.");
+                return;
+            }
+
+            // Demonstração local: não use senhas reais neste sistema.
+            contas[email] = { senha: senha };
+
+            try {
+                localStorage.setItem("mysticContas", JSON.stringify(contas));
+            } catch {
+                mostrarMensagem("Não foi possível salvar a conta neste navegador.");
+                return;
+            }
+
+            document.getElementById("emailLogin").value = email;
+            document.getElementById("senhaLogin").value = "";
+            document.getElementById("formCadastro").reset();
+
+            telaCadastro.classList.add("escondido");
+            telaLogin.classList.remove("escondido");
+            mostrarMensagem("Conta criada neste navegador! Agora entre com seu e-mail e senha.");
+        });
+
+        document.getElementById("formLogin").addEventListener("submit", (evento) => {
+            evento.preventDefault();
+
+            const email = document.getElementById("emailLogin")
+                .value.trim().toLowerCase();
+            const senha = document.getElementById("senhaLogin").value;
+            const contas = obterContas();
+
+            if (!contas[email] || contas[email].senha !== senha) {
+                mostrarMensagem("E-mail ou senha incorretos. Confira os dados ou crie uma conta.");
+                return;
+            }
+
+            // Marca uma sessão simples neste navegador.
+            sessionStorage.setItem("mysticLogado", "true");
+            sessionStorage.setItem("mysticEmail", email);
+
+            window.location.href = "home.html";
+        });
+
+        document.getElementById("esqueciSenha").addEventListener("click", () => {
+            mostrarMensagem(
+                "A recuperação automática de senha precisa de um serviço de e-mail. " +
+                "Nesta versão sem servidor, use uma conta de teste e não uma senha real."
+            );
+        });
+    </script>
 </body>
-
-</html>
+    </html>
