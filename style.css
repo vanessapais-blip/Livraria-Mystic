@@ -1,0 +1,402 @@
+/* ========================================
+   MYSTIC LIVRARIA — ESTILO GLOBAL
+   ======================================== */
+
+/* Cores e configurações gerais */
+:root {
+  --fundo: #242424;
+  --superficie: #303030;
+  --superficie-hover: #383838;
+  --borda: #444444;
+  --dourado: #d4af37;
+  --texto: #ffffff;
+  --texto-secundario: #dddddd;
+  --texto-suave: #cccccc;
+  --raio: 10px;
+  --transicao: 0.2s ease;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Links */
+a {
+  color: var(--texto);
+  text-decoration: none;
+  transition: color var(--transicao);
+}
+
+a:hover {
+  color: var(--dourado);
+}
+
+/* Cabeçalho */
+header {
+  min-height: 75px;
+  padding: 15px 40px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* Logo Mystic */
+.logo {
+  color: var(--dourado);
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--dourado);
+}
+
+/* Navegação */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--texto);
+  text-decoration: none;
+  transition: color var(--transicao);
+}
+
+nav a:hover,
+nav a.ativo {
+  color: var(--dourado);
+}
+
+/* Seta para voltar */
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  color: var(--texto);
+  font-size: 32px;
+  line-height: 1;
+}
+
+.voltar:hover {
+  color: var(--dourado);
+  background: var(--superficie-hover);
+}
+
+/* Área principal */
+main {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 45px 25px;
+}
+
+/* Títulos */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.3;
+  margin-bottom: 15px;
+}
+
+h1,
+.titulo-principal {
+  color: var(--dourado);
+  font-size: 36px;
+}
+
+h2,
+.titulo {
+  color: var(--dourado);
+  font-size: 24px;
+}
+
+h3 {
+  color: var(--dourado);
+  font-size: 19px;
+}
+
+/* Textos */
+p,
+label,
+li {
+  color: var(--texto);
+}
+
+.descricao {
+  color: var(--texto);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+.texto-secundario {
+  color: var(--texto-secundario);
+}
+
+.texto-dourado,
+.mystic-dourado {
+  color: var(--dourado);
+}
+
+/* Cartões */
+.card,
+.cartao,
+.livro,
+.artigo,
+.postagem {
+  background: var(--superficie);
+  border: 1px solid #404040;
+  border-radius: 12px;
+  padding: 18px;
+  transition:
+    transform var(--transicao),
+    border-color var(--transicao),
+    background var(--transicao);
+}
+
+.card:hover,
+.cartao:hover,
+.livro:hover,
+.artigo:hover,
+.postagem:hover {
+  border-color: #666666;
+}
+
+/* Imagens dentro de cartões */
+.card img,
+.cartao img,
+.livro img,
+.artigo img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* Campos de texto, pesquisa e formulários */
+input,
+textarea,
+select {
+  max-width: 100%;
+  background: var(--superficie);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: 9px;
+  padding: 12px 14px;
+  font: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--texto-suave);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--dourado);
+}
+
+input[type="search"],
+.campo-pesquisa,
+.pesquisa {
+  width: 100%;
+}
+
+/* Opções dos menus de seleção */
+select option {
+  background: var(--superficie);
+  color: var(--texto);
+}
+
+/* Botões */
+button,
+.botao,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: #444444;
+  color: var(--texto);
+  border: 1px solid #555555;
+  border-radius: 8px;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--transicao),
+    color var(--transicao),
+    border-color var(--transicao);
+}
+
+button:hover,
+.botao:hover,
+.btn:hover {
+  background: #505050;
+  color: var(--dourado);
+  border-color: var(--dourado);
+}
+
+/* Botão dourado opcional */
+.botao-dourado,
+.btn-dourado {
+  background: var(--dourado);
+  color: #242424;
+  border-color: var(--dourado);
+  font-weight: bold;
+}
+
+.botao-dourado:hover,
+.btn-dourado:hover {
+  background: #e2c45b;
+  color: #242424;
+}
+
+/* Etiquetas e categorias */
+.badge,
+.categoria,
+.tag {
+  display: inline-block;
+  padding: 4px 9px;
+  background: #3b3b3b;
+  color: var(--texto-secundario);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+/* Separadores */
+hr {
+  border: none;
+  border-top: 1px solid var(--borda);
+  margin: 25px 0;
+}
+
+/* Rodapé */
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 18px;
+  padding: 30px 20px;
+  margin-top: 35px;
+  background: var(--fundo);
+  border-top: 1px solid var(--borda);
+  color: var(--texto);
+  text-align: center;
+}
+
+footer a {
+  color: var(--texto);
+}
+
+footer a:hover {
+  color: var(--dourado);
+}
+
+/* Mensagens vazias */
+.mensagem-vazia,
+#nenhum {
+  color: var(--texto);
+  text-align: center;
+  padding: 35px 15px;
+}
+
+/* Elementos desativados */
+button:disabled,
+input:disabled,
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Acessibilidade: foco pelo teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--dourado);
+  outline-offset: 3px;
+}
+
+/* Adaptação para telas menores */
+@media (max-width: 700px) {
+  header {
+    padding: 15px 18px;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    gap: 15px;
+  }
+
+  main {
+    padding: 30px 17px;
+  }
+
+  h1,
+  .titulo-principal {
+    font-size: 30px;
+  }
+
+  h2,
+  .titulo {
+    font-size: 22px;
+  }
+
+  .livros,
+  .grade-cartoes {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(155px, 1fr)
+    );
+    gap: 14px;
+  }
+
+  footer {
+    padding: 25px 15px;
+  }
+}
+
+/* Telas muito estreitas */
+@media (max-width: 380px) {
+  header {
+    padding: 12px;
+  }
+
+  main {
+    padding: 25px 12px;
+  }
+
+  nav {
+    gap: 10px;
+  }
+}
