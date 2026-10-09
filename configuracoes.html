@@ -1,259 +1,748 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#242424">
+  <title>Configurações | Mystic Livraria</title>
 
-<header>
-    <a href="home.html" class="logo">
-        <span class="book">♧</span>
-        <span>Mystic</span>
+  <style>
+    :root {
+      --fundo: #202020;
+      --painel: #2b2b2b;
+      --painel-2: #333333;
+      --texto: #f5f0e6;
+      --texto-suave: #bcb8af;
+      --dourado: #d5ad59;
+      --dourado-hover: #edc875;
+      --borda: #45413a;
+      --sombra: 0 8px 25px rgba(0, 0, 0, .18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      transition: background .2s, color .2s;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topo {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px 5%;
+      border-bottom: 1px solid var(--borda);
+      background: #262626;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: #fff;
+      font-size: 25px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+
+    .logo-simbolo {
+      color: var(--dourado);
+      font-size: 29px;
+    }
+
+    .busca {
+      width: min(380px, 45%);
+      padding: 11px 15px;
+      color: var(--texto);
+      background: #1c1c1c;
+      border: 1px solid var(--borda);
+      border-radius: 9px;
+      outline: none;
+    }
+
+    .busca:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--dourado);
+      outline: 2px solid rgba(213, 173, 89, .15);
+    }
+
+    .layout {
+      width: min(1400px, 100%);
+      margin: 0 auto;
+      padding: 30px 24px 45px;
+      display: grid;
+      grid-template-columns: 235px minmax(0, 1fr);
+      align-items: start;
+      gap: 28px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 20px;
+      padding: 20px 12px;
+      background: var(--painel);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+    }
+
+    .sidebar h2 {
+      padding: 0 10px 15px;
+      color: var(--dourado);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+    }
+
+    .nav-links {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 10px 12px;
+      color: var(--texto-suave);
+      border-radius: 8px;
+      transition: .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--dourado);
+      background: rgba(213, 173, 89, .09);
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .titulo-pagina {
+      margin-bottom: 23px;
+    }
+
+    .titulo-pagina h1 {
+      margin-bottom: 5px;
+      font-size: clamp(26px, 3vw, 34px);
+      line-height: 1.25;
+    }
+
+    .titulo-pagina p {
+      color: var(--texto-suave);
+    }
+
+    .status {
+      margin-bottom: 16px;
+      padding: 10px 14px;
+      color: var(--dourado-hover);
+      background: rgba(213, 173, 89, .09);
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .colunas {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      gap: 20px;
+    }
+
+    .coluna {
+      display: grid;
+      align-content: start;
+      gap: 20px;
+      min-width: 0;
+    }
+
+    .card {
+      min-width: 0;
+      padding: 22px;
+      background: var(--painel);
+      border: 1px solid var(--borda);
+      border-radius: 13px;
+      box-shadow: var(--sombra);
+      scroll-margin-top: 20px;
+    }
+
+    .card h2 {
+      margin-bottom: 6px;
+      font-size: 19px;
+    }
+
+    .descricao {
+      margin-bottom: 17px;
+      color: var(--texto-suave);
+      font-size: 13px;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .setting-row:first-of-type {
+      padding-top: 5px;
+    }
+
+    .setting-row:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .setting-row > div {
+      min-width: 0;
+    }
+
+    .setting-row p {
+      margin-top: 3px;
+      color: var(--texto-suave);
+      font-size: 12px;
+    }
+
+    .campo {
+      width: 100%;
+      min-width: 0;
+      margin-top: 7px;
+      padding: 10px 12px;
+      color: var(--texto);
+      background: #202020;
+      border: 1px solid var(--borda);
+      border-radius: 7px;
+    }
+
+    .campo-grupo {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .campo-grupo:last-child {
+      border-bottom: none;
+    }
+
+    .campo-grupo label.titulo-campo {
+      display: block;
+      font-weight: 600;
+    }
+
+    .opcoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .opcao {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--texto-suave);
+      cursor: pointer;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      accent-color: var(--dourado);
+      cursor: pointer;
+    }
+
+    .botao {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 13px;
+      color: var(--texto);
+      background: var(--painel-2);
+      border: 1px solid var(--borda);
+      border-radius: 7px;
+      transition: .2s;
+    }
+
+    .botao:hover {
+      border-color: var(--dourado);
+      color: var(--dourado-hover);
+    }
+
+    .botao-dourado {
+      color: #211b10;
+      background: var(--dourado);
+      border-color: var(--dourado);
+      font-weight: 700;
+    }
+
+    .botao-dourado:hover {
+      color: #211b10;
+      background: var(--dourado-hover);
+    }
+
+    .botoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .largura-total {
+      margin-top: 20px;
+    }
+
+    .rodape {
+      padding: 22px;
+      color: var(--texto-suave);
+      text-align: center;
+      border-top: 1px solid var(--borda);
+      font-size: 12px;
+    }
+
+    /* Tema claro */
+    body.tema-claro {
+      --fundo: #f3f0e9;
+      --painel: #fffdf8;
+      --painel-2: #eee8dc;
+      --texto: #28251f;
+      --texto-suave: #6f6a60;
+      --borda: #ded5c5;
+      --sombra: 0 8px 25px rgba(0, 0, 0, .05);
+    }
+
+    body.tema-claro .topo {
+      background: #fffdf8;
+    }
+
+    body.tema-claro .logo {
+      color: #28251f;
+    }
+
+    body.tema-claro .busca,
+    body.tema-claro .campo {
+      color: var(--texto);
+      background: #fff;
+    }
+
+    body.fonte-pequena {
+      font-size: 13px;
+    }
+
+    body.fonte-grande {
+      font-size: 17px;
+    }
+
+    body.fonte-extra-grande {
+      font-size: 19px;
+    }
+
+    body.fonte-arial {
+      font-family: Arial, sans-serif;
+    }
+
+    body.fonte-georgia {
+      font-family: Georgia, serif;
+    }
+
+    body.fonte-verdana {
+      font-family: Verdana, sans-serif;
+    }
+
+    body.fonte-mono {
+      font-family: "Courier New", monospace;
+    }
+
+    body.espacamento-medio {
+      line-height: 1.9;
+    }
+
+    body.espacamento-amplo {
+      line-height: 2.2;
+    }
+
+    body.sem-animacoes *,
+    body.sem-animacoes *::before,
+    body.sem-animacoes *::after {
+      scroll-behavior: auto !important;
+      animation: none !important;
+      transition: none !important;
+    }
+
+    body.texto-negrito {
+      font-weight: 700;
+    }
+
+    body.texto-italico {
+      font-style: italic;
+    }
+
+    body.texto-sublinhado a {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 950px) {
+      .layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+        gap: 18px;
+        padding: 22px 16px;
+      }
+
+      .colunas {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .topo {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+      }
+
+      .logo {
+        font-size: 22px;
+      }
+
+      .busca {
+        width: 100%;
+        max-width: none;
+        order: 2;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        padding: 18px 12px 30px;
+      }
+
+      .sidebar {
+        position: static;
+        padding: 14px;
+      }
+
+      .nav-links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .titulo-pagina h1 {
+        font-size: 27px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .setting-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .setting-row .botao {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topo">
+    <a class="logo" href="index.html" aria-label="Mystic Livraria - página inicial">
+      <span class="logo-simbolo">✦</span>
+      <span>Mystic</span>
     </a>
 
-    <div class="actions">
-        <input
-            class="search"
-            id="buscaTopo"
-            type="search"
-            placeholder="⌕  Buscar configurações..."
-            aria-label="Buscar configurações"
-        >
-        <span class="gold">♧</span>
-        <span class="avatar">♙</span>
-    </div>
-</header>
+    <input
+      class="busca"
+      id="buscaTopo"
+      type="search"
+      placeholder="Buscar configuração..."
+      aria-label="Buscar configuração"
+    >
+  </header>
 
-<div class="layout">
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Configurações</h2>
 
-<aside>
-    <a href="#conta"><i>♙</i> Conta e perfil</a>
-    <a href="#aparencia" class="active"><i>◉</i> Aparência</a>
-    <a href="#texto"><i>Aa</i> Texto e fonte</a>
-    <a href="#notificacoes"><i>♧</i> Notificações e sons</a>
-    <a href="#privacidade"><i>♢</i> Privacidade</a>
-    <a href="#idioma"><i>◎</i> Idioma e região</a>
-    <a href="#dados"><i>▤</i> Armazenamento e dados</a>
-    <a href="#dispositivo"><i>▣</i> Dispositivo e sessão</a>
-</aside>
+      <nav class="nav-links" aria-label="Navegação das configurações">
+        <a href="#conta">Minha conta</a>
+        <a href="#aparencia">Aparência</a>
+        <a href="#texto">Leitura e texto</a>
+        <a href="#notificacoes">Notificações</a>
+        <a href="#idioma">Idioma e horário</a>
+        <a href="#privacidade">Privacidade</a>
+        <a href="#dados">Armazenamento</a>
+        <a href="#dispositivo">Dispositivo</a>
+      </nav>
+    </aside>
 
-<main>
+    <main>
+      <div class="titulo-pagina">
+        <h1>Configurações</h1>
+        <p>Personalize sua experiência na Mystic Livraria.</p>
+      </div>
 
-    <div class="title">
-        <span class="gear">⚙</span>
-        <div>
-            <h1>Configurações</h1>
-            <p>Personalize sua experiência na Mystic.</p>
+      <div id="status" class="status" role="status" aria-live="polite" hidden></div>
+
+      <div class="colunas">
+        <div class="coluna">
+
+          <!-- CONTA -->
+          <section class="card" id="conta">
+            <h2>Minha conta</h2>
+            <p class="descricao">Preferências básicas da sua conta.</p>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="nomeUsuario">Nome de exibição</label>
+              <input class="campo" id="nomeUsuario" type="text" placeholder="Como deseja ser chamado?">
+            </div>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="emailUsuario">E-mail</label>
+              <input class="campo" id="emailUsuario" type="email" placeholder="seuemail@exemplo.com" autocomplete="email">
+              <p class="descricao">Este campo salva apenas a preferência local. Ele não altera sua conta no servidor.</p>
+            </div>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="bioUsuario">Sobre você</label>
+              <textarea class="campo" id="bioUsuario" rows="3" placeholder="Conte um pouco sobre você..."></textarea>
+            </div>
+
+            <button class="botao botao-dourado" type="button" id="salvarConta">Salvar informações</button>
+          </section>
+
+          <!-- APARÊNCIA -->
+          <section class="card" id="aparencia">
+            <h2>Aparência</h2>
+            <p class="descricao">Escolha como a página será exibida.</p>
+
+            <div class="campo-grupo">
+              <strong>Tema</strong>
+              <div class="opcoes">
+                <label class="opcao">
+                  <input type="radio" name="tema" id="temaEscuro" value="escuro" checked>
+                  Escuro
+                </label>
+                <label class="opcao">
+                  <input type="radio" name="tema" id="temaClaro" value="claro">
+                  Claro
+                </label>
+              </div>
+            </div>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="reduzirAnimacoes">
+                <input type="checkbox" id="reduzirAnimacoes">
+                Reduzir animações
+              </label>
+            </div>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="corDestaque">Cor de destaque</label>
+              <select class="campo" id="corDestaque">
+                <option value="dourado">Dourado</option>
+                <option value="azul">Azul</option>
+                <option value="verde">Verde</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- TEXTO -->
+          <section class="card" id="texto">
+            <h2>Leitura e texto</h2>
+            <p class="descricao">Ajuste o texto para ler com mais conforto.</p>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="tamanhoFonte">Tamanho da fonte</label>
+              <select class="campo" id="tamanhoFonte">
+                <option value="normal">Normal</option>
+                <option value="small">Pequeno</option>
+                <option value="large">Grande</option>
+                <option value="xlarge">Muito grande</option>
+              </select>
+            </div>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="tipoFonte">Tipo de fonte</label>
+              <select class="campo" id="tipoFonte">
+                <option value="padrao">Padrão</option>
+                <option value="arial">Arial</option>
+                <option value="georgia">Georgia</option>
+                <option value="verdana">Verdana</option>
+                <option value="mono">Monoespaçada</option>
+              </select>
+            </div>
+
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="espacamento">Espaçamento do texto</label>
+              <select class="campo" id="espacamento">
+                <option value="normal">Normal</option>
+                <option value="medium">Médio</option>
+                <option value="wide">Amplo</option>
+              </select>
+            </div>
+
+            <div class="campo-grupo">
+              <strong>Estilo do texto</strong>
+              <div class="opcoes">
+                <label class="opcao"><input type="checkbox" id="negrito"> Negrito</label>
+                <label class="opcao"><input type="checkbox" id="italico"> Itálico</label>
+                <label class="opcao"><input type="checkbox" id="sublinhar"> Sublinhado nos links</label>
+              </div>
+            </div>
+          </section>
+
+          <!-- NOTIFICAÇÕES -->
+          <section class="card" id="notificacoes">
+            <h2>Notificações</h2>
+            <p class="descricao">Escolha suas preferências de avisos neste navegador.</p>
+
+            <div class="setting-row">
+              <div>
+                <strong>Notificações ativadas</strong>
+                <p>Permite que a página registre sua preferência.</p>
+              </div>
+              <input type="checkbox" id="notificacoesAtivas" checked aria-label="Ativar notificações">
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <strong>Sons de notificação</strong>
+                <p>Ative ou desative os sons de teste.</p>
+              </div>
+              <input type="checkbox" id="sonsAtivos" aria-label="Ativar sons">
+            </div>
+
+            <div class="campo-grupo">
+              <strong>Som preferido</strong>
+              <div class="opcoes">
+                <label class="opcao"><input type="radio" name="som" value="padrao" checked> Padrão</label>
+                <label class="opcao"><input type="radio" name="som" value="sininho"> Sininho</label>
+                <label class="opcao"><input type="radio" name="som" value="suave"> Suave</label>
+                <label class="opcao"><input type="radio" name="som" value="alerta"> Alerta</label>
+                <label class="opcao"><input type="radio" name="som" value="personalizado"> Personalizado</label>
+              </div>
+
+              <div class="botoes">
+                <button class="botao testarSom" type="button" data-som="padrao">Testar padrão</button>
+                <button class="botao testarSom" type="button" data-som="sininho">Testar sininho</button>
+                <button class="botao testarSom" type="button" data-som="suave">Testar suave</button>
+                <button class="botao testarSom" type="button" data-som="alerta">Testar alerta</button>
+              </div>
+
+              <label class="titulo-campo" for="arquivoSom" style="display:block;margin-top:16px">
+                Som personalizado (opcional)
+              </label>
+              <input class="campo" id="arquivoSom" type="file" accept="audio/*">
+              <p id="nomeSom" class="descricao">Nenhum arquivo selecionado.</p>
+              <audio id="audioPersonalizado" controls hidden></audio>
+              <button class="botao" id="testarPersonalizado" type="button">Testar som personalizado</button>
+            </div>
+          </section>
         </div>
-    </div>
 
-    <p id="status" class="status" aria-live="polite"></p>
+        <div class="coluna">
 
-    <div class="columns">
+          <!-- IDIOMA E HORÁRIO -->
+          <section class="card" id="idioma">
+            <h2>Idioma e horário</h2>
+            <p class="descricao">Configure o idioma e a exibição de datas.</p>
 
-        <div class="column">
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="idiomaPreferido">Idioma</label>
+              <select class="campo" id="idiomaPreferido">
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+              <p class="descricao">Esta preferência não traduz automaticamente o conteúdo do site.</p>
+            </div>
 
-            <section class="card pesquisavel" id="conta"
-                     data-palavras="conta perfil sair sessão">
-                <div class="head">
-                    <span class="icon">♙</span>
-                    <div>
-                        <h2>Conta e perfil</h2>
-                        <p class="desc">Gerencie sua conta.</p>
-                    </div>
-                </div>
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="fuso">Fuso horário</label>
+              <input class="campo" id="fuso" type="text" placeholder="Ex.: America/Sao_Paulo">
+              <button class="botao" id="detectarFuso" type="button" style="margin-top:9px">Detectar fuso horário</button>
+            </div>
 
-                <div class="item">
-                    <div class="info">
-                        <strong>Meu perfil</strong>
-                        <small>Edite suas informações pessoais.</small>
-                    </div>
-                    <a class="btn" href="perfil.html">Abrir perfil</a>
-                </div>
+            <div class="setting-row">
+              <div>
+                <strong>Horário atual</strong>
+                <p>Horário local deste dispositivo.</p>
+              </div>
+              <strong id="horarioAtual">--:--:--</strong>
+            </div>
 
-                <div class="item">
-                    <div class="info">
-                        <strong>Sair da conta</strong>
-                        <small>Encerra a sessão neste navegador.</small>
-                    </div>
-                    <button class="btn danger" id="sair" type="button">Sair</button>
-                </div>
-            </section>
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="formatoHora">Formato de hora</label>
+              <select class="campo" id="formatoHora">
+                <option value="24">24 horas</option>
+                <option value="12">12 horas</option>
+              </select>
+            </div>
 
-            <section class="card pesquisavel" id="aparencia"
-                     data-palavras="aparência tema claro escuro cores papel parede">
-                <div class="head">
-                    <span class="icon">◉</span>
-                    <div>
-                        <h2>Aparência</h2>
-                        <p class="desc">Escolha as cores e o visual da Mystic.</p>
-                    </div>
-                </div>
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="formatoData">Formato de data</label>
+              <select class="campo" id="formatoData">
+                <option value="dd/mm/aaaa">DD/MM/AAAA</option>
+                <option value="mm/dd/aaaa">MM/DD/AAAA</option>
+                <option value="aaaa-mm-dd">AAAA-MM-DD</option>
+              </select>
+            </div>
+          </section>
 
-                <div class="theme-wrap">
-                    <div>
-                        <div class="themes">
-                            <button class="theme selected" id="temaEscuro" type="button">
-                                <span class="check">✓</span>
-                                <span class="symbol">☾</span>
-                                <strong>Escuro</strong>
-                                <small>Visual escuro</small>
-                            </button>
+          <!-- PRIVACIDADE -->
+          <section class="card" id="privacidade">
+            <h2>Privacidade</h2>
+            <p class="descricao">Gerencie as preferências de visibilidade desta interface.</p>
 
-                            <button class="theme" id="temaClaro" type="button">
-                                <span class="check">✓</span>
-                                <span class="symbol">☼</span>
-                                <strong>Claro</strong>
-                                <small>Visual iluminado</small>
-                            </button>
-                        </div>
-                    </div>
+            <div class="setting-row">
+              <div>
+                <strong>Mostrar status online</strong>
+                <p>Preferência local de exibição.</p>
+              </div>
+              <input type="checkbox" id="mostrarOnline" checked aria-label="Mostrar status online">
+            </div>
 
-                    <div>
-                        <div class="wallpaper"></div>
-                        <div class="wall-label">Tema cinza e dourado</div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="info">
-                        <strong>Reduzir animações</strong>
-                        <small>Reduz efeitos de movimento.</small>
-                    </div>
-                    <input type="checkbox" id="reduzirAnimacoes">
-                </div>
-            </section>
-
-            <section class="card pesquisavel" id="texto"
-                     data-palavras="texto fonte tamanho tipografia espaçamento negrito itálico links">
-                <div class="head">
-                    <span class="icon">Aa</span>
-                    <div>
-                        <h2>Texto e fonte</h2>
-                        <p class="desc">Personalize a leitura.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="info">
-                        <strong>Tamanho do texto</strong>
-                        <small>Ajuste o tamanho de leitura.</small>
-                    </div>
-                    <select id="tamanhoFonte">
-                        <option value="normal">Normal</option>
-                        <option value="small">Pequeno</option>
-                        <option value="large">Grande</option>
-                        <option value="xlarge">Extra grande</option>
-                    </select>
-                </div>
-
-                <div class="item">
-                    <div class="info"><strong>Fonte</strong></div>
-                    <select id="tipoFonte">
-                        <option value="padrao">Padrão</option>
-                        <option value="arial">Arial</option>
-                        <option value="georgia">Georgia</option>
-                        <option value="verdana">Verdana</option>
-                        <option value="mono">Monoespaçada</option>
-                    </select>
-                </div>
-
-                <div class="item">
-                    <div class="info"><strong>Espaçamento entre linhas</strong></div>
-                    <select id="espacamento">
-                        <option value="normal">Normal</option>
-                        <option value="medium">Médio</option>
-                        <option value="wide">Amplo</option>
-                    </select>
-                </div>
-
-                <div class="item">
-                    <div class="info"><strong>Estilo do texto</strong></div>
-                    <div class="styles">
-                        <label><input type="checkbox" id="negrito"> <b>N</b></label>
-                        <label><input type="checkbox" id="italico"> <i>I</i></label>
-                        <label><input type="checkbox" id="sublinhar"> <u>U</u></label>
-                    </div>
-                </div>
-
-                <button class="btn" id="restaurarTexto" type="button">
-                    Restaurar texto padrão
-                </button>
-            </section>
-
-            <section class="card pesquisavel" id="notificacoes"
-                     data-palavras="notificações sons áudio toque">
-                <div class="head">
-                    <span class="icon">♧</span>
-                    <div>
-                        <h2>Notificações e sons</h2>
-                        <p class="desc">Escolha suas preferências de som.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="info">
-                        <strong>Notificações ativadas</strong>
-                        <small>Salva sua preferência.</small>
-                    </div>
-                    <input type="checkbox" id="notificacoesAtivas" checked>
-                </div>
-
-                <div class="item">
-                    <div class="info">
-                        <strong>Sons ativados</strong>
-                        <small>Permite testar os sons abaixo.</small>
-                    </div>
-                    <input type="checkbox" id="sonsAtivos" checked>
-                </div>
-
-                <p class="desc">Som padrão</p>
-
-                <div class="sounds">
-                    <label class="sound">
-                        <input type="radio" name="som" value="padrao" checked>
-                        Mystic padrão
-                        <button class="btn testarSom" data-som="padrao" type="button">▶ Testar</button>
-                    </label>
-
-                    <label class="sound">
-                        <input type="radio" name="som" value="sininho">
-                        Sininho
-                        <button class="btn testarSom" data-som="sininho" type="button">▶ Testar</button>
-                    </label>
-
-                    <label class="sound">
-                        <input type="radio" name="som" value="suave">
-                        Toque suave
-                        <button class="btn testarSom" data-som="suave" type="button">▶ Testar</button>
-                    </label>
-
-                    <label class="sound">
-                        <input type="radio" name="som" value="alerta">
-                        Alerta
-                        <button class="btn testarSom" data-som="alerta" type="button">▶ Testar</button>
-                    </label>
-
-                    <label class="sound">
-                        <input type="radio" name="som" value="personalizado">
-                        Meu arquivo de áudio
-                    </label>
-                </div>
-
-                <div class="item">
-                    <div class="info">
-                        <strong>Escolher arquivo de áudio</strong>
-                        <small>Selecione um arquivo do seu dispositivo.</small>
-                    </div>
-                    <input type="file" id="arquivoSom" accept="audio/*">
-                </div>
-
-                <p id="nomeSom" class="status">Nenhum arquivo escolhido.</p>
-                <audio id="audioPersonalizado"></audio>
-
-                <button class="btn" id="testarPersonalizado" type="button">
-                    ▶ Testar meu áudio
-                </button>
-
-                <div class="notice">
-                    Os sons de demonstração são gerados pela página. Notificações reais
+            <div class="campo-grupo">
+              <label class="titulo-campo" for="visitasPerfil">Visibilidade das visitas ao perfil</label>
+              <select class="campo" id="visitasPerfil">
+                <option value="todos">Todos</option>
+                <option value="seguidores">Apenas seguidores</option>
+sons de demonstração são gerados pela página. Notificações reais
                     em segundo plano exigem integração adicional.
                 </div>
             </section>
