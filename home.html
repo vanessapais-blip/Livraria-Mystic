@@ -387,13 +387,54 @@
       margin-top: 4px;
     }
 
+    /* RODAPÉ */
+
     footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
       text-align: center;
       color: #d4af37;
       padding: 35px 20px;
       margin-top: 50px;
       border-top: 1px solid #444;
       font-family: Arial, sans-serif;
+    }
+
+    footer a {
+      color: #d4af37;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* SEÇÃO SOBRE NÓS */
+
+    .sobre-nos {
+      padding: 25px 20px 40px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      color: #d4af37;
+      border-top: 1px solid #444;
+      background: #242424;
+      scroll-margin-top: 90px;
+    }
+
+    .sobre-nos h2 {
+      font-size: 22px;
+      font-weight: normal;
+      margin-bottom: 15px;
+    }
+
+    .sobre-nos p {
+      max-width: 650px;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     /* CELULARES */
@@ -459,6 +500,16 @@
         right: 17px;
         bottom: 150px;
       }
+
+      footer {
+        gap: 12px;
+        padding: 28px 15px;
+        font-size: 14px;
+      }
+
+      .sobre-nos {
+        padding: 25px 18px 35px;
+      }
     }
   </style>
 </head>
@@ -492,8 +543,12 @@
   <aside class="menu-lateral" id="menuLateral" aria-label="Menu principal">
     <div class="topo-menu">
       <h2>☾ Mystic</h2>
-      <button class="fechar-menu" id="fecharMenu" type="button"
-        aria-label="Fechar menu">×</button>
+      <button
+        class="fechar-menu"
+        id="fecharMenu"
+        type="button"
+        aria-label="Fechar menu"
+      >×</button>
     </div>
 
     <a href="home.html">
@@ -559,7 +614,10 @@
     <h2 class="secao-titulo">Livros em destaque</h2>
 
     <section class="livros" id="listaLivros">
-      <article class="card" data-titulo="o pequeno príncipe antoine saint-exupery">
+      <article
+        class="card"
+        data-titulo="o pequeno príncipe antoine saint-exupery"
+      >
         <div class="capa">📖</div>
         <h3>O Pequeno Príncipe</h3>
         <p>Antoine de Saint-Exupéry</p>
@@ -581,7 +639,11 @@
       </article>
     </section>
 
-    <p id="semResultados" hidden style="color:#d4af37; margin-top:20px;">
+    <p
+      id="semResultados"
+      hidden
+      style="color:#d4af37; margin-top:20px;"
+    >
       Nenhum livro encontrado.
     </p>
   </main>
@@ -631,9 +693,21 @@
     >+</button>
   </div>
 
+  <!-- RODAPÉ COM SOBRE NÓS -->
   <footer>
-    Mystic — Livraria
+    <span>Mystic — Livraria</span>
+    <a href="#sobre-nos">Sobre nós</a>
   </footer>
+
+  <!-- SEÇÃO SOBRE NÓS -->
+  <section id="sobre-nos" class="sobre-nos">
+    <h2>Sobre nós</h2>
+    <p>
+      A Mystic Livraria é um espaço dedicado aos amantes da leitura,
+      à criatividade e à descoberta de novas histórias. Queremos aproximar
+      leitores e escritores em um ambiente onde a imaginação ganha vida.
+    </p>
+  </section>
 
   <script>
     // ABRIR E FECHAR O MENU LATERAL
