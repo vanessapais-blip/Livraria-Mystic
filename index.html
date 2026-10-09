@@ -1,406 +1,897 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Livraria Mystic | Acesse sua conta</title>
+  <title>Login | Livraria Mystic</title>
 
-    <meta
-        name="description"
-        content="Entre na Livraria Mystic e descubra um universo de histórias."
-    >
+  <style>
+    :root {
+      --fundo: #090909;
+      --cartao: #151515;
+      --dourado: #d4af67;
+      --dourado-claro: #f0d99b;
+      --texto: #f5f0e6;
+      --texto-suave: #aaa49a;
+      --borda: #393127;
+      --erro: #ff7777;
+      --sucesso: #8be0a0;
+    }
 
-    <style>
-        :root {
-            --fundo: #090909;
-            --fundo-secundario: #101010;
-            --cartao: #141414;
-            --cartao-hover: #1a1a1a;
-            --dourado: #d6ad55;
-            --dourado-claro: #f0d58b;
-            --texto: #f4f0e8;
-            --texto-secundario: #a7a29a;
-            --borda: #33302a;
-            --erro: #ff7373;
-            --sucesso: #70d7a0;
-            --raio: 15px;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(
+          circle at top,
+          #252016 0%,
+          #101010 38%,
+          var(--fundo) 75%
+        );
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+      padding: 35px 30px;
+      background: rgba(21, 21, 21, 0.97);
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.55);
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .logo {
+      display: block;
+      width: 150px;
+      height: 150px;
+      max-width: 65%;
+      object-fit: cover;
+      margin: 0 auto 14px;
+      border-radius: 20px;
+      border: 2px solid var(--dourado);
+      box-shadow: 0 0 18px rgba(212, 175, 103, 0.18);
+    }
+
+    .marca {
+      color: var(--dourado);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 27px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .subtitulo {
+      margin-top: 9px;
+      color: var(--texto-suave);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+      color: var(--dourado-claro);
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .descricao {
+      margin-bottom: 25px;
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .campo {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--texto);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 13px 14px;
+      background: #0c0c0c;
+      border: 1px solid #484033;
+      border-radius: 9px;
+      color: var(--texto);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--dourado);
+      box-shadow: 0 0 0 3px rgba(212, 175, 103, 0.1);
+    }
+
+    input::placeholder {
+      color: #77716a;
+    }
+
+    .senha-wrapper {
+      position: relative;
+    }
+
+    .senha-wrapper input {
+      padding-right: 75px;
+    }
+
+    .mostrar-senha {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      color: var(--dourado);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .opcoes {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 5px 0 22px;
+    }
+
+    .lembrar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--texto-suave);
+      font-size: 12px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    .lembrar input {
+      accent-color: var(--dourado);
+    }
+
+    a {
+      color: var(--dourado);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--dourado-claro);
+      text-decoration: underline;
+    }
+
+    .esqueci {
+      font-size: 12px;
+      text-align: right;
+    }
+
+    .captcha {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #101010;
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+    }
+
+    .captcha-titulo {
+      margin-bottom: 10px;
+      color: var(--texto);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .captcha-conta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .captcha-conta span {
+      flex-shrink: 0;
+      color: var(--dourado-claro);
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .captcha-conta input {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .botao {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(
+        135deg,
+        var(--dourado-claro),
+        var(--dourado)
+      );
+      border: none;
+      border-radius: 9px;
+      color: #17130b;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, filter 0.2s;
+    }
+
+    .botao:hover {
+      filter: brightness(1.08);
+      transform: translateY(-1px);
+    }
+
+    .botao:active {
+      transform: translateY(0);
+    }
+
+    .mensagem {
+      display: none;
+      margin-bottom: 18px;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .mensagem.erro {
+      display: block;
+      color: var(--erro);
+      background: rgba(255, 119, 119, 0.08);
+      border: 1px solid rgba(255, 119, 119, 0.25);
+    }
+
+    .mensagem.sucesso {
+      display: block;
+      color: var(--sucesso);
+      background: rgba(139, 224, 160, 0.08);
+      border: 1px solid rgba(139, 224, 160, 0.25);
+    }
+
+    .cadastro {
+      margin-top: 25px;
+      padding-top: 20px;
+      border-top: 1px solid var(--borda);
+      color: var(--texto-suave);
+      font-size: 13px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .cadastro a {
+      font-weight: bold;
+    }
+
+    .rodape {
+      margin-top: 22px;
+      color: #77716a;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+
+      .container {
+        padding: 28px 22px;
+      }
+
+      .marca {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <header class="logo-area">
+      <img
+        class="logo"
+        src="logo-mystic.jpg"
+        alt="Logo da Livraria Mystic"
+      >
+
+      <div class="marca">LIVRARIA MYSTIC</div>
+
+      <p class="subtitulo">
+        Um universo de histórias espera por você.
+      </p>
+    </header>
+
+    <h1>Bem-vindo de volta</h1>
+
+    <p class="descricao">
+      Entre na sua conta para continuar sua jornada literária.
+    </p>
+
+    <div
+      id="mensagem"
+      class="mensagem"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <form id="formLogin">
+
+      <div class="campo">
+        <label for="email">E-mail</label>
+
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Digite seu e-mail"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="campo">
+        <label for="senha">Senha</label>
+
+        <div class="senha-wrapper">
+          <input
+            type="password"
+            id="senha"
+            name="senha"
+            placeholder="Digite sua senha"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            class="mostrar-senha"
+            type="button"
+            id="toggleSenha"
+          >
+            Mostrar
+          </button>
+        </div>
+      </div>
+
+      <div class="opcoes">
+
+        <label class="lembrar" for="lembrar">
+          <input
+            type="checkbox"
+            id="lembrar"
+          >
+          Lembrar meu e-mail
+        </label>
+
+        <a
+          class="esqueci"
+          href="#"
+          id="esqueciSenha"
+        >
+          Esqueci a senha
+        </a>
+
+      </div>
+
+      <div class="captcha">
+
+        <p class="captcha-titulo">
+          Verificação de segurança
+        </p>
+
+        <div class="captcha-conta">
+          <span id="perguntaCaptcha">Quanto é 3 + 4?</span>
+
+          <input
+            type="text"
+            id="respostaCaptcha"
+            inputmode="numeric"
+            placeholder="Resposta"
+            aria-label="Resposta da verificação"
+            required
+          >
+        </div>
+
+      </div>
+
+      <button
+        class="botao"
+        type="submit"
+      >
+        Entrar na minha conta
+      </button>
+
+    </form>
+
+    <div class="cadastro">
+      Ainda não tem uma conta?<br>
+
+      <a href="cadrastro.html">
+        Criar minha conta
+      </a>
+    </div>
+
+    <footer class="rodape">
+      © <span id="ano"></span> Livraria Mystic.<br>
+      Sua próxima história começa aqui.
+    </footer>
+
+  </main>
+
+  <script>
+    /*
+      Chaves utilizadas no armazenamento local:
+
+      mysticContas
+      mysticContasLembradas
+      mysticSessao
+
+      Os dados ficam neste navegador e neste dispositivo.
+    */
+
+    const CHAVE_CONTAS = "mysticContas";
+    const CHAVE_LEMBRADAS = "mysticContasLembradas";
+    const CHAVE_SESSAO = "mysticSessao";
+
+    const formLogin = document.getElementById("formLogin");
+    const campoEmail = document.getElementById("email");
+    const campoSenha = document.getElementById("senha");
+    const campoCaptcha = document.getElementById("respostaCaptcha");
+    const checkboxLembrar = document.getElementById("lembrar");
+    const mensagem = document.getElementById("mensagem");
+
+    let numeroCaptcha1;
+    let numeroCaptcha2;
+
+    document.getElementById("ano").textContent =
+      new Date().getFullYear();
+
+    function lerJSON(chave, valorPadrao) {
+      try {
+        const valor = localStorage.getItem(chave);
+
+        if (!valor) {
+          return valorPadrao;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        return JSON.parse(valor);
+      } catch (erro) {
+        return valorPadrao;
+      }
+    }
+
+    function mostrarMensagem(texto, tipo = "erro") {
+      mensagem.textContent = texto;
+      mensagem.className = "mensagem " + tipo;
+    }
+
+    function limparMensagem() {
+      mensagem.textContent = "";
+      mensagem.className = "mensagem";
+    }
+
+    function gerarCaptcha() {
+      numeroCaptcha1 = Math.floor(Math.random() * 9) + 1;
+      numeroCaptcha2 = Math.floor(Math.random() * 9) + 1;
+
+      document.getElementById("perguntaCaptcha").textContent =
+        `Quanto é ${numeroCaptcha1} + ${numeroCaptcha2}?`;
+
+      campoCaptcha.value = "";
+    }
+
+    function emailValido(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    /*
+      Compara a senha com registros novos, que utilizam
+      PBKDF2-SHA-256, e também com registros antigos que
+      eventualmente armazenem a senha em texto simples.
+
+      Para compatibilidade, aceita diferentes nomes de
+      propriedades que podem ter sido usados no cadastro.
+    */
+
+    function obterCampo(conta, nomes) {
+      for (const nome of nomes) {
+        if (
+          conta &&
+          Object.prototype.hasOwnProperty.call(conta, nome)
+        ) {
+          return conta[nome];
+        }
+      }
+
+      return undefined;
+    }
+
+    function base64ParaBytes(base64) {
+      const binario = atob(base64);
+
+      const bytes = new Uint8Array(binario.length);
+
+      for (let i = 0; i < binario.length; i++) {
+        bytes[i] = binario.charCodeAt(i);
+      }
+
+      return bytes;
+    }
+
+    function bytesParaBase64(bytes) {
+      let binario = "";
+
+      for (const byte of bytes) {
+        binario += String.fromCharCode(byte);
+      }
+
+      return btoa(binario);
+    }
+
+    async function calcularHashSenha(
+      senha,
+      saltBase64,
+      iteracoes = 210000
+    ) {
+      if (!window.crypto || !window.crypto.subtle) {
+        throw new Error(
+          "CRIPTOGRAFIA_INDISPONIVEL"
+        );
+      }
+
+      const encoder = new TextEncoder();
+
+      const material = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(senha),
+        "PBKDF2",
+        false,
+        ["deriveBits"]
+      );
+
+      const salt = base64ParaBytes(saltBase64);
+
+      const resultado = await crypto.subtle.deriveBits(
+        {
+          name: "PBKDF2",
+          salt: salt,
+          iterations: iteracoes,
+          hash: "SHA-256"
+        },
+        material,
+        256
+      );
+
+      return bytesParaBase64(
+        new Uint8Array(resultado)
+      );
+    }
+
+    async function verificarSenha(conta, senhaDigitada) {
+      const senhaArmazenada = obterCampo(
+        conta,
+        ["senhaHash", "passwordHash", "hash", "senha", "password"]
+      );
+
+      const salt = obterCampo(
+        conta,
+        ["salt", "senhaSalt", "passwordSalt"]
+      );
+
+      const algoritmo = obterCampo(
+        conta,
+        ["algoritmo", "algorithm", "metodoHash"]
+      );
+
+      const iteracoesInformadas = obterCampo(
+        conta,
+        ["iteracoes", "iterations"]
+      );
+
+      /*
+        Contas que armazenam salt e hash.
+      */
+
+      if (salt && senhaArmazenada) {
+        try {
+          const iteracoes =
+            Number(iteracoesInformadas) || 210000;
+
+          const hashCalculado = await calcularHashSenha(
+            senhaDigitada,
+            salt,
+            iteracoes
+          );
+
+          return hashCalculado === senhaArmazenada;
+        } catch (erro) {
+          if (erro.message === "CRIPTOGRAFIA_INDISPONIVEL") {
+            throw erro;
+          }
+
+          return false;
+        }
+      }
+
+      /*
+        Compatibilidade com contas antigas que armazenam
+        a senha diretamente no localStorage.
+
+        Esse formato é menos seguro e deve ser migrado
+        para um formato com hash e salt.
+      */
+
+      if (
+        typeof senhaArmazenada === "string" &&
+        senhaArmazenada === senhaDigitada &&
+        !salt
+      ) {
+        return true;
+      }
+
+      return false;
+    }
+
+    function encontrarContaPorEmail(email) {
+      const contas = lerJSON(CHAVE_CONTAS, []);
+
+      if (!Array.isArray(contas)) {
+        return null;
+      }
+
+      return contas.find(conta => {
+        const emailConta = obterCampo(
+          conta,
+          ["email", "e-mail", "usuario", "user"]
+        );
+
+        return (
+          typeof emailConta === "string" &&
+          emailConta.trim().toLowerCase() === email
+        );
+      }) || null;
+    }
+
+    function salvarEmailLembrado(email) {
+      if (checkboxLembrar.checked) {
+        localStorage.setItem(
+          CHAVE_LEMBRADAS,
+          JSON.stringify({ email: email })
+        );
+      } else {
+        localStorage.removeItem(CHAVE_LEMBRADAS);
+      }
+    }
+
+    function carregarEmailLembrado() {
+      const lembrado = lerJSON(CHAVE_LEMBRADAS, null);
+
+      if (!lembrado) {
+        return;
+      }
+
+      if (typeof lembrado === "string") {
+        campoEmail.value = lembrado;
+        checkboxLembrar.checked = true;
+        return;
+      }
+
+      if (lembrado.email) {
+        campoEmail.value = lembrado.email;
+        checkboxLembrar.checked = true;
+      }
+    }
+
+    /*
+      Exibe a mensagem quando o cadastro redireciona
+      para index.html?cadastro=sucesso
+    */
+
+    const parametros = new URLSearchParams(
+      window.location.search
+    );
+
+    if (parametros.get("cadastro") === "sucesso") {
+      mostrarMensagem(
+        "Cadastro realizado! Agora você já pode entrar na sua conta.",
+        "sucesso"
+      );
+
+      window.history.replaceState(
+        {},
+        document.title,
+        window.location.pathname
+      );
+    }
+
+    carregarEmailLembrado();
+    gerarCaptcha();
+
+    /*
+      Mostrar ou esconder senha.
+    */
+
+    document
+      .getElementById("toggleSenha")
+      .addEventListener("click", function () {
+        const senhaVisivel =
+          campoSenha.type === "text";
+
+        campoSenha.type = senhaVisivel
+          ? "password"
+          : "text";
+
+        this.textContent = senhaVisivel
+          ? "Mostrar"
+          : "Ocultar";
+      });
+
+    /*
+      Recuperação de senha demonstrativa.
+      Não envia e-mails nem altera senhas.
+    */
+
+    document
+      .getElementById("esqueciSenha")
+      .addEventListener("click", function (evento) {
+        evento.preventDefault();
+
+        const email = campoEmail.value.trim().toLowerCase();
+
+        if (!email || !emailValido(email)) {
+          mostrarMensagem(
+            "Digite seu e-mail no campo acima para continuar."
+          );
+
+          campoEmail.focus();
+          return;
         }
 
-        body {
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 28px 16px;
-            color: var(--texto);
-            background:
-                radial-gradient(
-                    ellipse at top,
-                    rgba(177, 133, 43, 0.10),
-                    transparent 48%
-                ),
-                var(--fundo);
-            font-family: "Segoe UI", Arial, sans-serif;
+        mostrarMensagem(
+          "A recuperação automática ainda não está configurada. " +
+          "Entre em contato com a administração da Livraria Mystic.",
+          "erro"
+        );
+      });
+
+    /*
+      Processo de login.
+    */
+
+    formLogin.addEventListener("submit", async function (evento) {
+      evento.preventDefault();
+      limparMensagem();
+
+      const email = campoEmail.value.trim().toLowerCase();
+      const senha = campoSenha.value;
+
+      const resposta = campoCaptcha.value.trim();
+
+      if (!emailValido(email)) {
+        mostrarMensagem("Digite um endereço de e-mail válido.");
+        campoEmail.focus();
+        return;
+      }
+
+      const respostaCorreta =
+        numeroCaptcha1 + numeroCaptcha2;
+
+      if (
+        resposta === "" ||
+        !/^\d+$/.test(resposta) ||
+        Number(resposta) !== respostaCorreta
+      ) {
+        mostrarMensagem(
+          "A resposta da verificação está incorreta. Tente novamente."
+        );
+
+        gerarCaptcha();
+        return;
+      }
+
+      const conta = encontrarContaPorEmail(email);
+
+      if (!conta) {
+        mostrarMensagem(
+          "E-mail ou senha incorretos. Confira os dados ou crie uma conta."
+        );
+
+        gerarCaptcha();
+        return;
+      }
+
+      try {
+        const senhaCorreta = await verificarSenha(
+          conta,
+          senha
+        );
+
+        if (!senhaCorreta) {
+          mostrarMensagem(
+            "E-mail ou senha incorretos. Confira os dados e tente novamente."
+          );
+
+          gerarCaptcha();
+          return;
         }
 
-        button,
-        input {
-            font: inherit;
-        }
+        salvarEmailLembrado(email);
 
-        button {
-            -webkit-tap-highlight-color: transparent;
-        }
+        /*
+          Não guardamos a senha na sessão.
+        */
 
-        .pagina {
-            width: 100%;
-            max-width: 445px;
-            margin: auto;
-        }
+        const sessao = {
+          email: email,
+          nome: obterCampo(
+            conta,
+            ["nome", "name"]
+          ) || "",
+          autenticado: true,
+          dataLogin: new Date().toISOString()
+        };
 
-        .marca {
-            text-align: center;
-            margin-bottom: 28px;
-        }
+        localStorage.setItem(
+          CHAVE_SESSAO,
+          JSON.stringify(sessao)
+        );
 
-        .icone-marca {
-            width: 65px;
-            height: 65px;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(214, 173, 85, 0.6);
-            border-radius: 50%;
-            color: var(--dourado);
-            font-size: 31px;
-            background: rgba(214, 173, 85, 0.05);
-            box-shadow: 0 0 35px rgba(214, 173, 85, 0.06);
-        }
+        mostrarMensagem(
+          "Login realizado com sucesso! Redirecionando...",
+          "sucesso"
+        );
 
-        .marca h1 {
-            color: var(--dourado);
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(30px, 7vw, 39px);
-            font-weight: 500;
-            letter-spacing: 4px;
-        }
+        setTimeout(function () {
+          window.location.href = "home.html";
+        }, 700);
 
-        .marca p {
-            margin-top: 9px;
-            color: var(--texto-secundario);
-            font-size: 12px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
+      } catch (erro) {
+        if (
+          erro.message === "CRIPTOGRAFIA_INDISPONIVEL"
+        ) {
+          mostrarMensagem(
+            "O navegador não disponibilizou a função de segurança necessária. " +
+            "Abra o projeto usando um servidor local de desenvolvimento."
+          );
+        } else {
+          mostrarMensagem(
+            "Não foi possível verificar sua senha. " +
+            "Confira o cadastro e tente novamente."
+          );
         }
+      }
+    });
+  </script>
 
-        .cartao {
-            padding: 31px;
-            border: 1px solid var(--borda);
-            border-radius: var(--raio);
-            background: linear-gradient(
-                145deg,
-                rgba(24, 24, 24, 0.98),
-                rgba(14, 14, 14, 0.99)
-            );
-            box-shadow: 0 20px 70px rgba(0, 0, 0, 0.38);
-        }
-
-        .cabecalho-cartao {
-            margin-bottom: 26px;
-        }
-
-        .cabecalho-cartao h2 {
-            margin-bottom: 9px;
-            font-size: 25px;
-            font-weight: 500;
-        }
-
-        .cabecalho-cartao p {
-            color: var(--texto-secundario);
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .campo {
-            margin-bottom: 19px;
-        }
-
-        .campo label {
-            display: block;
-            margin-bottom: 9px;
-            color: #e7e1d5;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .campo input {
-            width: 100%;
-            min-height: 47px;
-            padding: 12px 14px;
-            color: var(--texto);
-            background: #0c0c0c;
-            border: 1px solid #37342e;
-            border-radius: 8px;
-            outline: none;
-            transition:
-                border-color 0.2s,
-                box-shadow 0.2s;
-        }
-
-        .campo input::placeholder {
-            color: #6d6962;
-        }
-
-        .campo input:focus {
-            border-color: var(--dourado);
-            box-shadow: 0 0 0 3px rgba(214, 173, 85, 0.09);
-        }
-
-        .entrada-senha {
-            position: relative;
-        }
-
-        .entrada-senha input {
-            padding-right: 51px;
-        }
-
-        .alternar-senha {
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%);
-            border: 0;
-            padding: 5px;
-            background: transparent;
-            color: #aaa49a;
-            cursor: pointer;
-            font-size: 18px;
-        }
-
-        .alternar-senha:hover {
-            color: var(--dourado);
-        }
-
-        .linha-opcoes {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            margin: 3px 0 21px;
-        }
-
-        .opcao-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--texto-secundario);
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .opcao-checkbox input {
-            width: 15px;
-            height: 15px;
-            accent-color: var(--dourado);
-            cursor: pointer;
-        }
-
-        .link-botao {
-            padding: 0;
-            color: var(--dourado);
-            border: 0;
-            background: transparent;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .link-botao:hover {
-            color: var(--dourado-claro);
-            text-decoration: underline;
-        }
-
-        .botao-principal {
-            width: 100%;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 13px 18px;
-            border: 1px solid var(--dourado);
-            border-radius: 8px;
-            color: #17120a;
-            background: linear-gradient(
-                110deg,
-                #c39a42,
-                #ead18a
-            );
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.6px;
-            cursor: pointer;
-            transition:
-                transform 0.2s,
-                filter 0.2s,
-                box-shadow 0.2s;
-        }
-
-        .botao-principal:hover:not(:disabled) {
-            transform: translateY(-1px);
-            filter: brightness(1.07);
-            box-shadow: 0 5px 22px rgba(214, 173, 85, 0.13);
-        }
-
-        .botao-principal:disabled {
-            opacity: 0.75;
-            cursor: wait;
-        }
-
-        .separador {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            margin: 23px 0;
-            color: #777168;
-            font-size: 11px;
-        }
-
-        .separador::before,
-        .separador::after {
-            content: "";
-            height: 1px;
-            flex: 1;
-            background: #302e29;
-        }
-
-        .rodape-cartao {
-            color: var(--texto-secundario);
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .rodape-cartao button {
-            color: var(--dourado);
-            font-weight: 600;
-            border: 0;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .rodape-cartao button:hover {
-            text-decoration: underline;
-        }
-
-        .mensagem {
-            display: none;
-            margin-bottom: 19px;
-            padding: 12px 14px;
-            border: 1px solid transparent;
-            border-radius: 8px;
-            font-size: 13px;
-            line-height: 1.5;
-            overflow-wrap: anywhere;
-        }
-
-        .mensagem.visivel {
-            display: block;
-        }
-
-        .mensagem.erro {
-            color: var(--erro);
-            border-color: rgba(255, 115, 115, 0.25);
-            background: rgba(255, 70, 70, 0.07);
-        }
-
-        .mensagem.sucesso {
-            color: var(--sucesso);
-            border-color: rgba(112, 215, 160, 0.25);
-            background: rgba(40, 180, 100, 0.07);
-        }
-
-        .mensagem.info {
-            color: var(--dourado-claro);
-            border-color: rgba(214, 173, 85, 0.25);
-            background: rgba(214, 173, 85, 0.06);
-        }
-
-        .captcha {
-            margin: 4px 0 21px;
-            padding: 15px;
-            border: 1px solid #35322c;
-            border-radius: 9px;
-            background: #101010;
-        }
-
-        .captcha-titulo {
-            display: block;
-            margin-bottom: 12px;
-            color: #e7e1d5;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .captcha-conteudo {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .captcha-pergunta {
-            color: var(--dourado-claro);
-            font-family: Georgia, serif;
-            font-size: 17px;
-        }
-
-        .captcha-controles {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .captcha-controles input {
-            width: 75px;
-            min-height: 39px;
-            padding: 8px;
-            color: var(--texto);
-            background: #090909;
-            border: 1px solid #37342e;
-            border-radius: 6px;
-            outline: none;
-        }
-
-        .captcha-controles input:focus {
-            border-color: var(--dourado);
-        }
-
-        .botao-atualizar {
-            width: 37px;
-            height: 37px;
-            color: var(--dourado);
-            background: transparent;
-            border: 1px solid #37342e;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 19px;
-        }
-
-        .botao-atualizar:hover {
-            background: #242018;
-        }
-
-        .contas-salvas {
-            display: none;
+</body>
+    </html>         display: none;
             margin-bottom: 19px;
         }
 
