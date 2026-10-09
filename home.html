@@ -16,7 +16,7 @@
     body {
       font-family: Arial, sans-serif;
       background: #242424;
-      color: #d4af37;
+      color: white;
     }
 
     body.menu-aberto {
@@ -47,7 +47,7 @@
 
     .botao-menu {
       background: transparent;
-      color: #d4af37;
+      color: white;
       border: none;
       font-family: Arial, sans-serif;
       font-size: 29px;
@@ -75,7 +75,7 @@
     }
 
     .link-livros {
-      color: #d4af37;
+      color: white;
       text-decoration: none;
       padding: 11px 15px;
       border-radius: 8px;
@@ -137,7 +137,7 @@
 
     .fechar-menu {
       background: transparent;
-      color: #d4af37;
+      color: white;
       border: none;
       font-family: Arial, sans-serif;
       font-size: 27px;
@@ -150,7 +150,7 @@
       gap: 13px;
       padding: 15px 12px;
       margin-bottom: 7px;
-      color: #d4af37;
+      color: white;
       text-decoration: none;
       border-radius: 9px;
     }
@@ -166,7 +166,7 @@
     }
 
     .titulo-menu {
-      color: #d4af37;
+      color: white;
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -193,7 +193,7 @@
     }
 
     .boas-vindas p {
-      color: #d4af37;
+      color: white;
       font-size: 16px;
       line-height: 1.6;
     }
@@ -204,7 +204,7 @@
       background: #303030;
       border: 1px solid #444;
       border-radius: 10px;
-      color: #d4af37;
+      color: white;
       font-family: Arial, sans-serif;
       font-size: 15px;
       margin-bottom: 40px;
@@ -216,7 +216,7 @@
     }
 
     .pesquisa::placeholder {
-      color: #d4af37;
+      color: white;
       opacity: 0.75;
     }
 
@@ -262,7 +262,7 @@
     }
 
     .card p {
-      color: #d4af37;
+      color: white;
       line-height: 1.5;
       margin-bottom: 20px;
     }
@@ -272,7 +272,7 @@
       width: fit-content;
       padding: 10px 16px;
       background: #444;
-      color: #d4af37;
+      color: white;
       font-family: Arial, sans-serif;
       border-radius: 8px;
       text-decoration: none;
@@ -302,7 +302,7 @@
       border: 1px solid #555;
       border-radius: 50%;
       background: #383838;
-      color: #d4af37;
+      color: white;
       font-family: Arial, sans-serif;
       font-size: 25px;
       cursor: pointer;
@@ -322,7 +322,7 @@
       width: 60px;
       height: 60px;
       background: #eee;
-      color: #d4af37;
+      color: #303030;
       border: none;
       font-size: 35px;
     }
@@ -353,14 +353,14 @@
     }
 
     .menu-criar h3 {
-      color: #d4af37;
+      color: white;
       font-family: Arial, sans-serif;
       padding: 10px;
       font-size: 17px;
     }
 
     .menu-criar p {
-      color: #d4af37;
+      color: white;
       padding: 0 10px 12px;
       font-size: 13px;
       line-height: 1.5;
@@ -369,7 +369,7 @@
     .menu-criar a {
       display: block;
       padding: 13px 11px;
-      color: #d4af37;
+      color: white;
       text-decoration: none;
       border-radius: 8px;
       line-height: 1.4;
@@ -381,7 +381,7 @@
 
     .menu-criar small {
       display: block;
-      color: #d4af37;
+      color: white;
       opacity: 0.8;
       font-size: 12px;
       margin-top: 4px;
@@ -396,45 +396,24 @@
       flex-wrap: wrap;
       gap: 18px;
       text-align: center;
-      color: #d4af37;
+      color: white;
       padding: 35px 20px;
       margin-top: 50px;
       border-top: 1px solid #444;
       font-family: Arial, sans-serif;
     }
 
-    footer a {
+    .mystic-dourado {
       color: #d4af37;
+    }
+
+    footer a {
+      color: white;
       text-decoration: none;
     }
 
     footer a:hover {
       text-decoration: underline;
-    }
-
-    /* SEÇÃO SOBRE NÓS */
-
-    .sobre-nos {
-      padding: 25px 20px 40px;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      color: #d4af37;
-      border-top: 1px solid #444;
-      background: #242424;
-      scroll-margin-top: 90px;
-    }
-
-    .sobre-nos h2 {
-      font-size: 22px;
-      font-weight: normal;
-      margin-bottom: 15px;
-    }
-
-    .sobre-nos p {
-      max-width: 650px;
-      margin: 0 auto;
-      font-size: 15px;
-      line-height: 1.7;
     }
 
     /* CELULARES */
@@ -505,10 +484,6 @@
         gap: 12px;
         padding: 28px 15px;
         font-size: 14px;
-      }
-
-      .sobre-nos {
-        padding: 25px 18px 35px;
       }
     }
   </style>
@@ -642,7 +617,7 @@
     <p
       id="semResultados"
       hidden
-      style="color:#d4af37; margin-top:20px;"
+      style="color:white; margin-top:20px;"
     >
       Nenhum livro encontrado.
     </p>
@@ -693,21 +668,11 @@
     >+</button>
   </div>
 
-  <!-- RODAPÉ COM SOBRE NÓS -->
+  <!-- RODAPÉ -->
   <footer>
-    <span>Mystic — Livraria</span>
-    <a href="#sobre-nos">Sobre nós</a>
+    <span><span class="mystic-dourado">Mystic</span> — Livraria</span>
+    <a href="sobre.html">Sobre nós</a>
   </footer>
-
-  <!-- SEÇÃO SOBRE NÓS -->
-  <section id="sobre-nos" class="sobre-nos">
-    <h2>Sobre nós</h2>
-    <p>
-      A Mystic Livraria é um espaço dedicado aos amantes da leitura,
-      à criatividade e à descoberta de novas histórias. Queremos aproximar
-      leitores e escritores em um ambiente onde a imaginação ganha vida.
-    </p>
-  </section>
 
   <script>
     // ABRIR E FECHAR O MENU LATERAL
@@ -735,13 +700,6 @@
     fecharMenu.addEventListener("click", fecharMenuLateral);
     fundoMenu.addEventListener("click", fecharMenuLateral);
 
-    document.addEventListener("keydown", function(evento) {
-      if (evento.key === "Escape") {
-        fecharMenuLateral();
-        fecharMenuCriar();
-      }
-    });
-
     // ABRIR E FECHAR O MENU DE ESCRITA
 
     const botaoCriar = document.getElementById("botaoCriar");
@@ -762,6 +720,13 @@
         !menuCriar.contains(evento.target) &&
         !botaoCriar.contains(evento.target)
       ) {
+        fecharMenuCriar();
+      }
+    });
+
+    document.addEventListener("keydown", function(evento) {
+      if (evento.key === "Escape") {
+        fecharMenuLateral();
         fecharMenuCriar();
       }
     });
