@@ -918,4672 +918,826 @@
                 <button type="button" data-spacing="normal" class="selected">Normal</button>
                 <button type="button" data-spacing="medium">Médio</button>
                 <button type="button" data-spacing="wide">Amplo</button>
-              </dividden></div>
-
-      <div class="colunas">
-        <div class="coluna">
-
-          <!-- CONTA -->
-          <section class="card" id="conta">
-            <h2>Minha conta</h2>
-            <p class="descricao">Preferências básicas da sua conta.</p>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="nomeUsuario">Nome de exibição</label>
-              <input class="campo" id="nomeUsuario" type="text" placeholder="Como deseja ser chamado?">
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="emailUsuario">E-mail</label>
-              <input class="campo" id="emailUsuario" type="email" placeholder="seuemail@exemplo.com" autocomplete="email">
-              <p class="descricao">Este campo salva apenas a preferência local. Ele não altera sua conta no servidor.</p>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="bioUsuario">Sobre você</label>
-              <textarea class="campo" id="bioUsuario" rows="3" placeholder="Conte um pouco sobre você..."></textarea>
-            </div>
-
-            <button class="botao botao-dourado" type="button" id="salvarConta">Salvar informações</button>
-          </section>
-
-          <!-- APARÊNCIA -->
-          <section class="card" id="aparencia">
-            <h2>Aparência</h2>
-            <p class="descricao">Escolha como a página será exibida.</p>
-
-            <div class="campo-grupo">
-              <strong>Tema</strong>
-              <div class="opcoes">
-                <label class="opcao">
-                  <input type="radio" name="tema" id="temaEscuro" value="escuro" checked>
-                  Escuro
-                </label>
-                <label class="opcao">
-                  <input type="radio" name="tema" id="temaClaro" value="claro">
-                  Claro
-                </label>
               </div>
             </div>
 
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="reduzirAnimacoes">
-                <input type="checkbox" id="reduzirAnimacoes">
-                Reduzir animações
-              </label>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="corDestaque">Cor de destaque</label>
-              <select class="campo" id="corDestaque">
-                <option value="dourado">Dourado</option>
-                <option value="azul">Azul</option>
-                <option value="verde">Verde</option>
-              </select>
-            </div>
-          </section>
-
-          <!-- TEXTO -->
-          <section class="card" id="texto">
-            <h2>Leitura e texto</h2>
-            <p class="descricao">Ajuste o texto para ler com mais conforto.</p>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="tamanhoFonte">Tamanho da fonte</label>
-              <select class="campo" id="tamanhoFonte">
-                <option value="normal">Normal</option>
-                <option value="small">Pequeno</option>
-                <option value="large">Grande</option>
-                <option value="xlarge">Muito grande</option>
-              </select>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="tipoFonte">Tipo de fonte</label>
-              <select class="campo" id="tipoFonte">
-                <option value="padrao">Padrão</option>
-                <option value="arial">Arial</option>
-                <option value="georgia">Georgia</option>
-                <option value="verdana">Verdana</option>
-                <option value="mono">Monoespaçada</option>
-              </select>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="espacamento">Espaçamento do texto</label>
-              <select class="campo" id="espacamento">
-                <option value="normal">Normal</option>
-                <option value="medium">Médio</option>
-                <option value="wide">Amplo</option>
-              </select>
-            </div>
-
-            <div class="campo-grupo">
-              <strong>Estilo do texto</strong>
-              <div class="opcoes">
-                <label class="opcao"><input type="checkbox" id="negrito"> Negrito</label>
-                <label class="opcao"><input type="checkbox" id="italico"> Itálico</label>
-                <label class="opcao"><input type="checkbox" id="sublinhar"> Sublinhado nos links</label>
+            <div class="field" style="margin-top:14px">
+              <label>Estilo do texto</label>
+              <div class="styles">
+                <label><input type="checkbox" id="negrito"> Negrito</label>
+                <label><input type="checkbox" id="italico"> Itálico</label>
+                <label><input type="checkbox" id="sublinhar"> Sublinhado nos links</label>
               </div>
             </div>
           </section>
 
-          <!-- NOTIFICAÇÕES -->
-          <section class="card" id="notificacoes">
-            <h2>Notificações</h2>
-            <p class="descricao">Escolha suas preferências de avisos neste navegador.</p>
-
-            <div class="setting-row">
+          <section class="card searchable" id="notificacoes" data-words="notificações sons sininho alerta">
+            <div class="head">
+              <span class="icon" aria-hidden="true">♧</span>
               <div>
+                <h2>Notificações</h2>
+                <p class="desc">Gerencie as preferências de notificação desta página.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="info">
                 <strong>Notificações ativadas</strong>
-                <p>Permite que a página registre sua preferência.</p>
+                <small>Salva sua preferência neste navegador; não ativa avisos do servidor.</small>
               </div>
-              <input type="checkbox" id="notificacoesAtivas" checked aria-label="Ativar notificações">
+              <input type="checkbox" id="notificacoesAtivas" checked>
             </div>
 
-            <div class="setting-row">
-              <div>
+            <div class="item">
+              <div class="info">
                 <strong>Sons de notificação</strong>
-                <p>Ative ou desative os sons de teste.</p>
+                <small>Permite reproduzir os sons de teste abaixo.</small>
               </div>
-              <input type="checkbox" id="sonsAtivos" aria-label="Ativar sons">
+              <input type="checkbox" id="sonsAtivos">
             </div>
 
-            <div class="campo-grupo">
-              <strong>Som preferido</strong>
-              <div class="opcoes">
-                <label class="opcao"><input type="radio" name="som" value="padrao" checked> Padrão</label>
-                <label class="opcao"><input type="radio" name="som" value="sininho"> Sininho</label>
-                <label class="opcao"><input type="radio" name="som" value="suave"> Suave</label>
-                <label class="opcao"><input type="radio" name="som" value="alerta"> Alerta</label>
-                <label class="opcao"><input type="radio" name="som" value="personalizado"> Personalizado</label>
+            <div class="field" style="margin-top:12px">
+              <label>Som de teste</label>
+              <div class="sounds">
+                <label class="sound"><input type="radio" name="som" value="padrao" checked> Padrão <button class="btn play" data-som="padrao" type="button">Testar</button></label>
+                <label class="sound"><input type="radio" name="som" value="sino"> Sininho <button class="btn play" data-som="sino" type="button">Testar</button></label>
+                <label class="sound"><input type="radio" name="som" value="suave"> Suave <button class="btn play" data-som="suave" type="button">Testar</button></label>
+                <label class="sound"><input type="radio" name="som" value="alerta"> Alerta <button class="btn play" data-som="alerta" type="button">Testar</button></label>
               </div>
+            </div>
 
-              <div class="botoes">
-                <button class="botao testarSom" type="button" data-som="padrao">Testar padrão</button>
-                <button class="botao testarSom" type="button" data-som="sininho">Testar sininho</button>
-                <button class="botao testarSom" type="button" data-som="suave">Testar suave</button>
-                <button class="botao testarSom" type="button" data-som="alerta">Testar alerta</button>
-              </div>
-
-              <label class="titulo-campo" for="arquivoSom" style="display:block;margin-top:16px">
-                Som personalizado (opcional)
-              </label>
-              <input class="campo" id="arquivoSom" type="file" accept="audio/*">
-              <p id="nomeSom" class="descricao">Nenhum arquivo selecionado.</p>
+            <div class="field" style="margin-top:14px">
+              <label for="arquivoSom">Arquivo de som personalizado</label>
+              <input id="arquivoSom" type="file" accept="audio/*">
+              <p id="nomeSom" class="desc">Nenhum arquivo selecionado.</p>
               <audio id="audioPersonalizado" controls hidden></audio>
-              <button class="botao" id="testarPersonalizado" type="button">Testar som personalizado</button>
+              <button class="btn" id="testarAudio" type="button" style="margin-top:8px">Testar áudio personalizado</button>
             </div>
           </section>
-        </div>
-
-        <div class="coluna">
-
-          <!-- IDIOMA E HORÁRIO -->
-          <section class="card" id="idioma">
-            <h2>Idioma e horário</h2>
-            <p class="descricao">Configure o idioma e a exibição de datas.</p>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="idiomaPreferido">Idioma</label>
-              <select class="campo" id="idiomaPreferido">
-                <option value="pt-BR">Português (Brasil)</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
-              </select>
-              <p class="descricao">Esta preferência não traduz automaticamente o conteúdo do site.</p>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="fuso">Fuso horário</label>
-              <input class="campo" id="fuso" type="text" placeholder="Ex.: America/Sao_Paulo">
-              <button class="botao" id="detectarFuso" type="button" style="margin-top:9px">Detectar fuso horário</button>
-            </div>
-
-            <div class="setting-row">
-              <div>
-                <strong>Horário atual</strong>
-                <p>Horário local deste dispositivo.</p>
-              </div>
-              <strong id="horarioAtual">--:--:--</strong>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="formatoHora">Formato de hora</label>
-              <select class="campo" id="formatoHora">
-                <option value="24">24 horas</option>
-                <option value="12">12 horas</option>
-              </select>
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="formatoData">Formato de data</label>
-              <select class="campo" id="formatoData">
-                <option value="dd/mm/aaaa">DD/MM/AAAA</option>
-                <option value="mm/dd/aaaa">MM/DD/AAAA</option>
-                <option value="aaaa-mm-dd">AAAA-MM-DD</option>
-              </select>
-            </div>
-          </section>
-
-          <!-- PRIVACIDADE -->
-          <section class="card" id="privacidade">
-            <h2>Privacidade</h2>
-            <p class="descricao">Gerencie as preferências de visibilidade desta interface.</p>
-
-            <div class="setting-row">
-              <div>
-                <strong>Mostrar status online</strong>
-                <p>Preferência local de exibição.</p>
-              </div>
-              <input type="checkbox" id="mostrarOnline" checked aria-label="Mostrar status online">
-            </div>
-
-            <div class="campo-grupo">
-              <label class="titulo-campo" for="visitasPerfil">Visibilidade das visitas ao perfil</label>
-              <select class="campo" id="visitasPerfil">
-                <option value="todos">Todos</option>
-                <option value="seguidores">Apenas seguidores</option>
-sons de demonstração são gerados pela página. Notificações reais
-                    em segundo plano exigem integração adicional.
-                </div>
-            </section>
-
         </div>
 
         <div class="column">
 
-            <section class="card pesquisavel" id="idioma"
-                     data-palavras="idioma língua região fuso horário data hora">
-                <div class="head">
-                    <span class="icon">◎</span>
-                    <div>
-                        <h2>Idioma e região</h2>
-                        <p class="desc">Escolha idioma, fuso e formatos.</p>
-                    </div>
+          <section class="card searchable" id="privacidade" data-words="privacidade perfil mensagens visitas online bloqueados">
+            <div class="head">
+              <span class="icon" aria-hidden="true">♢</span>
+              <div>
+                <h2>Privacidade</h2>
+                <p class="desc">Defina suas preferências de visibilidade.</p>
+              </div>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Mostrar status on-line</strong>
+                <small>Salva sua preferência local; não altera seu status no servidor.</small>
+              </div>
+              <input id="online" type="checkbox" checked>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Mostrar visitas ao perfil</strong>
+                <small>Preferência de exibição local.</small>
+              </div>
+              <input id="visitas" type="checkbox" checked>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Quem pode enviar mensagens?</strong>
+                <small>Esta escolha só será aplicada quando houver integração com o servidor.</small>
+              </div>
+              <select id="mensagens">
+                <option value="todos">Todos</option>
+                <option value="seguidores">Apenas seguidores</option>
+                <option value="ninguem">Ninguém</option>
+              </select>
+            </div>
+
+            <div class="item">
+              <div class="info">
+                <strong>Visibilidade do perfil</strong>
+                <small>Salva a opção escolhida neste navegador.</small>
+              </div>
+              <select id="visibilidade">
+                <option value="publico">Público</option>
+                <option value="privado">Privado</option>
+              </select>
+            </div>
+
+            <div class="field" style="margin-top:14px">
+              <label for="contasBloqueadas">Anotações sobre contas bloqueadas</label>
+              <textarea id="contasBloqueadas" rows="3" placeholder="Digite observações, se necessário..."></textarea>
+              <p class="desc">Este campo é apenas uma anotação local; ele não bloqueia contas de verdade.</p>
+            </div>
+
+            <button class="btn" id="gerenciarBloqueios" type="button" style="margin-top:10px">Sobre o bloqueio de contas</button>
+          </section>
+
+          <section class="card searchable" id="idioma" data-words="idioma região fuso horário data hora">
+            <div class="head">
+              <span class="icon" aria-hidden="true">◎</span>
+              <div>
+                <h2>Idioma e região</h2>
+                <p class="desc">Escolha o idioma e o formato de data e hora.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="idiomaPreferido">Idioma preferido</label>
+              <select id="idiomaPreferido">
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="en">Inglês</option>
+                <option value="es">Espanhol</option>
+              </select>
+              <p class="desc">Esta opção não traduz automaticamente as páginas do site.</p>
+            </div>
+
+            <div class="field" style="margin-top:12px">
+              <label for="fuso">Fuso horário</label>
+              <select id="fuso">
+                <option value="auto">Detectar automaticamente</option>
+                <option value="America/Sao_Paulo">Brasília — São Paulo</option>
+                <option value="America/Manaus">Manaus</option>
+                <option value="America/Rio_Branco">Rio Branco</option>
+                <option value="Europe/Lisbon">Lisboa</option>
+                <option value="Europe/London">Londres</option>
+                <option value="America/New_York">Nova York</option>
+                <option value="UTC">UTC</option>
+              </select>
+            </div>
+
+            <div class="formats">
+              <div class="field">
+                <label for="formatoHora">Formato da hora</label>
+                <select id="formatoHora">
+                  <option value="24">24 horas</option>
+                  <option value="12">12 horas</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="formatoData">Formato da data</label>
+                <select id="formatoData">
+                  <option value="DMY">DD/MM/AAAA</option>
+                  <option value="MDY">MM/DD/AAAA</option>
+                  <option value="YMD">AAAA-MM-DD</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="notice" id="horaAtual" aria-live="polite">Consultando a data e a hora...</div>
+          </section>
+
+          <section class="card searchable" id="dados" data-words="armazenamento dados livros offline espaço">
+            <div class="head">
+              <span class="icon" aria-hidden="true">▤</span>
+              <div>
+                <h2>Armazenamento e dados</h2>
+                <p class="desc">Consulte uma estimativa dos dados locais deste site.</p>
+              </div>
+            </div>
+
+            <div class="storage">
+              <div class="ring" id="storageRing"><span id="storagePercent">0%</span></div>
+              <div>
+                <strong id="storageUsed">Calculando...</strong>
+                <p class="desc">Estimativa dos dados disponíveis no armazenamento local.</p>
+              </div>
+            </div>
+
+            <div class="legend">
+              <div><span class="dot"></span> Preferências: <span id="settingsBytes">0 bytes</span></div>
+              <div><span class="dot"></span> Registros de livros: <span id="booksBytes">0 bytes</span></div>
+              <div><span class="dot"></span> Outros dados do site: <span id="otherBytes">0 bytes</span></div>
+            </div>
+
+            <div class="book-row">
+              <div class="book-info">
+                <span class="book-icon" aria-hidden="true">▤</span>
+                <div>
+                  <strong>Livros para leitura off-line</strong>
+                  <small id="offlineCount">0 registros</small>
                 </div>
+              </div>
+              <button class="btn" id="downloads" type="button">Ver registros</button>
+            </div>
 
-                <div class="item">
-                    <div class="info"><strong>Idioma</strong></div>
-                    <select id="idiomaPreferido">
-                        <option value="pt-BR">Português (Brasil)</option>
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="fr">Français</option>
-                        <option value="de">Deutsch</option>
-                        <option value="it">Italiano</option>
-                        <option value="ja">日本語</option>
-                        <option value="ko">한국어</option>
-                        <option value="zh">中文</option>
-                        <option value="ar">العربية</option>
-                    </select>
-                </div>
+            <p class="notice" id="storageNote">Os valores são estimativas e não representam necessariamente todos os arquivos armazenados pelo navegador.</p>
 
-                <div class="item">
-                    <div class="info"><strong>Fuso horário</strong></div>
-                    <select id="fuso">
-                        <option value="auto">Detectar automaticamente</option>
-                        <option value="America/Sao_Paulo">Brasília / São Paulo</option>
-                        <option value="America/Manaus">Manaus</option>
-                        <option value="America/Rio_Branco">Rio Branco</option>
-                        <option value="America/Noronha">Fernando de Noronha</option>
-                        <option value="America/New_York">Nova York</option>
-                        <option value="Europe/Lisbon">Lisboa</option>
-                        <option value="Europe/London">Londres</option>
-                        <option value="Europe/Paris">Paris</option>
-                        <option value="Asia/Tokyo">Tóquio</option>
-                        <option value="Australia/Sydney">Sydney</option>
-                    </select>
-                </div>
+            <div class="item">
+              <div class="info">
+                <strong>Exportar preferências</strong>
+                <small>Baixa um arquivo JSON com as opções salvas.</small>
+              </div>
+              <button class="btn" id="exportar" type="button">Exportar</button>
+            </div>
 
-                <div class="item">
-                    <div class="info">
-                        <strong>Horário atual</strong>
-                        <small id="horarioAtual">Calculando...</small>
-                    </div>
-                    <button class="btn" id="detectarFuso" type="button">Usar meu fuso</button>
-                </div>
+            <div class="item">
+              <div class="info">
+                <strong>Restaurar preferências</strong>
+                <small>Volta às opções padrão desta página.</small>
+              </div>
+              <button class="btn" id="limpar" type="button">Restaurar</button>
+            </div>
+          </section>
 
-                <div class="formats">
-                    <div class="field">
-                        <label for="formatoHora">Formato de hora</label>
-                        <select id="formatoHora">
-                            <option value="24">24 horas</option>
-                            <option value="12">12 horas (AM/PM)</option>
-                        </select>
-                    </div>
+          <section class="card searchable" id="dispositivo" data-words="dispositivo sessão navegador idioma">
+            <div class="head">
+              <span class="icon" aria-hidden="true">▣</span>
+              <div>
+                <h2>Dispositivo e sessão</h2>
+                <p class="desc">Informações básicas deste navegador.</p>
+              </div>
+            </div>
 
-                    <div class="field">
-                        <label for="formatoData">Formato de data</label>
-                        <select id="formatoData">
-                            <option value="local">Automático</option>
-                            <option value="DMY">DD/MM/AAAA</option>
-                            <option value="MDY">MM/DD/AAAA</option>
-                            <option value="YMD">AAAA-MM-DD</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="device-grid">
+              <div class="mini">
+                <span class="gold" aria-hidden="true">▣</span>
+                <div><b>Dispositivo</b><span id="dispositivoAtual">Consultando...</span></div>
+              </div>
+              <div class="mini">
+                <span class="gold" aria-hidden="true">◷</span>
+                <div><b>Fuso horário detectado</b><span id="fusoDetectado">Consultando...</span></div>
+              </div>
+              <div class="mini">
+                <span class="gold" aria-hidden="true">▣</span>
+                <div><b>Idioma do navegador</b><span id="idiomaNavegador">Consultando...</span></div>
+              </div>
+              <div class="mini">
+                <span class="gold" aria-hidden="true">◎</span>
+                <div><b>Fuso selecionado</b><span id="fusoAtual">Automático</span></div>
+              </div>
+            </div>
 
-                <div class="notice">
-                    A escolha do idioma fica salva, mas a tradução de todas as páginas
-                    precisa ser implementada separadamente.
-                </div>
-            </section>
+            <p class="notice">Para consultar outros dispositivos conectados ou encerrar sessões remotamente, é necessário integrar esta página a um sistema de autenticação com servidor.</p>
+          </section>
 
-            <section class="card pesquisavel" id="privacidade"
-                     data-palavras="privacidade segurança online perfil mensagens bloqueio">
-                <div class="head">
-                    <span class="icon">♢</span>
-                    <div>
-                        <h2>Privacidade e segurança</h2>
-                        <p class="desc">Configure suas preferências de privacidade.</p>
-                    </div>
-                </div>
+          <section class="card searchable" id="pesquisa" data-words="pesquisa buscar livros blogs redações">
+            <div class="head">
+              <span class="icon" aria-hidden="true">⌕</span>
+              <div>
+                <h2>Pesquisa</h2>
+                <p class="desc">Encontre conteúdos na Mystic Livraria.</p>
+              </div>
+            </div>
 
-                <div class="item">
-                    <div class="info"><strong>Mostrar status online</strong></div>
-                    <input type="checkbox" id="mostrarOnline" checked>
-                </div>
-
-                <div class="item">
-                    <div class="info"><strong>Permitir registro de visitas ao perfil</strong></div>
-                    <input type="checkbox" id="visitasPerfil" checked>
-                </div>
-
-                <div class="item">
-                    <div class="info"><strong>Quem pode enviar mensagens</strong></div>
-                    <select id="quemMensagem">
-                        <option value="todos">Todos</option>
-                        <option value="conexoes">Pessoas com conexão</option>
-                        <option value="ninguem">Ninguém</option>
-                    </select>
-                </div>
-
-                <div class="item">
-                    <div class="info"><strong>Visibilidade do perfil</strong></div>
-                    <select id="visibilidadePerfil">
-                        <option value="publico">Público</option>
-                        <option value="privado">Privado</option>
-                    </select>
-                </div>
-
-                <div class="item">
-                    <div class="info">
-                        <strong>Contas bloqueadas</strong>
-                        <small>O bloqueio real exige integração entre usuários.</small>
-                    </div>
-                    <button class="btn" id="contasBloqueadas" type="button">Gerenciar</button>
-                </div>
-
-                <div class="notice">
-                    Estas opções guardam preferências neste navegador. Elas não aplicam
-                    restrições reais a outros usuários sem um sistema de contas conectado.
-                </div>
-            </section>
-
+            <div class="item">
+              <div class="info">
+                <strong>Pesquisar livros, blogs e redações</strong>
+                <small>Continue sua pesquisa na página inicial.</small>
+              </div>
+              <a class="btn" href="home.html">Pesquisar</a>
+            </div>
+          </section>
         </div>
       </div>
-  
-      <!-- ARMAZENAMENTO -->
-      <section class="card" id="dados">
-        <h2>Armazenamento e dados</h2>
-        <p>Gerencie as preferências salvas neste navegador.</p>
 
-        <div class="setting-row">
-          <div>
-            <strong>Configurações salvas</strong>
-            <p>Suas preferências ficam neste navegador.</p>
-          </div>
-          <button type="button" class="gold" id="exportarConfig">
-            Exportar configurações
-          </button>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <strong>Restaurar configurações</strong>
-            <p>Volta às preferências padrão da página.</p>
-          </div>
-          <button type="button" id="restaurarConfig">
-            Restaurar padrão
-          </button>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <strong>Limpar configurações salvas</strong>
-            <p>Remove as preferências locais deste site.</p>
-          </div>
-          <button type="button" id="limparConfig">
-            Limpar dados
-          </button>
-        </div>
-      </section>
-
-      <!-- DISPOSITIVO -->
-      <section class="card" id="dispositivo">
-        <h2>Dispositivo e sessão</h2>
-        <p>Informações básicas do navegador atual.</p>
-
-        <div class="setting-row">
-          <span>Navegador</span>
-          <strong id="infoNavegador">Detectando...</strong>
-        </div>
-
-        <div class="setting-row">
-          <span>Idioma do navegador</span>
-          <strong id="infoIdioma">Detectando...</strong>
-        </div>
-
-        <div class="setting-row">
-          <span>Última atualização das preferências</span>
-          <strong id="ultimaAtualizacao">Ainda não salva</strong>
-        </div>
-
-        <div class="setting-row">
-          <div>
-            <strong>Sair da conta</strong>
-            <p>Encerra a sessão local deste site.</p>
-          </div>
-          <button type="button" id="sairConta">Sair</button>
-        </div>
-      </section>
-
+      <div class="notice full-width">
+        As preferências desta página são armazenadas no navegador atual. Elas não substituem as configurações de uma conta conectada a um servidor.
+      </div>
     </main>
   </div>
 
-  <!-- RODAPÉ -->
-  <footer class="footer">
-    <p>© <span id="anoAtual"></span> Mystic Livraria</p>
-    <p>Suas preferências são gerenciadas neste navegador.</p>
+  <footer>
+    <a href="perfil.html">← Voltar ao perfil</a>
+    <span>© <span id="anoAtual"></span> Mystic Livraria</span>
   </footer>
 
   <script>
-    (() => {
-      "use strict";
+    "use strict";
 
-      const CHAVE_CONFIG = "mysticConfiguracoes";
+    const CHAVE_CONFIG = "mysticConfiguracoes";
+    const CHAVE_LIVROS = "mysticLivrosOffline";
 
-      const $ = (seletor) => document.querySelector(seletor);
-      const $$ = (seletor) => document.querySelectorAll(seletor);
+    const padrao = {
+      theme: "dark",
+      size: "normal",
+      font: "default",
+      spacing: "normal",
+      bold: false,
+      italic: false,
+      underline: false,
+      reduceMotion: false,
+      accent: "dourado",
+      notifications: true,
+      sounds: false,
+      sound: "padrao",
+      online: true,
+      visits: true,
+      messages: "todos",
+      visibility: "publico",
+      blockedNotes: "",
+      language: "pt-BR",
+      timezone: "auto",
+      hour: "24",
+      date: "DMY"
+    };
 
-      const status = $("#status");
+    const $ = (id) => document.getElementById(id);
 
-      function avisar(mensagem) {
-        if (status) {
-          status.textContent = mensagem;
-          status.hidden = false;
-        } else {
-          alert(mensagem);
-        }
+    function carregarPreferencias() {
+      try {
+        const salvas = JSON.parse(localStorage.getItem(CHAVE_CONFIG) || "{}");
+        return { ...padrao, ...salvas };
+      } catch {
+        return { ...padrao };
+      }
+    }
+
+    let estado = carregarPreferencias();
+    let audioUrl = null;
+    let imagemUrl = null;
+    let contextoAudio = null;
+
+    function avisar(mensagem) {
+      const elemento = $("avisoSalvo");
+      if (elemento) elemento.textContent = mensagem;
+    }
+
+    function salvar(mensagem = "Preferências salvas neste navegador.") {
+      try {
+        localStorage.setItem(CHAVE_CONFIG, JSON.stringify(estado));
+        avisar(mensagem);
+        atualizarArmazenamento();
+      } catch {
+        avisar("Não foi possível salvar as preferências. Verifique o armazenamento do navegador.");
+      }
+    }
+
+    function alterar(chave, valor) {
+      estado[chave] = valor;
+      aplicarPreferencias();
+      salvar();
+      atualizarHora();
+    }
+
+    function aplicarPreferencias() {
+      document.body.classList.toggle("light", estado.theme === "light");
+
+      document.body.classList.remove(
+        "small", "large", "xlarge",
+        "font-arial", "font-georgia", "font-verdana", "font-mono",
+        "spacing-medium", "spacing-wide", "no-animations"
+      );
+
+      if (["small", "large", "xlarge"].includes(estado.size)) {
+        document.body.classList.add(estado.size);
       }
 
-      function lerConfiguracoes() {
-        try {
-          return JSON.parse(localStorage.getItem(CHAVE_CONFIG)) || {};
-        } catch {
-          return {};
-        }
+      if (["arial", "georgia", "verdana", "mono"].includes(estado.font)) {
+        document.body.classList.add("font-" + estado.font);
       }
 
-      function salvarConfiguracoes(mostrarMensagem = true) {
-        const configuracoes = {};
-
-        $$("input, select, textarea").forEach((campo) => {
-          if (!campo.id && !campo.name) return;
-
-          const chave = campo.id || campo.name;
-
-          if (campo.type === "checkbox") {
-            configuracoes[chave] = campo.checked;
-          } else if (campo.type === "radio") {
-            if (campo.checked) configuracoes[campo.name] = campo.value;
-          } else if (campo.type !== "file") {
-            configuracoes[chave] = campo.value;
-          }
-        });
-
-        configuracoes.atualizadoEm = new Date().toLocaleString();
-
-        try {
-          localStorage.setItem(CHAVE_CONFIG, JSON.stringify(configuracoes));
-
-          const ultimaAtualizacao = $("#ultimaAtualizacao");
-          if (ultimaAtualizacao) {
-            ultimaAtualizacao.textContent = configuracoes.atualizadoEm;
-          }
-
-          if (mostrarMensagem) avisar("Configurações salvas neste navegador.");
-        } catch {
-          avisar("Não foi possível salvar. Verifique o armazenamento do navegador.");
-        }
+      if (["medium", "wide"].includes(estado.spacing)) {
+        document.body.classList.add("spacing-" + estado.spacing);
       }
 
-      function aplicarConfiguracoes() {
-        const configuracoes = lerConfiguracoes();
-
-        Object.entries(configuracoes).forEach(([chave, valor]) => {
-          if (chave === "atualizadoEm") {
-            const campoData = $("#ultimaAtualizacao");
-            if (campoData) campoData.textContent = valor;
-            return;
-          }
-
-          const campo = document.getElementById(chave);
-          if (!campo) return;
-
-          if (campo.type === "checkbox") {
-            campo.checked = Boolean(valor);
-          } else if (campo.type === "radio") {
-            const radio = document.querySelector(
-              `input[name="${campo.name}"][value="${valor}"]`
-            );
-            if (radio) radio.checked = true;
-          } else if (campo.type !== "file") {
-            campo.value = valor;
-          }
-        });
-
-        aplicarVisual();
+      if (estado.reduceMotion) {
+        document.body.classList.add("no-animations");
       }
 
-      function aplicarVisual() {
-        const temaEscuro = $("#temaEscuro");
-        const temaClaro = $("#temaClaro");
-        const tamanhoFonte = $("#tamanhoFonte");
-        const tipoFonte = $("#tipoFonte");
-        const espacamento = $("#espacamento");
-        const reduzirAnimacoes = $("#reduzirAnimacoes");
-        const negrito = $("#negrito");
-        const italico = $("#italico");
-        const sublinhar = $("#sublinhar");
+      document.body.style.fontWeight = estado.bold ? "700" : "";
+      document.body.style.fontStyle = estado.italic ? "italic" : "";
 
-        if (temaClaro?.checked) {
-          document.body.classList.add("tema-claro");
-          document.body.classList.remove("tema-escuro");
-        } else if (temaEscuro?.checked) {
-          document.body.classList.add("tema-escuro");
-          document.body.classList.remove("tema-claro");
-        }
-
-        document.body.classList.remove(
-          "fonte-pequena", "fonte-grande", "fonte-extra-grande",
-          "fonte-arial", "fonte-georgia", "fonte-verdana", "fonte-mono",
-          "espacamento-medio", "espacamento-amplo",
-          "sem-animacoes", "texto-negrito", "texto-italico", "texto-sublinhado"
-        );
-
-        const tamanhos = {
-          small: "fonte-pequena",
-          large: "fonte-grande",
-          xlarge: "fonte-extra-grande"
-        };
-
-        if (tamanhoFonte && tamanhos[tamanhoFonte.value]) {
-          document.body.classList.add(tamanhos[tamanhoFonte.value]);
-        }
-
-        const fontes = {
-          arial: "fonte-arial",
-          georgia: "fonte-georgia",
-          verdana: "fonte-verdana",
-          mono: "fonte-mono"
-        };
-
-        if (tipoFonte && fontes[tipoFonte.value]) {
-          document.body.classList.add(fontes[tipoFonte.value]);
-        }
-
-        if (espacamento?.value === "medium") {
-          document.body.classList.add("espacamento-medio");
-        } else if (espacamento?.value === "wide") {
-          document.body.classList.add("espacamento-amplo");
-        }
-
-        if (reduzirAnimacoes?.checked) {
-          document.body.classList.add("sem-animacoes");
-        }
-
-        if (negrito?.checked) document.body.classList.add("texto-negrito");
-        if (italico?.checked) document.body.classList.add("texto-italico");
-        if (sublinhar?.checked) document.body.classList.add("texto-sublinhado");
-      }
-
-      // Salva e aplica alterações nos campos.
-      $$("input, select, textarea").forEach((campo) => {
-        campo.addEventListener("change", () => {
-          aplicarVisual();
-          salvarConfiguracoes(false);
-        });
+      document.querySelectorAll("a").forEach((link) => {
+        link.style.textDecoration = estado.underline ? "underline" : "";
       });
 
-      $("#temaEscuro")?.addEventListener("change", aplicarVisual);
-      $("#temaClaro")?.addEventListener("change", aplicarVisual);
+      $("temaEscuro").classList.toggle("selected", estado.theme === "dark");
+      $("temaClaro").classList.toggle("selected", estado.theme === "light");
+      $("temaEscuro").setAttribute("aria-pressed", String(estado.theme === "dark"));
+      $("temaClaro").setAttribute("aria-pressed", String(estado.theme === "light"));
 
-      // Exporta as configurações em um arquivo JSON.
-      $("#exportarConfig")?.addEventListener("click", () => {
-        const arquivo = new Blob(
-          [JSON.stringify(lerConfiguracoes(), null, 2)],
-          { type: "application/json" }
-        );
+      $("tamanhoFonte").value = estado.size;
+      $("fonte").value = estado.font;
+      $("corDestaque").value = estado.accent;
+      $("reduzirAnimacoes").checked = estado.reduceMotion;
+      $("negrito").checked = estado.bold;
+      $("italico").checked = estado.italic;
+      $("sublinhar").checked = estado.underline;
+      $("idiomaPreferido").value = estado.language;
+      $("fuso").value = estado.timezone;
+      $("formatoHora").value = estado.hour;
+      $("formatoData").value = estado.date;
+      $("notificacoesAtivas").checked = estado.notifications;
+      $("sonsAtivos").checked = estado.sounds;
+      $("online").checked = estado.online;
+      $("visitas").checked = estado.visits;
+      $("mensagens").value = estado.messages;
+      $("visibilidade").value = estado.visibility;
+      $("contasBloqueadas").value = estado.blockedNotes;
 
+      document.querySelectorAll("[data-spacing]").forEach((botao) => {
+        botao.classList.toggle("selected", botao.dataset.spacing === estado.spacing);
+      });
+
+      document.querySelectorAll('[name="som"]').forEach((radio) => {
+        radio.checked = radio.value === estado.sound;
+      });
+
+      const cores = {
+        dourado: { gold: "#f2bd4b", goldbg: "#49391a" },
+        azul: { gold: "#82b8ff", goldbg: "#1e344c" },
+        verde: { gold: "#83d6a0", goldbg: "#1c3d2b" }
+      };
+
+      const cor = cores[estado.accent] || cores.dourado;
+      document.documentElement.style.setProperty("--gold", cor.gold);
+      document.documentElement.style.setProperty("--goldbg", cor.goldbg);
+    }
+
+    $("temaEscuro").addEventListener("click", () => alterar("theme", "dark"));
+    $("temaClaro").addEventListener("click", () => alterar("theme", "light"));
+
+    $("tamanhoFonte").addEventListener("change", (evento) => alterar("size", evento.target.value));
+    $("fonte").addEventListener("change", (evento) => alterar("font", evento.target.value));
+    $("corDestaque").addEventListener("change", (evento) => alterar("accent", evento.target.value));
+    $("reduzirAnimacoes").addEventListener("change", (evento) => alterar("reduceMotion", evento.target.checked));
+    $("formatoHora").addEventListener("change", (evento) => alterar("hour", evento.target.value));
+    $("formatoData").addEventListener("change", (evento) => alterar("date", evento.target.value));
+    $("idiomaPreferido").addEventListener("change", (evento) => alterar("language", evento.target.value));
+    $("fuso").addEventListener("change", (evento) => alterar("timezone", evento.target.value));
+    $("mensagens").addEventListener("change", (evento) => alterar("messages", evento.target.value));
+    $("visibilidade").addEventListener("change", (evento) => alterar("visibility", evento.target.value));
+    $("contasBloqueadas").addEventListener("change", (evento) => alterar("blockedNotes", evento.target.value));
+
+    [
+      ["negrito", "bold"],
+      ["italico", "italic"],
+      ["sublinhar", "underline"],
+      ["notificacoesAtivas", "notifications"],
+      ["sonsAtivos", "sounds"],
+      ["online", "online"],
+      ["visitas", "visits"]
+    ].forEach(([id, chave]) => {
+      $(id).addEventListener("change", (evento) => alterar(chave, evento.target.checked));
+    });
+
+    document.querySelectorAll("[data-spacing]").forEach((botao) => {
+      botao.addEventListener("click", () => alterar("spacing", botao.dataset.spacing));
+    });
+
+    document.querySelectorAll('[name="som"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        if (radio.checked) alterar("sound", radio.value);
+      });
+    });
+
+    // Pesquisa as seções sem alterar os dados salvos.
+    $("buscaTopo").addEventListener("input", (evento) => {
+      const termo = evento.target.value.trim().toLocaleLowerCase("pt-BR");
+
+      document.querySelectorAll(".searchable").forEach((cartao) => {
+        const conteudo = (
+          cartao.innerText + " " + (cartao.dataset.words || "")
+        ).toLocaleLowerCase("pt-BR");
+
+        cartao.classList.toggle("hidden", Boolean(termo) && !conteudo.includes(termo));
+      });
+    });
+
+    // Gera sons de teste usando o navegador.
+    async function tocarSom(tipo) {
+      if (!estado.sounds) {
+        avisar("Ative os sons de notificação antes de testar.");
+        return;
+      }
+
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContext) {
+          avisar("Este navegador não oferece suporte à reprodução desse som.");
+          return;
+        }
+
+        contextoAudio = contextoAudio || new AudioContext();
+
+        if (contextoAudio.state === "suspended") {
+          await contextoAudio.resume();
+        }
+
+        const frequencias = {
+          padrao: [660, 880],
+          sino: [1046, 1318],
+          suave: [440, 554],
+          alerta: [880, 660]
+        };
+
+        (frequencias[tipo] || frequencias.padrao).forEach((frequencia, indice) => {
+          const oscilador = contextoAudio.createOscillator();
+          const volume = contextoAudio.createGain();
+          const inicio = contextoAudio.currentTime + indice * 0.15;
+
+          oscilador.frequency.value = frequencia;
+          oscilador.type = tipo === "suave" ? "sine" : "triangle";
+
+          volume.gain.setValueAtTime(0.001, inicio);
+          volume.gain.exponentialRampToValueAtTime(0.12, inicio + 0.02);
+          volume.gain.exponentialRampToValueAtTime(0.001, inicio + 0.18);
+
+          oscilador.connect(volume);
+          volume.connect(contextoAudio.destination);
+          oscilador.start(inicio);
+          oscilador.stop(inicio + 0.2);
+        });
+      } catch {
+        avisar("Não foi possível reproduzir o som neste navegador.");
+      }
+    }
+
+    document.querySelectorAll(".play").forEach((botao) => {
+      botao.addEventListener("click", () => tocarSom(botao.dataset.som));
+    });
+
+    $("arquivoSom").addEventListener("change", (evento) => {
+      const arquivo = evento.target.files && evento.target.files[0];
+      const audio = $("audioPersonalizado");
+
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+        audioUrl = null;
+      }
+
+      if (!arquivo) {
+        $("nomeSom").textContent = "Nenhum arquivo selecionado.";
+        audio.removeAttribute("src");
+        audio.hidden = true;
+        return;
+      }
+
+      if (!arquivo.type.startsWith("audio/")) {
+        evento.target.value = "";
+        avisar("Selecione um arquivo de áudio válido.");
+        return;
+      }
+
+      audioUrl = URL.createObjectURL(arquivo);
+      audio.src = audioUrl;
+      audio.hidden = false;
+      $("nomeSom").textContent = arquivo.name;
+      avisar("Arquivo de áudio selecionado. Ele não foi enviado a um servidor.");
+    });
+
+    $("testarAudio").addEventListener("click", async () => {
+      if (!estado.sounds) {
+        avisar("Ative os sons de notificação antes de testar.");
+        return;
+      }
+
+      const audio = $("audioPersonalizado");
+
+      if (!audio.src) {
+        avisar("Escolha um arquivo de áudio primeiro.");
+        return;
+      }
+
+      try {
+        await audio.play();
+      } catch {
+        avisar("Não foi possível reproduzir o arquivo de áudio.");
+      }
+    });
+
+    // A imagem escolhida é usada apenas como prévia temporária.
+    $("arquivoWallpaper").addEventListener("change", (evento) => {
+      const arquivo = evento.target.files && evento.target.files[0];
+
+      if (imagemUrl) {
+        URL.revokeObjectURL(imagemUrl);
+        imagemUrl = null;
+      }
+
+      if (!arquivo) return;
+
+      if (!arquivo.type.startsWith("image/")) {
+        evento.target.value = "";
+        avisar("Selecione um arquivo de imagem válido.");
+        return;
+      }
+
+      imagemUrl = URL.createObjectURL(arquivo);
+      $("wallpaper").style.background = `center / cover no-repeat url("${imagemUrl}")`;
+      avisar("Prévia da imagem atualizada. A imagem não foi enviada nem salva permanentemente.");
+    });
+
+    $("gerenciarBloqueios").addEventListener("click", () => {
+      avisar("O bloqueio real de contas precisa estar integrado ao sistema de usuários do servidor.");
+    });
+
+    // Exporta apenas as preferências guardadas por esta página.
+    $("exportar").addEventListener("click", () => {
+      try {
+        const conteudo = JSON.stringify(estado, null, 2);
+        const arquivo = new Blob([conteudo], { type: "application/json" });
         const url = URL.createObjectURL(arquivo);
         const link = document.createElement("a");
+
         link.href = url;
         link.download = "mystic-configuracoes.json";
+        document.body.appendChild(link);
         link.click();
+        link.remove();
         URL.revokeObjectURL(url);
-        avisar("Exportação iniciada.");
-      });
 
-      // Restaura os campos para o padrão e remove as preferências guardadas.
-      $("#restaurarConfig")?.addEventListener("click", () => {
-        if (!confirm("Deseja restaurar as configurações padrão?")) return;
+        avisar("Arquivo de preferências exportado.");
+      } catch {
+        avisar("Não foi possível exportar as preferências.");
+      }
+    });
 
+    $("limpar").addEventListener("click", () => {
+      if (!confirm("Deseja restaurar as configurações padrão desta página?")) return;
+
+      estado = { ...padrao };
+
+      try {
         localStorage.removeItem(CHAVE_CONFIG);
-        location.reload();
-      });
-
-      $("#limparConfig")?.addEventListener("click", () => {
-        if (!confirm("Deseja apagar as configurações salvas neste navegador?")) return;
-
-        localStorage.removeItem(CHAVE_CONFIG);
-        avisar("Configurações locais removidas.");
-      });
-
-      // Exibe informações básicas do navegador.
-      const navegador = $("#infoNavegador");
-      const idioma = $("#infoIdioma");
-
-      if (navegador) navegador.textContent = navigator.userAgent;
-      if (idioma) idioma.textContent = navigator.language || "Indisponível";
-
-      const ano = $("#anoAtual");
-      if (ano) ano.textContent = new Date().getFullYear();
-
-      // Atualiza relógio e fuso horário, se os campos existirem.
-      function atualizarHorario() {
-        const horario = $("#horarioAtual");
-        const fuso = $("#fuso");
-
-        if (horario) {
-          horario.textContent = new Date().toLocaleTimeString();
-        }
-
-        if (fuso && !fuso.value) {
-          fuso.value = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-        }
+      } catch {
+        avisar("Não foi possível remover as preferências salvas.");
+        return;
       }
 
-      $("#detectarFuso")?.addEventListener("click", () => {
-        const fuso = $("#fuso");
-        if (fuso) {
-          fuso.value = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
-          salvarConfiguracoes(false);
-          avisar("Fuso horário atualizado.");
-        }
-      });
+      aplicarPreferencias();
+      salvar("As preferências padrão foram restauradas.");
+      atualizarHora();
+    });
 
-      // Botão para sair da sessão local.
-      $("#sairConta")?.addEventListener("click", () => {
-        if (!confirm("Deseja sair da sua conta neste navegador?")) return;
+    // Mostra registros existentes, sem afirmar que os arquivos foram baixados.
+    $("downloads").addEventListener("click", () => {
+      let livros = [];
 
+      try {
+        const dados = JSON.parse(localStorage.getItem(CHAVE_LIVROS) || "[]");
+        if (Array.isArray(dados)) livros = dados;
+      } catch {
+        livros = [];
+      }
+
+      if (livros.length) {
+        avisar(
+          `Foram encontrados ${livros.length} registro(s) de livros para leitura off-line. Isso não confirma que os arquivos estejam baixados.`
+        );
+      } else {
+        avisar("Nenhum registro de livro para leitura off-line foi encontrado.");
+      }
+    });
+
+    $("sair").addEventListener("click", () => {
+      if (!confirm("Deseja sair da sua conta neste navegador?")) return;
+
+      try {
         sessionStorage.removeItem("mysticLogado");
         sessionStorage.removeItem("mysticEmail");
-        location.href = "index.html";
-      });
+      } catch {
+        avisar("Não foi possível encerrar a sessão automaticamente.");
+        return;
+      }
 
-      // Pesquisa simples pelas seções da página.
-      $("#buscaTopo")?.addEventListener("input", (evento) => {
-        const termo = evento.target.value.trim().toLocaleLowerCase("pt-BR");
+      window.location.href = "index.html";
+    });
 
-        $$(".card").forEach((cartao) => {
-          const corresponde = cartao.textContent
-            .toLocaleLowerCase("pt-BR")
-            .includes(termo);
+    // Informações gerais do navegador.
+    $("fusoDetectado").textContent =
+      Intl.DateTimeFormat().resolvedOptions().timeZone || "Não detectado";
 
-          cartao.hidden = termo !== "" && !corresponde;
-        });
-      });
+    $("idiomaNavegador").textContent = navigator.language || "Não detectado";
 
-      aplicarConfiguracoes();
-      atualizarHorario();
-    })();
+    const agente = navigator.userAgent;
+
+    $("dispositivoAtual").textContent =
+      /Windows/i.test(agente) ? "Windows" :
+      /Android/i.test(agente) ? "Android" :
+      /iPhone|iPad/i.test(agente) ? "iOS" :
+      /Macintosh|Mac OS/i.test(agente) ? "macOS" :
+      /Linux/i.test(agente) ? "Linux" :
+      "Sistema não identificado";
+
+    $("anoAtual").textContent = new Date().getFullYear();
+
+    function atualizarHora() {
+      const zona = estado.timezone === "auto"
+        ? (Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC")
+        : estado.timezone;
+
+      $("fusoAtual").textContent =
+        estado.timezone === "auto" ? `${zona} (automático)` : zona;
+
+      try {
+        const agora = new Date();
+
+        const hora = new Intl.DateTimeFormat(estado.language, {
+          timeZone: zona,
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: estado.hour === "12"
+        }).format(agora);
+
+        const partes = new Intl.DateTimeFormat("en-CA", {
+          timeZone: zona,
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        }).formatToParts(agora);
+
+        const data = Object.fromEntries(
+          partes.map((parte) => [parte.type, parte.value])
+        );
+
+        let dataFormatada;
+
+        if (estado.date === "YMD") {
+          dataFormatada = `${data.year}-${data.month}-${data.day}`;
+        } else if (estado.date === "MDY") {
+          dataFormatada = `${data.month}/${data.day}/${data.year}`;
+        } else {
+          dataFormatada = `${data.day}/${data.month}/${data.year}`;
+        }
+
+        $("horaAtual").textContent = `Horário atual: ${hora} • Data: ${dataFormatada}`;
+      } catch {
+        $("horaAtual").textContent =
+          "Não foi possível calcular a data e a hora para esse fuso horário.";
+      }
+    }
+
+    function formatarBytes(bytes) {
+      if (!Number.isFinite(bytes) || bytes <= 0) return "0 bytes";
+
+      const unidades = ["bytes", "KB", "MB", "GB"];
+      let indice = 0;
+      let valor = bytes;
+
+      while (valor >= 1024 && indice < unidades.length - 1) {
+        valor /= 1024;
+        indice++;
+      }
+
+      return `${indice === 0 ? Math.round(valor) : valor.toFixed(1)} ${unidades[indice]}`;
+    }
+
+    function atualizarArmazenamento() {
+      let bytesPreferencias = 0;
+      let bytesLivros = 0;
+      let bytesOutros = 0;
+      let livros = [];
+
+      try {
+        bytesPreferencias = new Blob([
+          localStorage.getItem(CHAVE_CONFIG) || ""
+        ]).size;
+      } catch {}
+
+      try {
+        const dados = JSON.parse(localStorage.getItem(CHAVE_LIVROS) || "[]");
+        if (Array.isArray(dados)) livros = dados;
+        bytesLivros = new Blob([
+          JSON.stringify(livros)
+        ]).size;
+      } catch {
+        livros = [];
+      }
+
+      try {
+        for (let indice = 0; indice < localStorage.length; indice++) {
+          const chave = localStorage.key(indice);
+
+          if (chave !== CHAVE_CONFIG && chave !== CHAVE_LIVROS) {
+            bytesOutros += new Blob([
+              localStorage.getItem(chave) || ""
+            ]).size;
+          }
+        }
+      } catch {}
+
+      const total = bytesPreferencias + bytesLivros + bytesOutros;
+      const percentual = Math.min(
+        100,
+        Math.round(total / (5 * 1024 * 1024) * 100)
+      );
+
+      $("storageUsed").textContent = `${formatarBytes(total)} (estimativa)`;
+      $("settingsBytes").textContent = formatarBytes(bytesPreferencias);
+      $("booksBytes").textContent = formatarBytes(bytesLivros);
+      $("otherBytes").textContent = formatarBytes(bytesOutros);
+      $("offlineCount").textContent =
+        `${livros.length} ${livros.length === 1 ? "registro" : "registros"}`;
+
+      $("storagePercent").textContent = `${percentual}%`;
+      $("storageRing").style.background =
+        `conic-gradient(var(--gold) 0 ${percentual}%, var(--border) ${percentual}% 100%)`;
+
+      $("storageNote").textContent =
+        "Estimativa dos dados locais acessíveis a esta página, usando 5 MB apenas como referência visual. Não mede todo o cache do navegador nem confirma que os arquivos dos livros estejam baixados.";
+    }
+
+    aplicarPreferencias();
+    atualizarHora();
+    atualizarArmazenamento();
+    setInterval(atualizarHora, 30000);
   </script>
 </body>
-  </html>
-          
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Configurações — Mystic</title>
-
-<style>
-:root {
-    color-scheme: dark;
-    --bg: #0c0f13;
-    --panel: #151a20;
-    --panel2: #1c2229;
-    --border: #2b333d;
-    --text: #f4f4f5;
-    --muted: #a6adb8;
-    --field: #10151b;
-    --gold: #f2bd4b;
-    --goldbg: #49391a;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.45 Inter, Arial, sans-serif;
-}
-
-body.light {
-    color-scheme: light;
-    --bg: #f2f3f5;
-    --panel: #ffffff;
-    --panel2: #f5f6f8;
-    --border: #d9dde3;
-    --text: #22262c;
-    --muted: #626b77;
-    --field: #ffffff;
-    --gold: #b78319;
-    --goldbg: #f7edda;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-header {
-    height: 54px;
-    display: flex;
-    align-items: center;
-    padding: 0 22px;
-    gap: 18px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 5;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 165px;
-    font: bold 25px Georgia, serif;
-    color: #ffffff;
-}
-
-.logo .book {
-    color: var(--gold);
-    font: 26px Arial;
-}
-
-.actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.search {
-    width: min(250px, 35vw);
-}
-
-input[type="search"],
-input[type="text"],
-select {
-    width: 100%;
-    min-width: 0;
-    padding: 9px 11px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--field);
-    color: var(--text);
-}
-
-input[type="file"] {
-    max-width: 100%;
-    color: var(--text);
-}
-
-input::placeholder {
-    color: var(--muted);
-}
-
-.gold {
-    color: var(--gold);
-    font-size: 20px;
-}
-
-.avatar {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    background: #303741;
-    display: grid;
-    place-items: center;
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: 205px minmax(0, 1fr);
-    min-height: calc(100vh - 54px);
-}
-
-aside {
-    padding: 18px 9px;
-    background: #0e1217;
-    border-right: 1px solid var(--border);
-}
-
-aside a {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 10px 11px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    color: #c4cad2;
-    font-size: 13px;
-}
-
-aside a i {
-    width: 18px;
-    text-align: center;
-    color: var(--gold);
-    font-style: normal;
-    font-size: 17px;
-}
-
-aside a:hover,
-aside a.active {
-    background: var(--goldbg);
-    color: var(--text);
-}
-
-aside a.active {
-    border: 1px solid #8d6a25;
-}
-
-main {
-    width: 100%;
-    max-width: 1450px;
-    margin: auto;
-    padding: 18px 24px 26px;
-    min-width: 0;
-}
-
-.title {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.title .gear {
-    font-size: 27px;
-    color: var(--gold);
-}
-
-.title h1 {
-    font-size: 23px;
-    margin: 0;
-}
-
-.title p,
-.desc {
-    color: var(--muted);
-    font-size: 11px;
-    margin: 4px 0 0;
-}
-
-.columns {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-}
-
-.column {
-    display: grid;
-    gap: 13px;
-    min-width: 0;
-}
-
-.card {
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    background: linear-gradient(145deg, var(--panel), #12171d);
-    min-width: 0;
-    scroll-margin-top: 70px;
-}
-
-body.light .card {
-    background: var(--panel);
-}
-
-.head {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 13px;
-}
-
-.head .icon {
-    font-size: 25px;
-    color: var(--gold);
-    min-width: 26px;
-    text-align: center;
-    line-height: 1.15;
-}
-
-.card h2 {
-    font-size: 14px;
-    margin: 0 0 3px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.info {
-    flex: 1;
-    min-width: 0;
-}
-
-.info strong {
-    display: block;
-    font-size: 12px;
-}
-
-.info small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 2px;
-}
-
-.item select {
-    max-width: 190px;
-    font-size: 11px;
-    padding: 8px;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    accent-color: var(--gold);
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.danger {
-    color: #ff8888;
-}
-
-.themes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-}
-
-.theme {
-    position: relative;
-    min-height: 112px;
-    padding: 12px;
-    text-align: left;
-    background: var(--panel2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.theme.selected {
-    border: 2px solid var(--gold);
-    padding: 11px;
-}
-
-.theme .symbol {
-    display: block;
-    font-size: 27px;
-    margin-bottom: 5px;
-}
-
-.theme strong,
-.theme small {
-    display: block;
-}
-
-.theme strong {
-    font-size: 12px;
-}
-
-.theme small {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-.check {
-    display: none;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    color: var(--gold);
-}
-
-.theme.selected .check {
-    display: block;
-}
-
-.theme-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 130px;
-    gap: 12px;
-}
-
-.wallpaper {
-    height: 78px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: radial-gradient(
-        ellipse at 70% 15%,
-        #57431d,
-        #171717 40%,
-        #08090b 80%
-    );
-    margin: 5px 0 7px;
-}
-
-.wall-label {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.sounds {
-    display: grid;
-    gap: 5px;
-}
-
-.sound {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-}
-
-.sound button {
-    margin-left: auto;
-}
-
-.notice {
-    padding: 10px 11px;
-    margin-top: 10px;
-    background: var(--panel2);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.formats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.field label {
-    display: block;
-    font-size: 11px;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.segments {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.segments button {
-    flex: 1;
-    min-width: 55px;
-    padding: 8px 5px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 10px;
-}
-
-.segments button.selected {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--goldbg);
-}
-
-.styles {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.styles label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.styles input {
-    width: 15px;
-    height: 15px;
-}
-
-.storage {
-    display: grid;
-    grid-template-columns: 75px 1fr;
-    gap: 14px;
-    align-items: center;
-    margin: 8px 0 12px;
-}
-
-.ring {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(var(--gold) 0 42%, var(--border) 42%);
-    position: relative;
-    font-weight: bold;
-}
-
-.ring:before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    background: var(--panel);
-}
-
-.ring span {
-    position: relative;
-}
-
-.legend {
-    display: grid;
-    gap: 5px;
-}
-
-.legend div {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--gold);
-}
-
-.book-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.book-info {
-    display: flex;
-    gap: 10px;
-    min-width: 0;
-}
-
-.book-icon {
-    font-size: 19px;
-    color: var(--gold);
-}
-
-.book-row strong {
-    display: block;
-    font-size: 11px;
-}
-
-.book-row small {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.device-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.mini {
-    display: flex;
-    gap: 8px;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.mini b {
-    display: block;
-    color: var(--text);
-    font-weight: 500;
-    margin-bottom: 3px;
-}
-
-.status {
-    font-size: 10px;
-    color: var(--muted);
-    min-height: 14px;
-}
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 24px;
-    border-top: 1px solid var(--border);
-    background: #0e1217;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-footer a {
-    color: var(--gold);
-}
-
-.hidden {
-    display: none !important;
-}
-
-body.small { font-size: 12px; }
-body.large { font-size: 16px; }
-body.xlarge { font-size: 18px; }
-
-body.font-arial { font-family: Arial, sans-serif; }
-body.font-georgia { font-family: Georgia, serif; }
-body.font-verdana { font-family: Verdana, sans-serif; }
-body.font-mono { font-family: monospace; }
-
-body.spacing-medium { line-height: 1.8; }
-body.spacing-wide { line-height: 2.1; }
-
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    aside {
-        display: flex;
-        gap: 4px;
-        overflow-x: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-        padding: 8px;
-    }
-
-    aside a {
-        white-space: nowrap;
-        margin: 0;
-    }
-
-    .columns {
-        grid-template-columns: 1fr;
-    }
-
-    main {
-        padding: 16px;
-    }
-}
-
-@media (max-width: 580px) {
-    header {
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .logo {
-        min-width: 0;
-        font-size: 21px;
-    }
-
-    .actions {
-        gap: 9px;
-    }
-
-    .search {
-        width: 38vw;
-    }
-
-    main {
-        padding: 13px 10px;
-    }
-
-    .theme-wrap {
-        grid-template-columns: 1fr;
-    }
-
-    .wallpaper {
-        height: 55px;
-    }
-
-    .item {
-        gap: 8px;
-    }
-
-    .item select {
-        max-width: 48%;
-    }
-
-    .formats,
-    .device-grid {
-        grid-template-columns: 1fr;
-    }
-
-    footer {
-        padding: 14px 12px;
-    }
-}
-</style>
-  </head>integração en do texto</strong></div>
-                <select id="tamanhoFonte">
-                    <option value="pequena">Pequeno</option>
-                    <option value="normal">Normal</option>
-                    <option value="grande">Grande</option>
-                    <option value="extra">Extra grande</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Fonte</strong></div>
-                <select id="tipoFonte">
-                    <option value="padrao">Padrão</option>
-                    <option value="arial">Arial</option>
-                    <option value="georgia">Georgia</option>
-                    <option value="verdana">Verdana</option>
-                    <option value="mono">Monoespaçada</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Espaçamento entre linhas</strong></div>
-                <select id="espacamento">
-                    <option value="normal">Normal</option>
-                    <option value="medio">Médio</option>
-                    <option value="amplo">Amplo</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Negrito</strong></div>
-                <input type="checkbox" id="negrito" aria-label="Negrito">
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Itálico</strong></div>
-                <input type="checkbox" id="italico" aria-label="Itálico">
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Sublinhar links</strong></div>
-                <input type="checkbox" id="sublinhar" aria-label="Sublinhar links">
-            </div>
-
-            <button class="botao" id="restaurarTexto">Restaurar texto padrão</button>
-        </section>
-
-        <section class="card pesquisavel" id="notificacoes"
-                 data-palavras="notificações sons áudio música toque arquivo celular personalizado">
-            <h2>♧ Notificações e sons</h2>
-            <p class="descricao">Escolha e teste seus sons de notificação.</p>
-
-            <div class="item">
-                <div class="info">
-                    <strong>Notificações ativadas</strong>
-                    <small>Salva sua preferência para futuras notificações.</small>
-                </div>
-                <input type="checkbox" id="notificacoesAtivas" checked>
-            </div>
-
-            <div class="item">
-                <div class="info">
-                    <strong>Sons ativados</strong>
-                    <small>Permite testar os sons abaixo.</small>
-                </div>
-                <input type="checkbox" id="sonsAtivos" checked>
-            </div>
-
-            <p><strong>Som padrão</strong></p>
-            <div class="sons">
-                <label class="som">
-                    <input type="radio" name="som" value="padrao" checked>
-                    Mystic padrão
-                    <button class="botao testarSom" data-som="padrao" type="button">▶ Testar</button>
-                </label>
-                <label class="som">
-                    <input type="radio" name="som" value="sininho">
-                    Sininho
-                    <button class="botao testarSom" data-som="sininho" type="button">▶ Testar</button>
-                </label>
-                <label class="som">
-                    <input type="radio" name="som" value="suave">
-                    Toque suave
-                    <button class="botao testarSom" data-som="suave" type="button">▶ Testar</button>
-                </label>
-                <label class="som">
-                    <input type="radio" name="som" value="alerta">
-                    Alerta
-                    <button class="botao testarSom" data-som="alerta" type="button">▶ Testar</button>
-                </label>
-                <label class="som">
-                    <input type="radio" name="som" value="personalizado">
-                    Meu arquivo de áudio
-                </label>
-            </div>
-
-            <div class="item">
-                <div class="info">
-                    <strong>Escolher áudio do celular ou computador</strong>
-                    <small>Selecione um arquivo de áudio permitido pelo seu dispositivo.</small>
-                </div>
-                <input type="file" id="arquivoSom" accept="audio/*"
-                       aria-label="Escolher arquivo de áudio">
-            </div>
-
-            <p id="nomeSom" class="status">Nenhum arquivo escolhido.</p>
-            <audio id="audioPersonalizado"></audio>
-            <button class="botao" id="testarPersonalizado" type="button">▶ Testar meu áudio</button>
-
-            <div class="aviso">
-                Os sons padrão são gerados pela página. O áudio personalizado
-                pode ser testado enquanto a página está aberta. Para receber
-                notificações reais em segundo plano, será necessária integração adicional.
-            </div>
-        </section>
-    </div>
-
-    <div class="coluna">
-
-        <section class="card pesquisavel" id="idioma"
-                 data-palavras="idioma língua região fuso horário data hora">
-            <h2>◎ Idioma e região</h2>
-            <p class="descricao">Escolha idioma, fuso e formatos.</p>
-
-            <div class="item">
-                <div class="info"><strong>Idioma</strong></div>
-                <select id="idioma">
-                    <option value="pt-BR">Português (Brasil)</option>
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                    <option value="it">Italiano</option>
-                    <option value="ja">日本語</option>
-                    <option value="ko">한국어</option>
-                    <option value="zh">中文</option>
-                    <option value="ar">العربية</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Fuso horário</strong></div>
-                <select id="fuso">
-                    <option value="auto">Detectar automaticamente</option>
-                    <option value="America/Sao_Paulo">Brasília / São Paulo</option>
-                    <option value="America/Manaus">Manaus</option>
-                    <option value="America/Rio_Branco">Rio Branco</option>
-                    <option value="America/Noronha">Fernando de Noronha</option>
-                    <option value="America/New_York">Nova York</option>
-                    <option value="Europe/Lisbon">Lisboa</option>
-                    <option value="Europe/London">Londres</option>
-                    <option value="Europe/Paris">Paris</option>
-                    <option value="Asia/Tokyo">Tóquio</option>
-                    <option value="Australia/Sydney">Sydney</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info">
-                    <strong>Horário atual</strong>
-                    <small id="horarioAtual">Calculando...</small>
-                </div>
-                <button class="botao" id="detectarFuso">Usar meu fuso</button>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Formato de hora</strong></div>
-                <select id="formatoHora">
-                    <option value="24">24 horas</option>
-                    <option value="12">12 horas (AM/PM)</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Formato de data</strong></div>
-                <select id="formatoData">
-                    <option value="local">Automático</option>
-                    <option value="DMY">DD/MM/AAAA</option>
-                    <option value="MDY">MM/DD/AAAA</option>
-                    <option value="YMD">AAAA-MM-DD</option>
-                </select>
-            </div>
-
-            <p class="aviso">
-                A escolha do idioma fica salva, mas a tradução de todas as páginas
-                precisa ser implementada separadamente.
-            </p>
-        </section>
-
-        <section class="card pesquisavel" id="privacidade"
-                 data-palavras="privacidade segurança online perfil mensagens bloqueio restrição">
-            <h2>♢ Privacidade e segurança</h2>
-            <p class="descricao">Configure suas preferências de privacidade.</p>
-
-            <div class="item">
-                <div class="info"><strong>Mostrar status online</strong></div>
-                <input type="checkbox" id="mostrarOnline" checked>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Permitir registro de visitas ao perfil</strong></div>
-                <input type="checkbox" id="visitasPerfil" checked>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Quem pode enviar mensagens</strong></div>
-                <select id="quemMensagem">
-                    <option value="todos">Todos</option>
-                    <option value="conexoes">Pessoas com conexão</option>
-                    <option value="ninguem">Ninguém</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info"><strong>Visibilidade do perfil</strong></div>
-                <select id="visibilidadePerfil">
-                    <option value="publico">Público</option>
-                    <option value="privado">Privado</option>
-                </select>
-            </div>
-
-            <div class="item">
-                <div class="info">
-                    <strong>Contas bloqueadas</strong>
-                    <small>O bloqueio real exige integração entre usuários.</small>
-                </div>
-                <butcampo.idption>
-                <option value="privado">Privado (preferência salva)</option>
-            </select>
-        </div>
-    </section>
-
-    <section class="grupo" id="idioma-regiao">
-        <h2 class="grupo-titulo">🌎 Idioma e regiã<!DOCTY<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Configurações — Mystic</title>
-
-<style>
-:root {
-    color-scheme: dark;
-    --bg: #0c0f13;
-    --panel: #151a20;
-    --panel2: #1c2229;
-    --border: #2b333d;
-    --text: #f4f4f5;
-    --muted: #a6adb8;
-    --field: #10151b;
-    --gold: #f2bd4b;
-    --goldbg: #49391a;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.45 Inter, Arial, sans-serif;
-}
-
-body.light {
-    color-scheme: light;
-    --bg: #f2f3f5;
-    --panel: #ffffff;
-    --panel2: #f5f6f8;
-    --border: #d9dde3;
-    --text: #22262c;
-    --muted: #626b77;
-    --field: #ffffff;
-    --gold: #b78319;
-    --goldbg: #f7edda;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-header {
-    height: 54px;
-    display: flex;
-    align-items: center;
-    padding: 0 22px;
-    gap: 18px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 5;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 165px;
-    font: bold 25px Georgia, serif;
-    color: #ffffff;
-}
-
-.logo .book {
-    color: var(--gold);
-    font: 26px Arial;
-}
-
-.actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.search {
-    width: min(250px, 35vw);
-}
-
-input[type="search"],
-input[type="text"],
-select {
-    width: 100%;
-    min-width: 0;
-    padding: 9px 11px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--field);
-    color: var(--text);
-}
-
-input[type="file"] {
-    max-width: 100%;
-    color: var(--text);
-}
-
-input::placeholder {
-    color: var(--muted);
-}
-
-.gold {
-    color: var(--gold);
-    font-size: 20px;
-}
-
-.avatar {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    background: #303741;
-    display: grid;
-    place-items: center;
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: 205px minmax(0, 1fr);
-    min-height: calc(100vh - 54px);
-}
-
-aside {
-    padding: 18px 9px;
-    background: #0e1217;
-    border-right: 1px solid var(--border);
-}
-
-aside a {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 10px 11px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    color: #c4cad2;
-    font-size: 13px;
-}
-
-aside a i {
-    width: 18px;
-    text-align: center;
-    color: var(--gold);
-    font-style: normal;
-    font-size: 17px;
-}
-
-aside a:hover,
-aside a.active {
-    background: var(--goldbg);
-    color: var(--text);
-}
-
-aside a.active {
-    border: 1px solid #8d6a25;
-}
-
-main {
-    width: 100%;
-    max-width: 1450px;
-    margin: auto;
-    padding: 18px 24px 26px;
-    min-width: 0;
-}
-
-.title {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.title .gear {
-    font-size: 27px;
-    color: var(--gold);
-}
-
-.title h1 {
-    font-size: 23px;
-    margin: 0;
-}
-
-.title p,
-.desc {
-    color: var(--muted);
-    font-size: 11px;
-    margin: 4px 0 0;
-}
-
-.columns {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-}
-
-.column {
-    display: grid;
-    gap: 13px;
-    min-width: 0;
-}
-
-.card {
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    background: linear-gradient(145deg, var(--panel), #12171d);
-    min-width: 0;
-    scroll-margin-top: 70px;
-}
-
-body.light .card {
-    background: var(--panel);
-}
-
-.head {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 13px;
-}
-
-.head .icon {
-    font-size: 25px;
-    color: var(--gold);
-    min-width: 26px;
-    text-align: center;
-    line-height: 1.15;
-}
-
-.card h2 {
-    font-size: 14px;
-    margin: 0 0 3px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.info {
-    flex: 1;
-    min-width: 0;
-}
-
-.info strong {
-    display: block;
-    font-size: 12px;
-}
-
-.info small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 2px;
-}
-
-.item select {
-    max-width: 190px;
-    font-size: 11px;
-    padding: 8px;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    accent-color: var(--gold);
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.danger {
-    color: #ff8888;
-}
-
-.themes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-}
-
-.theme {
-    position: relative;
-    min-height: 112px;
-    padding: 12px;
-    text-align: left;
-    background: var(--panel2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.theme.selected {
-    border: 2px solid var(--gold);
-    padding: 11px;
-}
-
-.theme .symbol {
-    display: block;
-    font-size: 27px;
-    margin-bottom: 5px;
-}
-
-.theme strong,
-.theme small {
-    display: block;
-}
-
-.theme strong {
-    font-size: 12px;
-}
-
-.theme small {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-.check {
-    display: none;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    color: var(--gold);
-}
-
-.theme.selected .check {
-    display: block;
-}
-
-.theme-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 130px;
-    gap: 12px;
-}
-
-.wallpaper {
-    height: 78px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: radial-gradient(
-        ellipse at 70% 15%,
-        #57431d,
-        #171717 40%,
-        #08090b 80%
-    );
-    margin: 5px 0 7px;
-}
-
-.wall-label {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.sounds {
-    display: grid;
-    gap: 5px;
-}
-
-.sound {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-}
-
-.sound button {
-    margin-left: auto;
-}
-
-.notice {
-    padding: 10px 11px;
-    margin-top: 10px;
-    background: var(--panel2);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.formats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.field label {
-    display: block;
-    font-size: 11px;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.segments {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.segments button {
-    flex: 1;
-    min-width: 55px;
-    padding: 8px 5px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 10px;
-}
-
-.segments button.selected {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--goldbg);
-}
-
-.styles {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.styles label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.styles input {
-    width: 15px;
-    height: 15px;
-}
-
-.storage {
-    display: grid;
-    grid-template-columns: 75px 1fr;
-    gap: 14px;
-    align-items: center;
-    margin: 8px 0 12px;
-}
-
-.ring {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(var(--gold) 0 42%, var(--border) 42%);
-    position: relative;
-    font-weight: bold;
-}
-
-.ring:before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    background: var(--panel);
-}
-
-.ring span {
-    position: relative;
-}
-
-.legend {
-    display: grid;
-    gap: 5px;
-}
-
-.legend div {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--gold);
-}
-
-.book-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.book-info {
-    display: flex;
-    gap: 10px;
-    min-width: 0;
-}
-
-.book-icon {
-    font-size: 19px;
-    color: var(--gold);
-}
-
-.book-row strong {
-    display: block;
-    font-size: 11px;
-}
-
-.book-row small {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.device-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.mini {
-    display: flex;
-    gap: 8px;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.mini b {
-    display: block;
-    color: var(--text);
-    font-weight: 500;
-    margin-bottom: 3px;
-}
-
-.status {
-    font-size: 10px;
-    color: var(--muted);
-    min-height: 14px;
-}
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 24px;
-    border-top: 1px solid var(--border);
-    background: #0e1217;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-footer a {
-    color: var(--gold);
-}
-
-.hidden {
-    display: none !important;
-}
-
-body.small { font-size: 12px; }
-body.large { font-size: 16px; }
-body.xlarge { font-size: 18px; }
-
-body.font-arial { font-family: Arial, sans-serif; }
-body.font-georgia { font-family: Georgia, serif; }
-body.font-verdana { font-family: Verdana, sans-serif; }
-body.font-mono { font-family: monospace; }
-
-body.spacing-medium { line-height: 1.8; }
-body.spacing-wide { line-height: 2.1; }
-
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    aside {
-        display: flex;
-        gap: 4px;
-        overflow-x: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-        padding: 8px;
-    }
-
-    aside a {
-        white-space: nowrap;
-        margin: 0;
-    }
-
-    .columns {
-        grid-template-columns: 1fr;
-    }
-
-    main {
-        padding: 16px;
-    }
-}
-
-@media (max-width: 580px) {
-    header {
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .logo {
-        min-width: 0;
-        font-size: 21px;
-    }
-
-    .actions {
-        gap: 9px;
-    }
-
-    .search {
-        width: 38vw;
-    }
-
-    main {
-        padding: 13px 10px;
-    }
-
-    .theme-wrap {
-        grid-template-columns: 1fr;
-    }
-
-    .wallpaper {
-        height: 55px;
-    }
-
-    .item {
-        gap: 8px;
-    }
-
-    .item select {
-        max-width: 48%;
-    }
-
-    .formats,
-    .device-grid {
-        grid-template-columns: 1fr;
-    }
-
-    footer {
-        padding: 14px 12px;
-    }
-}
-</style>
-        </head>PE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Configurações — Mystic</title>
-
-<style>
-:root {
-    color-scheme: dark;
-    --bg: #0c0f13;
-    --panel: #151a20;
-    --panel2: #1c2229;
-    --border: #2b333d;
-    --text: #f4f4f5;
-    --muted: #a6adb8;
-    --field: #10151b;
-    --gold: #f2bd4b;
-    --goldbg: #49391a;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.45 Inter, Arial, sans-serif;
-}
-
-body.light {
-    color-scheme: light;
-    --bg: #f2f3f5;
-    --panel: #ffffff;
-    --panel2: #f5f6f8;
-    --border: #d9dde3;
-    --text: #22262c;
-    --muted: #626b77;
-    --field: #ffffff;
-    --gold: #b78319;
-    --goldbg: #f7edda;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-header {
-    height: 54px;
-    display: flex;
-    align-items: center;
-    padding: 0 22px;
-    gap: 18px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 5;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 165px;
-    font: bold 25px Georgia, serif;
-    color: #ffffff;
-}
-
-.logo .book {
-    color: var(--gold);
-    font: 26px Arial;
-}
-
-.actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.search {
-    width: min(250px, 35vw);
-}
-
-input[type="search"],
-input[type="text"],
-select {
-    width: 100%;
-    min-width: 0;
-    padding: 9px 11px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--field);
-    color: var(--text);
-}
-
-input[type="file"] {
-    max-width: 100%;
-    color: var(--text);
-}
-
-input::placeholder {
-    color: var(--muted);
-}
-
-.gold {
-    color: var(--gold);
-    font-size: 20px;
-}
-
-.avatar {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    background: #303741;
-    display: grid;
-    place-items: center;
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: 205px minmax(0, 1fr);
-    min-height: calc(100vh - 54px);
-}
-
-aside {
-    padding: 18px 9px;
-    background: #0e1217;
-    border-right: 1px solid var(--border);
-}
-
-aside a {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 10px 11px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    color: #c4cad2;
-    font-size: 13px;
-}
-
-aside a i {
-    width: 18px;
-    text-align: center;
-    color: var(--gold);
-    font-style: normal;
-    font-size: 17px;
-}
-
-aside a:hover,
-aside a.active {
-    background: var(--goldbg);
-    color: var(--text);
-}
-
-aside a.active {
-    border: 1px solid #8d6a25;
-}
-
-main {
-    width: 100%;
-    max-width: 1450px;
-    margin: auto;
-    padding: 18px 24px 26px;
-    min-width: 0;
-}
-
-.title {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.title .gear {
-    font-size: 27px;
-    color: var(--gold);
-}
-
-.title h1 {
-    font-size: 23px;
-    margin: 0;
-}
-
-.title p,
-.desc {
-    color: var(--muted);
-    font-size: 11px;
-    margin: 4px 0 0;
-}
-
-.columns {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-}
-
-.column {
-    display: grid;
-    gap: 13px;
-    min-width: 0;
-}
-
-.card {
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    background: linear-gradient(145deg, var(--panel), #12171d);
-    min-width: 0;
-    scroll-margin-top: 70px;
-}
-
-body.light .card {
-    background: var(--panel);
-}
-
-.head {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 13px;
-}
-
-.head .icon {
-    font-size: 25px;
-    color: var(--gold);
-    min-width: 26px;
-    text-align: center;
-    line-height: 1.15;
-}
-
-.card h2 {
-    font-size: 14px;
-    margin: 0 0 3px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.info {
-    flex: 1;
-    min-width: 0;
-}
-
-.info strong {
-    display: block;
-    font-size: 12px;
-}
-
-.info small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 2px;
-}
-
-.item select {
-    max-width: 190px;
-    font-size: 11px;
-    padding: 8px;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    accent-color: var(--gold);
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.danger {
-    color: #ff8888;
-}
-
-.themes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-}
-
-.theme {
-    position: relative;
-    min-height: 112px;
-    padding: 12px;
-    text-align: left;
-    background: var(--panel2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.theme.selected {
-    border: 2px solid var(--gold);
-    padding: 11px;
-}
-
-.theme .symbol {
-    display: block;
-    font-size: 27px;
-    margin-bottom: 5px;
-}
-
-.theme strong,
-.theme small {
-    display: block;
-}
-
-.theme strong {
-    font-size: 12px;
-}
-
-.theme small {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-.check {
-    display: none;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    color: var(--gold);
-}
-
-.theme.selected .check {
-    display: block;
-}
-
-.theme-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 130px;
-    gap: 12px;
-}
-
-.wallpaper {
-    height: 78px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: radial-gradient(
-        ellipse at 70% 15%,
-        #57431d,
-        #171717 40%,
-        #08090b 80%
-    );
-    margin: 5px 0 7px;
-}
-
-.wall-label {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.sounds {
-    display: grid;
-    gap: 5px;
-}
-
-.sound {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-}
-
-.sound button {
-    margin-left: auto;
-}
-
-.notice {
-    padding: 10px 11px;
-    margin-top: 10px;
-    background: var(--panel2);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.formats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.field label {
-    display: block;
-    font-size: 11px;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.segments {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.segments button {
-    flex: 1;
-    min-width: 55px;
-    padding: 8px 5px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 10px;
-}
-
-.segments button.selected {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--goldbg);
-}
-
-.styles {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.styles label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.styles input {
-    width: 15px;
-    height: 15px;
-}
-
-.storage {
-    display: grid;
-    grid-template-columns: 75px 1fr;
-    gap: 14px;
-    align-items: center;
-    margin: 8px 0 12px;
-}
-
-.ring {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(var(--gold) 0 42%, var(--border) 42%);
-    position: relative;
-    font-weight: bold;
-}
-
-.ring:before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    background: var(--panel);
-}
-
-.ring span {
-    position: relative;
-}
-
-.legend {
-    display: grid;
-    gap: 5px;
-}
-
-.legend div {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--gold);
-}
-
-.book-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.book-info {
-    display: flex;
-    gap: 10px;
-    min-width: 0;
-}
-
-.book-icon {
-    font-size: 19px;
-    color: var(--gold);
-}
-
-.book-row strong {
-    display: block;
-    font-size: 11px;
-}
-
-.book-row small {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.device-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.mini {
-    display: flex;
-    gap: 8px;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.mini b {
-    display: block;
-    color: var(--text);
-    font-weight: 500;
-    margin-bottom: 3px;
-}
-
-.status {
-    font-size: 10px;
-    color: var(--muted);
-    min-height: 14px;
-}
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 24px;
-    border-top: 1px solid var(--border);
-    background: #0e1217;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-footer a {
-    color: var(--gold);
-}
-
-.hidden {
-    display: none !important;
-}
-
-body.small { font-size: 12px; }
-body.large { font-size: 16px; }
-body.xlarge { font-size: 18px; }
-
-body.font-arial { font-family: Arial, sans-serif; }
-body.font-georgia { font-family: Georgia, serif; }
-body.font-verdana { font-family: Verdana, sans-serif; }
-body.font-mono { font-family: monospace; }
-
-body.spacing-medium { line-height: 1.8; }
-body.spacing-wide { line-height: 2.1; }
-
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    aside {
-        display: flex;
-        gap: 4px;
-        overflow-x: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-        padding: 8px;
-    }
-
-    aside a {
-        white-space: nowrap;
-        margin: 0;
-    }
-
-    .columns {
-        grid-template-columns: 1fr;
-    }
-
-    main {
-        padding: 16px;
-    }
-}
-
-@media (max-width: 580px) {
-    header {
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .logo {
-        min-width: 0;
-        font-size: 21px;
-    }
-
-    .actions {
-        gap: 9px;
-    }
-
-    .search {
-        width: 38vw;
-    }
-
-    main {
-        padding: 13px 10px;
-    }
-
-    .theme-wrap {
-        grid-template-columns: 1fr;
-    }
-
-    .wallpaper {
-        height: 55px;
-    }
-
-    .item {
-        gap: 8px;
-    }
-
-    .item select {
-        max-width: 48%;
-    }
-
-    .formats,
-    .device-grid {
-        grid-template-columns: 1fr;
-    }
-
-    footer {
-        padding: 14px 12px;
-    }
-}
-</style>
-        </head>o</h2>
-        <p class="grupo-descricao">O idioma recomendado aparece prime<!DOCTYPE html>
-<html lang="pt-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Configurações — Mystic</title>
-
-<style>
-:root {
-    color-scheme: dark;
-    --bg: #0c0f13;
-    --panel: #151a20;
-    --panel2: #1c2229;
-    --border: #2b333d;
-    --text: #f4f4f5;
-    --muted: #a6adb8;
-    --field: #10151b;
-    --gold: #f2bd4b;
-    --goldbg: #49391a;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.45 Inter, Arial, sans-serif;
-}
-
-body.light {
-    color-scheme: light;
-    --bg: #f2f3f5;
-    --panel: #ffffff;
-    --panel2: #f5f6f8;
-    --border: #d9dde3;
-    --text: #22262c;
-    --muted: #626b77;
-    --field: #ffffff;
-    --gold: #b78319;
-    --goldbg: #f7edda;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-header {
-    height: 54px;
-    display: flex;
-    align-items: center;
-    padding: 0 22px;
-    gap: 18px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 5;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 165px;
-    font: bold 25px Georgia, serif;
-    color: #ffffff;
-}
-
-.logo .book {
-    color: var(--gold);
-    font: 26px Arial;
-}
-
-.actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.search {
-    width: min(250px, 35vw);
-}
-
-input[type="search"],
-input[type="text"],
-select {
-    width: 100%;
-    min-width: 0;
-    padding: 9px 11px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--field);
-    color: var(--text);
-}
-
-input[type="file"] {
-    max-width: 100%;
-    color: var(--text);
-}
-
-input::placeholder {
-    color: var(--muted);
-}
-
-.gold {
-    color: var(--gold);
-    font-size: 20px;
-}
-
-.avatar {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    background: #303741;
-    display: grid;
-    place-items: center;
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: 205px minmax(0, 1fr);
-    min-height: calc(100vh - 54px);
-}
-
-aside {
-    padding: 18px 9px;
-    background: #0e1217;
-    border-right: 1px solid var(--border);
-}
-
-aside a {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 10px 11px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    color: #c4cad2;
-    font-size: 13px;
-}
-
-aside a i {
-    width: 18px;
-    text-align: center;
-    color: var(--gold);
-    font-style: normal;
-    font-size: 17px;
-}
-
-aside a:hover,
-aside a.active {
-    background: var(--goldbg);
-    color: var(--text);
-}
-
-aside a.active {
-    border: 1px solid #8d6a25;
-}
-
-main {
-    width: 100%;
-    max-width: 1450px;
-    margin: auto;
-    padding: 18px 24px 26px;
-    min-width: 0;
-}
-
-.title {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.title .gear {
-    font-size: 27px;
-    color: var(--gold);
-}
-
-.title h1 {
-    font-size: 23px;
-    margin: 0;
-}
-
-.title p,
-.desc {
-    color: var(--muted);
-    font-size: 11px;
-    margin: 4px 0 0;
-}
-
-.columns {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-}
-
-.column {
-    display: grid;
-    gap: 13px;
-    min-width: 0;
-}
-
-.card {
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    background: linear-gradient(145deg, var(--panel), #12171d);
-    min-width: 0;
-    scroll-margin-top: 70px;
-}
-
-body.light .card {
-    background: var(--panel);
-}
-
-.head {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 13px;
-}
-
-.head .icon {
-    font-size: 25px;
-    color: var(--gold);
-    min-width: 26px;
-    text-align: center;
-    line-height: 1.15;
-}
-
-.card h2 {
-    font-size: 14px;
-    margin: 0 0 3px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.info {
-    flex: 1;
-    min-width: 0;
-}
-
-.info strong {
-    display: block;
-    font-size: 12px;
-}
-
-.info small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 2px;
-}
-
-.item select {
-    max-width: 190px;
-    font-size: 11px;
-    padding: 8px;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    accent-color: var(--gold);
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.danger {
-    color: #ff8888;
-}
-
-.themes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-}
-
-.theme {
-    position: relative;
-    min-height: 112px;
-    padding: 12px;
-    text-align: left;
-    background: var(--panel2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.theme.selected {
-    border: 2px solid var(--gold);
-    padding: 11px;
-}
-
-.theme .symbol {
-    display: block;
-    font-size: 27px;
-    margin-bottom: 5px;
-}
-
-.theme strong,
-.theme small {
-    display: block;
-}
-
-.theme strong {
-    font-size: 12px;
-}
-
-.theme small {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-.check {
-    display: none;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    color: var(--gold);
-}
-
-.theme.selected .check {
-    display: block;
-}
-
-.theme-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 130px;
-    gap: 12px;
-}
-
-.wallpaper {
-    height: 78px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: radial-gradient(
-        ellipse at 70% 15%,
-        #57431d,
-        #171717 40%,
-        #08090b 80%
-    );
-    margin: 5px 0 7px;
-}
-
-.wall-label {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.sounds {
-    display: grid;
-    gap: 5px;
-}
-
-.sound {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-}
-
-.sound button {
-    margin-left: auto;
-}
-
-.notice {
-    padding: 10px 11px;
-    margin-top: 10px;
-    background: var(--panel2);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.formats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.field label {
-    display: block;
-    font-size: 11px;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.segments {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.segments button {
-    flex: 1;
-    min-width: 55px;
-    padding: 8px 5px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 10px;
-}
-
-.segments button.selected {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--goldbg);
-}
-
-.styles {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.styles label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.styles input {
-    width: 15px;
-    height: 15px;
-}
-
-.storage {
-    display: grid;
-    grid-template-columns: 75px 1fr;
-    gap: 14px;
-    align-items: center;
-    margin: 8px 0 12px;
-}
-
-.ring {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(var(--gold) 0 42%, var(--border) 42%);
-    position: relative;
-    font-weight: bold;
-}
-
-.ring:before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    background: var(--panel);
-}
-
-.ring span {
-    position: relative;
-}
-
-.legend {
-    display: grid;
-    gap: 5px;
-}
-
-.legend div {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--gold);
-}
-
-.book-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.book-info {
-    display: flex;
-    gap: 10px;
-    min-width: 0;
-}
-
-.book-icon {
-    font-size: 19px;
-    color: var(--gold);
-}
-
-.book-row strong {
-    display: block;
-    font-size: 11px;
-}
-
-.book-row small {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.device-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.mini {
-    display: flex;
-    gap: 8px;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.mini b {
-    display: block;
-    color: var(--text);
-    font-weight: 500;
-    margin-bottom: 3px;
-}
-
-.status {
-    font-size: 10px;
-    color: var(--muted);
-    min-height: 14px;
-}
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 24px;
-    border-top: 1px solid var(--border);
-    background: #0e1217;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-footer a {
-    color: var(--gold);
-}
-
-.hidden {
-    display: none !important;
-}
-
-body.small { font-size: 12px; }
-body.large { font-size: 16px; }
-body.xlarge { font-size: 18px; }
-
-body.font-arial { font-family: Arial, sans-serif; }
-body.font-georgia { font-family: Georgia, serif; }
-body.font-verdana { font-family: Verdana, sans-serif; }
-body.font-mono { font-family: monospace; }
-
-body.spacing-medium { line-height: 1.8; }
-body.spacing-wide { line-height: 2.1; }
-
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    aside {
-        display: flex;
-        gap: 4px;
-        overflow-x: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-        padding: 8px;
-    }
-
-    aside a {
-        white-space: nowrap;
-        margin: 0;
-    }
-
-    .columns {
-        grid-template-columns: 1fr;
-    }
-
-    main {
-        padding: 16px;
-    }
-}
-
-@media (max-width: 580px) {
-    header {
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .logo {
-        min-width: 0;
-        font-size: 21px;
-    }
-
-    .actions {
-        gap: 9px;
-    }
-
-    .search {
-        width: 38vw;
-    }
-
-    main {
-        padding: 13px 10px;
-    }
-
-    .theme-wrap {
-        grid-template-columns: 1fr;
-    }
-
-    .wallpaper {
-        height: 55px;
-    }
-
-    .item {
-        gap: 8px;
-    }
-
-    .item select {
-        max-width: 48%;
-    }
-
-    .formats,
-    .device-grid {
-        grid-template-columns: 1fr;
-    }
-
-    footer {
-        padding: 14px 12px;
-    }
-}
-</style>
-        </head>BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Configurações — Mystic</title>
-
-<style>
-:root {
-    color-scheme: dark;
-    --bg: #0c0f13;
-    --panel: #151a20;
-    --panel2: #1c2229;
-    --border: #2b333d;
-    --text: #f4f4f5;
-    --muted: #a6adb8;
-    --field: #10151b;
-    --gold: #f2bd4b;
-    --goldbg: #49391a;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 14px/1.45 Inter, Arial, sans-serif;
-}
-
-body.light {
-    color-scheme: light;
-    --bg: #f2f3f5;
-    --panel: #ffffff;
-    --panel2: #f5f6f8;
-    --border: #d9dde3;
-    --text: #22262c;
-    --muted: #626b77;
-    --field: #ffffff;
-    --gold: #b78319;
-    --goldbg: #f7edda;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button, input, select {
-    font: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-header {
-    height: 54px;
-    display: flex;
-    align-items: center;
-    padding: 0 22px;
-    gap: 18px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    z-index: 5;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    min-width: 165px;
-    font: bold 25px Georgia, serif;
-    color: #ffffff;
-}
-
-.logo .book {
-    color: var(--gold);
-    font: 26px Arial;
-}
-
-.actions {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.search {
-    width: min(250px, 35vw);
-}
-
-input[type="search"],
-input[type="text"],
-select {
-    width: 100%;
-    min-width: 0;
-    padding: 9px 11px;
-    border: 1px solid var(--border);
-    border-radius: 9px;
-    background: var(--field);
-    color: var(--text);
-}
-
-input[type="file"] {
-    max-width: 100%;
-    color: var(--text);
-}
-
-input::placeholder {
-    color: var(--muted);
-}
-
-.gold {
-    color: var(--gold);
-    font-size: 20px;
-}
-
-.avatar {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    background: #303741;
-    display: grid;
-    place-items: center;
-}
-
-.layout {
-    display: grid;
-    grid-template-columns: 205px minmax(0, 1fr);
-    min-height: calc(100vh - 54px);
-}
-
-aside {
-    padding: 18px 9px;
-    background: #0e1217;
-    border-right: 1px solid var(--border);
-}
-
-aside a {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    padding: 10px 11px;
-    margin-bottom: 4px;
-    border-radius: 8px;
-    color: #c4cad2;
-    font-size: 13px;
-}
-
-aside a i {
-    width: 18px;
-    text-align: center;
-    color: var(--gold);
-    font-style: normal;
-    font-size: 17px;
-}
-
-aside a:hover,
-aside a.active {
-    background: var(--goldbg);
-    color: var(--text);
-}
-
-aside a.active {
-    border: 1px solid #8d6a25;
-}
-
-main {
-    width: 100%;
-    max-width: 1450px;
-    margin: auto;
-    padding: 18px 24px 26px;
-    min-width: 0;
-}
-
-.title {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    margin-bottom: 18px;
-}
-
-.title .gear {
-    font-size: 27px;
-    color: var(--gold);
-}
-
-.title h1 {
-    font-size: 23px;
-    margin: 0;
-}
-
-.title p,
-.desc {
-    color: var(--muted);
-    font-size: 11px;
-    margin: 4px 0 0;
-}
-
-.columns {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-}
-
-.column {
-    display: grid;
-    gap: 13px;
-    min-width: 0;
-}
-
-.card {
-    padding: 15px;
-    border: 1px solid var(--border);
-    border-radius: 11px;
-    background: linear-gradient(145deg, var(--panel), #12171d);
-    min-width: 0;
-    scroll-margin-top: 70px;
-}
-
-body.light .card {
-    background: var(--panel);
-}
-
-.head {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    margin-bottom: 13px;
-}
-
-.head .icon {
-    font-size: 25px;
-    color: var(--gold);
-    min-width: 26px;
-    text-align: center;
-    line-height: 1.15;
-}
-
-.card h2 {
-    font-size: 14px;
-    margin: 0 0 3px;
-}
-
-.item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.info {
-    flex: 1;
-    min-width: 0;
-}
-
-.info strong {
-    display: block;
-    font-size: 12px;
-}
-
-.info small {
-    display: block;
-    color: var(--muted);
-    font-size: 10px;
-    margin-top: 2px;
-}
-
-.item select {
-    max-width: 190px;
-    font-size: 11px;
-    padding: 8px;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-    accent-color: var(--gold);
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-}
-
-.danger {
-    color: #ff8888;
-}
-
-.themes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 9px;
-}
-
-.theme {
-    position: relative;
-    min-height: 112px;
-    padding: 12px;
-    text-align: left;
-    background: var(--panel2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-.theme.selected {
-    border: 2px solid var(--gold);
-    padding: 11px;
-}
-
-.theme .symbol {
-    display: block;
-    font-size: 27px;
-    margin-bottom: 5px;
-}
-
-.theme strong,
-.theme small {
-    display: block;
-}
-
-.theme strong {
-    font-size: 12px;
-}
-
-.theme small {
-    font-size: 10px;
-    color: var(--muted);
-    margin-top: 4px;
-}
-
-.check {
-    display: none;
-    position: absolute;
-    right: 8px;
-    top: 8px;
-    color: var(--gold);
-}
-
-.theme.selected .check {
-    display: block;
-}
-
-.theme-wrap {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 130px;
-    gap: 12px;
-}
-
-.wallpaper {
-    height: 78px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: radial-gradient(
-        ellipse at 70% 15%,
-        #57431d,
-        #171717 40%,
-        #08090b 80%
-    );
-    margin: 5px 0 7px;
-}
-
-.wall-label {
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.sounds {
-    display: grid;
-    gap: 5px;
-}
-
-.sound {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-}
-
-.sound button {
-    margin-left: auto;
-}
-
-.notice {
-    padding: 10px 11px;
-    margin-top: 10px;
-    background: var(--panel2);
-    border-radius: 8px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.formats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-}
-
-.field label {
-    display: block;
-    font-size: 11px;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.segments {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-}
-
-.segments button {
-    flex: 1;
-    min-width: 55px;
-    padding: 8px 5px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--panel2);
-    color: var(--text);
-    font-size: 10px;
-}
-
-.segments button.selected {
-    border-color: var(--gold);
-    color: var(--gold);
-    background: var(--goldbg);
-}
-
-.styles {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.styles label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: var(--muted);
-    font-size: 10px;
-}
-
-.styles input {
-    width: 15px;
-    height: 15px;
-}
-
-.storage {
-    display: grid;
-    grid-template-columns: 75px 1fr;
-    gap: 14px;
-    align-items: center;
-    margin: 8px 0 12px;
-}
-
-.ring {
-    width: 72px;
-    height: 72px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: conic-gradient(var(--gold) 0 42%, var(--border) 42%);
-    position: relative;
-    font-weight: bold;
-}
-
-.ring:before {
-    content: "";
-    position: absolute;
-    inset: 6px;
-    border-radius: 50%;
-    background: var(--panel);
-}
-
-.ring span {
-    position: relative;
-}
-
-.legend {
-    display: grid;
-    gap: 5px;
-}
-
-.legend div {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--gold);
-}
-
-.book-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 1px solid var(--border);
-}
-
-.book-info {
-    display: flex;
-    gap: 10px;
-    min-width: 0;
-}
-
-.book-icon {
-    font-size: 19px;
-    color: var(--gold);
-}
-
-.book-row strong {
-    display: block;
-    font-size: 11px;
-}
-
-.book-row small {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.device-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.mini {
-    display: flex;
-    gap: 8px;
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.mini b {
-    display: block;
-    color: var(--text);
-    font-weight: 500;
-    margin-bottom: 3px;
-}
-
-.status {
-    font-size: 10px;
-    color: var(--muted);
-    min-height: 14px;
-}
-
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 24px;
-    border-top: 1px solid var(--border);
-    background: #0e1217;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-footer a {
-    color: var(--gold);
-}
-
-.hidden {
-    display: none !important;
-}
-
-body.small { font-size: 12px; }
-body.large { font-size: 16px; }
-body.xlarge { font-size: 18px; }
-
-body.font-arial { font-family: Arial, sans-serif; }
-body.font-georgia { font-family: Georgia, serif; }
-body.font-verdana { font-family: Verdana, sans-serif; }
-body.font-mono { font-family: monospace; }
-
-body.spacing-medium { line-height: 1.8; }
-body.spacing-wide { line-height: 2.1; }
-
-@media (max-width: 900px) {
-    .layout {
-        grid-template-columns: 1fr;
-    }
-
-    aside {
-        display: flex;
-        gap: 4px;
-        overflow-x: auto;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-        padding: 8px;
-    }
-
-    aside a {
-        white-space: nowrap;
-        margin: 0;
-    }
-
-    .columns {
-        grid-template-columns: 1fr;
-    }
-
-    main {
-        padding: 16px;
-    }
-}
-
-@media (max-width: 580px) {
-    header {
-        padding: 0 12px;
-        gap: 8px;
-    }
-
-    .logo {
-        min-width: 0;
-        font-size: 21px;
-    }
-
-    .actions {
-        gap: 9px;
-    }
-
-    .search {
-        width: 38vw;
-    }
-
-    main {
-        padding: 13px 10px;
-    }
-
-    .theme-wrap {
-        grid-template-columns: 1fr;
-    }
-
-    .wallpaper {
-        height: 55px;
-    }
-
-    .item {
-        gap: 8px;
-    }
-
-    .item select {
-        max-width: 48%;
-    }
-
-    .formats,
-    .device-grid {
-        grid-template-columns: 1fr;
-    }
-
-    footer {
-        padding: 14px 12px;
-    }
-}
-</style>
-        </head>iro. Você pode selecionar outro idioma e definir o fuso horário independentemente do idioma.</p>
-
-        <div class="item">
-            <div class="item-info">
-                <strong>Idioma da interface</strong>
-                <p>Escolha o idioma desejado. A tradução completa será conectada às páginas gradualmente.</p>
-            </div>
-            <select id="idioma" data-setting>
-                <option value="pt-BR">Português (Brasil)</option>
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="it">Italiano</option>
-                <option value="ja">日本語</option>
-                <option value="ko">한국어</option>
-                <option value="zh">中文</option>
-                <option value="ar">العربية</option>
-            </select>
-        </div>
-
-        <div class="item">
-            <div class="item-info">
-                <strong>Fuso horário</strong>
-                <p>Usado futuramente em publicações, mensagens, eventos e prazos.</p>
-            </div>
-            <select id="fuso" data-setting>
-                <option value="auto">Detectar automaticamente</option>
-                <option value="America/Sao_Paulo">Brasília / São Paulo</option>
-                <option value="America/Manaus">Manaus</option>
-                <option value="America/Rio_Branco">Rio Branco</option>
-                <option value="America/Noronha">Fernando de Noronha</option>
-                <option value="America/New_York">Nova York</option>
-                <option value="America/Chicago">Chicago</option>
-                <option value="America/Denver">Denver</option>
-                <option value="America/Los_Angeles">Los Angeles</option>
-                <option value="America/Toronto">Toronto</option>
-                <option value="America/Mexico_City">Cidade do México</option>
-                <option value="America/Bogota">Bogotá</option>
-                <option value="America/Lima">Lima</option>
-                <option value="America/Santiago">Santiago</option>
-                <option value="America/Argentina/Buenos_Aires">Buenos Aires</option>
-                <option value="Europe/Lisbon">Lisboa</option>
-                <option value="Europe/London">Londres</option>
-                <option value="Europe/Paris">Paris</option>
-                <option value="Europe/Madrid">Madri</option>
-                <option value="Europe/Berlin">Berlim</option>
-                <option value="Europe/Rome">Roma</option>
-                <option value="Europe/Moscow">Moscou</option>
-                <option value="Africa/Cairo">Cairo</option>
-                <option value="Africa/Johannesburg">Joanesburgo</option>
-                <option value="Asia/Dubai">Dubai</option>
-                <option value="Asia/Kolkata">Nova Délhi / Calcutá</option>
-                <option value="Asia/Bangkok">Bangkok</option>
-                <option value="Asia/Singapore">Singapura</option>
-                <option value="Asia/Shanghai">Xangai / Pequim</option>
-                <option value="Asia/Tokyo">Tóquio</option>
-                <option value="Asia/Seoul">Seul</option>
-                <option value="Australia/Perth">Perth</option>
-                <option value="Australia/Sydney">Sydney</option>
-                <option value="Pacific/Auckland">Auckland</option>
-            </select>
-        </div>
-
-        <div class="item">
-            <div class="item-info">
-                <strong>Horário atual no fuso selecionado</strong>
-                <p id="horarioAtual">Calculando horário...</p>
-            </div>
-            <button class="botao" id="detectarFuso">Usar meu fuso</button>
-        </div>
-
-        <div class="item">
-            <div class="item-info">
-                <strong>Formato de hora</strong>
-                <p>Escolha como os horários serão exibidos.</p>
-            </div>
-            <select id="formatoHora" data-setting>
-                <option value="24">24 horas</option>
-                <option value="12">12 horas (AM/PM)</option>
-            </select>
-        </div>
-
-        <div class="item">
-            <div class="item-info">
-                <strong>Formato de data</strong>
-                <p>Escolha como as datas serão exibidas.</p>
-            </div>
-            <select id="formatoData" data-setting>
-                <option value="local">Automático pelo idioma</option>
-                <option value="DMY">Dia/mês/ano</option>
-                <option value="MDY">Mês/dia/ano</option>
-                <option value="YMD">Ano-mês-dia</option>
-            </select>
-        </div>
-        <p class="aviso">O fuso automático usa a configuração de horário do navegador, não o GPS. Para prazos oficiais, a Mystic deverá usar o fuso definido pela administração do evento.</p>
-    </section>
-
-    <section class="grupo" id="dispositivo">
-        <h2 class="grupo-titulo">📱 Dispositivo e sessão</h2>
-        <p class="grupo-descricao">Informações disponíveis neste navegador.</p>
-        <div class="item">
-            <div class="item-info">
-                <strong>Fuso detectado</strong>
-                <p id="fusoDetectado">Consultando navegador...</p>
-            </div>
-        </div>
-        <div class="item">
-            <div class="item-info">
-                <strong>Idioma do navegador</strong>
-                <p id="idiomaNavegador">Consultando navegador...</p>
-            </div>
-        </div>
-        <p class="aviso">Por enquanto, não é possível listar com segurança todos os dispositivos conectados à conta sem um sistema de autenticação com servidor.</p>
-    </section>
-
-    <section class="grupo" id="dados">
-        <h2 class="grupo-titulo">🗂️ Dados e preferências</h2>
-        <p class="grupo-descricao">As preferências desta página são salvas no armazenamento local deste navegador.</p>
-        <div class="item">
-            <div class="item-info">
-                <strong>Limpar preferências</strong>
-                <p>Apaga as configurações salvas pela página e volta aos valores iniciais.</p>
-            </div>
-            <button class="botao perigo" id="limpar">Limpar</button>
-        </div>
-    </section>
-
-    <section class="grupo" id="pesquisa">
-        <h2 class="grupo-titulo">🔍 Pesquisa</h2>
-        <p class="grupo-descricao">Encontre conteúdo na Mystic.</p>
-        <div class="item">
-            <div class="item-info">
-                <strong>Pesquisar livros, blogs e redações</strong>
-                <p>Ir à página inicial para continuar sua busca.</p>
-            </div>
-            <a href="home.html" class="botao">Pesquisar</a>
-        </div>
-    </section>
-
-    <a href="perfil.html" class="voltar">← Voltar para meu perfil</a>
-</main>
-
-<footer>Mystic — Livraria</footer>
-
-<script>
-const CHAVE = "mysticConfiguracoes";
-const padrao = {
-    tema: "escuro",
-    tamanhoTexto: "normal",
-    reduzirAnimacoes: false,
-    notificacoesAtivas: true,
-    sons: true,
-    avisosPublicacoes: true,
-    avisosMensagens: true,
-    mostrarOnline: true,
-    visitasPerfil: true,
-    quemMensagem: "todos",
-    visibilidadePerfil: "publico",
-    idioma: "pt-BR",
-    fuso: "auto",
-    formatoHora: "24",
-    formatoData: "local"
-};
-
-let configuracoes = { ...padrao };
-
-try {
-    const salvas = JSON.parse(localStorage.getItem(CHAVE) || "{}");
-    configuracoes = { ...padrao, ...salvas };
-} catch (erro) {
-    configuracoes = { ...padrao };
-}
-
-const avisoSalvo = document.getElementById("avisoSalvo");
-
-function salvar() {
-    try {
-        localStorage.setItem(CHAVE, JSON.stringify(configuracoes));
-        avisoSalvo.textContent = "Preferências salvas neste navegador.";
-    } catch (erro) {
-        avisoSalvo.textContent = "Não foi possível salvar as preferências neste navegador.";
-    }
-}
-
-function aplicarAparencia() {
-    document.body.classList.toggle("claro", configuracoes.tema === "claro");
-    document.body.classList.toggle("grande", configuracoes.tamanhoTexto === "grande");
-
-    let estilo = document.getElementById("estiloMovimento");
-    if (!estilo) {
-        estilo = document.createElement("style");
-        estilo.id = "estiloMovimento";
-        document.head.appendChild(estilo);
-    }
-
-    estilo.textContent = configuracoes.reduzirAnimacoes
-        ? "* { animation: none !important; transition: none !important; scroll-behavior: auto !important; }"
-        : "";
-}
-
-function preencherControles() {
-    document.querySelectorAll("[data-setting]").forEach(controle => {
-        const id = controle.id;
-        if (!(id in configuracoes)) return;
-
-        if (controle.type === "checkbox") {
-            controle.checked = Boolean(configuracoes[id]);
-        } else {
-            controle.value = configuracoes[id];
-        }
-    });
-
-    aplicarAparencia();
-}
-
-document.querySelectorAll("[data-setting]").forEach(controle => {
-    controle.addEventListener("change", () => {
-        const id = controle.id;
-        configuracoes[id] = controle.type === "checkbox"
-            ? controle.checked
-            : controle.value;
-
-        salvar();
-        aplicarAparencia();
-        atualizarHorario();
-    });
-});
-
-function obterFuso() {
-    if (configuracoes.fuso === "auto") {
-        return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-    }
-    return configuracoes.fuso;
-}
-
-function atualizarHorario() {
-    const fuso = obterFuso();
-    const hora12 = configuracoes.formatoHora === "12";
-
-    try {
-        const opcoes = {
-            timeZone: fuso,
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: hora12
-   ection class="pesquisa">
-
-        <h2>
-            🔍 Pesquisa
-        </h2>
-
-        <p>
-            Encontre livros, blogs e redações dentro da Mystic.
-        </p>
-
-
-        <div class="barra-pesquisa">
-
-            <input
-                type="text"
-                placeholder="O que você está procurando?"
-            >
-
-            <button>
-                🔍
-            </button>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- VOLTAR -->
-
-    <a href="perfil.html" class="voltar">
-        ← Voltar para meu perfil
-    </a>
-
-</div>
-
-
-
-<!-- RODAPÉ -->
-
-<footer>
-
-    Mystic — Livraria
-
-</footer>
-
-
-</body>
-
 </html>
