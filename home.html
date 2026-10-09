@@ -19,58 +19,181 @@
       color: #f2f2f2;
     }
 
+    body.menu-aberto {
+      overflow: hidden;
+    }
+
+    /* CABEÇALHO */
+
     header {
+      height: 76px;
       background: #303030;
       border-bottom: 1px solid #444;
-      padding: 18px 40px;
+      padding: 12px 25px;
 
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 20px;
+      justify-content: space-between;
+      gap: 15px;
+
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .lado-esquerdo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .botao-menu {
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 29px;
+      cursor: pointer;
+      padding: 5px;
+      line-height: 1;
     }
 
     .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: white;
-    }
-
-    nav {
       display: flex;
       align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: #ddd;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    nav a:hover {
+      gap: 9px;
       color: white;
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: bold;
     }
+
+    .logo img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .link-livros {
+      color: #eee;
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 8px;
+      background: #404040;
+      white-space: nowrap;
+    }
+
+    .link-livros:hover {
+      background: #505050;
+    }
+
+    /* MENU LATERAL */
+
+    .fundo-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 19;
+      display: none;
+    }
+
+    .fundo-menu.aberto {
+      display: block;
+    }
+
+    .menu-lateral {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 285px;
+      max-width: 85vw;
+      height: 100vh;
+      height: 100dvh;
+      padding: 25px 18px;
+
+      background: #303030;
+      border-right: 1px solid #484848;
+
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      z-index: 20;
+      overflow-y: auto;
+    }
+
+    .menu-lateral.aberto {
+      transform: translateX(0);
+    }
+
+    .topo-menu {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .topo-menu h2 {
+      font-size: 23px;
+    }
+
+    .fechar-menu {
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .menu-lateral a {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      padding: 15px 12px;
+      margin-bottom: 7px;
+
+      color: #eee;
+      text-decoration: none;
+      border-radius: 9px;
+    }
+
+    .menu-lateral a:hover {
+      background: #444;
+    }
+
+    .icone-menu {
+      width: 25px;
+      text-align: center;
+      font-size: 19px;
+    }
+
+    .titulo-menu {
+      color: #999;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 25px 12px 12px;
+    }
+
+    /* CONTEÚDO PRINCIPAL */
 
     main {
       max-width: 1100px;
-      margin: 50px auto;
+      margin: 45px auto;
       padding: 0 25px;
     }
 
     .boas-vindas {
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .boas-vindas h1 {
-      font-size: 40px;
+      font-size: 38px;
       margin-bottom: 10px;
     }
 
     .boas-vindas p {
       color: #aaa;
-      font-size: 17px;
+      font-size: 16px;
+      line-height: 1.6;
     }
 
     .pesquisa {
@@ -85,6 +208,10 @@
       outline: none;
     }
 
+    .pesquisa:focus {
+      border-color: #888;
+    }
+
     .pesquisa::placeholder {
       color: #999;
     }
@@ -96,16 +223,16 @@
 
     .livros {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 22px;
     }
 
     .card {
       background: #303030;
       border: 1px solid #444;
       border-radius: 15px;
-      padding: 25px;
-      min-height: 300px;
+      padding: 23px;
+      min-height: 290px;
 
       display: flex;
       flex-direction: column;
@@ -120,37 +247,139 @@
       justify-content: center;
       align-items: center;
 
-      font-size: 65px;
+      font-size: 60px;
       margin-bottom: 20px;
     }
 
     .card h3 {
-      font-size: 21px;
+      font-size: 20px;
       margin-bottom: 8px;
     }
 
     .card p {
       color: #aaa;
+      line-height: 1.5;
       margin-bottom: 20px;
     }
 
     .botao {
       display: inline-block;
       width: fit-content;
-
       padding: 10px 16px;
-
       background: #444;
       color: white;
-
       border-radius: 8px;
       text-decoration: none;
-
       margin-top: auto;
     }
 
     .botao:hover {
       background: #555;
+    }
+
+    /* BOTÕES FLUTUANTES */
+
+    .botoes-flutuantes {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      z-index: 10;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .botao-flutuante {
+      width: 55px;
+      height: 55px;
+      border: 1px solid #555;
+      border-radius: 50%;
+      background: #383838;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+      text-decoration: none;
+    }
+
+    .botao-flutuante:hover {
+      background: #505050;
+      transform: translateY(-2px);
+    }
+
+    .botao-criar {
+      width: 60px;
+      height: 60px;
+      background: #eee;
+      color: #222;
+      border: none;
+      font-size: 35px;
+    }
+
+    .botao-criar:hover {
+      background: #ccc;
+    }
+
+    /* MENU DE ESCRITA */
+
+    .menu-criar {
+      position: fixed;
+      right: 25px;
+      bottom: 165px;
+      width: 275px;
+      max-width: calc(100vw - 35px);
+
+      background: #303030;
+      border: 1px solid #484848;
+      border-radius: 13px;
+      padding: 12px;
+
+      display: none;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.45);
+      z-index: 9;
+    }
+
+    .menu-criar.aberto {
+      display: block;
+    }
+
+    .menu-criar h3 {
+      padding: 10px;
+      font-size: 17px;
+    }
+
+    .menu-criar p {
+      color: #aaa;
+      padding: 0 10px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .menu-criar a {
+      display: block;
+      padding: 13px 11px;
+      color: #eee;
+      text-decoration: none;
+      border-radius: 8px;
+      line-height: 1.4;
+    }
+
+    .menu-criar a:hover {
+      background: #444;
+    }
+
+    .menu-criar small {
+      display: block;
+      color: #aaa;
+      font-size: 12px;
+      margin-top: 4px;
     }
 
     footer {
@@ -161,100 +390,68 @@
       border-top: 1px solid #444;
     }
 
+    /* CELULARES */
 
-    /* BOTÃO + */
-
-    .botao-criar {
-      position: fixed;
-      right: 30px;
-      bottom: 30px;
-
-      width: 60px;
-      height: 60px;
-
-      border: none;
-      border-radius: 50%;
-
-      background: #444;
-      color: white;
-
-      font-size: 35px;
-      line-height: 60px;
-
-      cursor: pointer;
-
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-
-      z-index: 10;
-    }
-
-    .botao-criar:hover {
-      background: #555;
-    }
-
-
-    /* MENU DO + */
-
-    .menu-criar {
-      position: fixed;
-      right: 30px;
-      bottom: 100px;
-
-      width: 230px;
-
-      background: #303030;
-      border: 1px solid #444;
-      border-radius: 12px;
-
-      padding: 10px;
-
-      display: none;
-
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-
-      z-index: 9;
-    }
-
-    .menu-criar.aberto {
-      display: block;
-    }
-
-    .menu-criar a {
-      display: block;
-
-      color: white;
-      text-decoration: none;
-
-      padding: 14px;
-      border-radius: 8px;
-    }
-
-    .menu-criar a:hover {
-      background: #444;
-    }
-
-
-    @media (max-width: 700px) {
-
+    @media (max-width: 600px) {
       header {
-        padding: 18px 20px;
+        height: 66px;
+        padding: 10px 14px;
+      }
 
-        flex-direction: column;
-        align-items: flex-start;
+      .logo {
+        font-size: 18px;
+      }
+
+      .logo img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .lado-esquerdo {
+        gap: 8px;
+      }
+
+      .link-livros {
+        padding: 9px 11px;
+        font-size: 14px;
+      }
+
+      main {
+        margin: 32px auto;
+        padding: 0 17px;
       }
 
       .boas-vindas h1 {
-        font-size: 32px;
+        font-size: 30px;
+      }
+
+      .boas-vindas p {
+        font-size: 15px;
+      }
+
+      .livros {
+        grid-template-columns: 1fr;
+      }
+
+      .botoes-flutuantes {
+        right: 17px;
+        bottom: 18px;
+      }
+
+      .botao-flutuante {
+        width: 51px;
+        height: 51px;
       }
 
       .botao-criar {
-        right: 20px;
-        bottom: 20px;
+        width: 57px;
+        height: 57px;
+        font-size: 33px;
       }
 
       .menu-criar {
-        right: 20px;
-        bottom: 90px;
+        right: 17px;
+        bottom: 150px;
       }
     }
   </style>
@@ -262,142 +459,199 @@
 
 <body>
 
+  <!-- CABEÇALHO -->
   <header>
+    <div class="lado-esquerdo">
 
-    <div class="logo">
-      Mystic
+      <button
+        class="botao-menu"
+        id="botaoMenu"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+      >☰</button>
+
+      <a class="logo" href="home.html">
+        <img src="logo-mystic.jpg" alt="Logo Mystic">
+        <span>Mystic</span>
+      </a>
+
     </div>
 
-    <nav>
-      <a href="home.html">Início</a>
-      <a href="livros.html">Livros</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="redacoes.html">Redações</a>
-      <a href="perfil.html">👤 Meu perfil</a>
-    </nav>
-
+    <a class="link-livros" href="livros.html">📚 Livros</a>
   </header>
 
 
+  <!-- FUNDO ESCURO DO MENU -->
+  <div class="fundo-menu" id="fundoMenu"></div>
+
+
+  <!-- MENU LATERAL -->
+  <aside class="menu-lateral" id="menuLateral" aria-label="Menu principal">
+
+    <div class="topo-menu">
+      <h2>☾ Mystic</h2>
+      <button class="fechar-menu" id="fecharMenu" type="button"
+        aria-label="Fechar menu">×</button>
+    </div>
+
+    <a href="home.html">
+      <span class="icone-menu">⌂</span>
+      <span>Início</span>
+    </a>
+
+    <a href="livros.html">
+      <span class="icone-menu">📚</span>
+      <span>Livros</span>
+    </a>
+
+    <a href="blogs.html">
+      <span class="icone-menu">📰</span>
+      <span>Artigos e blogs</span>
+    </a>
+
+    <a href="forum.html">
+      <span class="icone-menu">💬</span>
+      <span>Fórum</span>
+    </a>
+
+    <div class="titulo-menu">Sua conta</div>
+
+    <a href="perfil.html">
+      <span class="icone-menu">👤</span>
+      <span>Perfil</span>
+    </a>
+
+    <a href="configuracoes.html">
+      <span class="icone-menu">⚙️</span>
+      <span>Configurações</span>
+    </a>
+
+    <a href="configuracoes.html#aparencia">
+      <span class="icone-menu">🎨</span>
+      <span>Aparência</span>
+    </a>
+
+    <a href="notificacoes.html">
+      <span class="icone-menu">🔔</span>
+      <span>Notificações</span>
+    </a>
+
+  </aside>
+
+
+  <!-- CONTEÚDO PRINCIPAL -->
   <main>
 
     <section class="boas-vindas">
-
       <h1>Bem-vindo à Mystic</h1>
 
       <p>
-        Encontre livros, histórias, redações e muito mais.
+        Encontre livros, descubra histórias e compartilhe sua criatividade.
       </p>
-
     </section>
-
 
     <input
       class="pesquisa"
-      type="text"
+      id="pesquisaLivros"
+      type="search"
       placeholder="🔎 Pesquisar livros..."
+      aria-label="Pesquisar livros"
     >
 
+    <h2 class="secao-titulo">Livros em destaque</h2>
 
-    <h2 class="secao-titulo">
-      Livros em destaque
-    </h2>
+    <section class="livros" id="listaLivros">
 
+      <article class="card" data-titulo="o pequeno príncipe antoine saint-exupery">
+        <div class="capa">📖</div>
 
-    <section class="livros">
+        <h3>O Pequeno Príncipe</h3>
 
-      <div class="card">
+        <p>Antoine de Saint-Exupéry</p>
 
-        <div class="capa">
-          📖
-        </div>
+        <a href="livro.html" class="botao">Ver livro</a>
+      </article>
 
-        <h3>
-          O Pequeno Príncipe
-        </h3>
+      <article class="card" data-titulo="novos livros em breve">
+        <div class="capa">📚</div>
 
-        <p>
-          Antoine de Saint-Exupéry
-        </p>
+        <h3>Em breve</h3>
 
-        <a href="livro.html" class="botao">
-          Ver livro
-        </a>
+        <p>Novos livros serão adicionados à biblioteca.</p>
 
-      </div>
+        <span class="botao">Em breve</span>
+      </article>
 
+      <article class="card" data-titulo="novas histórias em breve">
+        <div class="capa">✨</div>
 
-      <div class="card">
+        <h3>Em breve</h3>
 
-        <div class="capa">
-          📚
-        </div>
+        <p>Novas histórias estão chegando à Mystic.</p>
 
-        <h3>
-          Em breve
-        </h3>
-
-        <p>
-          Novos livros serão adicionados.
-        </p>
-
-        <span class="botao">
-          Em breve
-        </span>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="capa">
-          ✨
-        </div>
-
-        <h3>
-          Em breve
-        </h3>
-
-        <p>
-          Novas histórias chegando à Mystic.
-        </p>
-
-        <span class="botao">
-          Em breve
-        </span>
-
-      </div>
+        <span class="botao">Em breve</span>
+      </article>
 
     </section>
+
+    <p id="semResultados" hidden style="color:#aaa; margin-top:20px;">
+      Nenhum livro encontrado.
+    </p>
 
   </main>
 
 
-  <!-- MENU PARA CRIAR CONTEÚDO -->
-
+  <!-- MENU DE ESCRITA -->
   <div class="menu-criar" id="menuCriar">
 
-    <a href="criar-blog.html">
-      ✍️ Escrever um Blog
-    </a>
+    <h3>✍️ O que você quer escrever?</h3>
+
+    <p>Escolha um tipo de texto para começar.</p>
 
     <a href="criar-redacao.html">
-      📝 Escrever uma Redação
+      📝 Redação
+      <small>Temas e datas especiais.</small>
+    </a>
+
+    <a href="criar-blog.html">
+      📰 Artigo
+      <small>Ideias, opiniões e textos informativos.</small>
+    </a>
+
+    <a href="criar-fanfic.html">
+      📚 Fanfic
+      <small>Crie histórias com seus personagens favoritos.</small>
+    </a>
+
+    <a href="criar-genero.html">
+      ✒️ Gêneros textuais diversos
+      <small>Poemas, contos, crônicas, cartas e outros.</small>
     </a>
 
   </div>
 
 
-  <!-- BOTÃO + -->
+  <!-- BOTÕES FLUTUANTES -->
+  <div class="botoes-flutuantes">
 
-  <button
-    class="botao-criar"
-    id="botaoCriar"
-    onclick="abrirMenu()"
-    aria-label="Criar conteúdo"
-  >
-    +
-  </button>
+    <a
+      class="botao-flutuante"
+      href="forum.html"
+      aria-label="Abrir fórum"
+      title="Fórum"
+    >☏</a>
+
+    <button
+      class="botao-flutuante botao-criar"
+      id="botaoCriar"
+      type="button"
+      aria-label="Escrever"
+      aria-expanded="false"
+      title="Escrever"
+    >+</button>
+
+  </div>
 
 
   <footer>
@@ -406,16 +660,88 @@
 
 
   <script>
+    // ABRIR E FECHAR O MENU LATERAL
 
-    function abrirMenu() {
+    const botaoMenu = document.getElementById("botaoMenu");
+    const menuLateral = document.getElementById("menuLateral");
+    const fundoMenu = document.getElementById("fundoMenu");
+    const fecharMenu = document.getElementById("fecharMenu");
 
-      const menu = document.getElementById("menuCriar");
-
-      menu.classList.toggle("aberto");
-
+    function abrirMenuLateral() {
+      menuLateral.classList.add("aberto");
+      fundoMenu.classList.add("aberto");
+      document.body.classList.add("menu-aberto");
+      botaoMenu.setAttribute("aria-expanded", "true");
     }
 
+    function fecharMenuLateral() {
+      menuLateral.classList.remove("aberto");
+      fundoMenu.classList.remove("aberto");
+      document.body.classList.remove("menu-aberto");
+      botaoMenu.setAttribute("aria-expanded", "false");
+    }
+
+    botaoMenu.addEventListener("click", abrirMenuLateral);
+    fecharMenu.addEventListener("click", fecharMenuLateral);
+    fundoMenu.addEventListener("click", fecharMenuLateral);
+
+    document.addEventListener("keydown", function(evento) {
+      if (evento.key === "Escape") {
+        fecharMenuLateral();
+        fecharMenuCriar();
+      }
+    });
+
+
+    // ABRIR E FECHAR O MENU DE ESCRITA
+
+    const botaoCriar = document.getElementById("botaoCriar");
+    const menuCriar = document.getElementById("menuCriar");
+
+    function fecharMenuCriar() {
+      menuCriar.classList.remove("aberto");
+      botaoCriar.setAttribute("aria-expanded", "false");
+    }
+
+    botaoCriar.addEventListener("click", function() {
+      const aberto = menuCriar.classList.toggle("aberto");
+      botaoCriar.setAttribute("aria-expanded", String(aberto));
+    });
+
+    document.addEventListener("click", function(evento) {
+      if (
+        !menuCriar.contains(evento.target) &&
+        !botaoCriar.contains(evento.target)
+      ) {
+        fecharMenuCriar();
+      }
+    });
+
+
+    // PESQUISA DOS LIVROS EXIBIDOS NESTA PÁGINA
+
+    const pesquisaLivros = document.getElementById("pesquisaLivros");
+    const cardsLivros = document.querySelectorAll("#listaLivros .card");
+    const semResultados = document.getElementById("semResultados");
+
+    pesquisaLivros.addEventListener("input", function() {
+      const termo = pesquisaLivros.value.trim().toLowerCase();
+      let encontrados = 0;
+
+      cardsLivros.forEach(function(card) {
+        const texto = card.dataset.titulo.toLowerCase();
+        const corresponde = texto.includes(termo);
+
+        card.style.display = corresponde ? "flex" : "none";
+
+        if (corresponde) {
+          encontrados++;
+        }
+      });
+
+      semResultados.hidden = encontrados > 0;
+    });
   </script>
 
 </body>
-</html>
+  </html>
