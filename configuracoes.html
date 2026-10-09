@@ -1,606 +1,578 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Configurações — Mystic</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #242424;
-            color: #eee;
-        }
-
-        /* CABEÇALHO */
-
-        header {
-            background: #303030;
-            border-bottom: 1px solid #444;
-
-            padding: 18px 40px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-
-            color: #eee;
-            text-decoration: none;
-        }
-
-        nav {
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: #ccc;
-            text-decoration: none;
-
-            font-size: 15px;
-        }
-
-        nav a:hover {
-            color: white;
-        }
-
-        /* CONTAINER */
-
-        .container {
-            max-width: 900px;
-
-            margin: 40px auto;
-
-            padding: 0 20px;
-        }
-
-        /* TÍTULO */
-
-        .cabecalho {
-            margin-bottom: 30px;
-        }
-
-        .cabecalho h1 {
-            font-size: 28px;
-
-            margin-bottom: 8px;
-        }
-
-        .cabecalho p {
-            color: #999;
-
-            font-size: 15px;
-        }
-
-        /* CONFIGURAÇÕES */
-
-        .configuracoes {
-            background: #303030;
-
-            border: 1px solid #444;
-
-            border-radius: 12px;
-
-            overflow: hidden;
-        }
-
-        .config-item {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            gap: 20px;
-
-            padding: 22px;
-
-            border-bottom: 1px solid #444;
-        }
-
-        .config-item:last-child {
-            border-bottom: none;
-        }
-
-        .config-info {
-            display: flex;
-
-            align-items: center;
-
-            gap: 15px;
-        }
-
-        .icone {
-            width: 45px;
-            height: 45px;
-
-            background: #3b3b3b;
-
-            border: 1px solid #4a4a4a;
-
-            border-radius: 10px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 21px;
-        }
-
-        .config-texto strong {
-            display: block;
-
-            margin-bottom: 5px;
-
-            font-size: 16px;
-        }
-
-        .config-texto span {
-            color: #999;
-
-            font-size: 13px;
-
-            line-height: 1.4;
-        }
-
-        /* BOTÕES */
-
-        .botao {
-            background: #444;
-
-            border: 1px solid #555;
-
-            color: #eee;
-
-            padding: 9px 15px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            text-decoration: none;
-
-            font-size: 13px;
-
-            white-space: nowrap;
-        }
-
-        .botao:hover {
-            background: #555;
-        }
-
-        .botao-perigo {
-            color: #ff8a8a;
-        }
-
-        /* PESQUISA */
-
-        .pesquisa {
-            margin-top: 30px;
-
-            background: #303030;
-
-            border: 1px solid #444;
-
-            border-radius: 12px;
-
-            padding: 25px;
-        }
-
-        .pesquisa h2 {
-            font-size: 20px;
-
-            margin-bottom: 8px;
-        }
-
-        .pesquisa p {
-            color: #999;
-
-            font-size: 14px;
-
-            margin-bottom: 18px;
-        }
-
-        .barra-pesquisa {
-            display: flex;
-
-            gap: 10px;
-        }
-
-        .barra-pesquisa input {
-            flex: 1;
-
-            background: #242424;
-
-            border: 1px solid #555;
-
-            color: #eee;
-
-            padding: 12px 15px;
-
-            border-radius: 8px;
-
-            outline: none;
-        }
-
-        .barra-pesquisa input:focus {
-            border-color: #777;
-        }
-
-        .barra-pesquisa button {
-            background: #444;
-
-            border: 1px solid #555;
-
-            color: #eee;
-
-            padding: 0 18px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-        }
-
-        .barra-pesquisa button:hover {
-            background: #555;
-        }
-
-        /* VOLTAR */
-
-        .voltar {
-            display: inline-block;
-
-            margin-top: 25px;
-
-            color: #aaa;
-
-            text-decoration: none;
-
-            font-size: 14px;
-        }
-
-        .voltar:hover {
-            color: white;
-        }
-
-        /* RODAPÉ */
-
-        footer {
-            text-align: center;
-
-            color: #777;
-
-            padding: 40px 20px;
-
-            margin-top: 50px;
-
-            border-top: 1px solid #444;
-        }
-
-        /* CELULAR */
-
-        @media (max-width: 650px) {
-
-            header {
-                padding: 18px 20px;
-
-                flex-direction: column;
-
-                gap: 15px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-
-                justify-content: center;
-
-                gap: 15px;
-            }
-
-            .config-item {
-                align-items: flex-start;
-
-                flex-direction: column;
-            }
-
-            .barra-pesquisa {
-                flex-direction: column;
-            }
-
-            .barra-pesquisa button {
-                padding: 12px;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurações — Mystic</title>
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --fundo: #242424;
+    --painel: #303030;
+    --borda: #444;
+    --texto: #eee;
+    --secundario: #aaa;
+    --campo: #242424;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    line-height: 1.5;
+}
+
+body.claro {
+    --fundo: #f2f2f2;
+    --painel: #fff;
+    --borda: #ddd;
+    --texto: #222;
+    --secundario: #666;
+    --campo: #fafafa;
+}
+
+body.grande { font-size: 18px; }
+
+header {
+    background: var(--painel);
+    border-bottom: 1px solid var(--borda);
+    padding: 17px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    color: var(--texto);
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+nav a, .voltar {
+    color: var(--secundario);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover, .voltar:hover { color: var(--texto); }
+
+.container {
+    width: min(950px, 100%);
+    margin: 35px auto;
+    padding: 0 18px;
+}
+
+.intro { margin-bottom: 25px; }
+.intro h1 { font-size: 28px; margin-bottom: 7px; }
+.intro p, .descricao { color: var(--secundario); font-size: 14px; }
+
+.grupo {
+    margin-bottom: 22px;
+    background: var(--painel);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    overflow: hidden;
+    scroll-margin-top: 20px;
+}
+
+.grupo-titulo {
+    padding: 20px 22px 12px;
+    font-size: 19px;
+}
+
+.grupo-descricao {
+    padding: 0 22px 15px;
+    color: var(--secundario);
+    font-size: 13px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 18px 22px;
+    border-top: 1px solid var(--borda);
+}
+
+.item-info { flex: 1; min-width: 0; }
+.item-info strong { display: block; margin-bottom: 4px; }
+.item-info p { color: var(--secundario); font-size: 13px; }
+
+.controles {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+select, input[type="text"], input[type="search"] {
+    background: var(--campo);
+    border: 1px solid #666;
+    color: var(--texto);
+    padding: 10px 12px;
+    border-radius: 7px;
+    max-width: 100%;
+    font: inherit;
+}
+
+select { min-width: 190px; }
+input[type="checkbox"] { accent-color: #aaa; width: 18px; height: 18px; }
+
+.botao {
+    display: inline-block;
+    border: 1px solid #666;
+    background: #444;
+    color: #fff;
+    padding: 9px 13px;
+    border-radius: 7px;
+    cursor: pointer;
+    text-decoration: none;
+    font: inherit;
+    font-size: 13px;
+}
+
+body.claro .botao { background: #eee; color: #222; }
+.botao:hover { opacity: .85; }
+.perigo { color: #ff9999; }
+.status { color: var(--secundario); font-size: 12px; margin-top: 10px; }
+.aviso { padding: 14px 22px; color: var(--secundario); font-size: 13px; }
+.voltar { display: inline-block; margin: 5px 0 20px; }
+
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    margin-top: 30px;
+    border-top: 1px solid var(--borda);
+    color: var(--secundario);
+    font-size: 13px;
+}
+
+@media(max-width: 650px) {
+    header { flex-direction: column; padding: 18px; }
+    nav { justify-content: center; gap: 12px; }
+    .item { align-items: flex-start; flex-direction: column; gap: 12px; }
+    .controles { width: 100%; }
+    select { width: 100%; }
+    .intro h1 { font-size: 24px; }
+}
+</style>
 </head>
 
-
 <body>
-
-
-<!-- CABEÇALHO -->
-
 <header>
-
-    <a href="home.html" class="logo">
-        Mystic
-    </a>
-
-
+    <a href="home.html" class="logo">Mystic</a>
     <nav>
-
-        <a href="home.html">
-            Início
-        </a>
-
-        <a href="livros.html">
-            Livros
-        </a>
-
-        <a href="blogs.html">
-            Blogs
-        </a>
-
-        <a href="redacoes.html">
-            Redações
-        </a>
-
-        <a href="perfil.html">
-            Meu perfil
-        </a>
-
-        <a href="configuracoes.html">
-            ⚙️ Configurações
-        </a>
-
+        <a href="home.html">Início</a>
+        <a href="livros.html">Livros</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="redacoes.html">Redações</a>
+        <a href="perfil.html">Meu perfil</a>
     </nav>
-
 </header>
 
-
-
-<div class="container">
-
-
-    <!-- TÍTULO -->
-
-    <section class="cabecalho">
-
-        <h1>
-            ⚙️ Configurações
-        </h1>
-
-        <p>
-            Gerencie as configurações da sua conta na Mystic.
-        </p>
-
+<main class="container">
+    <section class="intro">
+        <h1>⚙️ Configurações</h1>
+        <p>Personalize sua experiência na Mystic.</p>
+        <p id="avisoSalvo" class="status" aria-live="polite"></p>
     </section>
 
-
-
-    <!-- CONFIGURAÇÕES -->
-
-    <section class="configuracoes">
-
-
-        <!-- CONTA -->
-
-        <div class="config-item">
-
-            <div class="config-info">
-
-                <div class="icone">
-                    👤
-                </div>
-
-                <div class="config-texto">
-
-                    <strong>
-                        Conta e perfil
-                    </strong>
-
-                    <span>
-                        Altere seu nome, descrição e informações pessoais.
-                    </span>
-
-                </div>
-
+    <section class="grupo" id="conta">
+        <h2 class="grupo-titulo">👤 Conta e perfil</h2>
+        <p class="grupo-descricao">Gerencie as informações da sua conta.</p>
+        <div class="item">
+            <div class="item-info">
+                <strong>Meu perfil</strong>
+                <p>Edite seu nome, foto, descrição e informações pessoais.</p>
             </div>
-
-            <a href="perfil.html" class="botao">
-                Editar
-            </a>
-
+            <a href="perfil.html" class="botao">Abrir perfil</a>
         </div>
-
-
-
-        <!-- APARÊNCIA -->
-
-        <div class="config-item">
-
-            <div class="config-info">
-
-                <div class="icone">
-                    🎨
-                </div>
-
-                <div class="config-texto">
-
-                    <strong>
-                        Aparência
-                    </strong>
-
-                    <span>
-                        Personalize a aparência da Mystic.
-                    </span>
-
-                </div>
-
+        <div class="item">
+            <div class="item-info">
+                <strong>Sair da conta</strong>
+                <p>Encerre a sessão neste navegador.</p>
             </div>
-
-            <button class="botao">
-                Configurar
-            </button>
-
+            <button class="botao perigo" id="sair">Sair</button>
         </div>
-
-
-
-        <!-- NOTIFICAÇÕES -->
-
-        <div class="config-item">
-
-            <div class="config-info">
-
-                <div class="icone">
-                    🔔
-                </div>
-
-                <div class="config-texto">
-
-                    <strong>
-                        Notificações
-                    </strong>
-
-                    <span>
-                        Controle as notificações que deseja receber.
-                    </span>
-
-                </div>
-
-            </div>
-
-            <button class="botao">
-                Configurar
-            </button>
-
-        </div>
-
-
-
-        <!-- PRIVACIDADE -->
-
-        <div class="config-item">
-
-            <div class="config-info">
-
-                <div class="icone">
-                    🔒
-                </div>
-
-                <div class="config-texto">
-
-                    <strong>
-                        Privacidade
-                    </strong>
-
-                    <span>
-                        Controle a privacidade das suas informações.
-                    </span>
-
-                </div>
-
-            </div>
-
-            <button class="botao">
-                Configurar
-            </button>
-
-        </div>
-
-
-
-        <!-- PESQUISA -->
-
-        <div class="config-item">
-
-            <div class="config-info">
-
-                <div class="icone">
-                    🔍
-                </div>
-
-                <div class="config-texto">
-
-                    <strong>
-                        Pesquisa
-                    </strong>
-
-                    <span>
-                        Pesquise livros, blogs e redações na Mystic.
-                    </span>
-
-                </div>
-
-            </div>
-
-            <a href="home.html" class="botao">
-                Pesquisar
-            </a>
-
-        </div>
-
-
-
-        <!-- SAIR -->
-
-        <div class="config-item">
-
-            <div class="config-info">
-
-                <div class="icone">
-                    🚪
-                </div>
-
-                <div class="config-texto">
-
-                    <strong>
-                        Sair da conta
-                    </strong>
-
-                    <span>
-                        Sair da sua conta neste dispositivo.
-                    </span>
-
-                </div>
-
-            </div>
-
-            <button class="botao botao-perigo">
-                Sair
-            </button>
-
-        </div>
-
-
     </section>
 
+    <section class="grupo" id="aparencia">
+        <h2 class="grupo-titulo">🎨 Aparência</h2>
+        <p class="grupo-descricao">Personalize a apresentação da interface.</p>
+        <div class="item">
+            <div class="item-info">
+                <strong>Tema</strong>
+                <p>Escolha entre tema escuro e claro.</p>
+            </div>
+            <div class="controles">
+                <select id="tema" data-setting>
+                    <option value="escuro">Escuro</option>
+                    <option value="claro">Claro</option>
+                </select>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Tamanho do texto</strong>
+                <p>Altere o tamanho geral dos textos da página.</p>
+            </div>
+            <select id="tamanhoTexto" data-setting>
+                <option value="normal">Normal</option>
+                <option value="grande">Grande</option>
+            </select>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Reduzir animações</strong>
+                <p>Preferência para movimentos e efeitos visuais.</p>
+            </div>
+            <input type="checkbox" id="reduzirAnimacoes" data-setting aria-label="Reduzir animações">
+        </div>
+    </section>
 
+    <section class="grupo" id="notificacoes">
+        <h2 class="grupo-titulo">🔔 Notificações e sons</h2>
+        <p class="grupo-descricao">Escolha quais avisos deseja receber. Essas preferências serão aplicadas quando os respectivos recursos estiverem disponíveis.</p>
 
-    <!-- PESQUISA -->
+        <div class="item">
+            <div class="item-info">
+                <strong>Notificações da Mystic</strong>
+                <p>Ativar preferências de notificações dentro do site.</p>
+            </div>
+            <input type="checkbox" id="notificacoesAtivas" data-setting checked aria-label="Ativar notificações">
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Sons de notificação</strong>
+                <p>Permitir sons quando os avisos forem implementados.</p>
+            </div>
+            <input type="checkbox" id="sons" data-setting checked aria-label="Ativar sons">
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Curtidas e comentários</strong>
+                <p>Preferência para avisos sobre suas publicações.</p>
+            </div>
+            <input type="checkbox" id="avisosPublicacoes" data-setting checked aria-label="Avisos de curtidas e comentários">
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Mensagens e respostas</strong>
+                <p>Preferência para avisos de mensagens e respostas.</p>
+            </div>
+            <input type="checkbox" id="avisosMensagens" data-setting checked aria-label="Avisos de mensagens e respostas">
+        </div>
+    </section>
 
-    <section class="pesquisa">
+    <section class="grupo" id="privacidade">
+        <h2 class="grupo-titulo">🔒 Privacidade e segurança</h2>
+        <p class="grupo-descricao">Configure suas preferências de privacidade. Elas ficam salvas neste navegador, mas ainda não restringem o acesso de outros usuários.</p>
+
+        <div class="item">
+            <div class="item-info">
+                <strong>Mostrar status online</strong>
+                <p>Preferência para exibir quando você está ativo.</p>
+            </div>
+            <input type="checkbox" id="mostrarOnline" data-setting checked aria-label="Mostrar status online">
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Permitir registro de visitas ao perfil</strong>
+                <p>Preferência relacionada às visualizações de perfil.</p>
+            </div>
+            <input type="checkbox" id="visitasPerfil" data-setting checked aria-label="Permitir registro de visitas">
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Quem pode enviar mensagens</strong>
+                <p>Preferência para o futuro sistema de mensagens.</p>
+            </div>
+            <select id="quemMensagem" data-setting>
+                <option value="todos">Todos</option>
+                <option value="seguidores">Pessoas que sigo ou que me seguem</option>
+                <option value="ninguem">Ninguém</option>
+            </select>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Contas bloqueadas e restringidas</strong>
+                <p>O bloqueio e a restrição reais precisarão ser conectados aos perfis e às publicações.</p>
+            </div>
+            <button class="botao" id="bloqueios">Ver opções</button>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Visibilidade do perfil</strong>
+                <p>Defina sua preferência para a futura opção de perfil privado.</p>
+            </div>
+            <select id="visibilidadePerfil" data-setting>
+                <option value="publico">Público</option>
+                <option value="privado">Privado (preferência salva)</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="grupo" id="idioma-regiao">
+        <h2 class="grupo-titulo">🌎 Idioma e região</h2>
+        <p class="grupo-descricao">O idioma recomendado aparece primeiro. Você pode selecionar outro idioma e definir o fuso horário independentemente do idioma.</p>
+
+        <div class="item">
+            <div class="item-info">
+                <strong>Idioma da interface</strong>
+                <p>Escolha o idioma desejado. A tradução completa será conectada às páginas gradualmente.</p>
+            </div>
+            <select id="idioma" data-setting>
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="it">Italiano</option>
+                <option value="ja">日本語</option>
+                <option value="ko">한국어</option>
+                <option value="zh">中文</option>
+                <option value="ar">العربية</option>
+            </select>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <strong>Fuso horário</strong>
+                <p>Usado futuramente em publicações, mensagens, eventos e prazos.</p>
+            </div>
+            <select id="fuso" data-setting>
+                <option value="auto">Detectar automaticamente</option>
+                <option value="America/Sao_Paulo">Brasília / São Paulo</option>
+                <option value="America/Manaus">Manaus</option>
+                <option value="America/Rio_Branco">Rio Branco</option>
+                <option value="America/Noronha">Fernando de Noronha</option>
+                <option value="America/New_York">Nova York</option>
+                <option value="America/Chicago">Chicago</option>
+                <option value="America/Denver">Denver</option>
+                <option value="America/Los_Angeles">Los Angeles</option>
+                <option value="America/Toronto">Toronto</option>
+                <option value="America/Mexico_City">Cidade do México</option>
+                <option value="America/Bogota">Bogotá</option>
+                <option value="America/Lima">Lima</option>
+                <option value="America/Santiago">Santiago</option>
+                <option value="America/Argentina/Buenos_Aires">Buenos Aires</option>
+                <option value="Europe/Lisbon">Lisboa</option>
+                <option value="Europe/London">Londres</option>
+                <option value="Europe/Paris">Paris</option>
+                <option value="Europe/Madrid">Madri</option>
+                <option value="Europe/Berlin">Berlim</option>
+                <option value="Europe/Rome">Roma</option>
+                <option value="Europe/Moscow">Moscou</option>
+                <option value="Africa/Cairo">Cairo</option>
+                <option value="Africa/Johannesburg">Joanesburgo</option>
+                <option value="Asia/Dubai">Dubai</option>
+                <option value="Asia/Kolkata">Nova Délhi / Calcutá</option>
+                <option value="Asia/Bangkok">Bangkok</option>
+                <option value="Asia/Singapore">Singapura</option>
+                <option value="Asia/Shanghai">Xangai / Pequim</option>
+                <option value="Asia/Tokyo">Tóquio</option>
+                <option value="Asia/Seoul">Seul</option>
+                <option value="Australia/Perth">Perth</option>
+                <option value="Australia/Sydney">Sydney</option>
+                <option value="Pacific/Auckland">Auckland</option>
+            </select>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <strong>Horário atual no fuso selecionado</strong>
+                <p id="horarioAtual">Calculando horário...</p>
+            </div>
+            <button class="botao" id="detectarFuso">Usar meu fuso</button>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <strong>Formato de hora</strong>
+                <p>Escolha como os horários serão exibidos.</p>
+            </div>
+            <select id="formatoHora" data-setting>
+                <option value="24">24 horas</option>
+                <option value="12">12 horas (AM/PM)</option>
+            </select>
+        </div>
+
+        <div class="item">
+            <div class="item-info">
+                <strong>Formato de data</strong>
+                <p>Escolha como as datas serão exibidas.</p>
+            </div>
+            <select id="formatoData" data-setting>
+                <option value="local">Automático pelo idioma</option>
+                <option value="DMY">Dia/mês/ano</option>
+                <option value="MDY">Mês/dia/ano</option>
+                <option value="YMD">Ano-mês-dia</option>
+            </select>
+        </div>
+        <p class="aviso">O fuso automático usa a configuração de horário do navegador, não o GPS. Para prazos oficiais, a Mystic deverá usar o fuso definido pela administração do evento.</p>
+    </section>
+
+    <section class="grupo" id="dispositivo">
+        <h2 class="grupo-titulo">📱 Dispositivo e sessão</h2>
+        <p class="grupo-descricao">Informações disponíveis neste navegador.</p>
+        <div class="item">
+            <div class="item-info">
+                <strong>Fuso detectado</strong>
+                <p id="fusoDetectado">Consultando navegador...</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-info">
+                <strong>Idioma do navegador</strong>
+                <p id="idiomaNavegador">Consultando navegador...</p>
+            </div>
+        </div>
+        <p class="aviso">Por enquanto, não é possível listar com segurança todos os dispositivos conectados à conta sem um sistema de autenticação com servidor.</p>
+    </section>
+
+    <section class="grupo" id="dados">
+        <h2 class="grupo-titulo">🗂️ Dados e preferências</h2>
+        <p class="grupo-descricao">As preferências desta página são salvas no armazenamento local deste navegador.</p>
+        <div class="item">
+            <div class="item-info">
+                <strong>Limpar preferências</strong>
+                <p>Apaga as configurações salvas pela página e volta aos valores iniciais.</p>
+            </div>
+            <button class="botao perigo" id="limpar">Limpar</button>
+        </div>
+    </section>
+
+    <section class="grupo" id="pesquisa">
+        <h2 class="grupo-titulo">🔍 Pesquisa</h2>
+        <p class="grupo-descricao">Encontre conteúdo na Mystic.</p>
+        <div class="item">
+            <div class="item-info">
+                <strong>Pesquisar livros, blogs e redações</strong>
+                <p>Ir à página inicial para continuar sua busca.</p>
+            </div>
+            <a href="home.html" class="botao">Pesquisar</a>
+        </div>
+    </section>
+
+    <a href="perfil.html" class="voltar">← Voltar para meu perfil</a>
+</main>
+
+<footer>Mystic — Livraria</footer>
+
+<script>
+const CHAVE = "mysticConfiguracoes";
+const padrao = {
+    tema: "escuro",
+    tamanhoTexto: "normal",
+    reduzirAnimacoes: false,
+    notificacoesAtivas: true,
+    sons: true,
+    avisosPublicacoes: true,
+    avisosMensagens: true,
+    mostrarOnline: true,
+    visitasPerfil: true,
+    quemMensagem: "todos",
+    visibilidadePerfil: "publico",
+    idioma: "pt-BR",
+    fuso: "auto",
+    formatoHora: "24",
+    formatoData: "local"
+};
+
+let configuracoes = { ...padrao };
+
+try {
+    const salvas = JSON.parse(localStorage.getItem(CHAVE) || "{}");
+    configuracoes = { ...padrao, ...salvas };
+} catch (erro) {
+    configuracoes = { ...padrao };
+}
+
+const avisoSalvo = document.getElementById("avisoSalvo");
+
+function salvar() {
+    try {
+        localStorage.setItem(CHAVE, JSON.stringify(configuracoes));
+        avisoSalvo.textContent = "Preferências salvas neste navegador.";
+    } catch (erro) {
+        avisoSalvo.textContent = "Não foi possível salvar as preferências neste navegador.";
+    }
+}
+
+function aplicarAparencia() {
+    document.body.classList.toggle("claro", configuracoes.tema === "claro");
+    document.body.classList.toggle("grande", configuracoes.tamanhoTexto === "grande");
+
+    let estilo = document.getElementById("estiloMovimento");
+    if (!estilo) {
+        estilo = document.createElement("style");
+        estilo.id = "estiloMovimento";
+        document.head.appendChild(estilo);
+    }
+
+    estilo.textContent = configuracoes.reduzirAnimacoes
+        ? "* { animation: none !important; transition: none !important; scroll-behavior: auto !important; }"
+        : "";
+}
+
+function preencherControles() {
+    document.querySelectorAll("[data-setting]").forEach(controle => {
+        const id = controle.id;
+        if (!(id in configuracoes)) return;
+
+        if (controle.type === "checkbox") {
+            controle.checked = Boolean(configuracoes[id]);
+        } else {
+            controle.value = configuracoes[id];
+        }
+    });
+
+    aplicarAparencia();
+}
+
+document.querySelectorAll("[data-setting]").forEach(controle => {
+    controle.addEventListener("change", () => {
+        const id = controle.id;
+        configuracoes[id] = controle.type === "checkbox"
+            ? controle.checked
+            : controle.value;
+
+        salvar();
+        aplicarAparencia();
+        atualizarHorario();
+    });
+});
+
+function obterFuso() {
+    if (configuracoes.fuso === "auto") {
+        return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+    }
+    return configuracoes.fuso;
+}
+
+function atualizarHorario() {
+    const fuso = obterFuso();
+    const hora12 = configuracoes.formatoHora === "12";
+
+    try {
+        const opcoes = {
+            timeZone: fuso,
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: hora12
+   ection class="pesquisa">
 
         <h2>
             🔍 Pesquisa
