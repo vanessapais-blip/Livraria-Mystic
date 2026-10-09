@@ -24,31 +24,28 @@
       border-bottom: 1px solid #444;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 15px 40px;
       gap: 20px;
     }
 
-    .logo {
-      color: #d4af37;
-      font-size: 28px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    nav {
-      display: flex;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
+    .voltar {
       color: white;
       text-decoration: none;
+      font-size: 32px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
     }
 
-    nav a:hover {
+    .voltar:hover {
       color: #d4af37;
+      background: #3b3b3b;
     }
 
     main {
@@ -135,7 +132,7 @@
     }
 
     .titulo {
-      color: white;
+      color: #d4af37;
       font-size: 24px;
       margin-bottom: 20px;
     }
@@ -246,14 +243,7 @@
 
     @media (max-width: 700px) {
       header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 18px;
-      }
-
-      nav {
-        justify-content: center;
-        gap: 15px;
+        padding: 15px 18px;
       }
 
       main {
@@ -283,15 +273,12 @@
 <body>
 
   <header>
-    <a class="logo" href="home.html">Mystic</a>
-
-    <nav>
-      <a href="home.html">Início</a>
-      <a href="livros.html">Livros</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="redacoes.html">Redações</a>
-      <a href="perfil.html">👤 Meu perfil</a>
-    </nav>
+    <a
+      href="home.html"
+      class="voltar"
+      aria-label="Voltar para a página inicial"
+      title="Voltar"
+    >←</a>
   </header>
 
   <main>
@@ -410,8 +397,6 @@
     const livros = document.querySelectorAll(".livro");
     const mensagemNenhum = document.getElementById("nenhum");
     const limparFiltros = document.getElementById("limparFiltros");
-
-    let subgeneroAtual = "Todos";
 
     const subgeneros = {
       "Ficção geral e especulativa": [
@@ -583,7 +568,6 @@
         seletorSubgenero.appendChild(opcao);
       });
 
-      subgeneroAtual = "Todos";
       seletorSubgenero.value = "Todos";
     }
 
@@ -600,14 +584,10 @@
         const subgeneroLivro = livro.dataset.subgenero;
 
         const correspondePesquisa = nome.includes(texto);
-
         const correspondeGenero =
-          generoAtual === "Todos" ||
-          generoLivro === generoAtual;
-
+          generoAtual === "Todos" || generoLivro === generoAtual;
         const correspondeSubgenero =
-          subAtual === "Todos" ||
-          subgeneroLivro === subAtual;
+          subAtual === "Todos" || subgeneroLivro === subAtual;
 
         const mostrar =
           correspondePesquisa &&
@@ -616,9 +596,7 @@
 
         livro.style.display = mostrar ? "flex" : "none";
 
-        if (mostrar) {
-          encontrados++;
-        }
+        if (mostrar) encontrados++;
       });
 
       mensagemNenhum.style.display =
@@ -632,10 +610,7 @@
       atualizarLivros();
     });
 
-    seletorSubgenero.addEventListener("change", function() {
-      subgeneroAtual = seletorSubgenero.value;
-      atualizarLivros();
-    });
+    seletorSubgenero.addEventListener("change", atualizarLivros);
 
     limparFiltros.addEventListener("click", function() {
       pesquisa.value = "";
