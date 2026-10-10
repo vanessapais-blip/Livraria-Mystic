@@ -3,22 +3,24 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0c0f13">
-  <title>Configurações | Mystic Livraria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100e0d">
+  <title>Configurações | Mystic</title>
 
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0c0f13;
-      --panel: #151a20;
-      --panel2: #1c2229;
-      --border: #2b333d;
-      --text: #f4f4f5;
-      --muted: #a6adb8;
-      --field: #10151b;
-      --gold: #f2bd4b;
-      --goldbg: #49391a;
+      --bg: #100e0d;
+      --panel: #191613;
+      --panel2: #211d19;
+      --field: #151210;
+      --border: #393027;
+      --text: #f4eee5;
+      --muted: #b9afa2;
+      --gold: #c9a45c;
+      --gold-light: #e2c783;
+      --gold-bg: #302719;
+      --danger: #e78d83;
     }
 
     * {
@@ -27,26 +29,43 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 90px;
     }
 
     body {
       margin: 0;
+      min-height: 100vh;
       background: var(--bg);
       color: var(--text);
-      font: 14px/1.5 Arial, Helvetica, sans-serif;
+      font: 14px/1.55 Arial, Helvetica, sans-serif;
+      transition: background .2s, color .2s;
     }
 
     body.light {
       color-scheme: light;
-      --bg: #f2f3f5;
-      --panel: #ffffff;
-      --panel2: #f5f6f8;
-      --border: #d9dde3;
-      --text: #22262c;
-      --muted: #626b77;
+      --bg: #f3f0e9;
+      --panel: #fffdf9;
+      --panel2: #f0ebe2;
       --field: #ffffff;
-      --gold: #b78319;
-      --goldbg: #f7edda;
+      --border: #d9d0c2;
+      --text: #29241d;
+      --muted: #70685c;
+      --gold: #98701e;
+      --gold-light: #89631b;
+      --gold-bg: #eee3cc;
+      --danger: #ad3434;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button, a, select, input {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
     }
 
     a {
@@ -54,570 +73,546 @@
       text-decoration: none;
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
     button:focus-visible,
     a:focus-visible,
     input:focus-visible,
-    select:focus-visible {
+    select:focus-visible,
+    textarea:focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 3px;
     }
 
-    header {
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding: 10px 22px;
-      border-bottom: 1px solid var(--border);
+    /* CABEÇALHO */
+
+    .topbar {
       position: sticky;
       top: 0;
+      z-index: 20;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 5%;
       background: var(--bg);
-      z-index: 5;
+      border-bottom: 1px solid var(--border);
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 165px;
-      font: bold 25px Georgia, serif;
-      color: var(--text);
-    }
-
-    .logo .book {
-      color: var(--gold);
-      font: 26px Arial, sans-serif;
-    }
-
-    .actions {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .search {
-      width: min(270px, 35vw);
-    }
-
-    input[type="search"],
-    input[type="text"],
-    input[type="email"],
-    input[type="file"],
-    select,
-    textarea {
-      width: 100%;
-      min-width: 0;
-      padding: 9px 11px;
+    .back {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 50%;
+      background: var(--panel);
+      color: var(--gold-light);
+      font-size: 23px;
+      transition: background .2s;
+    }
+
+    .back:hover {
+      background: var(--gold-bg);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 43px;
+      height: 43px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      color: var(--gold-light);
+      font: bold 29px Georgia, "Times New Roman", serif;
+      letter-spacing: 1px;
+    }
+
+    .top-search {
+      position: relative;
+      width: min(330px, 38vw);
+      margin-left: auto;
+    }
+
+    .top-search input {
+      width: 100%;
+      padding: 11px 40px 11px 15px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
       background: var(--field);
       color: var(--text);
     }
 
-    input::placeholder,
-    textarea::placeholder {
-      color: var(--muted);
-    }
-
-    textarea {
-      resize: vertical;
-    }
-
-    .gold {
+    .search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
       color: var(--gold);
-      font-size: 20px;
+      pointer-events: none;
+      font-size: 18px;
     }
 
-    .avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--panel2);
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-    }
+    /* ESTRUTURA */
 
     .layout {
       display: grid;
-      grid-template-columns: 205px minmax(0, 1fr);
-      min-height: calc(100vh - 58px);
+      grid-template-columns: 230px minmax(0, 1fr);
+      min-height: calc(100vh - 72px);
     }
 
-    aside {
-      padding: 18px 9px;
+    .sidebar {
+      padding: 24px 13px;
       background: var(--panel);
       border-right: 1px solid var(--border);
     }
 
-    .menu-titulo {
-      padding: 0 11px 10px;
+    .sidebar-title {
+      padding: 0 12px 13px;
       color: var(--gold);
       font-size: 11px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
-    aside nav {
+    .nav-list {
       display: grid;
-      gap: 4px;
+      gap: 5px;
     }
 
-    aside a {
+    .nav-link {
       display: flex;
-      gap: 12px;
       align-items: center;
-      padding: 10px 11px;
+      gap: 12px;
+      padding: 11px 12px;
+      border: 1px solid transparent;
       border-radius: 8px;
       color: var(--muted);
       font-size: 13px;
+      transition: .2s;
     }
 
-    aside a i {
-      width: 18px;
+    .nav-link:hover,
+    .nav-link.active {
+      background: var(--gold-bg);
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .nav-icon {
+      width: 20px;
+      flex-shrink: 0;
       text-align: center;
       color: var(--gold);
-      font-style: normal;
       font-size: 17px;
-    }
-
-    aside a:hover,
-    aside a.active {
-      background: var(--goldbg);
-      color: var(--text);
-    }
-
-    aside a.active {
-      border: 1px solid #8d6a25;
     }
 
     main {
       width: 100%;
-      max-width: 1450px;
-      margin: 0 auto;
-      padding: 22px 24px 30px;
+      max-width: 1500px;
       min-width: 0;
+      margin: 0 auto;
+      padding: 30px clamp(16px, 3vw, 42px) 45px;
     }
 
-    .title {
+    .page-title {
       display: flex;
-      gap: 12px;
       align-items: center;
-      margin-bottom: 18px;
+      gap: 15px;
+      margin-bottom: 22px;
     }
 
-    .title .gear {
-      font-size: 28px;
+    .page-icon {
       color: var(--gold);
+      font-size: 29px;
     }
 
-    .title h1 {
-      font-size: 24px;
-      margin: 0;
+    h1, h2, p {
+      margin-top: 0;
     }
 
-    .title p,
-    .desc {
+    h1 {
+      margin-bottom: 4px;
+      font: 29px Georgia, "Times New Roman", serif;
+    }
+
+    .muted {
       color: var(--muted);
-      font-size: 12px;
-      margin: 4px 0 0;
+    }
+
+    .page-description {
+      margin-bottom: 0;
+      font-size: 13px;
     }
 
     .status {
-      color: var(--gold);
-      font-size: 12px;
       min-height: 18px;
-      margin: 0 0 12px;
+      margin: 0 0 14px;
+      color: var(--gold-light);
+      font-size: 12px;
     }
 
-    .columns {
+    /* CARTÕES */
+
+    .settings-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+      gap: 17px;
       align-items: start;
     }
 
-    .column {
+    .settings-column {
       display: grid;
-      gap: 14px;
+      gap: 17px;
       min-width: 0;
     }
 
     .card {
-      padding: 16px;
+      min-width: 0;
+      padding: 18px;
       border: 1px solid var(--border);
       border-radius: 11px;
       background: var(--panel);
-      min-width: 0;
-      scroll-margin-top: 75px;
+      scroll-margin-top: 90px;
     }
 
-    .head {
+    .card-header {
       display: flex;
-      gap: 12px;
       align-items: flex-start;
-      margin-bottom: 13px;
+      gap: 12px;
+      margin-bottom: 15px;
     }
 
-    .head .icon {
-      font-size: 25px;
+    .card-icon {
+      width: 28px;
+      flex-shrink: 0;
       color: var(--gold);
-      min-width: 26px;
       text-align: center;
-      line-height: 1.15;
+      font-size: 23px;
+      line-height: 1.2;
     }
 
     .card h2 {
-      font-size: 15px;
-      margin: 0 0 3px;
+      margin: 0 0 4px;
+      font: 19px Georgia, "Times New Roman", serif;
     }
 
-    .item {
+    .card-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .setting-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 11px 0;
+      gap: 15px;
+      padding: 12px 0;
       border-top: 1px solid var(--border);
     }
 
-    .info {
+    .setting-info {
       flex: 1;
       min-width: 0;
     }
 
-    .info strong {
+    .setting-info strong {
       display: block;
-      font-size: 12px;
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .info small {
+    .setting-info small {
       display: block;
-      color: var(--muted);
-      font-size: 11px;
       margin-top: 3px;
-    }
-
-    .item select {
-      max-width: 190px;
-      font-size: 12px;
-      padding: 8px;
-    }
-
-    input[type="checkbox"],
-    input[type="radio"] {
-      accent-color: var(--gold);
-      width: 17px;
-      height: 17px;
-      flex-shrink: 0;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 11px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--panel2);
-      color: var(--text);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #211b10;
-      font-weight: bold;
-    }
-
-    .btn-primary:hover {
-      color: #211b10;
-      filter: brightness(1.08);
-    }
-
-    .danger {
-      color: #ff8888;
-    }
-
-    .themes {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 9px;
-    }
-
-    .theme {
-      position: relative;
-      min-height: 112px;
-      padding: 12px;
-      text-align: left;
-      background: var(--panel2);
-      color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .theme.selected {
-      border: 2px solid var(--gold);
-      padding: 11px;
-    }
-
-    .theme .symbol {
-      display: block;
-      font-size: 27px;
-      margin-bottom: 5px;
-    }
-
-    .theme strong,
-    .theme small {
-      display: block;
-    }
-
-    .theme strong {
-      font-size: 12px;
-    }
-
-    .theme small {
-      font-size: 11px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .check {
-      display: none;
-      position: absolute;
-      right: 8px;
-      top: 8px;
-      color: var(--gold);
-    }
-
-    .theme.selected .check {
-      display: block;
-    }
-
-    .theme-wrap {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 130px;
-      gap: 12px;
-    }
-
-    .wallpaper {
-      height: 78px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: radial-gradient(ellipse at 70% 15%, #57431d, #171717 40%, #08090b 80%);
-      margin: 5px 0 7px;
-    }
-
-    .wall-label {
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .notice {
-      padding: 10px 11px;
-      margin-top: 10px;
-      background: var(--panel2);
-      border-radius: 8px;
       color: var(--muted);
       font-size: 11px;
+      line-height: 1.5;
     }
 
-    .formats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
+    .field {
+      min-width: 0;
+      margin-top: 13px;
     }
 
     .field label {
       display: block;
+      margin-bottom: 6px;
       font-size: 12px;
-      margin-bottom: 5px;
       font-weight: 600;
     }
 
-    .segments {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
+    select,
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    textarea {
+      width: 100%;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--field);
+      color: var(--text);
     }
 
-    .segments button {
-      flex: 1;
-      min-width: 55px;
-      padding: 8px 5px;
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: 17px;
+      height: 17px;
+      flex-shrink: 0;
+      accent-color: var(--gold);
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 36px;
+      padding: 8px 12px;
       border: 1px solid var(--border);
       border-radius: 7px;
       background: var(--panel2);
       color: var(--text);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .btn-primary {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: #1a140a;
+      font-weight: bold;
+    }
+
+    .btn-primary:hover {
+      color: #1a140a;
+      filter: brightness(1.08);
+    }
+
+    .btn-danger {
+      color: var(--danger);
+    }
+
+    .btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    /* TEMAS */
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .theme-option {
+      position: relative;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--panel2);
+      color: var(--text);
+      text-align: left;
+    }
+
+    .theme-option.selected {
+      border: 2px solid var(--gold);
+      padding: 13px;
+    }
+
+    .theme-preview {
+      height: 48px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+    }
+
+    .preview-dark {
+      background: linear-gradient(135deg, #100e0d 60%, #4c3820);
+    }
+
+    .preview-light {
+      background: linear-gradient(135deg, #ffffff 60%, #e8d6b1);
+    }
+
+    .theme-option strong,
+    .theme-option small {
+      display: block;
+    }
+
+    .theme-option small {
+      margin-top: 4px;
+      color: var(--muted);
       font-size: 11px;
+    }
+
+    .theme-check {
+      display: none;
+      position: absolute;
+      top: 8px;
+      right: 9px;
+      color: var(--gold);
+    }
+
+    .theme-option.selected .theme-check {
+      display: block;
+    }
+
+    /* TEXTO */
+
+    .segments {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .segments button {
+      flex: 1;
+      min-width: 70px;
+      padding: 9px 8px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--panel2);
+      color: var(--text);
+      font-size: 12px;
     }
 
     .segments button.selected {
       border-color: var(--gold);
-      color: var(--gold);
-      background: var(--goldbg);
+      background: var(--gold-bg);
+      color: var(--gold-light);
     }
 
-    .styles {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    .wallpaper {
+      height: 95px;
+      margin: 8px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: radial-gradient(ellipse at 70% 15%, #57431d, #171717 45%, #08090b);
+      background-size: cover;
+      background-position: center;
     }
 
-    .styles label {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .note {
+      padding: 11px;
+      border-radius: 7px;
+      background: var(--panel2);
       color: var(--muted);
       font-size: 11px;
     }
 
-    .styles input {
-      width: 15px;
-      height: 15px;
-    }
+    /* ARMAZENAMENTO */
 
     .storage {
       display: grid;
-      grid-template-columns: 75px 1fr;
-      gap: 14px;
+      grid-template-columns: 78px minmax(0, 1fr);
       align-items: center;
-      margin: 8px 0 12px;
+      gap: 15px;
+      margin: 8px 0 15px;
     }
 
-    .ring {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
+    .storage-ring {
       display: grid;
       place-items: center;
-      background: conic-gradient(var(--gold) 0%, var(--border) 0% 100%);
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold) 0%, var(--border) 0%);
       position: relative;
       font-weight: bold;
     }
 
-    .ring::before {
+    .storage-ring::before {
       content: "";
       position: absolute;
-      inset: 6px;
+      inset: 7px;
       border-radius: 50%;
       background: var(--panel);
     }
 
-    .ring span {
+    .storage-ring span {
       position: relative;
     }
 
-    .legend {
-      display: grid;
-      gap: 5px;
-    }
-
-    .legend div {
-      display: flex;
-      gap: 7px;
-      align-items: center;
-      font-size: 11px;
-      color: var(--muted);
-    }
-
-    .dot {
-      width: 7px;
+    .progress-track {
       height: 7px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
+      overflow: hidden;
+      margin-top: 9px;
+      border-radius: 10px;
+      background: var(--border);
     }
 
-    .book-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--gold);
+      transition: width .2s;
+    }
+
+    .device-info {
+      display: grid;
       gap: 10px;
+    }
+
+    .device-line {
       padding: 10px 0;
       border-top: 1px solid var(--border);
+      overflow-wrap: anywhere;
     }
 
-    .book-info {
-      display: flex;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .book-icon {
-      font-size: 19px;
-      color: var(--gold);
-    }
-
-    .book-row strong {
+    .device-line strong {
       display: block;
       font-size: 12px;
     }
 
-    .book-row small {
-      display: block;
-      font-size: 11px;
+    .device-line small {
       color: var(--muted);
-    }
-
-    .device-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .mini {
-      display: flex;
-      gap: 8px;
       font-size: 11px;
-      color: var(--muted);
-      overflow-wrap: anywhere;
-    }
-
-    .mini b {
-      display: block;
-      color: var(--text);
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-
-    .full-width {
-      margin-top: 16px;
     }
 
     .hidden {
       display: none !important;
     }
 
-    body.small {
+    /* RODAPÉ */
+
+    footer {
+      display: flex;
+      justify-content: center;
+      padding: 22px;
+      border-top: 1px solid var(--border);
+      background: var(--panel);
+      color: #fff;
+      font: 18px Georgia, "Times New Roman", serif;
+    }
+
+    /* ACESSIBILIDADE */
+
+    body.font-small {
       font-size: 12px;
     }
 
-    body.large {
+    body.font-large {
       font-size: 16px;
     }
 
-    body.xlarge {
+    body.font-xlarge {
       font-size: 18px;
     }
 
@@ -645,249 +640,393 @@
       line-height: 2.1;
     }
 
+    body.text-bold {
+      font-weight: 600;
+    }
+
+    body.text-italic {
+      font-style: italic;
+    }
+
+    body.underline-links a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
     body.no-animations *,
     body.no-animations *::before,
     body.no-animations *::after {
-      animation: none !important;
       transition: none !important;
+      animation: none !important;
       scroll-behavior: auto !important;
     }
 
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 15px 24px;
-      border-top: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    footer a {
-      color: var(--gold);
-    }
-
-    @media (max-width: 900px) {
+    @media (max-width: 1050px) {
       .layout {
         grid-template-columns: 1fr;
       }
 
-      aside {
+      .sidebar {
+        padding: 10px;
         border-right: 0;
         border-bottom: 1px solid var(--border);
-        padding: 8px;
       }
 
-      aside nav {
+      .sidebar-title {
+        padding-bottom: 8px;
+      }
+
+      .nav-list {
         display: flex;
-        gap: 4px;
         overflow-x: auto;
+        gap: 5px;
+        padding-bottom: 3px;
       }
 
-      aside a {
-        white-space: nowrap;
+      .nav-link {
         flex-shrink: 0;
-      }
-
-      .columns {
-        grid-template-columns: 1fr;
+        white-space: nowrap;
       }
 
       main {
-        padding: 16px;
+        padding: 24px;
       }
     }
 
-    @media (max-width: 580px) {
-      header {
-        padding: 10px 12px;
-        gap: 8px;
+    @media (max-width: 700px) {
+      .topbar {
         flex-wrap: wrap;
+        gap: 10px;
+        padding: 12px 14px;
       }
 
-      .logo {
-        min-width: 0;
-        font-size: 22px;
+      .brand img {
+        width: 36px;
+        height: 36px;
       }
 
-      .actions {
-        gap: 9px;
+      .brand-name {
+        font-size: 25px;
       }
 
-      .search {
-        width: 42vw;
+      .back {
+        width: 36px;
+        height: 36px;
+      }
+
+      .top-search {
+        order: 3;
+        width: 100%;
+      }
+
+      .settings-grid {
+        grid-template-columns: 1fr;
       }
 
       main {
-        padding: 13px 10px;
+        padding: 20px 13px 30px;
       }
 
-      .theme-wrap {
+      .card {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .card h2 {
+        font-size: 18px;
+      }
+
+      .theme-preview {
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .theme-grid {
         grid-template-columns: 1fr;
       }
 
-      .wallpaper {
-        height: 55px;
-      }
-
-      .item {
+      .setting-row {
         gap: 8px;
       }
 
-      .item select {
+      .setting-row select {
         max-width: 48%;
       }
 
-      .formats,
-      .device-grid {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        padding: 14px 12px;
-        flex-wrap: wrap;
+      .btn {
+        padding: 8px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <a href="home.html" class="logo" aria-label="Mystic Livraria">
-      <span class="book" aria-hidden="true">◧</span>
-      <span>Mystic</span>
+  <header class="topbar">
+    <a class="back" href="home.html" aria-label="Voltar para Home" title="Voltar">
+      &#8592;
     </a>
 
-    <div class="actions">
+    <a class="brand" href="home.html" aria-label="Mystic - página inicial">
+      <img src="logo-mystic.jpg" alt="Logo Mystic">
+      <span class="brand-name">Mystic</span>
+    </a>
+
+    <div class="top-search">
       <input
-        class="search"
         id="buscaTopo"
         type="search"
-        placeholder="Buscar configurações..."
-        aria-label="Buscar configurações"
+        placeholder="Pesquisar configurações..."
+        aria-label="Pesquisar configurações"
       >
-      <span class="gold" aria-hidden="true">♧</span>
-      <span class="avatar" aria-hidden="true">●</span>
+      <span class="search-icon" aria-hidden="true">&#8981;</span>
     </div>
   </header>
 
   <div class="layout">
-    <aside aria-label="Menu de configurações">
-      <p class="menu-titulo">Configurações</p>
-      <nav>
-        <a href="#conta"><i aria-hidden="true">♙</i>Conta e perfil</a>
-        <a href="#aparencia"><i aria-hidden="true">◉</i>Aparência</a>
-        <a href="#notificacoes"><i aria-hidden="true">♧</i>Notificações</a>
-        <a href="#privacidade"><i aria-hidden="true">♢</i>Privacidade</a>
-        <a href="#idioma"><i aria-hidden="true">◎</i>Idioma e região</a>
-        <a href="#texto" class="active"><i aria-hidden="true">Aa</i>Texto e fonte</a>
-        <a href="#dados"><i aria-hidden="true">▤</i>Armazenamento e dados</a>
-        <a href="#dispositivo"><i aria-hidden="true">▣</i>Dispositivo e sessão</a>
-        <a href="#pesquisa"><i aria-hidden="true">⌕</i>Pesquisa</a>
+    <aside class="sidebar">
+      <div class="sidebar-title">Configurações</div>
+
+      <nav class="nav-list" aria-label="Seções de configurações">
+        <a class="nav-link active" href="#conta"><span class="nav-icon">♙</span>Conta e perfil</a>
+        <a class="nav-link" href="#aparencia"><span class="nav-icon">◐</span>Aparência</a>
+        <a class="nav-link" href="#notificacoes"><span class="nav-icon">♧</span>Notificações</a>
+        <a class="nav-link" href="#privacidade"><span class="nav-icon">◇</span>Privacidade</a>
+        <a class="nav-link" href="#idioma"><span class="nav-icon">◎</span>Idioma e região</a>
+        <a class="nav-link" href="#texto"><span class="nav-icon">Aa</span>Texto e fonte</a>
+        <a class="nav-link" href="#dados"><span class="nav-icon">▤</span>Armazenamento</a>
+        <a class="nav-link" href="#dispositivo"><span class="nav-icon">▣</span>Dispositivo</a>
+        <a class="nav-link" href="#pesquisa"><span class="nav-icon">⌕</span>Pesquisa</a>
       </nav>
     </aside>
 
     <main>
-      <div class="title">
-        <span class="gear" aria-hidden="true">⚙</span>
+      <div class="page-title">
+        <span class="page-icon" aria-hidden="true">⚙</span>
         <div>
           <h1>Configurações</h1>
-          <p>Personalize sua experiência na Mystic Livraria.</p>
+          <p class="muted page-description">Personalize sua experiência na Mystic Livraria.</p>
         </div>
       </div>
 
-      <p id="avisoSalvo" class="status" role="status" aria-live="polite"></p>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
 
-      <div class="columns">
-        <div class="column">
+      <div class="settings-grid">
+        <div class="settings-column">
 
-          <section class="card searchable" id="conta" data-words="conta perfil sair">
-            <div class="head">
-              <span class="icon" aria-hidden="true">♙</span>
+          <section class="card searchable" id="conta"
+            data-words="conta perfil sair login usuário">
+            <div class="card-header">
+              <span class="card-icon">♙</span>
               <div>
                 <h2>Conta e perfil</h2>
-                <p class="desc">Gerencie as opções relacionadas ao seu perfil.</p>
+                <p class="card-description">Gerencie as opções do seu perfil.</p>
               </div>
             </div>
 
-            <div class="item">
-              <div class="info">
+            <div class="setting-row">
+              <div class="setting-info">
                 <strong>Meu perfil</strong>
-                <small>Consulte ou edite suas informações pessoais.</small>
+                <small>Consulte ou edite suas informações.</small>
               </div>
               <a class="btn" href="perfil.html">Abrir perfil</a>
             </div>
 
-            <div class="item">
-              <div class="info">
+            <div class="setting-row">
+              <div class="setting-info">
                 <strong>Sair da conta</strong>
-                <small>Encerra a sessão neste navegador.</small>
+                <small>Volte à página inicial da Mystic.</small>
               </div>
-              <button class="btn danger" id="sair" type="button">Sair</button>
+              <button class="btn btn-danger" id="sair" type="button">Sair</button>
             </div>
           </section>
 
-          <section class="card searchable" id="aparencia" data-words="aparência tema claro escuro cores papel parede">
-            <div class="head">
-              <span class="icon" aria-hidden="true">☷</span>
+          <section class="card searchable" id="aparencia"
+            data-words="aparência tema escuro claro cor fundo papel parede animação">
+            <div class="card-header">
+              <span class="card-icon">◐</span>
               <div>
                 <h2>Aparência</h2>
-                <p class="desc">Escolha o tema e personalize a aparência da página.</p>
+                <p class="card-description">Personalize o visual da página.</p>
               </div>
             </div>
 
-            <strong style="font-size:12px;display:block;margin-bottom:7px">Tema</strong>
-            <div class="themes">
-              <button class="theme selected" id="temaEscuro" type="button" aria-pressed="true">
-                <span class="check" aria-hidden="true">●</span>
-                <span class="symbol" aria-hidden="true">☾</span>
+            <div class="theme-grid">
+              <button class="theme-option selected" type="button"
+                data-theme="dark" aria-pressed="true">
+                <span class="theme-check">●</span>
+                <div class="theme-preview preview-dark"></div>
                 <strong>Escuro</strong>
-                <small>Uma aparência escura com detalhes dourados.</small>
+                <small>Preto e dourado</small>
               </button>
 
-              <button class="theme" id="temaClaro" type="button" aria-pressed="false">
-                <span class="check" aria-hidden="true">●</span>
-                <span class="symbol" aria-hidden="true">☼</span>
+              <button class="theme-option" type="button"
+                data-theme="light" aria-pressed="false">
+                <span class="theme-check">●</span>
+                <div class="theme-preview preview-light"></div>
                 <strong>Claro</strong>
-                <small>Uma aparência clara e iluminada.</small>
+                <small>Claro e discreto</small>
               </button>
             </div>
 
-            <div class="item">
-              <div class="info">
-                <strong>Reduzir animações</strong>
-                <small>Desativa as transições e animações da página.</small>
-              </div>
-              <input id="reduzirAnimacoes" type="checkbox" aria-label="Reduzir animações">
-            </div>
-
-            <div class="item">
-              <div class="info">
+            <div class="setting-row">
+              <div class="setting-info">
                 <strong>Cor de destaque</strong>
-                <small>Escolha a cor usada nos detalhes da interface.</small>
+                <small>Cor dos detalhes e controles.</small>
               </div>
               <select id="corDestaque" aria-label="Cor de destaque">
-                <option value="dourado">Dourado</option>
-                <option value="azul">Azul</option>
-                <option value="verde">Verde</option>
+                <option value="gold">Dourado</option>
+                <option value="blue">Azul</option>
+                <option value="green">Verde</option>
               </select>
             </div>
 
-            <div class="field" style="margin-top:13px">
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Reduzir animações</strong>
+                <small>Desativa transições visuais.</small>
+              </div>
+              <input id="reduzirAnimacoes" type="checkbox">
+            </div>
+
+            <div class="field">
               <label for="arquivoWallpaper">Imagem de fundo opcional</label>
-              <div id="wallpaper" class="wallpaper" aria-label="Prévia do fundo"></div>
+              <div id="wallpaper" class="wallpaper"></div>
               <input id="arquivoWallpaper" type="file" accept="image/*">
-              <p class="desc">A imagem escolhida é aplicada apenas à prévia desta página e não é enviada a um servidor.</p>
+              <button id="removerWallpaper" class="btn"
+                type="button" style="margin-top:8px">
+                Remover imagem
+              </button>
+              <p class="card-description" style="margin-top:8px">
+                A imagem escolhida fica aplicada nesta página.
+              </p>
             </div>
           </section>
 
-          <section class="card searchable" id="texto" data-words="texto fonte leitura tamanho espaçamento negrito itálico sublinhado">
-            <div class="head">
-              <span class="icon" aria-hidden="true">Aa</span>
+          <section class="card searchable" id="notificacoes"
+            data-words="notificações avisos novidades lançamentos leitura">
+            <div class="card-header">
+              <span class="card-icon">♧</span>
+              <div>
+                <h2>Notificações</h2>
+                <p class="card-description">Escolha os avisos que deseja receber.</p>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Novos lançamentos</strong>
+                <small>Avisos sobre novos livros.</small>
+              </div>
+              <input type="checkbox" data-pref="notifLancamentos" checked>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Promoções e novidades</strong>
+                <small>Atualizações da livraria.</small>
+              </div>
+              <input type="checkbox" data-pref="notifPromocoes" checked>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Lembretes de leitura</strong>
+                <small>Lembretes para continuar lendo.</small>
+              </div>
+              <input type="checkbox" data-pref="notifLeitura">
+            </div>
+
+            <p class="note">
+              As preferências são salvas neste navegador. O envio real de notificações
+              exige integração adicional.
+            </p>
+          </section>
+
+          <section class="card searchable" id="idioma"
+            data-words="idioma região país português brasil linguagem">
+            <div class="card-header">
+              <span class="card-icon">◎</span>
+              <div>
+                <h2>Idioma e região</h2>
+                <p class="card-description">Escolha idioma e região preferidos.</p>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="idiomaSelect">Idioma</label>
+              <select id="idiomaSelect">
+                <option value="pt-BR">Português (Brasil)</option>
+                <option value="pt-PT">Português (Portugal)</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="regiaoSelect">Região</label>
+              <select id="regiaoSelect">
+                <option value="BR">Brasil</option>
+                <option value="PT">Portugal</option>
+                <option value="US">Estados Unidos</option>
+                <option value="ES">Espanha</option>
+              </select>
+            </div>
+          </section>
+
+          <section class="card searchable" id="privacidade"
+            data-words="privacidade dados cookies histórico pesquisa excluir">
+            <div class="card-header">
+              <span class="card-icon">◇</span>
+              <div>
+                <h2>Privacidade</h2>
+                <p class="card-description">Gerencie dados e preferências locais.</p>
+              </div>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Salvar histórico de pesquisa</strong>
+                <small>Guarda as pesquisas neste navegador.</small>
+              </div>
+              <input id="salvarHistorico" type="checkbox" checked>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Personalização local</strong>
+                <small>Guarda suas preferências neste dispositivo.</small>
+              </div>
+              <input id="personalizacao" type="checkbox" checked>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Limpar histórico de pesquisa</strong>
+                <small>Apaga as pesquisas guardadas nesta página.</small>
+              </div>
+              <button class="btn" id="limparHistorico" type="button">Limpar</button>
+            </div>
+
+            <p class="note">
+              Estas opções controlam dados locais. Uma conta real exige integração com servidor.
+            </p>
+          </section>
+
+        </div>
+
+        <div class="settings-column">
+
+          <section class="card searchable" id="texto"
+            data-words="texto fonte tamanho espaçamento leitura negrito itálico sublinhado">
+            <div class="card-header">
+              <span class="card-icon">Aa</span>
               <div>
                 <h2>Texto e fonte</h2>
-                <p class="desc">Ajuste a leitura para deixá-la mais confortável.</p>
+                <p class="card-description">Ajuste a leitura para maior conforto.</p>
               </div>
             </div>
 
@@ -901,7 +1040,7 @@
               </select>
             </div>
 
-            <div class="field" style="margin-top:12px">
+            <div class="field">
               <label for="fonte">Tipo de fonte</label>
               <select id="fonte">
                 <option value="default">Padrão</option>
@@ -912,7 +1051,7 @@
               </select>
             </div>
 
-            <div class="field" style="margin-top:12px">
+            <div class="field">
               <label>Espaçamento entre linhas</label>
               <div class="segments">
                 <button type="button" data-spacing="normal" class="selected">Normal</button>
@@ -921,823 +1060,734 @@
               </div>
             </div>
 
-            <div class="field" style="margin-top:14px">
-              <label>Estilo do texto</label>
-              <div class="styles">
-                <label><input type="checkbox" id="negrito"> Negrito</label>
-                <label><input type="checkbox" id="italico"> Itálico</label>
-                <label><input type="checkbox" id="sublinhar"> Sublinhado nos links</label>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Negrito</strong>
+                <small>Destaca o texto da interface.</small>
               </div>
+              <input type="checkbox" id="textoNegrito">
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Itálico</strong>
+                <small>Aplica estilo itálico ao texto.</small>
+              </div>
+              <input type="checkbox" id="textoItalico">
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Sublinhar links</strong>
+                <small>Facilita identificar links.</small>
+              </div>
+              <input type="checkbox" id="sublinharLinks">
             </div>
           </section>
 
-          <section class="card searchable" id="notificacoes" data-words="notificações sons sininho alerta">
-            <div class="head">
-              <span class="icon" aria-hidden="true">♧</span>
+          <section class="card searchable" id="pesquisa"
+            data-words="pesquisa busca histórico sugestões autor gênero">
+            <div class="card-header">
+              <span class="card-icon">⌕</span>
               <div>
-                <h2>Notificações</h2>
-                <p class="desc">Gerencie as preferências de notificação desta página.</p>
+                <h2>Pesquisa</h2>
+                <p class="card-description">Personalize a experiência de busca.</p>
               </div>
             </div>
 
-            <div class="item">
-              <div class="info">
-                <strong>Notificações ativadas</strong>
-                <small>Salva sua preferência neste navegador; não ativa avisos do servidor.</small>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Sugestões de pesquisa</strong>
+                <small>Ativa as sugestões no campo de busca.</small>
               </div>
-              <input type="checkbox" id="notificacoesAtivas" checked>
+              <input type="checkbox" data-pref="sugestoesPesquisa" checked>
             </div>
 
-            <div class="item">
-              <div class="info">
-                <strong>Sons de notificação</strong>
-                <small>Permite reproduzir os sons de teste abaixo.</small>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Pesquisar por autor</strong>
+                <small>Inclui autores na pesquisa.</small>
               </div>
-              <input type="checkbox" id="sonsAtivos">
+              <input type="checkbox" data-pref="buscarAutor" checked>
             </div>
 
-            <div class="field" style="margin-top:12px">
-              <label>Som de teste</label>
-              <div class="sounds">
-                <label class="sound"><input type="radio" name="som" value="padrao" checked> Padrão <button class="btn play" data-som="padrao" type="button">Testar</button></label>
-                <label class="sound"><input type="radio" name="som" value="sino"> Sininho <button class="btn play" data-som="sino" type="button">Testar</button></label>
-                <label class="sound"><input type="radio" name="som" value="suave"> Suave <button class="btn play" data-som="suave" type="button">Testar</button></label>
-                <label class="sound"><input type="radio" name="som" value="alerta"> Alerta <button class="btn play" data-som="alerta" type="button">Testar</button></label>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Pesquisar por gênero</strong>
+                <small>Inclui gêneros literários na busca.</small>
               </div>
+              <input type="checkbox" data-pref="buscarGenero" checked>
             </div>
 
-            <div class="field" style="margin-top:14px">
-              <label for="arquivoSom">Arquivo de som personalizado</label>
-              <input id="arquivoSom" type="file" accept="audio/*">
-              <p id="nomeSom" class="desc">Nenhum arquivo selecionado.</p>
-              <audio id="audioPersonalizado" controls hidden></audio>
-              <button class="btn" id="testarAudio" type="button" style="margin-top:8px">Testar áudio personalizado</button>
-            </div>
-          </section>
-        </div>
-
-        <div class="column">
-
-          <section class="card searchable" id="privacidade" data-words="privacidade perfil mensagens visitas online bloqueados">
-            <div class="head">
-              <span class="icon" aria-hidden="true">♢</span>
-              <div>
-                <h2>Privacidade</h2>
-                <p class="desc">Defina suas preferências de visibilidade.</p>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Histórico de pesquisa</strong>
+                <small>Consulte pesquisas salvas.</small>
               </div>
+              <button class="btn" id="verHistorico" type="button">Ver histórico</button>
             </div>
 
-            <div class="item">
-              <div class="info">
-                <strong>Mostrar status on-line</strong>
-                <small>Salva sua preferência local; não altera seu status no servidor.</small>
-              </div>
-              <input id="online" type="checkbox" checked>
-            </div>
-
-            <div class="item">
-              <div class="info">
-                <strong>Mostrar visitas ao perfil</strong>
-                <small>Preferência de exibição local.</small>
-              </div>
-              <input id="visitas" type="checkbox" checked>
-            </div>
-
-            <div class="item">
-              <div class="info">
-                <strong>Quem pode enviar mensagens?</strong>
-                <small>Esta escolha só será aplicada quando houver integração com o servidor.</small>
-              </div>
-              <select id="mensagens">
-                <option value="todos">Todos</option>
-                <option value="seguidores">Apenas seguidores</option>
-                <option value="ninguem">Ninguém</option>
-              </select>
-            </div>
-
-            <div class="item">
-              <div class="info">
-                <strong>Visibilidade do perfil</strong>
-                <small>Salva a opção escolhida neste navegador.</small>
-              </div>
-              <select id="visibilidade">
-                <option value="publico">Público</option>
-                <option value="privado">Privado</option>
-              </select>
-            </div>
-
-            <div class="field" style="margin-top:14px">
-              <label for="contasBloqueadas">Anotações sobre contas bloqueadas</label>
-              <textarea id="contasBloqueadas" rows="3" placeholder="Digite observações, se necessário..."></textarea>
-              <p class="desc">Este campo é apenas uma anotação local; ele não bloqueia contas de verdade.</p>
-            </div>
-
-            <button class="btn" id="gerenciarBloqueios" type="button" style="margin-top:10px">Sobre o bloqueio de contas</button>
+            <div id="historicoResultado" class="note hidden"></div>
           </section>
 
-          <section class="card searchable" id="idioma" data-words="idioma região fuso horário data hora">
-            <div class="head">
-              <span class="icon" aria-hidden="true">◎</span>
-              <div>
-                <h2>Idioma e região</h2>
-                <p class="desc">Escolha o idioma e o formato de data e hora.</p>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="idiomaPreferido">Idioma preferido</label>
-              <select id="idiomaPreferido">
-                <option value="pt-BR">Português (Brasil)</option>
-                <option value="en">Inglês</option>
-                <option value="es">Espanhol</option>
-              </select>
-              <p class="desc">Esta opção não traduz automaticamente as páginas do site.</p>
-            </div>
-
-            <div class="field" style="margin-top:12px">
-              <label for="fuso">Fuso horário</label>
-              <select id="fuso">
-                <option value="auto">Detectar automaticamente</option>
-                <option value="America/Sao_Paulo">Brasília — São Paulo</option>
-                <option value="America/Manaus">Manaus</option>
-                <option value="America/Rio_Branco">Rio Branco</option>
-                <option value="Europe/Lisbon">Lisboa</option>
-                <option value="Europe/London">Londres</option>
-                <option value="America/New_York">Nova York</option>
-                <option value="UTC">UTC</option>
-              </select>
-            </div>
-
-            <div class="formats">
-              <div class="field">
-                <label for="formatoHora">Formato da hora</label>
-                <select id="formatoHora">
-                  <option value="24">24 horas</option>
-                  <option value="12">12 horas</option>
-                </select>
-              </div>
-
-              <div class="field">
-                <label for="formatoData">Formato da data</label>
-                <select id="formatoData">
-                  <option value="DMY">DD/MM/AAAA</option>
-                  <option value="MDY">MM/DD/AAAA</option>
-                  <option value="YMD">AAAA-MM-DD</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="notice" id="horaAtual" aria-live="polite">Consultando a data e a hora...</div>
-          </section>
-
-          <section class="card searchable" id="dados" data-words="armazenamento dados livros offline espaço">
-            <div class="head">
-              <span class="icon" aria-hidden="true">▤</span>
+          <section class="card searchable" id="dados"
+            data-words="armazenamento dados espaço cache histórico limpar">
+            <div class="card-header">
+              <span class="card-icon">▤</span>
               <div>
                 <h2>Armazenamento e dados</h2>
-                <p class="desc">Consulte uma estimativa dos dados locais deste site.</p>
+                <p class="card-description">Gerencie preferências salvas neste navegador.</p>
               </div>
             </div>
 
             <div class="storage">
-              <div class="ring" id="storageRing"><span id="storagePercent">0%</span></div>
-              <div>
-                <strong id="storageUsed">Calculando...</strong>
-                <p class="desc">Estimativa dos dados disponíveis no armazenamento local.</p>
+              <div class="storage-ring" id="storageRing">
+                <span id="storagePercent">0%</span>
               </div>
-            </div>
-
-            <div class="legend">
-              <div><span class="dot"></span> Preferências: <span id="settingsBytes">0 bytes</span></div>
-              <div><span class="dot"></span> Registros de livros: <span id="booksBytes">0 bytes</span></div>
-              <div><span class="dot"></span> Outros dados do site: <span id="otherBytes">0 bytes</span></div>
-            </div>
-
-            <div class="book-row">
-              <div class="book-info">
-                <span class="book-icon" aria-hidden="true">▤</span>
-                <div>
-                  <strong>Livros para leitura off-line</strong>
-                  <small id="offlineCount">0 registros</small>
+              <div>
+                <strong id="storageText">Calculando dados locais...</strong>
+                <p class="card-description">
+                  Estimativa do espaço usado pelas preferências deste site.
+                </p>
+                <div class="progress-track">
+                  <div class="progress-fill" id="storageFill"></div>
                 </div>
               </div>
-              <button class="btn" id="downloads" type="button">Ver registros</button>
             </div>
 
-            <p class="notice" id="storageNote">Os valores são estimativas e não representam necessariamente todos os arquivos armazenados pelo navegador.</p>
-
-            <div class="item">
-              <div class="info">
-                <strong>Exportar preferências</strong>
-                <small>Baixa um arquivo JSON com as opções salvas.</small>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Atualizar estimativa</strong>
+                <small>Calcula novamente o tamanho dos dados locais.</small>
               </div>
-              <button class="btn" id="exportar" type="button">Exportar</button>
+              <button class="btn" id="atualizarDados" type="button">Atualizar</button>
             </div>
 
-            <div class="item">
-              <div class="info">
-                <strong>Restaurar preferências</strong>
-                <small>Volta às opções padrão desta página.</small>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Restaurar configurações</strong>
+                <small>Volta às preferências padrão desta página.</small>
               </div>
-              <button class="btn" id="limpar" type="button">Restaurar</button>
+              <button class="btn" id="restaurar" type="button">Restaurar</button>
             </div>
+
+            <p class="note">
+              A estimativa é aproximada e não representa o armazenamento de livros em um servidor.
+            </p>
           </section>
 
-          <section class="card searchable" id="dispositivo" data-words="dispositivo sessão navegador idioma">
-            <div class="head">
-              <span class="icon" aria-hidden="true">▣</span>
+          <section class="card searchable" id="dispositivo"
+            data-words="dispositivo navegador sessão sistema tela computador celular tablet">
+            <div class="card-header">
+              <span class="card-icon">▣</span>
               <div>
                 <h2>Dispositivo e sessão</h2>
-                <p class="desc">Informações básicas deste navegador.</p>
+                <p class="card-description">Informações sobre o dispositivo atual.</p>
               </div>
             </div>
 
-            <div class="device-grid">
-              <div class="mini">
-                <span class="gold" aria-hidden="true">▣</span>
-                <div><b>Dispositivo</b><span id="dispositivoAtual">Consultando...</span></div>
+            <div class="device-info">
+              <div class="device-line">
+                <strong>Tipo de dispositivo</strong>
+                <small id="tipoDispositivo">Detectando...</small>
               </div>
-              <div class="mini">
-                <span class="gold" aria-hidden="true">◷</span>
-                <div><b>Fuso horário detectado</b><span id="fusoDetectado">Consultando...</span></div>
+
+              <div class="device-line">
+                <strong>Navegador</strong>
+                <small id="navegador">Detectando...</small>
               </div>
-              <div class="mini">
-                <span class="gold" aria-hidden="true">▣</span>
-                <div><b>Idioma do navegador</b><span id="idiomaNavegador">Consultando...</span></div>
+
+              <div class="device-line">
+                <strong>Idioma do navegador</strong>
+                <small id="idiomaNavegador">Detectando...</small>
               </div>
-              <div class="mini">
-                <span class="gold" aria-hidden="true">◎</span>
-                <div><b>Fuso selecionado</b><span id="fusoAtual">Automático</span></div>
+
+              <div class="device-line">
+                <strong>Tamanho da tela</strong>
+                <small id="tamanhoTela">Detectando...</small>
               </div>
             </div>
 
-            <p class="notice">Para consultar outros dispositivos conectados ou encerrar sessões remotamente, é necessário integrar esta página a um sistema de autenticação com servidor.</p>
+            <div class="setting-row">
+              <div class="setting-info">
+                <strong>Recarregar página</strong>
+                <small>Atualiza a página atual.</small>
+              </div>
+              <button class="btn" id="recarregar" type="button">Recarregar</button>
+            </div>
+
+            <p class="note">
+              Esta seção mostra informações básicas do navegador atual. Ela não controla sessões em outros dispositivos.
+            </p>
           </section>
 
-          <section class="card searchable" id="pesquisa" data-words="pesquisa buscar livros blogs redações">
-            <div class="head">
-              <span class="icon" aria-hidden="true">⌕</span>
-              <div>
-                <h2>Pesquisa</h2>
-                <p class="desc">Encontre conteúdos na Mystic Livraria.</p>
-              </div>
-            </div>
-
-            <div class="item">
-              <div class="info">
-                <strong>Pesquisar livros, blogs e redações</strong>
-                <small>Continue sua pesquisa na página inicial.</small>
-              </div>
-              <a class="btn" href="home.html">Pesquisar</a>
-            </div>
-          </section>
         </div>
-      </div>
-
-      <div class="notice full-width">
-        As preferências desta página são armazenadas no navegador atual. Elas não substituem as configurações de uma conta conectada a um servidor.
       </div>
     </main>
   </div>
 
-  <footer>
-    <a href="perfil.html">← Voltar ao perfil</a>
-    <span>© <span id="anoAtual"></span> Mystic Livraria</span>
-  </footer>
+  <footer>Mystic</footer>
 
   <script>
-    "use strict";
+    (() => {
+      "use strict";
 
-    const CHAVE_CONFIG = "mysticConfiguracoes";
-    const CHAVE_LIVROS = "mysticLivrosOffline";
+      const STORAGE_KEY = "mysticConfiguracoesV1";
+      const HISTORY_KEY = "mysticHistoricoPesquisaV1";
+      const status = document.getElementById("status");
 
-    const padrao = {
-      theme: "dark",
-      size: "normal",
-      font: "default",
-      spacing: "normal",
-      bold: false,
-      italic: false,
-      underline: false,
-      reduceMotion: false,
-      accent: "dourado",
-      notifications: true,
-      sounds: false,
-      sound: "padrao",
-      online: true,
-      visits: true,
-      messages: "todos",
-      visibility: "publico",
-      blockedNotes: "",
-      language: "pt-BR",
-      timezone: "auto",
-      hour: "24",
-      date: "DMY"
-    };
-
-    const $ = (id) => document.getElementById(id);
-
-    function carregarPreferencias() {
-      try {
-        const salvas = JSON.parse(localStorage.getItem(CHAVE_CONFIG) || "{}");
-        return { ...padrao, ...salvas };
-      } catch {
-        return { ...padrao };
-      }
-    }
-
-    let estado = carregarPreferencias();
-    let audioUrl = null;
-    let imagemUrl = null;
-    let contextoAudio = null;
-
-    function avisar(mensagem) {
-      const elemento = $("avisoSalvo");
-      if (elemento) elemento.textContent = mensagem;
-    }
-
-    function salvar(mensagem = "Preferências salvas neste navegador.") {
-      try {
-        localStorage.setItem(CHAVE_CONFIG, JSON.stringify(estado));
-        avisar(mensagem);
-        atualizarArmazenamento();
-      } catch {
-        avisar("Não foi possível salvar as preferências. Verifique o armazenamento do navegador.");
-      }
-    }
-
-    function alterar(chave, valor) {
-      estado[chave] = valor;
-      aplicarPreferencias();
-      salvar();
-      atualizarHora();
-    }
-
-    function aplicarPreferencias() {
-      document.body.classList.toggle("light", estado.theme === "light");
-
-      document.body.classList.remove(
-        "small", "large", "xlarge",
-        "font-arial", "font-georgia", "font-verdana", "font-mono",
-        "spacing-medium", "spacing-wide", "no-animations"
-      );
-
-      if (["small", "large", "xlarge"].includes(estado.size)) {
-        document.body.classList.add(estado.size);
-      }
-
-      if (["arial", "georgia", "verdana", "mono"].includes(estado.font)) {
-        document.body.classList.add("font-" + estado.font);
-      }
-
-      if (["medium", "wide"].includes(estado.spacing)) {
-        document.body.classList.add("spacing-" + estado.spacing);
-      }
-
-      if (estado.reduceMotion) {
-        document.body.classList.add("no-animations");
-      }
-
-      document.body.style.fontWeight = estado.bold ? "700" : "";
-      document.body.style.fontStyle = estado.italic ? "italic" : "";
-
-      document.querySelectorAll("a").forEach((link) => {
-        link.style.textDecoration = estado.underline ? "underline" : "";
-      });
-
-      $("temaEscuro").classList.toggle("selected", estado.theme === "dark");
-      $("temaClaro").classList.toggle("selected", estado.theme === "light");
-      $("temaEscuro").setAttribute("aria-pressed", String(estado.theme === "dark"));
-      $("temaClaro").setAttribute("aria-pressed", String(estado.theme === "light"));
-
-      $("tamanhoFonte").value = estado.size;
-      $("fonte").value = estado.font;
-      $("corDestaque").value = estado.accent;
-      $("reduzirAnimacoes").checked = estado.reduceMotion;
-      $("negrito").checked = estado.bold;
-      $("italico").checked = estado.italic;
-      $("sublinhar").checked = estado.underline;
-      $("idiomaPreferido").value = estado.language;
-      $("fuso").value = estado.timezone;
-      $("formatoHora").value = estado.hour;
-      $("formatoData").value = estado.date;
-      $("notificacoesAtivas").checked = estado.notifications;
-      $("sonsAtivos").checked = estado.sounds;
-      $("online").checked = estado.online;
-      $("visitas").checked = estado.visits;
-      $("mensagens").value = estado.messages;
-      $("visibilidade").value = estado.visibility;
-      $("contasBloqueadas").value = estado.blockedNotes;
-
-      document.querySelectorAll("[data-spacing]").forEach((botao) => {
-        botao.classList.toggle("selected", botao.dataset.spacing === estado.spacing);
-      });
-
-      document.querySelectorAll('[name="som"]').forEach((radio) => {
-        radio.checked = radio.value === estado.sound;
-      });
-
-      const cores = {
-        dourado: { gold: "#f2bd4b", goldbg: "#49391a" },
-        azul: { gold: "#82b8ff", goldbg: "#1e344c" },
-        verde: { gold: "#83d6a0", goldbg: "#1c3d2b" }
+      const defaults = {
+        theme: "dark",
+        accent: "gold",
+        reduceMotion: false,
+        fontSize: "normal",
+        fontFamily: "default",
+        spacing: "normal",
+        bold: false,
+        italic: false,
+        underlineLinks: false,
+        language: "pt-BR",
+        region: "BR",
+        saveHistory: true,
+        personalization: true,
+        wallpaper: "",
+        prefs: {
+          notifLancamentos: true,
+          notifPromocoes: true,
+          notifLeitura: false,
+          sugestoesPesquisa: true,
+          buscarAutor: true,
+          buscarGenero: true
+        }
       };
 
-      const cor = cores[estado.accent] || cores.dourado;
-      document.documentElement.style.setProperty("--gold", cor.gold);
-      document.documentElement.style.setProperty("--goldbg", cor.goldbg);
-    }
+      let settings = loadSettings();
+      let wallpaperObjectUrl = null;
 
-    $("temaEscuro").addEventListener("click", () => alterar("theme", "dark"));
-    $("temaClaro").addEventListener("click", () => alterar("theme", "light"));
-
-    $("tamanhoFonte").addEventListener("change", (evento) => alterar("size", evento.target.value));
-    $("fonte").addEventListener("change", (evento) => alterar("font", evento.target.value));
-    $("corDestaque").addEventListener("change", (evento) => alterar("accent", evento.target.value));
-    $("reduzirAnimacoes").addEventListener("change", (evento) => alterar("reduceMotion", evento.target.checked));
-    $("formatoHora").addEventListener("change", (evento) => alterar("hour", evento.target.value));
-    $("formatoData").addEventListener("change", (evento) => alterar("date", evento.target.value));
-    $("idiomaPreferido").addEventListener("change", (evento) => alterar("language", evento.target.value));
-    $("fuso").addEventListener("change", (evento) => alterar("timezone", evento.target.value));
-    $("mensagens").addEventListener("change", (evento) => alterar("messages", evento.target.value));
-    $("visibilidade").addEventListener("change", (evento) => alterar("visibility", evento.target.value));
-    $("contasBloqueadas").addEventListener("change", (evento) => alterar("blockedNotes", evento.target.value));
-
-    [
-      ["negrito", "bold"],
-      ["italico", "italic"],
-      ["sublinhar", "underline"],
-      ["notificacoesAtivas", "notifications"],
-      ["sonsAtivos", "sounds"],
-      ["online", "online"],
-      ["visitas", "visits"]
-    ].forEach(([id, chave]) => {
-      $(id).addEventListener("change", (evento) => alterar(chave, evento.target.checked));
-    });
-
-    document.querySelectorAll("[data-spacing]").forEach((botao) => {
-      botao.addEventListener("click", () => alterar("spacing", botao.dataset.spacing));
-    });
-
-    document.querySelectorAll('[name="som"]').forEach((radio) => {
-      radio.addEventListener("change", () => {
-        if (radio.checked) alterar("sound", radio.value);
-      });
-    });
-
-    // Pesquisa as seções sem alterar os dados salvos.
-    $("buscaTopo").addEventListener("input", (evento) => {
-      const termo = evento.target.value.trim().toLocaleLowerCase("pt-BR");
-
-      document.querySelectorAll(".searchable").forEach((cartao) => {
-        const conteudo = (
-          cartao.innerText + " " + (cartao.dataset.words || "")
-        ).toLocaleLowerCase("pt-BR");
-
-        cartao.classList.toggle("hidden", Boolean(termo) && !conteudo.includes(termo));
-      });
-    });
-
-    // Gera sons de teste usando o navegador.
-    async function tocarSom(tipo) {
-      if (!estado.sounds) {
-        avisar("Ative os sons de notificação antes de testar.");
-        return;
+      function cloneDefaults() {
+        return JSON.parse(JSON.stringify(defaults));
       }
 
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
+      function loadSettings() {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (!saved) return cloneDefaults();
 
-        if (!AudioContext) {
-          avisar("Este navegador não oferece suporte à reprodução desse som.");
+          const parsed = JSON.parse(saved);
+          const base = cloneDefaults();
+
+          return {
+            ...base,
+            ...parsed,
+            prefs: {
+              ...base.prefs,
+              ...(parsed.prefs || {})
+            }
+          };
+        } catch {
+          return cloneDefaults();
+        }
+      }
+
+      function saveSettings(message = "Configurações salvas neste navegador.") {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+          showStatus(message);
+          updateStorage();
+        } catch {
+          showStatus("Não foi possível salvar. O armazenamento do navegador pode estar cheio.");
+        }
+      }
+
+      function showStatus(message) {
+        status.textContent = message;
+      }
+
+      function setSelect(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.value = value;
+      }
+
+      function setChecked(id, value) {
+        const element = document.getElementById(id);
+        if (element) element.checked = Boolean(value);
+      }
+
+      function applyTheme(theme) {
+        document.body.classList.toggle("light", theme === "light");
+
+        document.querySelectorAll("[data-theme]").forEach(button => {
+          const selected = button.dataset.theme === theme;
+          button.classList.toggle("selected", selected);
+          button.setAttribute("aria-pressed", String(selected));
+        });
+      }
+
+      function applyAccent(accent) {
+        const colors = {
+          gold: {
+            gold: "#c9a45c",
+            light: "#e2c783",
+            bg: "#302719"
+          },
+          blue: {
+            gold: "#6f9fd5",
+            light: "#a8cefa",
+            bg: "#1b2b40"
+          },
+          green: {
+            gold: "#72ad81",
+            light: "#a4d4ad",
+            bg: "#1d3022"
+          }
+        };
+
+        const chosen = colors[accent] || colors.gold;
+        const lightTheme = document.body.classList.contains("light");
+
+        document.documentElement.style.setProperty("--gold", lightTheme && accent === "gold" ? "#98701e" : chosen.gold);
+        document.documentElement.style.setProperty("--gold-light", lightTheme && accent === "gold" ? "#89631b" : chosen.light);
+        document.documentElement.style.setProperty("--gold-bg", lightTheme && accent === "gold" ? "#eee3cc" : chosen.bg);
+      }
+
+      function applyFontSize(value) {
+        document.body.classList.remove("font-small", "font-large", "font-xlarge");
+        if (value !== "normal") document.body.classList.add("font-" + value);
+      }
+
+      function applyFontFamily(value) {
+        document.body.classList.remove(
+          "font-arial", "font-georgia", "font-verdana", "font-mono"
+        );
+        if (value !== "default") document.body.classList.add("font-" + value);
+      }
+
+      function applySpacing(value) {
+        document.body.classList.remove("spacing-medium", "spacing-wide");
+        if (value !== "normal") document.body.classList.add("spacing-" + value);
+
+        document.querySelectorAll("[data-spacing]").forEach(button => {
+          button.classList.toggle("selected", button.dataset.spacing === value);
+        });
+      }
+
+      function applyAccessibility() {
+        document.body.classList.toggle("no-animations", settings.reduceMotion);
+        document.body.classList.toggle("text-bold", settings.bold);
+        document.body.classList.toggle("text-italic", settings.italic);
+        document.body.classList.toggle("underline-links", settings.underlineLinks);
+        applyFontSize(settings.fontSize);
+        applyFontFamily(settings.fontFamily);
+        applySpacing(settings.spacing);
+      }
+
+      function applyWallpaper() {
+        const preview = document.getElementById("wallpaper");
+        if (settings.wallpaper) {
+          preview.style.backgroundImage = `url("${settings.wallpaper}")`;
+        } else {
+          preview.style.backgroundImage =
+            "radial-gradient(ellipse at 70% 15%, #57431d, #171717 45%, #08090b)";
+        }
+      }
+
+      function renderSettings() {
+        applyTheme(settings.theme);
+        applyAccent(settings.accent);
+        applyAccessibility();
+
+        setSelect("corDestaque", settings.accent);
+        setSelect("tamanhoFonte", settings.fontSize);
+        setSelect("fonte", settings.fontFamily);
+        setSelect("idiomaSelect", settings.language);
+        setSelect("regiaoSelect", settings.region);
+
+        setChecked("reduzirAnimacoes", settings.reduceMotion);
+        setChecked("textoNegrito", settings.bold);
+        setChecked("textoItalico", settings.italic);
+        setChecked("sublinharLinks", settings.underlineLinks);
+        setChecked("salvarHistorico", settings.saveHistory);
+        setChecked("personalizacao", settings.personalization);
+
+        document.querySelectorAll("[data-pref]").forEach(input => {
+          input.checked = Boolean(settings.prefs[input.dataset.pref]);
+        });
+
+        applyWallpaper();
+        updateDeviceInfo();
+        updateStorage();
+      }
+
+      function recordSearch(value) {
+        if (!settings.saveHistory || !value.trim()) return;
+
+        try {
+          const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+          const next = [
+            value.trim(),
+            ...history.filter(item => item.toLowerCase() !== value.trim().toLowerCase())
+          ].slice(0, 30);
+
+          localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
+        } catch {
+          // O histórico é opcional e não deve interromper a página.
+        }
+      }
+
+      function getHistory() {
+        try {
+          return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+        } catch {
+          return [];
+        }
+      }
+
+      function clearHistory() {
+        localStorage.removeItem(HISTORY_KEY);
+        const result = document.getElementById("historicoResultado");
+        result.textContent = "O histórico de pesquisa foi apagado.";
+        result.classList.remove("hidden");
+        showStatus("Histórico apagado.");
+        updateStorage();
+      }
+
+      function updateStorage() {
+        let bytes = 0;
+
+        try {
+          for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key) || "";
+            bytes += new Blob([key, value]).size;
+          }
+        } catch {
+          // Alguns navegadores podem restringir o acesso ao armazenamento.
+        }
+
+        const kilobytes = bytes / 1024;
+        const percent = Math.min(100, Math.round((bytes / (1024 * 1024)) * 100));
+
+        document.getElementById("storagePercent").textContent = percent + "%";
+        document.getElementById("storageText").textContent =
+          kilobytes < 1
+            ? bytes + " bytes utilizados"
+            : kilobytes.toFixed(1) + " KB utilizados";
+
+        document.getElementById("storageFill").style.width = percent + "%";
+        document.getElementById("storageRing").style.background =
+          `conic-gradient(var(--gold) ${percent}%, var(--border) ${percent}% 100%)`;
+      }
+
+      function updateDeviceInfo() {
+        const ua = navigator.userAgent || "";
+        let browser = "Navegador não identificado";
+
+        if (/Edg\//.test(ua)) browser = "Microsoft Edge";
+        else if (/OPR\//.test(ua)) browser = "Opera";
+        else if (/Chrome\//.test(ua) && !/Edg\//.test(ua)) browser = "Google Chrome";
+        else if (/Firefox\//.test(ua)) browser = "Mozilla Firefox";
+        else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) browser = "Safari";
+
+        let device = "Computador";
+        if (/iPad|Tablet/i.test(ua)) {
+          device = "Tablet";
+        } else if (/Mobi|Android|iPhone/i.test(ua)) {
+          device = "Celular";
+        }
+
+        document.getElementById("tipoDispositivo").textContent = device;
+        document.getElementById("navegador").textContent = browser;
+        document.getElementById("idiomaNavegador").textContent =
+          navigator.language || "Não identificado";
+
+        document.getElementById("tamanhoTela").textContent =
+          `${window.innerWidth} × ${window.innerHeight} pixels`;
+      }
+
+      // TEMAS
+      document.querySelectorAll("[data-theme]").forEach(button => {
+        button.addEventListener("click", () => {
+          settings.theme = button.dataset.theme;
+          applyTheme(settings.theme);
+          applyAccent(settings.accent);
+          saveSettings("Tema atualizado.");
+        });
+      });
+
+      // COR DE DESTAQUE
+      document.getElementById("corDestaque").addEventListener("change", event => {
+        settings.accent = event.target.value;
+        applyAccent(settings.accent);
+        saveSettings("Cor de destaque atualizada.");
+      });
+
+      // TEXTO E ACESSIBILIDADE
+      document.getElementById("reduzirAnimacoes").addEventListener("change", event => {
+        settings.reduceMotion = event.target.checked;
+        applyAccessibility();
+        saveSettings();
+      });
+
+      document.getElementById("tamanhoFonte").addEventListener("change", event => {
+        settings.fontSize = event.target.value;
+        applyFontSize(settings.fontSize);
+        saveSettings("Tamanho do texto atualizado.");
+      });
+
+      document.getElementById("fonte").addEventListener("change", event => {
+        settings.fontFamily = event.target.value;
+        applyFontFamily(settings.fontFamily);
+        saveSettings("Fonte atualizada.");
+      });
+
+      document.querySelectorAll("[data-spacing]").forEach(button => {
+        button.addEventListener("click", () => {
+          settings.spacing = button.dataset.spacing;
+          applySpacing(settings.spacing);
+          saveSettings("Espaçamento atualizado.");
+        });
+      });
+
+      document.getElementById("textoNegrito").addEventListener("change", event => {
+        settings.bold = event.target.checked;
+        applyAccessibility();
+        saveSettings();
+      });
+
+      document.getElementById("textoItalico").addEventListener("change", event => {
+        settings.italic = event.target.checked;
+        applyAccessibility();
+        saveSettings();
+      });
+
+      document.getElementById("sublinharLinks").addEventListener("change", event => {
+        settings.underlineLinks = event.target.checked;
+        applyAccessibility();
+        saveSettings();
+      });
+
+      // IMAGEM DE FUNDO
+      document.getElementById("arquivoWallpaper").addEventListener("change", event => {
+        const file = event.target.files && event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+          showStatus("Escolha um arquivo de imagem válido.");
           return;
         }
 
-        contextoAudio = contextoAudio || new AudioContext();
-
-        if (contextoAudio.state === "suspended") {
-          await contextoAudio.resume();
+        if (file.size > 4 * 1024 * 1024) {
+          showStatus("Escolha uma imagem de até 4 MB.");
+          event.target.value = "";
+          return;
         }
 
-        const frequencias = {
-          padrao: [660, 880],
-          sino: [1046, 1318],
-          suave: [440, 554],
-          alerta: [880, 660]
-        };
+        if (wallpaperObjectUrl) URL.revokeObjectURL(wallpaperObjectUrl);
+        wallpaperObjectUrl = URL.createObjectURL(file);
 
-        (frequencias[tipo] || frequencias.padrao).forEach((frequencia, indice) => {
-          const oscilador = contextoAudio.createOscillator();
-          const volume = contextoAudio.createGain();
-          const inicio = contextoAudio.currentTime + indice * 0.15;
+        document.getElementById("wallpaper").style.backgroundImage =
+          `url("${wallpaperObjectUrl}")`;
 
-          oscilador.frequency.value = frequencia;
-          oscilador.type = tipo === "suave" ? "sine" : "triangle";
+        // A imagem fica apenas na prévia desta sessão para evitar ocupar
+        // muito espaço no armazenamento do navegador.
+        settings.wallpaper = "";
+        saveSettings("Imagem de fundo aplicada à prévia desta sessão.");
+      });
 
-          volume.gain.setValueAtTime(0.001, inicio);
-          volume.gain.exponentialRampToValueAtTime(0.12, inicio + 0.02);
-          volume.gain.exponentialRampToValueAtTime(0.001, inicio + 0.18);
+      document.getElementById("removerWallpaper").addEventListener("click", () => {
+        if (wallpaperObjectUrl) {
+          URL.revokeObjectURL(wallpaperObjectUrl);
+          wallpaperObjectUrl = null;
+        }
 
-          oscilador.connect(volume);
-          volume.connect(contextoAudio.destination);
-          oscilador.start(inicio);
-          oscilador.stop(inicio + 0.2);
+        settings.wallpaper = "";
+        document.getElementById("arquivoWallpaper").value = "";
+        applyWallpaper();
+        saveSettings("Imagem de fundo removida.");
+      });
+
+      // NOTIFICAÇÕES E PREFERÊNCIAS DE PESQUISA
+      document.querySelectorAll("[data-pref]").forEach(input => {
+        input.addEventListener("change", () => {
+          settings.prefs[input.dataset.pref] = input.checked;
+          saveSettings("Preferência atualizada.");
         });
-      } catch {
-        avisar("Não foi possível reproduzir o som neste navegador.");
-      }
-    }
+      });
 
-    document.querySelectorAll(".play").forEach((botao) => {
-      botao.addEventListener("click", () => tocarSom(botao.dataset.som));
-    });
+      // IDIOMA E REGIÃO
+      document.getElementById("idiomaSelect").addEventListener("change", event => {
+        settings.language = event.target.value;
+        document.documentElement.lang = settings.language;
+        saveSettings("Idioma preferido atualizado. O texto da página ainda está em português.");
+      });
 
-    $("arquivoSom").addEventListener("change", (evento) => {
-      const arquivo = evento.target.files && evento.target.files[0];
-      const audio = $("audioPersonalizado");
+      document.getElementById("regiaoSelect").addEventListener("change", event => {
+        settings.region = event.target.value;
+        saveSettings("Região atualizada.");
+      });
 
-      if (audioUrl) {
-        URL.revokeObjectURL(audioUrl);
-        audioUrl = null;
-      }
+      // PRIVACIDADE
+      document.getElementById("salvarHistorico").addEventListener("change", event => {
+        settings.saveHistory = event.target.checked;
 
-      if (!arquivo) {
-        $("nomeSom").textContent = "Nenhum arquivo selecionado.";
-        audio.removeAttribute("src");
-        audio.hidden = true;
-        return;
-      }
+        if (!settings.saveHistory) {
+          localStorage.removeItem(HISTORY_KEY);
+        }
 
-      if (!arquivo.type.startsWith("audio/")) {
-        evento.target.value = "";
-        avisar("Selecione um arquivo de áudio válido.");
-        return;
-      }
-
-      audioUrl = URL.createObjectURL(arquivo);
-      audio.src = audioUrl;
-      audio.hidden = false;
-      $("nomeSom").textContent = arquivo.name;
-      avisar("Arquivo de áudio selecionado. Ele não foi enviado a um servidor.");
-    });
-
-    $("testarAudio").addEventListener("click", async () => {
-      if (!estado.sounds) {
-        avisar("Ative os sons de notificação antes de testar.");
-        return;
-      }
-
-      const audio = $("audioPersonalizado");
-
-      if (!audio.src) {
-        avisar("Escolha um arquivo de áudio primeiro.");
-        return;
-      }
-
-      try {
-        await audio.play();
-      } catch {
-        avisar("Não foi possível reproduzir o arquivo de áudio.");
-      }
-    });
-
-    // A imagem escolhida é usada apenas como prévia temporária.
-    $("arquivoWallpaper").addEventListener("change", (evento) => {
-      const arquivo = evento.target.files && evento.target.files[0];
-
-      if (imagemUrl) {
-        URL.revokeObjectURL(imagemUrl);
-        imagemUrl = null;
-      }
-
-      if (!arquivo) return;
-
-      if (!arquivo.type.startsWith("image/")) {
-        evento.target.value = "";
-        avisar("Selecione um arquivo de imagem válido.");
-        return;
-      }
-
-      imagemUrl = URL.createObjectURL(arquivo);
-      $("wallpaper").style.background = `center / cover no-repeat url("${imagemUrl}")`;
-      avisar("Prévia da imagem atualizada. A imagem não foi enviada nem salva permanentemente.");
-    });
-
-    $("gerenciarBloqueios").addEventListener("click", () => {
-      avisar("O bloqueio real de contas precisa estar integrado ao sistema de usuários do servidor.");
-    });
-
-    // Exporta apenas as preferências guardadas por esta página.
-    $("exportar").addEventListener("click", () => {
-      try {
-        const conteudo = JSON.stringify(estado, null, 2);
-        const arquivo = new Blob([conteudo], { type: "application/json" });
-        const url = URL.createObjectURL(arquivo);
-        const link = document.createElement("a");
-
-        link.href = url;
-        link.download = "mystic-configuracoes.json";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(url);
-
-        avisar("Arquivo de preferências exportado.");
-      } catch {
-        avisar("Não foi possível exportar as preferências.");
-      }
-    });
-
-    $("limpar").addEventListener("click", () => {
-      if (!confirm("Deseja restaurar as configurações padrão desta página?")) return;
-
-      estado = { ...padrao };
-
-      try {
-        localStorage.removeItem(CHAVE_CONFIG);
-      } catch {
-        avisar("Não foi possível remover as preferências salvas.");
-        return;
-      }
-
-      aplicarPreferencias();
-      salvar("As preferências padrão foram restauradas.");
-      atualizarHora();
-    });
-
-    // Mostra registros existentes, sem afirmar que os arquivos foram baixados.
-    $("downloads").addEventListener("click", () => {
-      let livros = [];
-
-      try {
-        const dados = JSON.parse(localStorage.getItem(CHAVE_LIVROS) || "[]");
-        if (Array.isArray(dados)) livros = dados;
-      } catch {
-        livros = [];
-      }
-
-      if (livros.length) {
-        avisar(
-          `Foram encontrados ${livros.length} registro(s) de livros para leitura off-line. Isso não confirma que os arquivos estejam baixados.`
+        saveSettings(
+          settings.saveHistory
+            ? "Histórico ativado."
+            : "Histórico desativado e registros locais apagados."
         );
-      } else {
-        avisar("Nenhum registro de livro para leitura off-line foi encontrado.");
-      }
-    });
+      });
 
-    $("sair").addEventListener("click", () => {
-      if (!confirm("Deseja sair da sua conta neste navegador?")) return;
+      document.getElementById("personalizacao").addEventListener("change", event => {
+        settings.personalization = event.target.checked;
 
-      try {
-        sessionStorage.removeItem("mysticLogado");
-        sessionStorage.removeItem("mysticEmail");
-      } catch {
-        avisar("Não foi possível encerrar a sessão automaticamente.");
-        return;
-      }
+        if (!settings.personalization) {
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch {}
 
-      window.location.href = "index.html";
-    });
-
-    // Informações gerais do navegador.
-    $("fusoDetectado").textContent =
-      Intl.DateTimeFormat().resolvedOptions().timeZone || "Não detectado";
-
-    $("idiomaNavegador").textContent = navigator.language || "Não detectado";
-
-    const agente = navigator.userAgent;
-
-    $("dispositivoAtual").textContent =
-      /Windows/i.test(agente) ? "Windows" :
-      /Android/i.test(agente) ? "Android" :
-      /iPhone|iPad/i.test(agente) ? "iOS" :
-      /Macintosh|Mac OS/i.test(agente) ? "macOS" :
-      /Linux/i.test(agente) ? "Linux" :
-      "Sistema não identificado";
-
-    $("anoAtual").textContent = new Date().getFullYear();
-
-    function atualizarHora() {
-      const zona = estado.timezone === "auto"
-        ? (Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC")
-        : estado.timezone;
-
-      $("fusoAtual").textContent =
-        estado.timezone === "auto" ? `${zona} (automático)` : zona;
-
-      try {
-        const agora = new Date();
-
-        const hora = new Intl.DateTimeFormat(estado.language, {
-          timeZone: zona,
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: estado.hour === "12"
-        }).format(agora);
-
-        const partes = new Intl.DateTimeFormat("en-CA", {
-          timeZone: zona,
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric"
-        }).formatToParts(agora);
-
-        const data = Object.fromEntries(
-          partes.map((parte) => [parte.type, parte.value])
-        );
-
-        let dataFormatada;
-
-        if (estado.date === "YMD") {
-          dataFormatada = `${data.year}-${data.month}-${data.day}`;
-        } else if (estado.date === "MDY") {
-          dataFormatada = `${data.month}/${data.day}/${data.year}`;
+          showStatus("Preferências removidas do armazenamento. As alterações desta sessão continuam ativas.");
         } else {
-          dataFormatada = `${data.day}/${data.month}/${data.year}`;
+          saveSettings("Personalização local ativada.");
+        }
+      });
+
+      document.getElementById("limparHistorico").addEventListener("click", () => {
+        if (confirm("Deseja apagar o histórico de pesquisa salvo neste navegador?")) {
+          clearHistory();
+        }
+      });
+
+      // PESQUISA NAS CONFIGURAÇÕES
+      const searchInput = document.getElementById("buscaTopo");
+      const searchableCards = [...document.querySelectorAll(".searchable")];
+
+      function filterSettings() {
+        const query = searchInput.value.trim().toLocaleLowerCase("pt-BR");
+        let visibleCount = 0;
+
+        searchableCards.forEach(card => {
+          const text = (
+            card.innerText + " " + (card.dataset.words || "")
+          ).toLocaleLowerCase("pt-BR");
+
+          const matches = !query || text.includes(query);
+          card.classList.toggle("hidden", !matches);
+          if (matches) visibleCount++;
+        });
+
+        document.querySelectorAll(".settings-column").forEach(column => {
+          const hasVisibleCard = [...column.querySelectorAll(".searchable")]
+            .some(card => !card.classList.contains("hidden"));
+
+          column.classList.toggle("hidden", !hasVisibleCard);
+        });
+
+        document.getElementById("emptySearch")?.remove();
+
+        if (query && visibleCount === 0) {
+          const empty = document.createElement("p");
+          empty.id = "emptySearch";
+          empty.className = "note";
+          empty.textContent = "Nenhuma configuração encontrada para essa pesquisa.";
+          document.querySelector(".settings-grid").appendChild(empty);
+        }
+      }
+
+      searchInput.addEventListener("input", filterSettings);
+
+      searchInput.addEventListener("change", () => {
+        recordSearch(searchInput.value);
+      });
+
+      // HISTÓRICO DE PESQUISA
+      document.getElementById("verHistorico").addEventListener("click", () => {
+        const result = document.getElementById("historicoResultado");
+        const history = settings.saveHistory ? getHistory() : [];
+
+        result.classList.remove("hidden");
+
+        if (!history.length) {
+          result.textContent = settings.saveHistory
+            ? "Nenhuma pesquisa foi registrada ainda."
+            : "O histórico está desativado.";
+          return;
         }
 
-        $("horaAtual").textContent = `Horário atual: ${hora} • Data: ${dataFormatada}`;
-      } catch {
-        $("horaAtual").textContent =
-          "Não foi possível calcular a data e a hora para esse fuso horário.";
-      }
-    }
+        result.replaceChildren();
 
-    function formatarBytes(bytes) {
-      if (!Number.isFinite(bytes) || bytes <= 0) return "0 bytes";
+        const title = document.createElement("strong");
+        title.textContent = "Pesquisas recentes:";
+        result.appendChild(title);
 
-      const unidades = ["bytes", "KB", "MB", "GB"];
-      let indice = 0;
-      let valor = bytes;
+        const list = document.createElement("ul");
+        list.style.paddingLeft = "20px";
 
-      while (valor >= 1024 && indice < unidades.length - 1) {
-        valor /= 1024;
-        indice++;
-      }
+        history.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          list.appendChild(li);
+        });
 
-      return `${indice === 0 ? Math.round(valor) : valor.toFixed(1)} ${unidades[indice]}`;
-    }
+        result.appendChild(list);
+      });
 
-    function atualizarArmazenamento() {
-      let bytesPreferencias = 0;
-      let bytesLivros = 0;
-      let bytesOutros = 0;
-      let livros = [];
+      // ARMAZENAMENTO
+      document.getElementById("atualizarDados").addEventListener("click", () => {
+        updateStorage();
+        showStatus("Estimativa de armazenamento atualizada.");
+      });
 
-      try {
-        bytesPreferencias = new Blob([
-          localStorage.getItem(CHAVE_CONFIG) || ""
-        ]).size;
-      } catch {}
+      document.getElementById("restaurar").addEventListener("click", () => {
+        if (!confirm("Restaurar todas as configurações para os valores padrão?")) return;
 
-      try {
-        const dados = JSON.parse(localStorage.getItem(CHAVE_LIVROS) || "[]");
-        if (Array.isArray(dados)) livros = dados;
-        bytesLivros = new Blob([
-          JSON.stringify(livros)
-        ]).size;
-      } catch {
-        livros = [];
-      }
+        settings = cloneDefaults();
 
-      try {
-        for (let indice = 0; indice < localStorage.length; indice++) {
-          const chave = localStorage.key(indice);
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+          localStorage.removeItem(HISTORY_KEY);
+        } catch {}
 
-          if (chave !== CHAVE_CONFIG && chave !== CHAVE_LIVROS) {
-            bytesOutros += new Blob([
-              localStorage.getItem(chave) || ""
-            ]).size;
-          }
+        renderSettings();
+        saveSettings("Configurações restauradas.");
+      });
+
+      // DISPOSITIVO
+      document.getElementById("recarregar").addEventListener("click", () => {
+        window.location.reload();
+      });
+
+      window.addEventListener("resize", updateDeviceInfo);
+
+      // SAIR
+      document.getElementById("sair").addEventListener("click", () => {
+        const confirmed = confirm(
+          "Deseja voltar para a página inicial da Mystic?"
+        );
+
+        if (confirmed) {
+          window.location.href = "home.html";
         }
-      } catch {}
+      });
 
-      const total = bytesPreferencias + bytesLivros + bytesOutros;
-      const percentual = Math.min(
-        100,
-        Math.round(total / (5 * 1024 * 1024) * 100)
-      );
+      // NAVEGAÇÃO ENTRE SEÇÕES
+      document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+          document.querySelectorAll(".nav-link").forEach(item => {
+            item.classList.remove("active");
+          });
 
-      $("storageUsed").textContent = `${formatarBytes(total)} (estimativa)`;
-      $("settingsBytes").textContent = formatarBytes(bytesPreferencias);
-      $("booksBytes").textContent = formatarBytes(bytesLivros);
-      $("otherBytes").textContent = formatarBytes(bytesOutros);
-      $("offlineCount").textContent =
-        `${livros.length} ${livros.length === 1 ? "registro" : "registros"}`;
+          link.classList.add("active");
+        });
+      });
 
-      $("storagePercent").textContent = `${percentual}%`;
-      $("storageRing").style.background =
-        `conic-gradient(var(--gold) 0 ${percentual}%, var(--border) ${percentual}% 100%)`;
-
-      $("storageNote").textContent =
-        "Estimativa dos dados locais acessíveis a esta página, usando 5 MB apenas como referência visual. Não mede todo o cache do navegador nem confirma que os arquivos dos livros estejam baixados.";
-    }
-
-    aplicarPreferencias();
-    atualizarHora();
-    atualizarArmazenamento();
-    setInterval(atualizarHora, 30000);
+      // INICIALIZAÇÃO
+      renderSettings();
+      document.documentElement.lang = settings.language;
+    })();
   </script>
 </body>
 </html>
