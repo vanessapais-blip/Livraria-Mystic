@@ -3,268 +3,821 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mystic - Livros</title>
+
+  <meta name="theme-color" content="#191919">
+  <title>Livros | Mystic</title>
 
   <style>
+    /* =========================
+       CONFIGURAÇÕES GERAIS
+    ========================= */
+
+    :root {
+      --fundo: #191919;
+      --fundo-secundario: #202020;
+      --cartao: #242424;
+      --cartao-hover: #292929;
+      --borda: #383838;
+      --dourado: #d4af37;
+      --dourado-claro: #ecd58a;
+      --texto: #f5f5f5;
+      --texto-secundario: #bdbdbd;
+      --transicao: 0.2s ease;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      background: #242424;
-      color: white;
-      font-family: Arial, sans-serif;
+    html {
+      scroll-behavior: smooth;
     }
 
-    header {
-      min-height: 75px;
-      background: #303030;
-      border-bottom: 1px solid #444;
+    body {
+      min-height: 100vh;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button,
+    a,
+    select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--dourado);
+      outline-offset: 3px;
+    }
+
+    /* =========================
+       CABEÇALHO
+    ========================= */
+
+    .cabecalho {
+      width: 100%;
+      min-height: 76px;
+      background: #202020;
+      border-bottom: 1px solid var(--borda);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .cabecalho-conteudo {
+      width: 100%;
+      max-width: 1200px;
+      min-height: 76px;
+      margin: 0 auto;
+      padding: 12px 30px;
+
       display: flex;
       align-items: center;
-      justify-content: flex-start;
-      padding: 15px 40px;
+      justify-content: space-between;
       gap: 20px;
     }
 
-    .voltar {
-      color: white;
-      text-decoration: none;
-      font-size: 32px;
-      line-height: 1;
-      display: inline-flex;
+    .lado-esquerdo {
+      display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .voltar {
       width: 42px;
       height: 42px;
-      border-radius: 8px;
-      transition: color 0.2s, background 0.2s;
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--texto);
+      text-decoration: none;
+      font-size: 29px;
+      line-height: 1;
+
+      border-radius: 10px;
+      transition:
+        background var(--transicao),
+        color var(--transicao);
     }
 
     .voltar:hover {
-      color: #d4af37;
-      background: #3b3b3b;
+      background: #333;
+      color: var(--dourado);
     }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      color: var(--dourado);
+      text-decoration: none;
+      font-size: 22px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .logo img {
+      width: 42px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 9px;
+    }
+
+    .indicador-pagina {
+      color: var(--texto-secundario);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       CONTEÚDO PRINCIPAL
+    ========================= */
 
     main {
+      width: 100%;
       max-width: 1150px;
-      margin: auto;
-      padding: 45px 25px;
+      margin: 0 auto;
+      padding: 48px 30px 60px;
+      flex: 1;
     }
 
-    .titulo-principal {
-      color: #d4af37;
-      font-size: 36px;
+    .introducao {
+      margin-bottom: 32px;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      color: var(--dourado);
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
       margin-bottom: 10px;
     }
 
+    .titulo-principal {
+      color: var(--dourado);
+      font-size: clamp(30px, 4vw, 42px);
+      line-height: 1.2;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
     .descricao {
-      color: white;
+      max-width: 680px;
+      color: var(--texto-secundario);
       font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 30px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       PESQUISA
+    ========================= */
+
+    .area-pesquisa {
+      position: relative;
+      margin-bottom: 24px;
     }
 
     .pesquisa {
+      display: block;
       width: 100%;
-      padding: 15px;
-      background: #303030;
-      color: white;
-      border: 1px solid #444;
-      border-radius: 9px;
+      min-height: 54px;
+      padding: 15px 18px;
+
+      background: var(--fundo-secundario);
+      color: var(--texto);
+
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+
       font-size: 15px;
-      margin-bottom: 25px;
+      transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao);
     }
 
     .pesquisa::placeholder {
-      color: #ccc;
+      color: #999;
     }
 
-    .pesquisa:focus,
-    .filtro-select:focus {
+    .pesquisa:focus {
       outline: none;
-      border-color: #d4af37;
+      border-color: var(--dourado);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.09);
+    }
+
+    .pesquisa::-webkit-search-cancel-button {
+      cursor: pointer;
+    }
+
+    /* =========================
+       ÁREA DE FILTROS
+    ========================= */
+
+    .painel-filtros {
+      padding: 22px;
+      margin-bottom: 38px;
+
+      background: var(--fundo-secundario);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+    }
+
+    .cabecalho-filtros {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .titulo-filtros {
+      color: var(--texto);
+      font-size: 17px;
+      font-weight: 600;
     }
 
     .filtros {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 15px;
-      margin-bottom: 35px;
+      gap: 18px;
+    }
+
+    .campo-filtro {
+      min-width: 0;
     }
 
     .campo-filtro label {
       display: block;
-      color: white;
-      font-size: 14px;
-      margin-bottom: 8px;
+      color: var(--texto-secundario);
+      font-size: 13px;
+      margin-bottom: 9px;
     }
 
     .filtro-select {
       width: 100%;
-      padding: 13px;
-      background: #303030;
-      color: white;
-      border: 1px solid #444;
+      min-height: 48px;
+      padding: 12px 14px;
+
+      color: var(--texto);
+      background: #292929;
+
+      border: 1px solid var(--borda);
       border-radius: 9px;
+
       font-size: 14px;
+      cursor: pointer;
+      transition: border-color var(--transicao);
+    }
+
+    .filtro-select:hover {
+      border-color: #666;
+    }
+
+    .filtro-select:focus {
+      outline: none;
+      border-color: var(--dourado);
     }
 
     .filtro-select option {
-      background: #303030;
+      background: #242424;
       color: white;
     }
 
-    .limpar-filtros {
-      background: #444;
-      color: white;
-      border: 1px solid #555;
-      border-radius: 8px;
+    .botao-limpar {
+      min-height: 42px;
       padding: 10px 15px;
+
+      background: transparent;
+      color: var(--dourado-claro);
+
+      border: 1px solid #5c4b20;
+      border-radius: 9px;
+
+      font-size: 13px;
       cursor: pointer;
-      margin-top: 15px;
+
+      transition:
+        background var(--transicao),
+        border-color var(--transicao);
     }
 
-    .limpar-filtros:hover {
-      background: #555;
+    .botao-limpar:hover {
+      background: rgba(212, 175, 55, 0.08);
+      border-color: var(--dourado);
     }
 
-    .titulo {
-      color: #d4af37;
+    /* =========================
+       CATÁLOGO
+    ========================= */
+
+    .cabecalho-catalogo {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .titulo-catalogo {
+      color: var(--texto);
       font-size: 24px;
-      margin-bottom: 20px;
+      font-weight: 600;
     }
+
+    .contador {
+      color: var(--texto-secundario);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .contador strong {
+      color: var(--dourado);
+    }
+
+    /* =========================
+       CARTÕES DOS LIVROS
+    ========================= */
 
     .livros {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 22px;
+      align-items: stretch;
     }
 
     .livro {
-      background: #303030;
-      border: 1px solid #404040;
-      border-radius: 12px;
-      padding: 15px;
-      transition: transform 0.2s, border-color 0.2s;
+      min-width: 0;
+      min-height: 370px;
+
       display: flex;
       flex-direction: column;
+
+      padding: 14px;
+
+      background: var(--cartao);
+      border: 1px solid var(--borda);
+      border-radius: 13px;
+
+      transition:
+        transform var(--transicao),
+        border-color var(--transicao),
+        background var(--transicao);
     }
 
     .livro:hover {
       transform: translateY(-4px);
-      border-color: #666;
+      background: var(--cartao-hover);
+      border-color: #665525;
     }
 
     .capa {
-      height: 220px;
-      background: #3b3b3b;
-      border-radius: 8px;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      max-height: 235px;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 60px;
-      margin-bottom: 15px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(145deg, #353027, #242424 70%);
+
+      border: 1px solid #49402a;
+      border-radius: 9px;
+
+      margin-bottom: 17px;
+    }
+
+    .capa img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .capa-placeholder {
+      color: var(--dourado);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 45px;
+      font-weight: bold;
+      opacity: 0.85;
     }
 
     .livro h3 {
-      color: #d4af37;
-      font-size: 19px;
+      color: var(--dourado-claro);
+      font-size: 17px;
+      line-height: 1.4;
       margin-bottom: 8px;
+      overflow-wrap: anywhere;
     }
 
     .autor {
-      color: white;
-      font-size: 14px;
-      line-height: 1.5;
+      color: var(--texto-secundario);
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 9px;
     }
 
     .categoria-livro {
-      color: #ddd;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-top: 8px;
+      display: inline-block;
+      align-self: flex-start;
+
+      color: #c8b77c;
+      background: rgba(212, 175, 55, 0.08);
+
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 6px;
+
+      padding: 5px 8px;
+      margin-bottom: 18px;
+
+      font-size: 11px;
+      line-height: 1.4;
     }
 
     .botao {
-      display: block;
-      margin-top: 18px;
-      padding: 11px;
-      background: #444;
-      color: white;
-      text-align: center;
-      border-radius: 7px;
-      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      min-height: 42px;
+
       margin-top: auto;
-      position: relative;
-      top: 12px;
-      margin-bottom: 12px;
-    }
+      padding: 10px 12px;
 
-    .botao:hover {
-      background: #555;
-    }
+      background: #383838;
+      color: var(--texto);
 
-    #nenhum {
-      display: none;
-      color: white;
+      border: 1px solid #4a4a4a;
+      border-radius: 8px;
+
+      text-decoration: none;
       text-align: center;
-      padding: 40px 0;
-      line-height: 1.6;
+      font-size: 13px;
+      font-weight: 600;
+
+      transition:
+        background var(--transicao),
+        border-color var(--transicao),
+        color var(--transicao);
     }
+
+    a.botao:hover {
+      background: #4a4025;
+      border-color: var(--dourado);
+      color: var(--dourado-claro);
+    }
+
+    .botao-indisponivel {
+      color: #a5a5a5;
+      background: #292929;
+      border-color: #3a3a3a;
+      cursor: default;
+    }
+
+    /* =========================
+       NENHUM RESULTADO
+    ========================= */
+
+    .nenhum {
+      display: none;
+      padding: 50px 20px;
+      text-align: center;
+
+      background: var(--fundo-secundario);
+      border: 1px dashed #494949;
+      border-radius: 13px;
+    }
+
+    .nenhum h3 {
+      color: var(--dourado);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .nenhum p {
+      color: var(--texto-secundario);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       RODAPÉ
+    ========================= */
 
     footer {
+      width: 100%;
+      padding: 25px 20px;
+
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 18px;
+      justify-content: center;
       flex-wrap: wrap;
+      gap: 18px;
+
+      background: #202020;
+      border-top: 1px solid var(--borda);
+
+      color: var(--texto);
       text-align: center;
-      padding: 30px 20px;
-      margin-top: 35px;
-      border-top: 1px solid #444;
-      color: white;
+      font-size: 13px;
     }
 
-    .mystic-dourado {
-      color: #d4af37;
+    .mystic-rodape {
+      color: white;
+      font-weight: 600;
     }
 
     footer a {
-      color: white;
+      color: var(--texto-secundario);
       text-decoration: none;
+      transition: color var(--transicao);
     }
 
     footer a:hover {
-      text-decoration: underline;
+      color: var(--dourado);
     }
 
-    @media (max-width: 700px) {
-      header {
-        padding: 15px 18px;
+    /* =========================
+       TABLETS
+    ========================= */
+
+    @media (max-width: 950px) {
+      main {
+        padding: 38px 25px 50px;
+      }
+
+      .livros {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .livro {
+        min-height: 350px;
+      }
+
+      .capa {
+        max-height: 220px;
+      }
+    }
+
+    /* =========================
+       CELULARES
+    ========================= */
+
+    @media (max-width: 650px) {
+      .cabecalho,
+      .cabecalho-conteudo {
+        min-height: 66px;
+      }
+
+      .cabecalho-conteudo {
+        padding: 10px 15px;
+        gap: 10px;
+      }
+
+      .lado-esquerdo {
+        gap: 9px;
+      }
+
+      .voltar {
+        width: 36px;
+        height: 38px;
+        font-size: 27px;
+      }
+
+      .logo {
+        gap: 8px;
+        font-size: 19px;
+      }
+
+      .logo img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .indicador-pagina {
+        font-size: 12px;
       }
 
       main {
-        padding: 30px 17px;
+        padding: 32px 17px 45px;
+      }
+
+      .introducao {
+        margin-bottom: 25px;
+      }
+
+      .etiqueta {
+        font-size: 10px;
+        letter-spacing: 1.5px;
       }
 
       .titulo-principal {
-        font-size: 30px;
+        font-size: 31px;
+        margin-bottom: 11px;
+      }
+
+      .descricao {
+        font-size: 14px;
+        line-height: 1.8;
+      }
+
+      .pesquisa {
+        min-height: 50px;
+        padding: 13px 14px;
+        font-size: 14px;
+      }
+
+      .painel-filtros {
+        padding: 16px;
+        margin-bottom: 32px;
+      }
+
+      .cabecalho-filtros {
+        margin-bottom: 17px;
+      }
+
+      .titulo-filtros {
+        font-size: 15px;
       }
 
       .filtros {
         grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .campo-filtro label {
+        font-size: 12px;
+      }
+
+      .filtro-select {
+        min-height: 46px;
+        font-size: 13px;
+      }
+
+      .botao-limpar {
+        min-height: 40px;
+        padding: 9px 11px;
+        font-size: 12px;
+      }
+
+      .cabecalho-catalogo {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 17px;
+      }
+
+      .titulo-catalogo {
+        font-size: 22px;
+      }
+
+      .contador {
+        font-size: 12px;
       }
 
       .livros {
-        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
-        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .livro {
+        min-height: 0;
+        padding: 10px;
+        border-radius: 11px;
+      }
+
+      .livro:hover {
+        transform: none;
       }
 
       .capa {
-        height: 180px;
+        aspect-ratio: 3 / 4;
+        max-height: none;
+        margin-bottom: 12px;
+        border-radius: 7px;
+      }
+
+      .capa-placeholder {
+        font-size: 34px;
+      }
+
+      .livro h3 {
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      .autor {
+        font-size: 12px;
+        margin-bottom: 8px;
+      }
+
+      .categoria-livro {
+        padding: 4px 6px;
+        font-size: 10px;
+        margin-bottom: 13px;
+      }
+
+      .botao {
+        min-height: 39px;
+        padding: 9px 7px;
+        font-size: 12px;
+      }
+
+      .nenhum {
+        padding: 35px 17px;
+      }
+
+      .nenhum h3 {
+        font-size: 18px;
+      }
+
+      .nenhum p {
+        font-size: 13px;
+      }
+
+      footer {
+        padding: 23px 15px;
+        gap: 13px;
+        font-size: 12px;
+      }
+    }
+
+    /* CELULARES MUITO ESTREITOS */
+
+    @media (max-width: 360px) {
+      .indicador-pagina {
+        display: none;
+      }
+
+      .titulo-principal {
+        font-size: 28px;
+      }
+
+      .livros {
+        gap: 9px;
+      }
+
+      .livro {
+        padding: 8px;
+      }
+
+      .livro h3 {
+        font-size: 13px;
+      }
+
+      .autor {
+        font-size: 11px;
+      }
+
+      .categoria-livro {
+        font-size: 9px;
+      }
+
+      .botao {
+        font-size: 11px;
+      }
+    }
+
+    /* REDUZ MOVIMENTO SE SOLICITADO PELO DISPOSITIVO */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
       }
     }
   </style>
@@ -272,356 +825,190 @@
 
 <body>
 
-  <header>
-    <a
-      href="home.html"
-      class="voltar"
-      aria-label="Voltar para a página inicial"
-      title="Voltar"
-    >←</a>
+  <!-- CABEÇALHO -->
+
+  <header class="cabecalho">
+    <div class="cabecalho-conteudo">
+
+      <div class="lado-esquerdo">
+        <a
+          href="home.html"
+          class="voltar"
+          aria-label="Voltar para a página inicial"
+          title="Voltar"
+        >←</a>
+
+        <a class="logo" href="home.html" aria-label="Mystic - Início">
+          <img src="logo-mystic.jpg" alt="Logo da Mystic">
+          <span>Mystic</span>
+        </a>
+      </div>
+
+      <span class="indicador-pagina">Biblioteca</span>
+
+    </div>
   </header>
 
+  <!-- CONTEÚDO PRINCIPAL -->
+
   <main>
-    <h1 class="titulo-principal">Livros</h1>
 
-    <p class="descricao">
-      Explore o catálogo da Mystic, descubra novos gêneros e encontre sua próxima leitura.
-    </p>
+    <section class="introducao">
+      <span class="etiqueta">Sua próxima leitura começa aqui</span>
 
-    <input
-      id="pesquisa"
-      class="pesquisa"
-      type="search"
-      placeholder="🔎 Pesquisar por título ou autor..."
-      aria-label="Pesquisar livros por título ou autor"
-    >
+      <h1 class="titulo-principal">Biblioteca Mystic</h1>
 
-    <div class="filtros">
-      <div class="campo-filtro">
-        <label for="genero">Gênero literário</label>
-        <select id="genero" class="filtro-select">
-          <option value="Todos">Todos os gêneros</option>
-          <option value="Ficção geral e especulativa">Ficção geral e especulativa</option>
-          <option value="Ficção romântica, histórica e aventura">Ficção romântica, histórica e aventura</option>
-          <option value="Poesia, teatro e formatos visuais">Poesia, teatro e formatos visuais</option>
-          <option value="Não-ficção">Não-ficção</option>
-          <option value="Infantil e juvenil">Infantil e juvenil</option>
-        </select>
-      </div>
-
-      <div class="campo-filtro">
-        <label for="subgenero">Subgênero ou categoria</label>
-        <select id="subgenero" class="filtro-select">
-          <option value="Todos">Todos os subgêneros</option>
-        </select>
-      </div>
-    </div>
-
-    <button class="limpar-filtros" id="limparFiltros" type="button">
-      Limpar filtros
-    </button>
-
-    <h2 class="titulo" style="margin-top: 35px;">Catálogo</h2>
-
-    <section class="livros" id="listaLivros">
-
-      <article
-        class="livro"
-        data-genero="Ficção geral e especulativa"
-        data-subgenero="Clássicos"
-        data-nome="O Pequeno Príncipe Antoine de Saint-Exupéry"
-      >
-        <div class="capa">📕</div>
-        <h3>O Pequeno Príncipe</h3>
-        <p class="autor">Antoine de Saint-Exupéry</p>
-        <p class="categoria-livro">Clássicos</p>
-        <a href="livro.html" class="botao">Ver livro</a>
-      </article>
-
-      <article
-        class="livro"
-        data-genero="Ficção geral e especulativa"
-        data-subgenero="Fantasia"
-        data-nome="Livro de Fantasia"
-      >
-        <div class="capa">📘</div>
-        <h3>Em breve</h3>
-        <p class="autor">Novo autor</p>
-        <p class="categoria-livro">Fantasia</p>
-        <span class="botao">Em breve</span>
-      </article>
-
-      <article
-        class="livro"
-        data-genero="Ficção romântica, histórica e aventura"
-        data-subgenero="Aventura e ação"
-        data-nome="Livro de Aventura"
-      >
-        <div class="capa">📗</div>
-        <h3>Em breve</h3>
-        <p class="autor">Novo autor</p>
-        <p class="categoria-livro">Aventura e ação</p>
-        <span class="botao">Em breve</span>
-      </article>
-
-      <article
-        class="livro"
-        data-genero="Ficção geral e especulativa"
-        data-subgenero="Policial e mistério"
-        data-nome="Livro de Mistério"
-      >
-        <div class="capa">📙</div>
-        <h3>Em breve</h3>
-        <p class="autor">Novo autor</p>
-        <p class="categoria-livro">Policial e mistério</p>
-        <span class="botao">Em breve</span>
-      </article>
-
+      <p class="descricao">
+        Explore nosso catálogo, descubra diferentes gêneros literários
+        e encontre histórias que combinem com você.
+      </p>
     </section>
 
-    <p id="nenhum">
-      Nenhum livro encontrado para esses filtros.<br>
-      Tente pesquisar outro título ou selecionar outro gênero.
-    </p>
-  </main>
+    <!-- PESQUISA -->
 
-  <footer>
-    <span><span class="mystic-dourado">Mystic</span> — Livraria</span>
-    <a href="sobre.html">Sobre nós</a>
-  </footer>
+    <div class="area-pesquisa">
+      <input
+        id="pesquisa"
+        class="pesquisa"
+        type="search"
+        placeholder="🔎 Pesquisar por título ou autor..."
+        aria-label="Pesquisar livros por título ou autor"
+        autocomplete="off"
+      >
+    </div>
 
-  <script>
-    const pesquisa = document.getElementById("pesquisa");
-    const seletorGenero = document.getElementById("genero");
-    const seletorSubgenero = document.getElementById("subgenero");
-    const livros = document.querySelectorAll(".livro");
-    const mensagemNenhum = document.getElementById("nenhum");
-    const limparFiltros = document.getElementById("limparFiltros");
+    <!-- FILTROS -->
 
-    const subgeneros = {
-      "Ficção geral e especulativa": [
-        "Fantasia",
-        "Alta Fantasia (High Fantasy)",
-        "Baixa Fantasia (Low Fantasy)",
-        "Fantasia Urbana",
-        "Fantasia Sombria (Dark Fantasy)",
-        "Fantasia Romântica (Romantasy)",
-        "Ficção Científica (Sci-Fi)",
-        "Cyberpunk",
-        "Space Opera",
-        "Hard Sci-Fi",
-        "Viagem no Tempo",
-        "Pós-Apocalíptico",
-        "Steampunk",
-        "Afrofuturismo",
-        "Distopia e Utopia",
-        "Terror e Horror",
-        "Horror Cósmico (Lovecraftiano)",
-        "Terror Psicológico",
-        "Slasher",
-        "Fantasmas e Sobrenatural",
-        "Body Horror",
-        "Suspense e Thriller",
-        "Thriller Psicológico",
-        "Thriller Médico",
-        "Thriller Político",
-        "Thriller Legal/Jurídico",
-        "Espionagem",
-        "Policial e Mistério",
-        "Whodunit (Quem matou?)",
-        "Noir",
-        "Cozy Mystery",
-        "Procedural Policial",
-        "Ficção Contemporânea",
-        "Realismo Mágico",
-        "Metaficção",
-        "Romance de Formação (Bildungsroman)",
-        "Clássicos"
-      ],
+    <section class="painel-filtros" aria-label="Filtros do catálogo">
 
-      "Ficção romântica, histórica e aventura": [
-        "Romance de Época / Histórico",
-        "Regencial",
-        "Vitoriano",
-        "Medieval",
-        "Romance Contemporâneo",
-        "Comédia Romântica",
-        "Drama Romântico",
-        "New Adult",
-        "Aventura e ação",
-        "Sobrevivência",
-        "Grandes Jornadas",
-        "Capa e Espada",
-        "Ficção Histórica Geral",
-        "Ficção de Mistério e Mitologia",
-        "Recontagens Mitológicas",
-        "Aventuras Arqueológicas"
-      ],
+      <div class="cabecalho-filtros">
+        <h2 class="titulo-filtros">Filtrar livros</h2>
 
-      "Poesia, teatro e formatos visuais": [
-        "Poesia / Lírico",
-        "Sonetos",
-        "Haicais",
-        "Poesia Livre",
-        "Poesia Concreta",
-        "Poesia Confessional",
-        "Drama Teatral",
-        "Tragédia",
-        "Comédia",
-        "Tragicomédia",
-        "Teatro do Absurdo",
-        "Roteiros",
-        "Ficção Gráfica",
-        "Graphic Novels",
-        "Mangás",
-        "Histórias em Quadrinhos (HQs)",
-        "Quadrinhos Autobiográficos"
-      ],
+        <button
+          class="botao-limpar"
+          id="limparFiltros"
+          type="button"
+        >
+          Limpar filtros
+        </button>
+      </div>
 
-      "Não-ficção": [
-        "Biografias e Memórias",
-        "Biografia",
-        "Autobiografia",
-        "Memórias Oficiais",
-        "Cartas / Epistolar",
-        "Diários",
-        "Humanidades e Sociedade",
-        "História Geral",
-        "Filosofia",
-        "Sociologia",
-        "Antropologia",
-        "Ciência Política",
-        "Ensaios Críticos",
-        "Ciência e Tecnologia",
-        "Divulgação Científica",
-        "Astronomia",
-        "Matemática",
-        "Computação",
-        "Inteligência Artificial",
-        "Medicina Geral",
-        "Desenvolvimento Pessoal",
-        "Autoajuda",
-        "Produtividade",
-        "Psicologia Prática",
-        "Inteligência Emocional",
-        "Liderança",
-        "Negócios e Finanças",
-        "Economia",
-        "Finanças Pessoais",
-        "Investimentos",
-        "Empreendedorismo",
-        "Marketing",
-        "Biografias Corporativas",
-        "Jornalismo Literário",
-        "Livro-reportagem",
-        "True Crime (Crimes Reais)",
-        "Ensaios Jornalísticos",
-        "Espiritualidade e Religião",
-        "Teologia",
-        "Filosofia Religiosa",
-        "Livros Sagrados",
-        "Ocultismo",
-        "Meditação e Bem-Estar",
-        "Estilo de Vida e Lazer",
-        "Gastronomia e Culinária",
-        "Viagens e Guias de Turismo",
-        "Artes",
-        "Fotografia",
-        "Arquitetura",
-        "Esportes e Fitness",
-        "Acadêmicos e Didáticos",
-        "Livros Didáticos",
-        "Dicionários",
-        "Manuais Técnicos",
-        "Enciclopédias",
-        "Livros de Referência"
-      ],
+      <div class="filtros">
 
-      "Infantil e juvenil": [
-        "Infantil",
-        "Livros Ilustrados",
-        "Livros de Banho",
-        "Primeiras Leituras",
-        "Fábulas",
-        "Infanto-juvenil (Middle Grade)",
-        "Aventuras para 8 a 12 anos",
-        "Mistérios para 8 a 12 anos",
-        "Jovem Adulto (Young Adult / YA)",
-        "Histórias de amadurecimento para 12 a 18 anos"
-      ]
-    };
+        <div class="campo-filtro">
+          <label for="genero">Gênero literário</label>
 
-    function preencherSubgeneros() {
-      const genero = seletorGenero.value;
-      const opcoes = genero === "Todos"
-        ? ["Todos"]
-        : ["Todos", ...(subgeneros[genero] || [])];
+          <select id="genero" class="filtro-select">
+            <option value="Todos">Todos os gêneros</option>
+            <option value="Ficção geral e especulativa">
+              Ficção geral e especulativa
+            </option>
+            <option value="Ficção romântica, histórica e aventura">
+              Ficção romântica, histórica e aventura
+            </option>
+            <option value="Poesia, teatro e formatos visuais">
+              Poesia, teatro e formatos visuais
+            </option>
+            <option value="Não-ficção">Não-ficção</option>
+            <option value="Infantil e juvenil">Infantil e juvenil</option>
+          </select>
+        </div>
 
-      seletorSubgenero.innerHTML = "";
+        <div class="campo-filtro">
+          <label for="subgenero">Subgênero ou categoria</label>
 
-      opcoes.forEach(function(nome) {
-        const opcao = document.createElement("option");
-        opcao.value = nome;
-        opcao.textContent = nome === "Todos"
-          ? "Todos os subgêneros"
-          : nome;
-        seletorSubgenero.appendChild(opcao);
-      });
+          <select id="subgenero" class="filtro-select">
+            <option value="Todos">Todos os subgêneros</option>
+          </select>
+        </div>
 
-      seletorSubgenero.value = "Todos";
-    }
+      </div>
+    </section>
 
-    function atualizarLivros() {
-      const texto = pesquisa.value.toLowerCase().trim();
-      const generoAtual = seletorGenero.value;
-      const subAtual = seletorSubgenero.value;
+    <!-- CATÁLOGO -->
 
-      let encontrados = 0;
+    <section aria-label="Catálogo de livros">
 
-      livros.forEach(function(livro) {
-        const nome = livro.dataset.nome.toLowerCase();
-        const generoLivro = livro.dataset.genero;
-        const subgeneroLivro = livro.dataset.subgenero;
+      <div class="cabecalho-catalogo">
+        <h2 class="titulo-catalogo">Catálogo</h2>
 
-        const correspondePesquisa = nome.includes(texto);
-        const correspondeGenero =
-          generoAtual === "Todos" || generoLivro === generoAtual;
-        const correspondeSubgenero =
-          subAtual === "Todos" || subgeneroLivro === subAtual;
+        <p class="contador" id="contadorLivros" aria-live="polite">
+          <strong>4</strong> livros
+        </p>
+      </div>
 
-        const mostrar =
-          correspondePesquisa &&
-          correspondeGenero &&
-          correspondeSubgenero;
+      <div class="livros" id="listaLivros">
 
-        livro.style.display = mostrar ? "flex" : "none";
+        <!-- LIVRO 1 -->
 
-        if (mostrar) encontrados++;
-      });
+        <article
+          class="livro"
+          data-genero="Ficção geral e especulativa"
+          data-subgenero="Clássicos"
+          data-nome="O Pequeno Príncipe Antoine de Saint-Exupéry"
+        >
+          <div class="capa">
+            <span class="capa-placeholder" aria-hidden="true">M</span>
+          </div>
 
-      mensagemNenhum.style.display =
-        encontrados === 0 ? "block" : "none";
-    }
+          <h3>O Pequeno Príncipe</h3>
 
-    pesquisa.addEventListener("input", atualizarLivros);
+          <p class="autor">Antoine de Saint-Exupéry</p>
 
-    seletorGenero.addEventListener("change", function() {
-      preencherSubgeneros();
-      atualizarLivros();
-    });
+          <span class="categoria-livro">Clássicos</span>
 
-    seletorSubgenero.addEventListener("change", atualizarLivros);
+          <a href="livro.html" class="botao">Ver livro</a>
+        </article>
 
-    limparFiltros.addEventListener("click", function() {
-      pesquisa.value = "";
-      seletorGenero.value = "Todos";
-      preencherSubgeneros();
-      atualizarLivros();
-    });
+        <!-- LIVRO 2 -->
 
-    preencherSubgeneros();
-    atualizarLivros();
-  </script>
+        <article
+          class="livro"
+          data-genero="Ficção geral e especulativa"
+          data-subgenero="Fantasia"
+          data-nome="Livro de Fantasia Em breve"
+        >
+          <div class="capa">
+            <span class="capa-placeholder" aria-hidden="true">M</span>
+          </div>
 
-</body>
-</html>
+          <h3>Em breve</h3>
+
+          <p class="autor">Novo autor</p>
+
+          <span class="categoria-livro">Fantasia</span>
+
+          <span class="botao botao-indisponivel">Em breve</span>
+        </article>
+
+        <!-- LIVRO 3 -->
+
+        <article
+          class="livro"
+          data-genero="Ficção romântica, histórica e aventura"
+          data-subgenero="Aventura e ação"
+          data-nome="Livro de Aventura Em breve"
+        >
+          <div class="capa">
+            <span class="capa-placeholder" aria-hidden="true">M</span>
+          </div>
+
+          <h3>Em breve</h3>
+
+          <p class="autor">Novo autor</p>
+
+          <span class="categoria-livro">Aventura e ação</span>
+
+          <span class="botao botao-indisponivel">Em breve</span>
+        </article>
+
+        <!-- LIVRO 4 -->
+
+        <article
+          class="livro"
+          data-genero="Ficção geral e especulativa"
+          data-subgenero="Policial e mistério"
+          data-nome="Livro de Mistério Em breve"
+        >
+          <div class="capa">
+            <
