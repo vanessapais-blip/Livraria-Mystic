@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -35,6 +36,7 @@
     /* CABEÇALHO */
 
     header {
+      position: relative;
       width: 100%;
       padding: 20px 6%;
       background: #151210;
@@ -45,11 +47,43 @@
       width: 100%;
       max-width: 1400px;
       margin: 0 auto;
+      padding-left: 58px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
     }
+
+    /* SETA PARA VOLTAR À HOME */
+
+    .botao-voltar {
+      position: absolute;
+      top: 50%;
+      left: 6%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dourado-claro);
+      background: #211d19;
+      border: 1px solid var(--borda);
+      border-radius: 50%;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      font-size: 27px;
+      line-height: 1;
+      transition: background 0.2s, color 0.2s;
+      z-index: 10;
+    }
+
+    .botao-voltar:hover {
+      background: var(--dourado);
+      color: #17120b;
+    }
+
+    /* LOGO E NOME */
 
     .marca {
       display: flex;
@@ -57,8 +91,6 @@
       gap: 12px;
       flex-shrink: 0;
     }
-
-    /* LOGO NO LUGAR DO M DO CABEÇALHO */
 
     .logo-mystic {
       width: 48px;
@@ -93,7 +125,6 @@
       color: var(--texto);
       font-family: inherit;
       font-size: 15px;
-      transition: border-color 0.2s;
     }
 
     .area-pesquisa input:focus {
@@ -198,13 +229,18 @@
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
     }
 
-    /* CAPAS DOS LIVROS: O M CONTINUA AQUI */
+    /* CAPAS: O M PERMANECE */
 
     .capa {
       width: 100%;
       aspect-ratio: 3 / 4;
       background:
-        radial-gradient(circle at top, #3b2d20 0%, #211a15 55%, #151210 100%);
+        radial-gradient(
+          circle at top,
+          #3b2d20 0%,
+          #211a15 55%,
+          #151210 100%
+        );
       border: 1px solid #4a3825;
       border-radius: 5px;
       display: flex;
@@ -239,8 +275,11 @@
     .genero-livro {
       color: var(--dourado-claro);
       font-size: 13px;
+      line-height: 1.5;
       margin-bottom: 16px;
     }
+
+    /* BOTÕES DOURADOS */
 
     .botao-ler {
       display: block;
@@ -262,6 +301,12 @@
 
     .botao-ler:hover {
       background: var(--dourado-claro);
+    }
+
+    .botao-ler:disabled {
+      background: #493722;
+      color: #d5c7b3;
+      cursor: not-allowed;
     }
 
     .sem-resultados {
@@ -288,11 +333,19 @@
       letter-spacing: 1px;
     }
 
-    /* TABLETS */
+    /* TABLETS E TELAS MÉDIAS */
 
     @media (max-width: 1000px) {
       header {
         padding: 18px 4%;
+      }
+
+      .botao-voltar {
+        left: 4%;
+      }
+
+      .cabecalho {
+        padding-left: 55px;
       }
 
       main {
@@ -313,10 +366,20 @@
 
     @media (max-width: 650px) {
       header {
-        padding: 16px 5%;
+        padding: 58px 5% 16px;
+      }
+
+      .botao-voltar {
+        top: 12px;
+        left: 5%;
+        transform: none;
+        width: 36px;
+        height: 36px;
+        font-size: 23px;
       }
 
       .cabecalho {
+        padding-left: 0;
         flex-direction: column;
         align-items: stretch;
         gap: 16px;
@@ -417,10 +480,18 @@
 <body>
 
   <header>
+    <!-- SETA PARA home.html -->
+    <a
+      href="home.html"
+      class="botao-voltar"
+      aria-label="Voltar para a página inicial"
+      title="Voltar para Home"
+    >&#8592;</a>
+
     <div class="cabecalho">
 
       <div class="marca">
-        <!-- A imagem substitui somente o M do cabeçalho -->
+        <!-- Logo somente ao lado do nome -->
         <img
           src="logo-mystic.jpg"
           alt="Logo da Mystic"
@@ -437,7 +508,7 @@
           placeholder="Pesquisar livros..."
           aria-label="Pesquisar livros"
         >
-        <span class="icone-pesquisa" aria-hidden="true">⌕</span>
+        <span class="icone-pesquisa" aria-hidden="true">&#8981;</span>
       </div>
 
     </div>
@@ -478,7 +549,11 @@
       </select>
     </div>
 
-    <section class="catalogo" id="catalogo" aria-label="Catálogo de livros">
+    <section
+      class="catalogo"
+      id="catalogo"
+      aria-label="Catálogo de livros"
+    >
 
       <!-- LIVRO 1 -->
       <article
@@ -613,7 +688,8 @@
           textoCompleto.includes(termo);
 
         const correspondeGenero =
-          !generoSelecionado || genero === generoSelecionado;
+          !generoSelecionado ||
+          genero === generoSelecionado;
 
         const correspondeSubgenero =
           !subgeneroSelecionado ||
