@@ -3,9 +3,9 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#100e0d">
-  <title>Configurações | Mystic</title>
+  <title>Configurações | Mystic Livraria</title>
 
   <style>
     :root {
@@ -21,6 +21,8 @@
       --gold-light: #e2c783;
       --gold-bg: #302719;
       --danger: #e78d83;
+      --radius: 12px;
+      --content-width: 1440px;
     }
 
     * {
@@ -30,14 +32,17 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 90px;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
+      min-height: 100dvh;
+      overflow-wrap: anywhere;
       background: var(--bg);
       color: var(--text);
-      font: 14px/1.55 Arial, Helvetica, sans-serif;
+      font: 14px/1.6 Arial, Helvetica, sans-serif;
       transition: background .2s, color .2s;
     }
 
@@ -56,7 +61,7 @@
       --danger: #ad3434;
     }
 
-    button, input, select, textarea {
+    button, input, select {
       font: inherit;
     }
 
@@ -76,38 +81,42 @@
     button:focus-visible,
     a:focus-visible,
     input:focus-visible,
-    select:focus-visible,
-    textarea:focus-visible {
+    select:focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 3px;
     }
 
-    /* CABEÇALHO */
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    /* CABEÇALHO RESPONSIVO */
 
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      min-height: 72px;
+      z-index: 100;
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 12px 5%;
+      gap: 14px;
+      min-height: 72px;
+      padding: 12px clamp(12px, 4vw, 56px);
       background: var(--bg);
       border-bottom: 1px solid var(--border);
     }
 
     .back {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
+      flex: 0 0 42px;
       border: 1px solid var(--border);
       border-radius: 50%;
       background: var(--panel);
       color: var(--gold-light);
-      font-size: 23px;
+      font-size: 24px;
       transition: background .2s;
     }
 
@@ -118,31 +127,35 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
+      gap: 9px;
+      flex: 0 0 auto;
+      min-width: 0;
     }
 
     .brand img {
-      width: 43px;
-      height: 43px;
+      display: block;
+      width: 42px;
+      height: 42px;
       object-fit: contain;
     }
 
     .brand-name {
       color: var(--gold-light);
-      font: bold 29px Georgia, "Times New Roman", serif;
+      font: bold clamp(23px, 2.5vw, 30px) Georgia, "Times New Roman", serif;
       letter-spacing: 1px;
     }
 
     .top-search {
       position: relative;
-      width: min(330px, 38vw);
+      width: min(360px, 40%);
       margin-left: auto;
     }
 
     .top-search input {
+      display: block;
       width: 100%;
-      padding: 11px 40px 11px 15px;
+      min-height: 42px;
+      padding: 10px 40px 10px 14px;
       border: 1px solid var(--border);
       border-radius: 24px;
       background: var(--field);
@@ -151,24 +164,28 @@
 
     .search-icon {
       position: absolute;
-      right: 14px;
       top: 50%;
+      right: 14px;
       transform: translateY(-50%);
       color: var(--gold);
       pointer-events: none;
-      font-size: 18px;
+      font-size: 19px;
     }
 
-    /* ESTRUTURA */
+    /* ESTRUTURA PRINCIPAL */
 
     .layout {
       display: grid;
-      grid-template-columns: 230px minmax(0, 1fr);
+      grid-template-columns: 238px minmax(0, 1fr);
+      width: 100%;
+      max-width: var(--content-width);
       min-height: calc(100vh - 72px);
+      margin: 0 auto;
     }
 
     .sidebar {
-      padding: 24px 13px;
+      align-self: stretch;
+      padding: 25px 13px;
       background: var(--panel);
       border-right: 1px solid var(--border);
     }
@@ -177,6 +194,7 @@
       padding: 0 12px 13px;
       color: var(--gold);
       font-size: 11px;
+      font-weight: bold;
       letter-spacing: 1.5px;
       text-transform: uppercase;
     }
@@ -189,48 +207,49 @@
     .nav-link {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 11px 12px;
+      gap: 11px;
+      min-height: 42px;
+      padding: 10px 12px;
       border: 1px solid transparent;
       border-radius: 8px;
       color: var(--muted);
       font-size: 13px;
-      transition: .2s;
+      transition: background .2s, color .2s;
     }
 
     .nav-link:hover,
     .nav-link.active {
       background: var(--gold-bg);
-      color: var(--text);
       border-color: var(--border);
+      color: var(--text);
     }
 
     .nav-icon {
+      display: inline-grid;
       width: 20px;
-      flex-shrink: 0;
-      text-align: center;
+      flex: 0 0 20px;
+      place-items: center;
       color: var(--gold);
       font-size: 17px;
     }
 
     main {
       width: 100%;
-      max-width: 1500px;
       min-width: 0;
-      margin: 0 auto;
-      padding: 30px clamp(16px, 3vw, 42px) 45px;
+      padding: 30px clamp(14px, 3vw, 42px) 45px;
     }
 
     .page-title {
       display: flex;
       align-items: center;
-      gap: 15px;
-      margin-bottom: 22px;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
     .page-icon {
       color: var(--gold);
-      font-size: 29px;
+      font-size: 30px;
+      flex: 0 0 auto;
     }
 
     h1, h2, p {
@@ -238,8 +257,8 @@
     }
 
     h1 {
-      margin-bottom: 4px;
-      font: 29px Georgia, "Times New Roman", serif;
+      margin-bottom: 3px;
+      font: 29px/1.25 Georgia, "Times New Roman", serif;
     }
 
     .muted {
@@ -253,54 +272,55 @@
 
     .status {
       min-height: 18px;
-      margin: 0 0 14px;
+      margin: 0 0 12px;
       color: var(--gold-light);
       font-size: 12px;
     }
 
-    /* CARTÕES */
+    /* CARTÕES EM COLUNAS */
 
     .settings-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 17px;
       align-items: start;
+      gap: 18px;
     }
 
     .settings-column {
       display: grid;
-      gap: 17px;
+      align-content: start;
+      gap: 18px;
       min-width: 0;
     }
 
     .card {
       min-width: 0;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
+      padding: clamp(14px, 1.7vw, 20px);
       background: var(--panel);
-      scroll-margin-top: 90px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      scroll-margin-top: 95px;
     }
 
     .card-header {
       display: flex;
       align-items: flex-start;
-      gap: 12px;
+      gap: 11px;
       margin-bottom: 15px;
     }
 
     .card-icon {
-      width: 28px;
-      flex-shrink: 0;
+      width: 27px;
+      flex: 0 0 27px;
       color: var(--gold);
       text-align: center;
-      font-size: 23px;
-      line-height: 1.2;
+      font-size: 22px;
+      line-height: 1.3;
     }
 
     .card h2 {
       margin: 0 0 4px;
-      font: 19px Georgia, "Times New Roman", serif;
+      font: 19px/1.3 Georgia, "Times New Roman", serif;
     }
 
     .card-description {
@@ -313,13 +333,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      gap: 12px;
       padding: 12px 0;
       border-top: 1px solid var(--border);
     }
 
     .setting-info {
-      flex: 1;
+      flex: 1 1 auto;
       min-width: 0;
     }
 
@@ -351,10 +371,9 @@
 
     select,
     input[type="text"],
-    input[type="email"],
-    input[type="file"],
-    textarea {
-      width: 100%;
+    input[type="search"],
+    input[type="file"] {
+      max-width: 100%;
       min-width: 0;
       padding: 10px 11px;
       border: 1px solid var(--border);
@@ -363,20 +382,26 @@
       color: var(--text);
     }
 
-    input[type="checkbox"],
-    input[type="radio"] {
-      width: 17px;
-      height: 17px;
-      flex-shrink: 0;
+    .field select {
+      width: 100%;
+    }
+
+    input[type="checkbox"] {
+      width: 19px;
+      height: 19px;
+      margin: 0;
+      flex: 0 0 19px;
       accent-color: var(--gold);
+      cursor: pointer;
     }
 
     .btn {
       display: inline-flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       gap: 7px;
-      min-height: 36px;
+      min-height: 38px;
+      max-width: 100%;
       padding: 8px 12px;
       border: 1px solid var(--border);
       border-radius: 7px;
@@ -384,6 +409,8 @@
       color: var(--text);
       font-size: 12px;
       text-align: center;
+      white-space: normal;
+      transition: border-color .2s, color .2s;
     }
 
     .btn:hover {
@@ -407,12 +434,7 @@
       color: var(--danger);
     }
 
-    .btn:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-    }
-
-    /* TEMAS */
+    /* SELEÇÃO DE TEMA */
 
     .theme-grid {
       display: grid;
@@ -422,7 +444,8 @@
 
     .theme-option {
       position: relative;
-      padding: 14px;
+      min-width: 0;
+      padding: 12px;
       border: 1px solid var(--border);
       border-radius: 9px;
       background: var(--panel2);
@@ -431,12 +454,12 @@
     }
 
     .theme-option.selected {
+      padding: 11px;
       border: 2px solid var(--gold);
-      padding: 13px;
     }
 
     .theme-preview {
-      height: 48px;
+      height: 44px;
       margin-bottom: 10px;
       border: 1px solid var(--border);
       border-radius: 5px;
@@ -447,7 +470,7 @@
     }
 
     .preview-light {
-      background: linear-gradient(135deg, #ffffff 60%, #e8d6b1);
+      background: linear-gradient(135deg, #fff 60%, #e8d6b1);
     }
 
     .theme-option strong,
@@ -462,10 +485,10 @@
     }
 
     .theme-check {
-      display: none;
       position: absolute;
-      top: 8px;
+      top: 7px;
       right: 9px;
+      display: none;
       color: var(--gold);
     }
 
@@ -473,7 +496,7 @@
       display: block;
     }
 
-    /* TEXTO */
+    /* ESPAÇAMENTO DO TEXTO */
 
     .segments {
       display: flex;
@@ -482,9 +505,9 @@
     }
 
     .segments button {
-      flex: 1;
-      min-width: 70px;
-      padding: 9px 8px;
+      flex: 1 1 70px;
+      min-height: 38px;
+      padding: 8px;
       border: 1px solid var(--border);
       border-radius: 7px;
       background: var(--panel2);
@@ -498,8 +521,11 @@
       color: var(--gold-light);
     }
 
+    /* IMAGEM DE FUNDO */
+
     .wallpaper {
-      height: 95px;
+      width: 100%;
+      height: 100px;
       margin: 8px 0;
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -514,35 +540,36 @@
       background: var(--panel2);
       color: var(--muted);
       font-size: 11px;
+      line-height: 1.6;
     }
 
     /* ARMAZENAMENTO */
 
     .storage {
       display: grid;
-      grid-template-columns: 78px minmax(0, 1fr);
+      grid-template-columns: 76px minmax(0, 1fr);
       align-items: center;
-      gap: 15px;
+      gap: 14px;
       margin: 8px 0 15px;
     }
 
     .storage-ring {
+      position: relative;
       display: grid;
       place-items: center;
       width: 76px;
       height: 76px;
       border-radius: 50%;
       background: conic-gradient(var(--gold) 0%, var(--border) 0%);
-      position: relative;
       font-weight: bold;
     }
 
     .storage-ring::before {
-      content: "";
       position: absolute;
       inset: 7px;
       border-radius: 50%;
       background: var(--panel);
+      content: "";
     }
 
     .storage-ring span {
@@ -567,7 +594,7 @@
 
     .device-info {
       display: grid;
-      gap: 10px;
+      gap: 9px;
     }
 
     .device-line {
@@ -590,63 +617,32 @@
       display: none !important;
     }
 
-    /* RODAPÉ */
-
     footer {
       display: flex;
       justify-content: center;
-      padding: 22px;
+      padding: 22px 14px;
       border-top: 1px solid var(--border);
       background: var(--panel);
-      color: #fff;
-      font: 18px Georgia, "Times New Roman", serif;
+      color: var(--gold-light);
+      font: 19px Georgia, "Times New Roman", serif;
+      text-align: center;
     }
 
     /* ACESSIBILIDADE */
 
-    body.font-small {
-      font-size: 12px;
-    }
+    body.font-small { font-size: 12px; }
+    body.font-large { font-size: 16px; }
+    body.font-xlarge { font-size: 18px; }
 
-    body.font-large {
-      font-size: 16px;
-    }
+    body.font-arial { font-family: Arial, sans-serif; }
+    body.font-georgia { font-family: Georgia, serif; }
+    body.font-verdana { font-family: Verdana, sans-serif; }
+    body.font-mono { font-family: monospace; }
 
-    body.font-xlarge {
-      font-size: 18px;
-    }
-
-    body.font-arial {
-      font-family: Arial, sans-serif;
-    }
-
-    body.font-georgia {
-      font-family: Georgia, serif;
-    }
-
-    body.font-verdana {
-      font-family: Verdana, sans-serif;
-    }
-
-    body.font-mono {
-      font-family: monospace;
-    }
-
-    body.spacing-medium {
-      line-height: 1.8;
-    }
-
-    body.spacing-wide {
-      line-height: 2.1;
-    }
-
-    body.text-bold {
-      font-weight: 600;
-    }
-
-    body.text-italic {
-      font-style: italic;
-    }
+    body.spacing-medium { line-height: 1.8; }
+    body.spacing-wide { line-height: 2.1; }
+    body.text-bold { font-weight: 600; }
+    body.text-italic { font-style: italic; }
 
     body.underline-links a {
       text-decoration: underline;
@@ -661,43 +657,66 @@
       scroll-behavior: auto !important;
     }
 
+    /* TABLETS E TELAS MÉDIAS */
+
     @media (max-width: 1050px) {
       .layout {
         grid-template-columns: 1fr;
       }
 
       .sidebar {
-        padding: 10px;
+        position: sticky;
+        top: 66px;
+        z-index: 50;
+        padding: 9px 12px;
         border-right: 0;
         border-bottom: 1px solid var(--border);
       }
 
       .sidebar-title {
-        padding-bottom: 8px;
+        padding: 0 5px 7px;
       }
 
       .nav-list {
         display: flex;
+        gap: 6px;
         overflow-x: auto;
-        gap: 5px;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
         padding-bottom: 3px;
       }
 
       .nav-link {
-        flex-shrink: 0;
+        flex: 0 0 auto;
+        min-height: 38px;
+        padding: 8px 11px;
         white-space: nowrap;
       }
 
       main {
-        padding: 24px;
+        padding: 25px clamp(14px, 3vw, 30px) 38px;
       }
     }
 
+    /* CELULARES */
+
     @media (max-width: 700px) {
       .topbar {
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
         gap: 10px;
-        padding: 12px 14px;
+        padding: 10px 12px;
+      }
+
+      .back {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        font-size: 22px;
+      }
+
+      .brand {
+        gap: 8px;
       }
 
       .brand img {
@@ -709,56 +728,155 @@
         font-size: 25px;
       }
 
-      .back {
-        width: 36px;
-        height: 36px;
-      }
-
       .top-search {
-        order: 3;
+        grid-column: 1 / -1;
         width: 100%;
+        margin: 0;
       }
 
-      .settings-grid {
-        grid-template-columns: 1fr;
+      .top-search input {
+        min-height: 42px;
+      }
+
+      .sidebar {
+        top: 0;
+        padding: 8px 10px;
+      }
+
+      .nav-icon {
+        font-size: 15px;
+      }
+
+      .nav-link {
+        font-size: 12px;
       }
 
       main {
-        padding: 20px 13px 30px;
+        padding: 20px 12px 30px;
       }
 
-      .card {
-        padding: 15px;
+      .page-title {
+        gap: 10px;
+        margin-bottom: 19px;
+      }
+
+      .page-icon {
+        font-size: 26px;
       }
 
       h1 {
         font-size: 25px;
       }
 
+      .page-description {
+        font-size: 12px;
+      }
+
+      .settings-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .settings-column {
+        gap: 14px;
+      }
+
+      .card {
+        padding: 15px;
+        border-radius: 10px;
+      }
+
       .card h2 {
         font-size: 18px;
       }
 
-      .theme-preview {
-        height: 40px;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .theme-grid {
-        grid-template-columns: 1fr;
-      }
-
       .setting-row {
-        gap: 8px;
+        gap: 10px;
       }
 
-      .setting-row select {
-        max-width: 48%;
+      .setting-info strong {
+        font-size: 12px;
+      }
+
+      .setting-info small {
+        font-size: 11px;
       }
 
       .btn {
+        min-height: 40px;
+        padding: 9px 10px;
+      }
+
+      .theme-preview {
+        height: 38px;
+      }
+
+      .storage {
+        grid-template-columns: 65px minmax(0, 1fr);
+        gap: 11px;
+      }
+
+      .storage-ring {
+        width: 65px;
+        height: 65px;
+      }
+
+      .storage-ring::before {
+        inset: 6px;
+      }
+    }
+
+    /* CELULARES ESTREITOS */
+
+    @media (max-width: 380px) {
+      .brand-name {
+        font-size: 23px;
+      }
+
+      main {
+        padding-right: 9px;
+        padding-left: 9px;
+      }
+
+      .card {
+        padding: 12px;
+      }
+
+      .theme-grid {
+        gap: 7px;
+      }
+
+      .theme-option {
+        padding: 9px;
+      }
+
+      .theme-option.selected {
         padding: 8px;
+      }
+
+      .setting-row {
+        align-items: center;
+      }
+
+      .setting-row .btn {
+        max-width: 46%;
+      }
+
+      .segments button {
+        flex-basis: 65px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -766,11 +884,11 @@
 
 <body>
   <header class="topbar">
-    <a class="back" href="home.html" aria-label="Voltar para Home" title="Voltar">
+    <a class="back" href="home.html" aria-label="Voltar para a página inicial" title="Voltar">
       &#8592;
     </a>
 
-    <a class="brand" href="home.html" aria-label="Mystic - página inicial">
+    <a class="brand" href="home.html" aria-label="Mystic - início">
       <img src="logo-mystic.jpg" alt="Logo Mystic">
       <span class="brand-name">Mystic</span>
     </a>
@@ -837,8 +955,8 @@
 
             <div class="setting-row">
               <div class="setting-info">
-                <strong>Sair da conta</strong>
-                <small>Volte à página inicial da Mystic.</small>
+                <strong>Sair</strong>
+                <small>Voltar para a página inicial da Mystic.</small>
               </div>
               <button class="btn btn-danger" id="sair" type="button">Sair</button>
             </div>
@@ -896,12 +1014,11 @@
               <label for="arquivoWallpaper">Imagem de fundo opcional</label>
               <div id="wallpaper" class="wallpaper"></div>
               <input id="arquivoWallpaper" type="file" accept="image/*">
-              <button id="removerWallpaper" class="btn"
-                type="button" style="margin-top:8px">
+              <button id="removerWallpaper" class="btn" type="button" style="margin-top:8px">
                 Remover imagem
               </button>
               <p class="card-description" style="margin-top:8px">
-                A imagem escolhida fica aplicada nesta página.
+                A imagem escolhida é aplicada à prévia desta sessão.
               </p>
             </div>
           </section>
@@ -941,8 +1058,8 @@
             </div>
 
             <p class="note">
-              As preferências são salvas neste navegador. O envio real de notificações
-              exige integração adicional.
+              As preferências ficam salvas neste navegador. O envio real de notificações
+              precisa de integração adicional.
             </p>
           </section>
 
@@ -957,7 +1074,7 @@
             </div>
 
             <div class="field">
-              <label for="idiomaSelect">Idioma</label>
+              <label for="idiomaSelect">Idioma preferido</label>
               <select id="idiomaSelect">
                 <option value="pt-BR">Português (Brasil)</option>
                 <option value="pt-PT">Português (Portugal)</option>
@@ -978,12 +1095,12 @@
           </section>
 
           <section class="card searchable" id="privacidade"
-            data-words="privacidade dados cookies histórico pesquisa excluir">
+            data-words="privacidade dados histórico pesquisa excluir">
             <div class="card-header">
               <span class="card-icon">◇</span>
               <div>
                 <h2>Privacidade</h2>
-                <p class="card-description">Gerencie dados e preferências locais.</p>
+                <p class="card-description">Gerencie os dados locais da página.</p>
               </div>
             </div>
 
@@ -998,14 +1115,14 @@
             <div class="setting-row">
               <div class="setting-info">
                 <strong>Personalização local</strong>
-                <small>Guarda suas preferências neste dispositivo.</small>
+                <small>Guarda as preferências neste dispositivo.</small>
               </div>
               <input id="personalizacao" type="checkbox" checked>
             </div>
 
             <div class="setting-row">
               <div class="setting-info">
-                <strong>Limpar histórico de pesquisa</strong>
+                <strong>Limpar histórico</strong>
                 <small>Apaga as pesquisas guardadas nesta página.</small>
               </div>
               <button class="btn" id="limparHistorico" type="button">Limpar</button>
@@ -1015,7 +1132,6 @@
               Estas opções controlam dados locais. Uma conta real exige integração com servidor.
             </p>
           </section>
-
         </div>
 
         <div class="settings-column">
@@ -1079,7 +1195,7 @@
             <div class="setting-row">
               <div class="setting-info">
                 <strong>Sublinhar links</strong>
-                <small>Facilita identificar links.</small>
+                <small>Ajuda a identificar os links.</small>
               </div>
               <input type="checkbox" id="sublinharLinks">
             </div>
@@ -1136,7 +1252,7 @@
               <span class="card-icon">▤</span>
               <div>
                 <h2>Armazenamento e dados</h2>
-                <p class="card-description">Gerencie preferências salvas neste navegador.</p>
+                <p class="card-description">Gerencie as preferências salvas neste navegador.</p>
               </div>
             </div>
 
@@ -1147,7 +1263,7 @@
               <div>
                 <strong id="storageText">Calculando dados locais...</strong>
                 <p class="card-description">
-                  Estimativa do espaço usado pelas preferências deste site.
+                  Estimativa aproximada do espaço usado pelas preferências.
                 </p>
                 <div class="progress-track">
                   <div class="progress-fill" id="storageFill"></div>
@@ -1166,7 +1282,7 @@
             <div class="setting-row">
               <div class="setting-info">
                 <strong>Restaurar configurações</strong>
-                <small>Volta às preferências padrão desta página.</small>
+                <small>Volta às preferências padrão.</small>
               </div>
               <button class="btn" id="restaurar" type="button">Restaurar</button>
             </div>
@@ -1217,16 +1333,19 @@
             </div>
 
             <p class="note">
-              Esta seção mostra informações básicas do navegador atual. Ela não controla sessões em outros dispositivos.
+              Mostra informações básicas do navegador atual. Não controla sessões em outros dispositivos.
             </p>
           </section>
-
         </div>
       </div>
+
+      <p id="semResultados" class="note hidden">
+        Nenhuma configuração encontrada para essa pesquisa.
+      </p>
     </main>
   </div>
 
-  <footer>Mystic</footer>
+  <footer>Mystic Livraria</footer>
 
   <script>
     (() => {
@@ -1250,7 +1369,6 @@
         region: "BR",
         saveHistory: true,
         personalization: true,
-        wallpaper: "",
         prefs: {
           notifLancamentos: true,
           notifPromocoes: true,
@@ -1260,9 +1378,6 @@
           buscarGenero: true
         }
       };
-
-      let settings = loadSettings();
-      let wallpaperObjectUrl = null;
 
       function cloneDefaults() {
         return JSON.parse(JSON.stringify(defaults));
@@ -1289,18 +1404,30 @@
         }
       }
 
-      function saveSettings(message = "Configurações salvas neste navegador.") {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-          showStatus(message);
-          updateStorage();
-        } catch {
-          showStatus("Não foi possível salvar. O armazenamento do navegador pode estar cheio.");
-        }
-      }
+      let settings = loadSettings();
+      let wallpaperObjectUrl = null;
 
       function showStatus(message) {
         status.textContent = message;
+      }
+
+      function saveSettings(message = "Configurações salvas neste navegador.") {
+        if (settings.personalization) {
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+          } catch {
+            showStatus("Não foi possível salvar. O armazenamento pode estar cheio.");
+            updateStorage();
+            return;
+          }
+        } else {
+          try {
+            localStorage.removeItem(STORAGE_KEY);
+          } catch {}
+        }
+
+        showStatus(message);
+        updateStorage();
       }
 
       function setSelect(id, value) {
@@ -1321,33 +1448,29 @@
           button.classList.toggle("selected", selected);
           button.setAttribute("aria-pressed", String(selected));
         });
+
+        applyAccent(settings.accent);
       }
 
       function applyAccent(accent) {
         const colors = {
-          gold: {
-            gold: "#c9a45c",
-            light: "#e2c783",
-            bg: "#302719"
-          },
-          blue: {
-            gold: "#6f9fd5",
-            light: "#a8cefa",
-            bg: "#1b2b40"
-          },
-          green: {
-            gold: "#72ad81",
-            light: "#a4d4ad",
-            bg: "#1d3022"
-          }
+          gold: ["#c9a45c", "#e2c783", "#302719"],
+          blue: ["#6f9fd5", "#a8cefa", "#1b2b40"],
+          green: ["#72ad81", "#a4d4ad", "#1d3022"]
         };
 
         const chosen = colors[accent] || colors.gold;
         const lightTheme = document.body.classList.contains("light");
 
-        document.documentElement.style.setProperty("--gold", lightTheme && accent === "gold" ? "#98701e" : chosen.gold);
-        document.documentElement.style.setProperty("--gold-light", lightTheme && accent === "gold" ? "#89631b" : chosen.light);
-        document.documentElement.style.setProperty("--gold-bg", lightTheme && accent === "gold" ? "#eee3cc" : chosen.bg);
+        document.documentElement.style.setProperty(
+          "--gold", lightTheme && accent === "gold" ? "#98701e" : chosen[0]
+        );
+        document.documentElement.style.setProperty(
+          "--gold-light", lightTheme && accent === "gold" ? "#89631b" : chosen[1]
+        );
+        document.documentElement.style.setProperty(
+          "--gold-bg", lightTheme && accent === "gold" ? "#eee3cc" : chosen[2]
+        );
       }
 
       function applyFontSize(value) {
@@ -1367,7 +1490,9 @@
         if (value !== "normal") document.body.classList.add("spacing-" + value);
 
         document.querySelectorAll("[data-spacing]").forEach(button => {
-          button.classList.toggle("selected", button.dataset.spacing === value);
+          const selected = button.dataset.spacing === value;
+          button.classList.toggle("selected", selected);
+          button.setAttribute("aria-pressed", String(selected));
         });
       }
 
@@ -1376,6 +1501,7 @@
         document.body.classList.toggle("text-bold", settings.bold);
         document.body.classList.toggle("text-italic", settings.italic);
         document.body.classList.toggle("underline-links", settings.underlineLinks);
+
         applyFontSize(settings.fontSize);
         applyFontFamily(settings.fontFamily);
         applySpacing(settings.spacing);
@@ -1383,17 +1509,12 @@
 
       function applyWallpaper() {
         const preview = document.getElementById("wallpaper");
-        if (settings.wallpaper) {
-          preview.style.backgroundImage = `url("${settings.wallpaper}")`;
-        } else {
-          preview.style.backgroundImage =
-            "radial-gradient(ellipse at 70% 15%, #57431d, #171717 45%, #08090b)";
-        }
+        preview.style.backgroundImage =
+          "radial-gradient(ellipse at 70% 15%, #57431d, #171717 45%, #08090b)";
       }
 
       function renderSettings() {
         applyTheme(settings.theme);
-        applyAccent(settings.accent);
         applyAccessibility();
 
         setSelect("corDestaque", settings.accent);
@@ -1418,32 +1539,39 @@
         updateStorage();
       }
 
-      function recordSearch(value) {
-        if (!settings.saveHistory || !value.trim()) return;
-
-        try {
-          const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
-          const next = [
-            value.trim(),
-            ...history.filter(item => item.toLowerCase() !== value.trim().toLowerCase())
-          ].slice(0, 30);
-
-          localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
-        } catch {
-          // O histórico é opcional e não deve interromper a página.
-        }
-      }
-
       function getHistory() {
         try {
-          return JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+          const value = JSON.parse(localStorage.getItem(HISTORY_KEY) || "[]");
+          return Array.isArray(value) ? value : [];
         } catch {
           return [];
         }
       }
 
+      function recordSearch(value) {
+        if (!settings.saveHistory || !value.trim()) return;
+
+        try {
+          const history = getHistory();
+          const query = value.trim();
+          const next = [
+            query,
+            ...history.filter(item =>
+              item.toLocaleLowerCase("pt-BR") !== query.toLocaleLowerCase("pt-BR")
+            )
+          ].slice(0, 30);
+
+          localStorage.setItem(HISTORY_KEY, JSON.stringify(next));
+        } catch {
+          // O histórico é opcional.
+        }
+      }
+
       function clearHistory() {
-        localStorage.removeItem(HISTORY_KEY);
+        try {
+          localStorage.removeItem(HISTORY_KEY);
+        } catch {}
+
         const result = document.getElementById("historicoResultado");
         result.textContent = "O histórico de pesquisa foi apagado.";
         result.classList.remove("hidden");
@@ -1460,18 +1588,14 @@
             const value = localStorage.getItem(key) || "";
             bytes += new Blob([key, value]).size;
           }
-        } catch {
-          // Alguns navegadores podem restringir o acesso ao armazenamento.
-        }
+        } catch {}
 
-        const kilobytes = bytes / 1024;
-        const percent = Math.min(100, Math.round((bytes / (1024 * 1024)) * 100));
+        const kb = bytes / 1024;
+        const percent = Math.min(100, Math.round(bytes / (1024 * 1024) * 100));
 
         document.getElementById("storagePercent").textContent = percent + "%";
         document.getElementById("storageText").textContent =
-          kilobytes < 1
-            ? bytes + " bytes utilizados"
-            : kilobytes.toFixed(1) + " KB utilizados";
+          kb < 1 ? bytes + " bytes utilizados" : kb.toFixed(1) + " KB utilizados";
 
         document.getElementById("storageFill").style.width = percent + "%";
         document.getElementById("storageRing").style.background =
@@ -1484,44 +1608,39 @@
 
         if (/Edg\//.test(ua)) browser = "Microsoft Edge";
         else if (/OPR\//.test(ua)) browser = "Opera";
-        else if (/Chrome\//.test(ua) && !/Edg\//.test(ua)) browser = "Google Chrome";
         else if (/Firefox\//.test(ua)) browser = "Mozilla Firefox";
-        else if (/Safari\//.test(ua) && !/Chrome\//.test(ua)) browser = "Safari";
+        else if (/Chrome\//.test(ua)) browser = "Google Chrome";
+        else if (/Safari\//.test(ua)) browser = "Safari";
 
         let device = "Computador";
-        if (/iPad|Tablet/i.test(ua)) {
-          device = "Tablet";
-        } else if (/Mobi|Android|iPhone/i.test(ua)) {
-          device = "Celular";
-        }
+        if (/iPad|Tablet/i.test(ua)) device = "Tablet";
+        else if (/Mobi|Android|iPhone/i.test(ua)) device = "Celular";
 
         document.getElementById("tipoDispositivo").textContent = device;
         document.getElementById("navegador").textContent = browser;
         document.getElementById("idiomaNavegador").textContent =
           navigator.language || "Não identificado";
-
         document.getElementById("tamanhoTela").textContent =
           `${window.innerWidth} × ${window.innerHeight} pixels`;
       }
 
-      // TEMAS
+      // Tema
       document.querySelectorAll("[data-theme]").forEach(button => {
         button.addEventListener("click", () => {
           settings.theme = button.dataset.theme;
           applyTheme(settings.theme);
-          applyAccent(settings.accent);
           saveSettings("Tema atualizado.");
         });
       });
 
-      // COR DE DESTAQUE
+      // Cor de destaque
       document.getElementById("corDestaque").addEventListener("change", event => {
         settings.accent = event.target.value;
         applyAccent(settings.accent);
         saveSettings("Cor de destaque atualizada.");
       });
 
-      // TEXTO E ACESSIBILIDADE
+      // Acessibilidade
       document.getElementById("reduzirAnimacoes").addEventListener("change", event => {
         settings.reduceMotion = event.target.checked;
         applyAccessibility();
@@ -1566,7 +1685,7 @@
         saveSettings();
       });
 
-      // IMAGEM DE FUNDO
+      // Imagem de fundo: prévia temporária
       document.getElementById("arquivoWallpaper").addEventListener("change", event => {
         const file = event.target.files && event.target.files[0];
         if (!file) return;
@@ -1588,25 +1707,18 @@
         document.getElementById("wallpaper").style.backgroundImage =
           `url("${wallpaperObjectUrl}")`;
 
-        // A imagem fica apenas na prévia desta sessão para evitar ocupar
-        // muito espaço no armazenamento do navegador.
-        settings.wallpaper = "";
-        saveSettings("Imagem de fundo aplicada à prévia desta sessão.");
+        showStatus("Imagem aplicada à prévia desta sessão.");
       });
 
       document.getElementById("removerWallpaper").addEventListener("click", () => {
-        if (wallpaperObjectUrl) {
-          URL.revokeObjectURL(wallpaperObjectUrl);
-          wallpaperObjectUrl = null;
-        }
-
-        settings.wallpaper = "";
+        if (wallpaperObjectUrl) URL.revokeObjectURL(wallpaperObjectUrl);
+        wallpaperObjectUrl = null;
         document.getElementById("arquivoWallpaper").value = "";
         applyWallpaper();
-        saveSettings("Imagem de fundo removida.");
+        showStatus("Imagem de fundo removida.");
       });
 
-      // NOTIFICAÇÕES E PREFERÊNCIAS DE PESQUISA
+      // Preferências
       document.querySelectorAll("[data-pref]").forEach(input => {
         input.addEventListener("change", () => {
           settings.prefs[input.dataset.pref] = input.checked;
@@ -1614,11 +1726,11 @@
         });
       });
 
-      // IDIOMA E REGIÃO
+      // Idioma e região
       document.getElementById("idiomaSelect").addEventListener("change", event => {
         settings.language = event.target.value;
         document.documentElement.lang = settings.language;
-        saveSettings("Idioma preferido atualizado. O texto da página ainda está em português.");
+        saveSettings("Idioma preferido atualizado. A tradução completa exige textos adicionais.");
       });
 
       document.getElementById("regiaoSelect").addEventListener("change", event => {
@@ -1626,12 +1738,14 @@
         saveSettings("Região atualizada.");
       });
 
-      // PRIVACIDADE
+      // Privacidade
       document.getElementById("salvarHistorico").addEventListener("change", event => {
         settings.saveHistory = event.target.checked;
 
         if (!settings.saveHistory) {
-          localStorage.removeItem(HISTORY_KEY);
+          try {
+            localStorage.removeItem(HISTORY_KEY);
+          } catch {}
         }
 
         saveSettings(
@@ -1649,7 +1763,7 @@
             localStorage.removeItem(STORAGE_KEY);
           } catch {}
 
-          showStatus("Preferências removidas do armazenamento. As alterações desta sessão continuam ativas.");
+          showStatus("Personalização local desativada. As alterações atuais ficam nesta sessão.");
         } else {
           saveSettings("Personalização local ativada.");
         }
@@ -1661,49 +1775,39 @@
         }
       });
 
-      // PESQUISA NAS CONFIGURAÇÕES
+      // Pesquisa dentro das configurações
       const searchInput = document.getElementById("buscaTopo");
-      const searchableCards = [...document.querySelectorAll(".searchable")];
+      const cards = [...document.querySelectorAll(".searchable")];
+      const columns = [...document.querySelectorAll(".settings-column")];
 
       function filterSettings() {
         const query = searchInput.value.trim().toLocaleLowerCase("pt-BR");
-        let visibleCount = 0;
+        let count = 0;
 
-        searchableCards.forEach(card => {
+        cards.forEach(card => {
           const text = (
             card.innerText + " " + (card.dataset.words || "")
           ).toLocaleLowerCase("pt-BR");
 
           const matches = !query || text.includes(query);
           card.classList.toggle("hidden", !matches);
-          if (matches) visibleCount++;
+          if (matches) count++;
         });
 
-        document.querySelectorAll(".settings-column").forEach(column => {
-          const hasVisibleCard = [...column.querySelectorAll(".searchable")]
+        columns.forEach(column => {
+          const hasVisible = [...column.querySelectorAll(".searchable")]
             .some(card => !card.classList.contains("hidden"));
-
-          column.classList.toggle("hidden", !hasVisibleCard);
+          column.classList.toggle("hidden", !hasVisible);
         });
 
-        document.getElementById("emptySearch")?.remove();
-
-        if (query && visibleCount === 0) {
-          const empty = document.createElement("p");
-          empty.id = "emptySearch";
-          empty.className = "note";
-          empty.textContent = "Nenhuma configuração encontrada para essa pesquisa.";
-          document.querySelector(".settings-grid").appendChild(empty);
-        }
+        document.getElementById("semResultados")
+          .classList.toggle("hidden", !query || count > 0);
       }
 
       searchInput.addEventListener("input", filterSettings);
+      searchInput.addEventListener("change", () => recordSearch(searchInput.value));
 
-      searchInput.addEventListener("change", () => {
-        recordSearch(searchInput.value);
-      });
-
-      // HISTÓRICO DE PESQUISA
+      // Histórico
       document.getElementById("verHistorico").addEventListener("click", () => {
         const result = document.getElementById("historicoResultado");
         const history = settings.saveHistory ? getHistory() : [];
@@ -1735,7 +1839,7 @@
         result.appendChild(list);
       });
 
-      // ARMAZENAMENTO
+      // Armazenamento
       document.getElementById("atualizarDados").addEventListener("click", () => {
         updateStorage();
         showStatus("Estimativa de armazenamento atualizada.");
@@ -1755,36 +1859,31 @@
         saveSettings("Configurações restauradas.");
       });
 
-      // DISPOSITIVO
+      // Dispositivo
       document.getElementById("recarregar").addEventListener("click", () => {
         window.location.reload();
       });
 
       window.addEventListener("resize", updateDeviceInfo);
 
-      // SAIR
-      document.getElementById("sair").addEventListener("click", () => {
-        const confirmed = confirm(
-          "Deseja voltar para a página inicial da Mystic?"
-        );
-
-        if (confirmed) {
-          window.location.href = "home.html";
-        }
-      });
-
-      // NAVEGAÇÃO ENTRE SEÇÕES
+      // Navegação
       document.querySelectorAll(".nav-link").forEach(link => {
         link.addEventListener("click", () => {
           document.querySelectorAll(".nav-link").forEach(item => {
             item.classList.remove("active");
           });
-
           link.classList.add("active");
         });
       });
 
-      // INICIALIZAÇÃO
+      // Sair
+      document.getElementById("sair").addEventListener("click", () => {
+        if (confirm("Deseja voltar para a página inicial da Mystic?")) {
+          window.location.href = "home.html";
+        }
+      });
+
+      // Inicialização
       renderSettings();
       document.documentElement.lang = settings.language;
     })();
