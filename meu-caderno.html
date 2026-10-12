@@ -2,2203 +2,1124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meu Caderno | Mystic Livraria</title>
-
-<style>
-:root {
-  --fundo: #090909;
-  --painel: #101010;
-  --cartao: #121212;
-  --borda: #292929;
-  --texto: #f4f1eb;
-  --suave: #aaaeb7;
-  --dourado: #d6a342;
-  --dourado-claro: #f0c76e;
-  --hover: #201a10;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background: var(--fundo);
-  color: var(--texto);
-  font-family: Arial, Helvetica, sans-serif;
-  min-height: 100vh;
-}
-
-button, input, textarea, select {
-  font: inherit;
-}
-
-button, a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  cursor: pointer;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button:focus-visible, a:focus-visible,
-input:focus-visible, textarea:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--dourado);
-  outline-offset: 3px;
-}
-
-/* CABEÇALHO */
-
-.topo {
-  min-height: 66px;
-  padding: 12px 24px;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  background: #0b0b0b;
-  border-bottom: 1px solid var(--borda);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.marca {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.voltar {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  color: var(--dourado);
-  border: 1px solid #49391f;
-  border-radius: 9px;
-  font-size: 25px;
-}
-
-.voltar:hover {
-  background: var(--hover);
-}
-
-.logo {
-  font-family: Georgia, serif;
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.logo-simbolo {
-  color: var(--dourado);
-  font-size: 31px;
-}
-
-.busca-topo {
-  width: min(460px, 42vw);
-  margin: 0 auto;
-  position: relative;
-}
-
-.busca-topo span {
-  position: absolute;
-  left: 14px;
-  top: 10px;
-  color: var(--suave);
-  font-size: 20px;
-}
-
-.busca-topo input {
-  width: 100%;
-  padding: 12px 14px 12px 42px;
-  background: #131313;
-  border: 1px solid #303030;
-  border-radius: 30px;
-  color: white;
-  outline: none;
-}
-
-.busca-topo input:focus {
-  border-color: var(--dourado);
-}
-
-.acoes-topo {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.icone-topo {
-  background: none;
-  border: none;
-  color: var(--dourado);
-  font-size: 24px;
-}
-
-.avatar {
-  width: 38px;
-  height: 38px;
-  border: 1px solid var(--dourado);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--dourado);
-}
-
-/* ESTRUTURA */
-
-.layout {
-  display: grid;
-  grid-template-columns: 245px minmax(0, 1fr);
-  min-height: calc(100vh - 66px);
-}
-
-.lateral {
-  padding: 27px 14px;
-  background: #0b0b0b;
-  border-right: 1px solid var(--borda);
-}
-
-.rotulo-menu {
-  color: var(--dourado);
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  padding: 8px 13px 15px;
-}
-
-.menu {
-  display: grid;
-  gap: 5px;
-}
-
-.menu-item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  padding: 12px;
-  background: transparent;
-  color: #e7e7e7;
-  border: 1px solid transparent;
-  border-radius: 9px;
-  text-align: left;
-}
-
-.menu-item:hover {
-  background: #171717;
-}
-
-.menu-item.ativo {
-  background: #211b10;
-  border-color: var(--dourado);
-  color: var(--dourado-claro);
-}
-
-.menu-icone {
-  width: 28px;
-  text-align: center;
-  font-size: 21px;
-  flex-shrink: 0;
-}
-
-.menu-texto strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.menu-texto small {
-  display: block;
-  color: var(--suave);
-  margin-top: 4px;
-  font-size: 11px;
-  line-height: 1.4;
-}
-
-.separador-menu {
-  height: 1px;
-  background: var(--borda);
-  margin: 20px 8px;
-}
-
-.principal {
-  min-width: 0;
-  width: 100%;
-  max-width: 1650px;
-  padding: 30px 30px 90px;
-  margin: 0 auto;
-}
-
-.tela {
-  display: none;
-}
-
-.tela.ativa {
-  display: block;
-}
-
-.cabecalho-pagina {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.titulo-com-icone {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.icone-grande {
-  color: var(--dourado);
-  font-size: 43px;
-}
-
-h1, h2, h3 {
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-h1 {
-  font-size: clamp(25px, 3vw, 36px);
-  font-weight: normal;
-}
-
-.subtitulo {
-  color: var(--suave);
-  font-size: 14px;
-  margin-top: 8px;
-  line-height: 1.5;
-}
-
-/* BOTÕES */
-
-.botao {
-  border: 1px solid var(--borda);
-  background: #191919;
-  color: var(--texto);
-  padding: 10px 15px;
-  border-radius: 8px;
-  transition: .2s;
-}
-
-.botao:hover {
-  border-color: var(--dourado);
-}
-
-.botao.dourado {
-  background: var(--dourado);
-  border-color: var(--dourado);
-  color: #17120a;
-  font-weight: bold;
-}
-
-.botao.dourado:hover {
-  background: var(--dourado-claro);
-}
-
-.botao-perigo {
-  color: #ff9999;
-}
-
-.botao-simples {
-  background: transparent;
-  color: var(--dourado);
-  border: none;
-  padding: 8px 0;
-}
-
-/* MENU DE TRÊS PONTINHOS */
-
-.menu-opcoes {
-  position: relative;
-  flex-shrink: 0;
-}
-
-.botao-pontos {
-  width: 43px;
-  height: 36px;
-  border: 1px solid #40382a;
-  border-radius: 8px;
-  background: #111;
-  color: var(--texto);
-  font-size: 23px;
-  letter-spacing: 2px;
-}
-
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 43px;
-  right: 0;
-  width: 225px;
-  background: #141414;
-  border: 1px solid #393939;
-  border-radius: 10px;
-  padding: 6px;
-  box-shadow: 0 12px 35px #0009;
-  z-index: 30;
-}
-
-.dropdown.aberto {
-  display: block;
-}
-
-.dropdown button {
-  width: 100%;
-  padding: 12px 10px;
-  text-align: left;
-  color: #e8e8e8;
-  background: transparent;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-}
-
-.dropdown button:hover {
-  background: #252015;
-  color: var(--dourado-claro);
-}
-
-/* BANNER */
-
-.banner {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  min-height: 145px;
-  padding: 25px;
-  margin-bottom: 22px;
-  background:
-    radial-gradient(ellipse at 85% 50%, #37271135, transparent 50%),
-    linear-gradient(110deg, #17140f, #101010 65%);
-  border: 1px solid #393328;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.banner-simbolo {
-  width: 88px;
-  height: 88px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--dourado);
-  border-radius: 50%;
-  color: var(--dourado);
-  font-size: 39px;
-}
-
-.banner h2 {
-  color: var(--dourado-claro);
-  font-size: 22px;
-  font-weight: normal;
-  line-height: 1.3;
-  margin-bottom: 10px;
-}
-
-.banner p {
-  color: #b9b9b9;
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 560px;
-}
-
-/* ESTATÍSTICAS */
-
-.estatisticas {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin-bottom: 33px;
-}
-
-.estatistica {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  min-width: 0;
-  padding: 19px;
-  background: var(--cartao);
-  border: 1px solid #292929;
-  border-radius: 9px;
-}
-
-.estatistica-icone {
-  color: var(--dourado);
-  font-size: 29px;
-}
-
-.estatistica strong {
-  display: block;
-  color: var(--dourado-claro);
-  font-family: Georgia, serif;
-  font-size: 24px;
-  font-weight: normal;
-}
-
-.estatistica small {
-  display: block;
-  color: var(--suave);
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-/* SEÇÕES E CARDS */
-
-.secao {
-  margin-bottom: 34px;
-}
-
-.titulo-secao {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.titulo-secao h2 {
-  font-size: 21px;
-  font-weight: normal;
-}
-
-.titulo-secao p {
-  color: var(--suave);
-  font-size: 12px;
-  margin-top: 6px;
-}
-
-.ver-todos {
-  color: var(--dourado-claro);
-  background: transparent;
-  border: none;
-  white-space: nowrap;
-  font-size: 13px;
-}
-
-.grade-textos {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.texto-card {
-  min-width: 0;
-  padding: 19px;
-  background: linear-gradient(145deg, #141414, #101010);
-  border: 1px solid #303030;
-  border-radius: 9px;
-  transition: border-color .2s, transform .2s;
-}
-
-.texto-card:hover {
-  border-color: #74602f;
-  transform: translateY(-2px);
-}
-
-.card-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.etiqueta {
-  color: var(--dourado-claro);
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.card-menu {
-  position: relative;
-}
-
-.card-menu > button {
-  color: var(--dourado);
-  background: transparent;
-  border: none;
-  font-size: 22px;
-  padding: 0 3px;
-}
-
-.card-dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 28px;
-  width: 145px;
-  padding: 5px;
-  border: 1px solid var(--borda);
-  border-radius: 8px;
-  background: #191919;
-  z-index: 5;
-}
-
-.card-dropdown.aberto {
-  display: block;
-}
-
-.card-dropdown button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  color: var(--texto);
-  border: none;
-  text-align: left;
-  font-size: 12px;
-  border-radius: 5px;
-}
-
-.card-dropdown button:hover {
-  background: #292216;
-}
-
-.texto-card h3 {
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: normal;
-  overflow-wrap: anywhere;
-}
-
-.texto-card .descricao {
-  margin-top: 10px;
-  margin-bottom: 16px;
-  color: #afb3bc;
-  font-size: 14px;
-  line-height: 1.55;
-  overflow-wrap: anywhere;
-}
-
-.card-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 13px;
-  padding-top: 13px;
-  border-top: 1px solid #292929;
-  color: var(--suave);
-  font-size: 11px;
-}
-
-.card-meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.card-meta .numero {
-  color: var(--dourado-claro);
-}
-
-.grade-categorias {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.categoria-card {
-  min-width: 0;
-  padding: 18px 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-align: left;
-  color: var(--texto);
-  background: #121212;
-  border: 1px solid #292929;
-  border-radius: 8px;
-}
-
-.categoria-card:hover,
-.categoria-card.selecionada {
-  border-color: var(--dourado);
-  background: #1b1710;
-}
-
-.categoria-icone {
-  color: var(--dourado);
-  font-size: 24px;
-}
-
-.categoria-card strong {
-  display: block;
-  font-size: 12px;
-  font-weight: normal;
-  overflow-wrap: anywhere;
-}
-
-.categoria-card small {
-  display: block;
-  color: var(--suave);
-  font-size: 10px;
-  margin-top: 7px;
-}
-
-.dica {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  padding: 18px 22px;
-  background: #111;
-  border: 1px solid #292929;
-  border-radius: 8px;
-}
-
-.dica-icone {
-  color: var(--dourado);
-  font-size: 29px;
-}
-
-.dica strong {
-  color: var(--dourado-claro);
-  font-size: 14px;
-  font-weight: normal;
-}
-
-.dica p {
-  color: var(--suave);
-  font-size: 12px;
-  line-height: 1.5;
-  margin-top: 5px;
-}
-
-/* LISTAS E PESQUISA */
-
-.filtros {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.campo {
-  min-width: 0;
-  padding: 12px;
-  background: #141414;
-  border: 1px solid #303030;
-  border-radius: 8px;
-  color: var(--texto);
-  outline: none;
-}
-
-.filtros .campo:first-child {
-  flex: 1;
-}
-
-.lista {
-  display: grid;
-  gap: 12px;
-}
-
-.item-lista {
-  padding: 18px;
-  background: #121212;
-  border: 1px solid var(--borda);
-  border-radius: 9px;
-}
-
-.item-lista h3 {
-  font-size: 18px;
-  font-weight: normal;
-  margin-bottom: 8px;
-  overflow-wrap: anywhere;
-}
-
-.item-lista p {
-  color: var(--suave);
-  font-size: 13px;
-  line-height: 1.6;
-  margin-bottom: 12px;
-  overflow-wrap: anywhere;
-}
-
-.item-lista .acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.vazio {
-  padding: 35px 20px;
-  text-align: center;
-  color: var(--suave);
-  border: 1px dashed #383838;
-  border-radius: 10px;
-  line-height: 1.7;
-}
-
-.vazio strong {
-  display: block;
-  color: var(--dourado-claro);
-  margin-bottom: 7px;
-  font-size: 16px;
-}
-
-/* EDITOR */
-
-.editor {
-  display: grid;
-  gap: 18px;
-}
-
-.editor label {
-  display: grid;
-  gap: 8px;
-  color: var(--dourado-claro);
-  font-size: 13px;
-}
-
-.editor input,
-.editor textarea,
-.editor select {
-  width: 100%;
-  background: #141414;
-  color: var(--texto);
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 13px;
-  outline: none;
-}
-
-.editor textarea {
-  min-height: 340px;
-  resize: vertical;
-  line-height: 1.8;
-}
-
-.editor input:focus,
-.editor textarea:focus,
-.editor select:focus {
-  border-color: var(--dourado);
-}
-
-.editor-botoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.contador {
-  color: var(--suave);
-  font-size: 11px;
-  text-align: right;
-  margin-top: -10px;
-}
-
-/* DICIONÁRIO */
-
-.resultado-dicionario {
-  margin-top: 18px;
-  padding: 18px;
-  background: #141414;
-  border: 1px solid var(--borda);
-  border-radius: 9px;
-  line-height: 1.7;
-  overflow-wrap: anywhere;
-}
-
-.resultado-dicionario h3 {
-  color: var(--dourado-claro);
-  font-size: 21px;
-  margin-bottom: 10px;
-}
-
-.resultado-dicionario p {
-  margin-top: 8px;
-}
-
-/* BOTÃO FLUTUANTE */
-
-.botao-criar {
-  position: fixed;
-  right: 28px;
-  bottom: 25px;
-  width: 62px;
-  height: 62px;
-  display: grid;
-  place-items: center;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #f0c76e, #c99737);
-  color: #17120a;
-  font-size: 37px;
-  box-shadow: 0 6px 24px #0008;
-  z-index: 15;
-  transition: transform .2s;
-}
-
-.botao-criar:hover {
-  transform: scale(1.06);
-}
-
-.rodape {
-  padding: 22px;
-  color: #777;
-  text-align: center;
-  border-top: 1px solid var(--borda);
-  font-size: 12px;
-}
-
-.notificacao {
-  position: fixed;
-  left: 50%;
-  bottom: 25px;
-  transform: translateX(-50%);
-  z-index: 100;
-  padding: 13px 18px;
-  max-width: calc(100vw - 30px);
-  background: #202018;
-  border: 1px solid var(--dourado);
-  border-radius: 9px;
-  color: var(--texto);
-  box-shadow: 0 8px 30px #0009;
-  font-size: 13px;
-  text-align: center;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-/* RESPONSIVIDADE */
-
-@media (max-width: 1250px) {
-  .layout {
-    grid-template-columns: 215px minmax(0, 1fr);
-  }
-
-  .principal {
-    padding: 24px 20px 90px;
-  }
-
-  .grade-categorias {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .estatistica {
-    padding: 14px;
-  }
-}
-
-@media (max-width: 950px) {
-  .grade-textos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .estatisticas {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .busca-topo {
-    width: min(300px, 35vw);
-  }
-
-  .grade-categorias {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 650px) {
-  .topo {
-    padding: 11px 13px;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .logo {
-    font-size: 23px;
-  }
-
-  .logo-simbolo {
-    font-size: 26px;
-  }
-
-  .voltar {
-    width: 35px;
-    height: 35px;
-  }
-
-  .busca-topo {
-    order: 4;
-    width: 100%;
-    flex-basis: 100%;
-  }
-
-  .acoes-topo {
-    margin-left: auto;
-    gap: 12px;
-  }
-
-  .layout {
-    display: block;
-  }
-
-  .lateral {
-    display: none;
-    position: fixed;
-    z-index: 50;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: min(285px, 85vw);
-    overflow-y: auto;
-    box-shadow: 12px 0 40px #000b;
-  }
-
-  .lateral.aberta {
-    display: block;
-  }
-
-  .abrir-menu {
-    display: inline-grid !important;
-  }
-
-  .principal {
-    padding: 22px 14px 95px;
-  }
-
-  .cabecalho-pagina {
-    align-items: flex-start;
-  }
-
-  .titulo-com-icone {
-    gap: 12px;
-  }
-
-  .icone-grande {
-    font-size: 32px;
-  }
-
-  h1 {
-    font-size: 26px;
-  }
-
-  .subtitulo {
-    font-size: 12px;
-  }
-
-  .banner {
-    padding: 18px;
-    gap: 14px;
-    min-height: 130px;
-  }
-
-  .banner-simbolo {
-    width: 58px;
-    height: 58px;
-    font-size: 27px;
-  }
-
-  .banner h2 {
-    font-size: 19px;
-  }
-
-  .banner p {
-    font-size: 12px;
-  }
-
-  .estatisticas {
-    gap: 9px;
-  }
-
-  .estatistica {
-    gap: 10px;
-    padding: 13px 10px;
-  }
-
-  .estatistica-icone {
-    font-size: 22px;
-  }
-
-  .estatistica strong {
-    font-size: 21px;
-  }
-
-  .estatistica small {
-    font-size: 10px;
-  }
-
-  .grade-textos {
-    grid-template-columns: 1fr;
-  }
-
-  .grade-categorias {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 9px;
-  }
-
-  .categoria-card {
-    padding: 13px 10px;
-    gap: 8px;
-  }
-
-  .categoria-icone {
-    font-size: 20px;
-  }
-
-  .dica {
-    padding: 14px;
-    align-items: flex-start;
-  }
-
-  .botao-criar {
-    right: 17px;
-    bottom: 18px;
-    width: 55px;
-    height: 55px;
-  }
-
-  .editor textarea {
-    min-height: 260px;
-  }
-}
-
-@media (max-width: 350px) {
-  .grade-categorias {
-    grid-template-columns: 1fr;
-  }
-
-  .estatistica {
-    display: block;
-  }
-
-  .estatistica strong {
-    margin-top: 5px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#100e0d">
+  <title>Meu Caderno | Mystic Livraria">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100e0d;
+      --panel: #191613;
+      --panel2: #211d19;
+      --field: #151210;
+      --border: #393027;
+      --text: #f4eee5;
+      --muted: #b9afa2;
+      --gold: #c9a45c;
+      --gold-light: #e2c783;
+      --gold-bg: #302719;
+      --danger: #e78d83;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.6 Arial, Helvetica, sans-serif;
+    }
+
+    button, input, textarea, select {
+      font: inherit;
+    }
+
+    button, a, input, textarea, select {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button { cursor: pointer; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button:focus-visible, a:focus-visible,
+    input:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 72px;
+      padding: 12px clamp(12px, 4vw, 56px);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .back {
+      display: grid;
+      place-items: center;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--panel);
+      color: var(--gold-light);
+      font-size: 24px;
+    }
+
+    .back:hover { background: var(--gold-bg); }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .brand img {
+      display: block;
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+    }
+
+    .brand-name {
+      color: var(--gold-light);
+      font: bold clamp(23px, 2.5vw, 30px) Georgia, "Times New Roman", serif;
+      letter-spacing: 1px;
+    }
+
+    .top-search {
+      position: relative;
+      width: min(360px, 40%);
+      margin-left: auto;
+    }
+
+    .top-search input {
+      width: 100%;
+      min-height: 42px;
+      padding: 10px 40px 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--field);
+      color: var(--text);
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      color: var(--gold);
+      pointer-events: none;
+      font-size: 19px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 238px minmax(0, 1fr);
+      width: 100%;
+      max-width: 1440px;
+      min-height: calc(100vh - 72px);
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      padding: 25px 13px;
+      background: var(--panel);
+      border-right: 1px solid var(--border);
+    }
+
+    .sidebar-title {
+      padding: 0 12px 13px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .nav-list { display: grid; gap: 5px; }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      min-height: 42px;
+      padding: 10px 12px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background: var(--gold-bg);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .nav-icon {
+      display: inline-grid;
+      width: 20px;
+      flex: 0 0 20px;
+      place-items: center;
+      color: var(--gold);
+      font-size: 17px;
+    }
+
+    main {
+      width: 100%;
+      min-width: 0;
+      padding: 30px clamp(14px, 3vw, 42px) 45px;
+    }
+
+    .page-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .page-icon {
+      flex: 0 0 auto;
+      color: var(--gold);
+      font-size: 30px;
+    }
+
+    h1, h2, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 3px;
+      font: 29px/1.25 Georgia, "Times New Roman", serif;
+    }
+
+    h2 {
+      margin: 0 0 4px;
+      font: 19px/1.3 Georgia, "Times New Roman", serif;
+    }
+
+    .muted, .description { color: var(--muted); }
+
+    .description {
+      margin-bottom: 0;
+      font-size: 13px;
+    }
+
+    .status {
+      min-height: 18px;
+      margin: 0 0 12px;
+      color: var(--gold-light);
+      font-size: 12px;
+    }
+
+    .card {
+      min-width: 0;
+      padding: clamp(14px, 1.7vw, 20px);
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin-bottom: 15px;
+    }
+
+    .card-icon {
+      width: 27px;
+      flex: 0 0 27px;
+      color: var(--gold);
+      text-align: center;
+      font-size: 22px;
+      line-height: 1.3;
+    }
+
+    .card-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .toolbar select {
+      flex: 0 1 180px;
+      min-height: 40px;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--field);
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 38px;
+      max-width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--panel2);
+      color: var(--text);
+      font-size: 12px;
+      text-align: center;
+      transition: border-color .2s, color .2s;
+    }
+
+    .btn:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+    }
+
+    .btn-primary {
+      border-color: var(--gold);
+      background: var(--gold);
+      color: #1a140a;
+      font-weight: bold;
+    }
+
+    .btn-primary:hover { color: #1a140a; filter: brightness(1.08); }
+
+    .btn-danger { color: var(--danger); }
+
+    .editor {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .field { min-width: 0; }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .field input[type="text"],
+    .field textarea,
+    .field select,
+    .field input[type="file"] {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: var(--field);
+      color: var(--text);
+    }
+
+    .field textarea {
+      min-height: 190px;
+      resize: vertical;
+      line-height: 1.8;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: #938779;
+    }
+
+    .editor-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 9px;
+    }
+
+    .image-preview {
+      display: none;
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      object-position: left center;
+      margin-top: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--field);
+    }
+
+    .image-preview.visible { display: block; }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: border-color .2s;
+    }
+
+    .note-card:hover { border-color: var(--gold); }
+
+    .note-image {
+      display: block;
+      width: 100%;
+      max-height: 220px;
+      object-fit: cover;
+      background: var(--panel2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .note-content {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .note-category {
+      display: inline-block;
+      align-self: flex-start;
+      margin-bottom: 9px;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--gold-bg);
+      color: var(--gold-light);
+      font-size: 10px;
+    }
+
+    .note-title {
+      margin-bottom: 8px;
+      overflow-wrap: anywhere;
+      font: 20px/1.35 Georgia, "Times New Roman", serif;
+    }
+
+    .note-preview {
+      flex: 1;
+      margin-bottom: 13px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+    }
+
+    .note-date {
+      margin-bottom: 13px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .note-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+    }
+
+    .note-actions .btn { flex: 1 1 auto; }
+
+    .empty {
+      padding: 35px 18px;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .empty-icon {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 35px;
+    }
+
+    .empty strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text);
+      font: 20px Georgia, "Times New Roman", serif;
+    }
+
+    .note-info {
+      margin-top: 18px;
+      padding: 11px;
+      border-radius: 7px;
+      background: var(--panel2);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .hidden { display: none !important; }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      padding: 22px 14px;
+      border-top: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--gold-light);
+      font: 19px Georgia, "Times New Roman", serif;
+      text-align: center;
+    }
+
+    @media (max-width: 1050px) {
+      .layout { grid-template-columns: 1fr; }
+
+      .sidebar {
+        position: sticky;
+        top: 72px;
+        z-index: 10;
+        padding: 9px 12px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .sidebar-title { padding: 0 5px 7px; }
+
+      .nav-list {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+        padding-bottom: 3px;
+      }
+
+      .nav-link {
+        flex: 0 0 auto;
+        min-height: 38px;
+        padding: 8px 11px;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        display: grid;
+        grid-template-columns: 38px minmax(0, 1fr);
+        gap: 10px;
+        padding: 10px 12px;
+      }
+
+      .back {
+        width: 38px;
+        height: 38px;
+        flex-basis: 38px;
+        font-size: 22px;
+      }
+
+      .brand { gap: 8px; }
+
+      .brand img {
+        width: 36px;
+        height: 36px;
+      }
+
+      .brand-name { font-size: 25px; }
+
+      .top-search {
+        grid-column: 1 / -1;
+        width: 100%;
+        margin: 0;
+      }
+
+      .sidebar {
+        top: 0;
+        padding: 8px 10px;
+      }
+
+      main { padding: 20px 12px 30px; }
+
+      .page-title {
+        gap: 10px;
+        margin-bottom: 19px;
+      }
+
+      .page-icon { font-size: 26px; }
+      h1 { font-size: 25px; }
+
+      .note-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 13px;
+      }
+
+      .card {
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      .toolbar select { flex: 1 1 140px; }
+
+      .editor-actions .btn { flex: 1 1 auto; }
+
+      .note-content { padding: 14px; }
+      .note-title { font-size: 19px; }
+    }
+
+    @media (max-width: 380px) {
+      .brand-name { font-size: 23px; }
+      main { padding-right: 9px; padding-left: 9px; }
+      .card { padding: 12px; }
+      .note-content { padding: 12px; }
+      .note-actions .btn { font-size: 11px; padding: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header class="topbar">
+    <a class="back" href="home.html" aria-label="Voltar para a página inicial" title="Voltar">&#8592;</a>
 
-<header class="topo">
-  <div class="marca">
-    <a class="voltar" href="home.html" aria-label="Voltar para a página inicial">←</a>
-    <a class="logo" href="home.html">
-      <span class="logo-simbolo">◧</span>
-      <span>Mystic</span>
+    <a class="brand" href="home.html" aria-label="Mystic - início">
+      <img src="logo-mystic.jpg" alt="Logo Mystic">
+      <span class="brand-name">Mystic</span>
     </a>
-  </div>
 
-  <div class="busca-topo">
-    <span>⌕</span>
-    <input id="buscaGlobal" type="search" placeholder="Buscar no Meu Caderno..." aria-label="Buscar no caderno">
-  </div>
+    <div class="top-search">
+      <input id="buscaTopo" type="search" placeholder="Pesquisar no meu caderno..." aria-label="Pesquisar anotações">
+      <span class="search-icon" aria-hidden="true">&#8981;</span>
+    </div>
+  </header>
 
-  <div class="acoes-topo">
-    <a class="icone-topo" href="notificacoes.html" aria-label="Notificações">♧</a>
-    <a class="avatar" href="perfil.html" aria-label="Meu perfil">♙</a>
-  </div>
-</header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-title">Meu espaço</div>
+      <nav class="nav-list" aria-label="Navegação do caderno">
+        <a class="nav-link active" href="#inicio"><span class="nav-icon">⌂</span>Visão geral</a>
+        <a class="nav-link" href="#editor"><span class="nav-icon">✎</span>Nova anotação</a>
+        <a class="nav-link" href="#anotacoes"><span class="nav-icon">▤</span>Minhas anotações</a>
+        <a class="nav-link" href="#favoritas"><span class="nav-icon">♡</span>Favoritas</a>
+      </nav>
+    </aside>
 
-<div class="layout">
-
-  <aside class="lateral" id="lateral">
-    <div class="rotulo-menu">Meu Caderno</div>
-
-    <nav class="menu" aria-label="Navegação do caderno">
-      <button class="menu-item ativo" data-tela="inicio">
-        <span class="menu-icone">⌂</span>
-        <span class="menu-texto">
-          <strong>Início</strong>
-          <small>Visão geral dos seus textos</small>
-        </span>
-      </button>
-
-      <button class="menu-item" data-tela="recentes">
-        <span class="menu-icone">◷</span>
-        <span class="menu-texto">
-          <strong>Recentes</strong>
-          <small>Seus últimos textos</small>
-        </span>
-      </button>
-
-      <button class="menu-item" data-tela="rascunhos">
-        <span class="menu-icone">▤</span>
-        <span class="menu-texto">
-          <strong>Rascunhos</strong>
-          <small>Continue escrevendo</small>
-        </span>
-      </button>
-
-      <button class="menu-item" data-tela="favoritos">
-        <span class="menu-icone">♡</span>
-        <span class="menu-texto">
-          <strong>Favoritos</strong>
-          <small>Seus textos favoritos</small>
-        </span>
-      </button>
-
-      <button class="menu-item" data-tela="dicionario">
-        <span class="menu-icone">♧</span>
-        <span class="menu-texto">
-          <strong>Dicionário</strong>
-          <small>Pesquise palavras</small>
-        </span>
-      </button>
-    </nav>
-
-    <div class="separador-menu"></div>
-
-    <div class="rotulo-menu">Categorias</div>
-
-    <nav class="menu" id="menuCategorias" aria-label="Categorias de textos">
-      <button class="menu-item" data-categoria-menu="Redações">
-        <span class="menu-icone">▤</span>
-        <span class="menu-texto"><strong>Redações</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Contos">
-        <span class="menu-icone">♡</span>
-        <span class="menu-texto"><strong>Contos</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Poemas">
-        <span class="menu-icone">✒</span>
-        <span class="menu-texto"><strong>Poemas</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Crônicas">
-        <span class="menu-icone">▧</span>
-        <span class="menu-texto"><strong>Crônicas</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Fanfic">
-        <span class="menu-icone">✧</span>
-        <span class="menu-texto"><strong>Fanfic</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Artigos">
-        <span class="menu-icone">▤</span>
-        <span class="menu-texto"><strong>Artigos</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Diários">
-        <span class="menu-icone">♡</span>
-        <span class="menu-texto"><strong>Diários</strong></span>
-      </button>
-
-      <button class="menu-item" data-categoria-menu="Outros">
-        <span class="menu-icone">▦</span>
-        <span class="menu-texto"><strong>Outros</strong></span>
-      </button>
-    </nav>
-  </aside>
-
-  <main class="principal">
-
-    <!-- INÍCIO -->
-    <section class="tela ativa" id="tela-inicio">
-
-      <div class="cabecalho-pagina">
-        <div class="titulo-com-icone">
-          <span class="icone-grande">✒</span>
+    <main>
+      <section id="inicio">
+        <div class="page-title">
+          <span class="page-icon" aria-hidden="true">▤</span>
           <div>
             <h1>Meu Caderno</h1>
-            <p class="subtitulo">Seus textos, ideias e histórias em um só lugar.</p>
+            <p class="muted description">Seu espaço pessoal para ideias, leituras e inspirações.</p>
           </div>
         </div>
 
-        <div class="menu-opcoes">
-          <button class="botao-pontos" id="botaoPontos" aria-label="Mais opções" aria-expanded="false">···</button>
-          <div class="dropdown" id="dropdownPrincipal">
-            <button data-acao="configuracoes">⚙ Configurações do caderno</button>
-            <button data-acao="favoritos">♡ Ver favoritos</button>
-            <button data-acao="exportar">⇩ Exportar meus textos</button>
-            <button data-acao="limpar" class="botao-perigo">♲ Limpar caderno</button>
-          </div>
-        </div>
-      </div>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
 
-      <div class="banner">
-        <div class="banner-simbolo">✒</div>
-        <div>
-          <h2>Grandes ideias começam<br>com uma boa página.</h2>
-          <p>Escreva, revise e organize. Seu caderno é o espaço perfeito para dar vida às suas ideias.</p>
-        </div>
-      </div>
-
-      <div class="estatisticas">
-        <div class="estatistica">
-          <span class="estatistica-icone">▤</span>
-          <div>
-            <strong id="totalTextos">0</strong>
-            <small>Total de textos</small>
-          </div>
-        </div>
-
-        <div class="estatistica">
-          <span class="estatistica-icone">▧</span>
-          <div>
-            <strong id="totalRascunhos">0</strong>
-            <small>Rascunhos</small>
-          </div>
-        </div>
-
-        <div class="estatistica">
-          <span class="estatistica-icone">✓</span>
-          <div>
-            <strong id="totalConcluidos">0</strong>
-            <small>Concluídos</small>
-          </div>
-        </div>
-
-        <div class="estatistica">
-          <span class="estatistica-icone">☆</span>
-          <div>
-            <strong id="totalFavoritos">0</strong>
-            <small>Favoritos</small>
-          </div>
-        </div>
-      </div>
-
-      <section class="secao">
-        <div class="titulo-secao">
-          <div>
-            <h2>✦ Textos em destaque</h2>
-            <p>Seus textos mais recentes.</p>
-          </div>
-          <button class="ver-todos" data-abrir="todos">Ver todos →</button>
-        </div>
-
-        <div class="grade-textos" id="gradeDestaques"></div>
-      </section>
-
-      <section class="secao">
-        <div class="titulo-secao">
-          <div>
-            <h2>▱ Meus textos</h2>
-            <p>Organize suas ideias por categoria.</p>
-          </div>
-          <button class="ver-todos" data-abrir="todos">Ver todos →</button>
-        </div>
-
-        <div class="grade-categorias" id="gradeCategorias">
-          <button class="categoria-card" data-abrir-categoria="Redações">
-            <span class="categoria-icone">▤</span>
-            <span><strong>Redações</strong><small id="qtdRedações">0 textos</small></span>
-          </button>
-
-          <button class="categoria-card" data-abrir-categoria="Contos">
-            <span class="categoria-icone">♡</span>
-            <span><strong>Contos</strong><small id="qtdContos">0 textos</small></span>
-          </button>
-
-          <button class="categoria-card" data-abrir-categoria="Poemas">
-            <span class="categoria-icone">✒</span>
-            <span><strong>Poemas</strong><small id="qtdPoemas">0 textos</small></span>
-          </button>
-
-          <button class="categoria-card" data-abrir-categoria="Crônicas">
-            <span class="categoria-icone">▧</span>
-            <span><strong>Crônicas</strong><small id="qtdCrônicas">0 textos</small></span>
-          </button>
-
-          <button class="categoria-card" data-abrir-categoria="Fanfic">
-            <span class="categoria-icone">☆</span>
-            <span><strong>Fanfic</strong><small id="qtdFanfic">0 textos</small></span>
-          </button>
-
-          <button class="categoria-card" data-abrir-categoria="Artigos">
-            <span class="categoria-icone">▤</span>
-            <span><strong>Artigos</strong><small id="qtdArtigos">0 textos</small></span>
-          </button>
-
-          <button class="categoria-card" data-abrir-categoria="Outros">
-            <span class="categoria-icone">▦</span>
-            <span><strong>Outros</strong><small id="qtdOutros">0 textos</small></span>
-          </button>
+        <div class="toolbar">
+          <button class="btn btn-primary" id="novaAnotacao" type="button">＋ Nova anotação</button>
+          <select id="filtroCategoria" aria-label="Filtrar por categoria">
+            <option value="">Todas as categorias</option>
+            <option value="Leitura">Leitura</option>
+            <option value="Ideias">Ideias</option>
+            <option value="Citações">Citações</option>
+            <option value="Pessoal">Pessoal</option>
+            <option value="Outros">Outros</option>
+          </select>
+          <select id="filtroOrdem" aria-label="Ordenar anotações">
+            <option value="recentes">Mais recentes</option>
+            <option value="antigas">Mais antigas</option>
+            <option value="titulo">Ordem alfabética</option>
+          </select>
         </div>
       </section>
 
-      <div class="dica">
-        <span class="dica-icone">☼</span>
-        <div>
-          <strong>Dica do dia</strong>
-          <p>Uma boa história começa com uma simples ideia. Escreva, mesmo que seja só um rascunho.</p>
+      <section class="card editor hidden" id="editor" aria-labelledby="editorTitulo">
+        <div class="card-header">
+          <span class="card-icon">✎</span>
+          <div>
+            <h2 id="editorTitulo">Nova anotação</h2>
+            <p class="card-description">Registre seus pensamentos e guarde suas inspirações.</p>
+          </div>
         </div>
-      </div>
 
-    </section>
+        <form id="formAnotacao">
+          <input type="hidden" id="notaId">
 
-    <!-- TODOS OS TEXTOS -->
-    <section class="tela" id="tela-todos">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1>Todos os textos</h1>
-          <p class="subtitulo">Encontre e organize suas criações.</p>
-        </div>
-      </div>
+          <div class="field">
+            <label for="tituloNota">Título</label>
+            <input id="tituloNota" type="text" maxlength="120" placeholder="Dê um título à sua anotação" required>
+          </div>
 
-      <div class="secao">
-        <div class="filtros">
-          <input class="campo" id="filtroTexto" type="search" placeholder="Buscar por título ou conteúdo...">
-          <select class="campo" id="filtroEstado">
-            <option value="todos">Todos os estados</option>
-            <option value="rascunho">Rascunhos</option>
-            <option value="concluido">Concluídos</option>
-          </select>
-          <select class="campo" id="filtroTipo">
-            <option value="todas">Todas as categorias</option>
-            <option>Redações</option>
-            <option>Contos</option>
-            <option>Poemas</option>
-            <option>Crônicas</option>
-            <option>Fanfic</option>
-            <option>Artigos</option>
-            <option>Diários</option>
-            <option>Outros</option>
-          </select>
-        </div>
-        <div class="lista" id="listaTodos"></div>
-      </div>
-    </section>
-
-    <!-- RECENTES -->
-    <section class="tela" id="tela-recentes">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1>Recentes</h1>
-          <p class="subtitulo">Os textos que você editou por último.</p>
-        </div>
-      </div>
-      <div class="lista" id="listaRecentes"></div>
-    </section>
-
-    <!-- RASCUNHOS -->
-    <section class="tela" id="tela-rascunhos">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1>Rascunhos</h1>
-          <p class="subtitulo">Suas ideias que ainda estão em construção.</p>
-        </div>
-      </div>
-      <div class="lista" id="listaRascunhos"></div>
-    </section>
-
-    <!-- FAVORITOS -->
-    <section class="tela" id="tela-favoritos">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1>Favoritos</h1>
-          <p class="subtitulo">Guarde aqui os textos que você mais gosta.</p>
-        </div>
-      </div>
-      <div class="lista" id="listaFavoritos"></div>
-    </section>
-
-    <!-- CATEGORIA -->
-    <section class="tela" id="tela-categoria">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1 id="tituloCategoria">Categoria</h1>
-          <p class="subtitulo">Seus textos organizados por tipo.</p>
-        </div>
-      </div>
-      <div class="lista" id="listaCategoria"></div>
-    </section>
-
-    <!-- EDITOR -->
-    <section class="tela" id="tela-editor">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1 id="tituloEditor">Novo texto</h1>
-          <p class="subtitulo">Suas ideias merecem um espaço para crescer.</p>
-        </div>
-        <button class="botao" data-abrir="inicio">Voltar</button>
-      </div>
-
-      <div class="secao">
-        <form class="editor" id="formEditor">
-          <label>
-            Título do texto
-            <input id="campoTitulo" maxlength="150" placeholder="Digite o título..." required>
-          </label>
-
-          <label>
-            Categoria
-            <select id="campoCategoria" required>
-              <option value="">Selecione uma categoria</option>
-              <option>Redações</option>
-              <option>Contos</option>
-              <option>Poemas</option>
-              <option>Crônicas</option>
-              <option>Fanfic</option>
-              <option>Artigos</option>
-              <option>Diários</option>
-              <option>Outros</option>
+          <div class="field">
+            <label for="categoriaNota">Categoria</label>
+            <select id="categoriaNota">
+              <option value="Leitura">Leitura</option>
+              <option value="Ideias">Ideias</option>
+              <option value="Citações">Citações</option>
+              <option value="Pessoal">Pessoal</option>
+              <option value="Outros">Outros</option>
             </select>
-          </label>
+          </div>
 
-          <label>
-            Seu texto
-            <textarea id="campoCorpo" maxlength="100000" placeholder="Comece a escrever sua história..." required></textarea>
-          </label>
+          <div class="field">
+            <label for="textoNota">Sua anotação</label>
+            <textarea id="textoNota" placeholder="Escreva aqui seus pensamentos, trechos favoritos ou ideias..." required></textarea>
+          </div>
 
-          <div class="contador" id="contador">0 palavras · 0 caracteres</div>
+          <div class="field">
+            <label for="fotoNota">Adicionar foto (opcional)</label>
+            <input id="fotoNota" type="file" accept="image/*">
+            <img id="previewFoto" class="image-preview" alt="Prévia da foto escolhida">
+            <p class="card-description" style="margin-top:7px">Escolha uma imagem de até 2 MB para ilustrar a anotação.</p>
+          </div>
 
-          <label>
-            Estado do texto
-            <select id="campoEstado">
-              <option value="rascunho">Salvar como rascunho</option>
-              <option value="concluido">Marcar como concluído</option>
-            </select>
-          </label>
+          <div class="setting-row" style="display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--border);margin-top:12px">
+            <input id="favoritaNota" type="checkbox" style="width:19px;height:19px;accent-color:var(--gold)">
+            <label for="favoritaNota">Adicionar às favoritas</label>
+          </div>
 
-          <div class="editor-botoes">
-            <button class="botao dourado" type="submit">Salvar texto</button>
-            <button class="botao" type="button" id="botaoSalvarRascunho">Salvar rascunho</button>
-            <button class="botao" type="button" id="cancelarEdicao">Cancelar</button>
+          <div class="editor-actions">
+            <button class="btn" id="cancelarEdicao" type="button">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Salvar anotação</button>
           </div>
         </form>
-      </div>
-    </section>
+      </section>
 
-    <!-- DICIONÁRIO -->
-    <section class="tela" id="tela-dicionario">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1>Dicionário</h1>
-          <p class="subtitulo">Descubra o significado de palavras e expressões.</p>
-        </div>
-      </div>
-
-      <div class="secao">
-        <form class="filtros" id="formDicionario">
-          <input class="campo" id="campoPalavra" placeholder="Digite uma palavra..." required>
-          <button class="botao dourado" type="submit">Pesquisar</button>
-        </form>
-
-        <p class="subtitulo">A pesquisa usa um serviço externo e precisa de internet.</p>
-        <div id="resultadoDicionario" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <!-- CONFIGURAÇÕES -->
-    <section class="tela" id="tela-configuracoes">
-      <div class="cabecalho-pagina">
-        <div>
-          <h1>Configurações do caderno</h1>
-          <p class="subtitulo">Personalize a experiência de escrita.</p>
-        </div>
-      </div>
-
-      <div class="secao">
-        <div class="editor">
-          <label>
-            Nome do caderno
-            <input id="nomeCaderno" maxlength="80" placeholder="Meu Caderno">
-          </label>
-
-          <label>
-            Quantidade de textos em destaque
-            <select id="quantidadeDestaques">
-              <option value="3">3 textos</option>
-              <option value="6">6 textos</option>
-              <option value="9">9 textos</option>
-            </select>
-          </label>
-
-          <div class="editor-botoes">
-            <button class="botao dourado" id="salvarConfiguracoes" type="button">Salvar configurações</button>
-            <button class="botao" data-abrir="inicio">Voltar ao caderno</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-</div>
-
-<button class="botao-criar" id="criarTexto" aria-label="Criar novo texto" title="Criar novo texto">+</button>
-
-<footer class="rodape">Mystic Livraria · Seu espaço de escrita</footer>
-
-<div class="notificacao" id="mensagem" role="status" hidden></div>
-
-<script>
-(() => {
-  "use strict";
-
-  const CHAVE = "mysticCaderno";
-  const CHAVE_CONFIG = "mysticCadernoConfig";
-
-  const $ = id => document.getElementById(id);
-
-  let editandoId = null;
-  let categoriaAtual = "";
-  let temporizadorMensagem;
-
-  function lerTextos() {
-    try {
-      const dados = JSON.parse(localStorage.getItem(CHAVE) || "[]");
-      return Array.isArray(dados)
-        ? dados.filter(t => t && typeof t === "object" && t.id)
-        : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function salvarTextos(textos) {
-    try {
-      localStorage.setItem(CHAVE, JSON.stringify(textos));
-      return true;
-    } catch {
-      avisar("Não foi possível salvar. Verifique o espaço do navegador.");
-      return false;
-    }
-  }
-
-  function lerConfig() {
-    try {
-      return JSON.parse(localStorage.getItem(CHAVE_CONFIG) || "{}") || {};
-    } catch {
-      return {};
-    }
-  }
-
-  function salvarConfig(config) {
-    try {
-      localStorage.setItem(CHAVE_CONFIG, JSON.stringify(config));
-      return true;
-    } catch {
-      avisar("Não foi possível salvar as configurações.");
-      return false;
-    }
-  }
-
-  function avisar(texto) {
-    const caixa = $("mensagem");
-    caixa.textContent = texto;
-    caixa.hidden = false;
-    clearTimeout(temporizadorMensagem);
-    temporizadorMensagem = setTimeout(() => {
-      caixa.hidden = true;
-    }, 3000);
-  }
-
-  function escaparHTML(texto) {
-    return String(texto ?? "").replace(/[&<>"']/g, caractere => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[caractere]);
-  }
-
-  function dataLegivel(data) {
-    const d = new Date(data);
-    if (Number.isNaN(d.getTime())) return "Data desconhecida";
-    return d.toLocaleDateString("pt-BR");
-  }
-
-  function ordenar(textos) {
-    return [...textos].sort((a, b) =>
-      new Date(b.atualizado || 0) - new Date(a.atualizado || 0)
-    );
-  }
-
-  function palavras(texto) {
-    const limpo = String(texto || "").trim();
-    return limpo ? limpo.split(/\s+/).length : 0;
-  }
-
-  function mostrarTela(nome) {
-    document.querySelectorAll(".tela").forEach(tela => {
-      tela.classList.toggle("ativa", tela.id === "tela-" + nome);
-    });
-
-    document.querySelectorAll(".menu-item").forEach(botao => {
-      botao.classList.remove("ativo");
-    });
-
-    const ativo = document.querySelector(
-      '.menu-item[data-tela="' + nome + '"]'
-    );
-
-    if (ativo) ativo.classList.add("ativo");
-
-    document.querySelectorAll(".dropdown, .card-dropdown").forEach(menu => {
-      menu.classList.remove("aberto");
-    });
-
-    $("dropdownPrincipal").classList.remove("aberto");
-    $("botaoPontos").setAttribute("aria-expanded", "false");
-
-    atualizarTudo();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  function prepararEditor(texto = null, categoria = "") {
-    editandoId = texto ? texto.id : null;
-
-    $("formEditor").reset();
-
-    $("campoTitulo").value = texto ? texto.titulo : "";
-    $("campoCategoria").value = texto ? texto.categoria : categoria;
-    $("campoCorpo").value = texto ? texto.corpo : "";
-    $("campoEstado").value = texto ? texto.estado : "rascunho";
-
-    $("tituloEditor").textContent = texto ? "Editar texto" : "Novo texto";
-
-    atualizarContador();
-    mostrarTela("editor");
-    $("campoTitulo").focus();
-  }
-
-  function criarCard(texto) {
-    const favorito = !!texto.favorito;
-    const trecho = String(texto.corpo || "");
-    const resumo = trecho.length > 150
-      ? trecho.slice(0, 150) + "…"
-      : trecho;
-
-    return `
-      <article class="texto-card">
-        <div class="card-topo">
-          <span class="etiqueta">${escaparHTML(texto.categoria)}</span>
-
-          <div class="card-menu">
-            <button type="button" data-card-menu="${escaparHTML(texto.id)}"
-              aria-label="Opções do texto">⋮</button>
-            <div class="card-dropdown" id="cardmenu-${escaparHTML(texto.id)}">
-              <button type="button" data-editar="${escaparHTML(texto.id)}">Editar texto</button>
-              <button type="button" data-favoritar="${escaparHTML(texto.id)}">
-                ${favorito ? "Remover favorito" : "Adicionar favorito"}
-              </button>
-              <button type="button" data-excluir="${escaparHTML(texto.id)}">Excluir texto</button>
-            </div>
+      <section id="anotacoes">
+        <div class="card-header">
+          <span class="card-icon">▤</span>
+          <div>
+            <h2>Minhas anotações</h2>
+            <p class="card-description">Tudo o que você deseja guardar em um só lugar.</p>
           </div>
         </div>
 
-        <h3>${escaparHTML(texto.titulo)}</h3>
-        <p class="descricao">${escaparHTML(resumo)}</p>
+        <div id="listaAnotacoes" class="note-grid"></div>
 
-        <div class="card-meta">
-          <span>${texto.estado === "rascunho" ? "✎ Rascunho" : "✓ Concluído"}</span>
-          <span>▦ ${dataLegivel(texto.atualizado)}</span>
-          <span class="numero">${favorito ? "★ Favorito" : "☆ Favoritar"}</span>
+        <div id="vazio" class="empty hidden">
+          <span class="empty-icon">✧</span>
+          <strong>Seu caderno está esperando por você</strong>
+          <p>Crie sua primeira anotação para guardar ideias, leituras e momentos especiais.</p>
+          <button class="btn btn-primary" id="criarPrimeira" type="button">＋ Criar anotação</button>
         </div>
+      </section>
 
-        <button type="button" class="botao-simples" data-editar="${escaparHTML(texto.id)}">
-          Abrir texto →
-        </button>
-      </article>
-    `;
-  }
-
-  function criarItemLista(texto) {
-    const resumo = String(texto.corpo || "");
-    return `
-      <article class="item-lista">
-        <h3>${escaparHTML(texto.titulo)}</h3>
-        <p>${escaparHTML(texto.categoria)} ·
-          ${texto.estado === "rascunho" ? "Rascunho" : "Concluído"} ·
-          Atualizado em ${dataLegivel(texto.atualizado)}
-        </p>
-        <p>${escaparHTML(resumo.length > 260 ? resumo.slice(0, 260) + "…" : resumo)}</p>
-        <div class="acoes">
-          <button class="botao dourado" type="button" data-editar="${escaparHTML(texto.id)}">Abrir / editar</button>
-          <button class="botao" type="button" data-favoritar="${escaparHTML(texto.id)}">
-            ${texto.favorito ? "★ Remover favorito" : "☆ Favoritar"}
-          </button>
-          <button class="botao" type="button" data-excluir="${escaparHTML(texto.id)}">Excluir</button>
+      <section id="favoritas" style="margin-top:28px">
+        <div class="card-header">
+          <span class="card-icon">♡</span>
+          <div>
+            <h2>Anotações favoritas</h2>
+            <p class="card-description">Acesse rapidamente as anotações que marcou como favoritas.</p>
+          </div>
         </div>
-      </article>
-    `;
-  }
+        <div id="listaFavoritas" class="note-grid"></div>
+        <p id="vazioFavoritas" class="note-info hidden">Você ainda não marcou nenhuma anotação como favorita.</p>
+      </section>
 
-  function preencherLista(id, textos, tituloVazio, mensagemVazia) {
-    const lista = $(id);
+      <p class="note-info">
+        Suas anotações ficam salvas neste navegador. Se limpar os dados do navegador ou trocar de dispositivo, elas podem não estar disponíveis. Exporte uma cópia se quiser guardar um backup.
+      </p>
 
-    if (!textos.length) {
-      lista.innerHTML = `
-        <div class="vazio">
-          <strong>${escaparHTML(tituloVazio)}</strong>
-          ${escaparHTML(mensagemVazia)}
-        </div>
-      `;
-      return;
-    }
+      <div class="toolbar" style="margin-top:14px">
+        <button class="btn" id="exportar" type="button">⇩ Exportar backup</button>
+        <button class="btn btn-danger" id="apagarTudo" type="button">Apagar todas as anotações</button>
+      </div>
+    </main>
+  </div>
 
-    lista.innerHTML = textos.map(criarItemLista).join("");
-  }
+  <footer>Mystic Livraria</footer>
 
-  function atualizarTudo() {
-    const textos = ordenar(lerTextos());
+  <script>
+    (() => {
+      "use strict";
 
-    $("totalTextos").textContent = textos.length;
-    $("totalRascunhos").textContent =
-      textos.filter(t => t.estado === "rascunho").length;
-    $("totalConcluidos").textContent =
-      textos.filter(t => t.estado === "concluido").length;
-    $("totalFavoritos").textContent =
-      textos.filter(t => t.favorito).length;
+      const STORAGE_KEY = "mysticMeuCadernoV1";
+      const $ = id => document.getElementById(id);
 
-    const quantidade = Number(lerConfig().destaques) || 3;
+      let anotacoes = [];
+      let fotoAtual = "";
 
-    $("gradeDestaques").innerHTML = textos
-      .slice(0, quantidade)
-      .map(criarCard)
-      .join("");
-
-    if (!textos.length) {
-      $("gradeDestaques").innerHTML = `
-        <div class="vazio" style="grid-column:1/-1">
-          <strong>Seu caderno está esperando por você.</strong>
-          Crie seu primeiro texto clicando no botão +.
-        </div>
-      `;
-    }
-
-    const categorias = [
-      ["Redações", "qtdRedações"],
-      ["Contos", "qtdContos"],
-      ["Poemas", "qtdPoemas"],
-      ["Crônicas", "qtdCrônicas"],
-      ["Fanfic", "qtdFanfic"],
-      ["Artigos", "qtdArtigos"],
-      ["Outros", "qtdOutros"]
-    ];
-
-    categorias.forEach(([categoria, id]) => {
-      const quantidadeCategoria = textos.filter(
-        t => t.categoria === categoria
-      ).length;
-
-      $(id).textContent =
-        quantidadeCategoria + (quantidadeCategoria === 1 ? " texto" : " textos");
-    });
-
-    preencherLista(
-      "listaTodos",
-      filtrarTextos(textos),
-      "Nenhum texto encontrado",
-      "Crie um texto ou altere os filtros da pesquisa."
-    );
-
-    preencherLista(
-      "listaRecentes",
-      textos.slice(0, 20),
-      "Nada por aqui ainda",
-      "Seus textos recentes aparecerão aqui."
-    );
-
-    preencherLista(
-      "listaRascunhos",
-      textos.filter(t => t.estado === "rascunho"),
-      "Nenhum rascunho",
-      "Salve uma ideia como rascunho para continuar depois."
-    );
-
-    preencherLista(
-      "listaFavoritos",
-      textos.filter(t => t.favorito),
-      "Nenhum favorito ainda",
-      "Abra o menu ⋮ de um texto e adicione-o aos favoritos."
-    );
-
-    if (categoriaAtual) {
-      $("tituloCategoria").textContent = categoriaAtual;
-      preencherLista(
-        "listaCategoria",
-        textos.filter(t => t.categoria === categoriaAtual),
-        "Categoria vazia",
-        "Ainda não existem textos nesta categoria."
-      );
-    }
-  }
-
-  function filtrarTextos(textos) {
-    const termo = $("filtroTexto").value.trim().toLowerCase();
-    const estado = $("filtroEstado").value;
-    const tipo = $("filtroTipo").value;
-
-    return textos.filter(t => {
-      const combinaTermo =
-        !termo ||
-        String(t.titulo).toLowerCase().includes(termo) ||
-        String(t.corpo).toLowerCase().includes(termo);
-
-      const combinaEstado =
-        estado === "todos" || t.estado === estado;
-
-      const combinaTipo =
-        tipo === "todas" || t.categoria === tipo;
-
-      return combinaTermo && combinaEstado && combinaTipo;
-    });
-  }
-
-  function abrirCategoria(categoria) {
-    categoriaAtual = categoria;
-    mostrarTela("categoria");
-  }
-
-  $("criarTexto").addEventListener("click", () => prepararEditor());
-
-  document.querySelectorAll("[data-tela]").forEach(botao => {
-    botao.addEventListener("click", () => {
-      categoriaAtual = "";
-      mostrarTela(botao.dataset.tela);
-    });
-  });
-
-  document.querySelectorAll("[data-abrir]").forEach(botao => {
-    botao.addEventListener("click", () => {
-      categoriaAtual = "";
-      mostrarTela(botao.dataset.abrir);
-    });
-  });
-
-  document.querySelectorAll("[data-abrir-categoria]").forEach(botao => {
-    botao.addEventListener("click", () => {
-      abrirCategoria(botao.dataset.abrirCategoria);
-    });
-  });
-
-  document.querySelectorAll("[data-categoria-menu]").forEach(botao => {
-    botao.addEventListener("click", () => {
-      abrirCategoria(botao.dataset.categoriaMenu);
-    });
-  });
-
-  $("botaoPontos").addEventListener("click", () => {
-    const dropdown = $("dropdownPrincipal");
-    const aberto = dropdown.classList.toggle("aberto");
-    $("botaoPontos").setAttribute("aria-expanded", String(aberto));
-  });
-
-  document.addEventListener("click", event => {
-    if (!event.target.closest(".menu-opcoes")) {
-      $("dropdownPrincipal").classList.remove("aberto");
-      $("botaoPontos").setAttribute("aria-expanded", "false");
-    }
-
-    if (!event.target.closest(".card-menu")) {
-      document.querySelectorAll(".card-dropdown").forEach(menu => {
-        menu.classList.remove("aberto");
-      });
-    }
-  });
-
-  document.addEventListener("click", event => {
-    const botao = event.target.closest("[data-card-menu]");
-    if (!botao) return;
-
-    event.stopPropagation();
-
-    const menu = $("cardmenu-" + botao.dataset.cardMenu);
-    if (menu) menu.classList.toggle("aberto");
-  });
-
-  document.addEventListener("click", event => {
-    const editar = event.target.closest("[data-editar]");
-    if (editar) {
-      const texto = lerTextos().find(t => t.id === editar.dataset.editar);
-      if (texto) prepararEditor(texto);
-      return;
-    }
-
-    const favoritar = event.target.closest("[data-favoritar]");
-    if (favoritar) {
-      const textos = lerTextos();
-      const texto = textos.find(t => t.id === favoritar.dataset.favoritar);
-      if (!texto) return;
-
-      texto.favorito = !texto.favorito;
-
-      if (salvarTextos(textos)) {
-        avisar(texto.favorito ? "Texto adicionado aos favoritos." : "Texto removido dos favoritos.");
-        atualizarTudo();
-      }
-      return;
-    }
-
-    const excluir = event.target.closest("[data-excluir]");
-    if (excluir) {
-      const id = excluir.dataset.excluir;
-      if (!confirm("Tem certeza de que deseja excluir este texto?")) return;
-
-      const textos = lerTextos().filter(t => t.id !== id);
-
-      if (salvarTextos(textos)) {
-        avisar("Texto excluído.");
-        atualizarTudo();
-      }
-    }
-  });
-
-  $("formEditor").addEventListener("submit", event => {
-    event.preventDefault();
-
-    const titulo = $("campoTitulo").value.trim();
-    const categoria = $("campoCategoria").value;
-    const corpo = $("campoCorpo").value.trim();
-    const estado = $("campoEstado").value;
-
-    if (!titulo || !categoria || !corpo) {
-      avisar("Preencha o título, a categoria e o texto.");
-      return;
-    }
-
-    const textos = lerTextos();
-    const agora = new Date().toISOString();
-
-    let texto;
-
-    if (editandoId) {
-      texto = textos.find(t => t.id === editandoId);
-
-      if (!texto) {
-        avisar("Este texto não foi encontrado. Crie um novo texto.");
-        return;
+      function mostrarStatus(mensagem) {
+        $("status").textContent = mensagem;
       }
 
-      texto.titulo = titulo;
-      texto.categoria = categoria;
-      texto.corpo = corpo;
-      texto.estado = estado;
-      texto.atualizado = agora;
-    } else {
-      texto = {
-        id: (crypto.randomUUID
-          ? crypto.randomUUID()
-          : Date.now() + "-" + Math.random().toString(36).slice(2)),
-        titulo,
-        categoria,
-        corpo,
-        estado,
-        favorito: false,
-        criado: agora,
-        atualizado: agora
-      };
-
-      textos.unshift(texto);
-    }
-
-    if (!salvarTextos(textos)) return;
-
-    editandoId = null;
-    categoriaAtual = "";
-
-    avisar("Texto salvo com sucesso.");
-    mostrarTela(estado === "rascunho" ? "rascunhos" : "recentes");
-  });
-
-  $("botaoSalvarRascunho").addEventListener("click", () => {
-    $("campoEstado").value = "rascunho";
-    $("formEditor").requestSubmit();
-  });
-
-  $("cancelarEdicao").addEventListener("click", () => {
-    editandoId = null;
-    mostrarTela("inicio");
-  });
-
-  $("campoCorpo").addEventListener("input", atualizarContador);
-
-  function atualizarContador() {
-    const texto = $("campoCorpo").value;
-    $("contador").textContent =
-      palavras(texto) + " palavras · " + texto.length + " caracteres";
-  }
-
-  $("filtroTexto").addEventListener("input", atualizarTudo);
-  $("filtroEstado").addEventListener("change", atualizarTudo);
-  $("filtroTipo").addEventListener("change", atualizarTudo);
-
-  $("buscaGlobal").addEventListener("keydown", event => {
-    if (event.key === "Enter") {
-      $("filtroTexto").value = $("buscaGlobal").value;
-      categoriaAtual = "";
-      mostrarTela("todos");
-    }
-  });
-
-  $("buscaGlobal").addEventListener("input", () => {
-    if (!$("buscaGlobal").value.trim()) {
-      $("filtroTexto").value = "";
-      atualizarTudo();
-    }
-  });
-
-  $("dropdownPrincipal").addEventListener("click", event => {
-    const botao = event.target.closest("[data-acao]");
-    if (!botao) return;
-
-    const acao = botao.dataset.acao;
-    $("dropdownPrincipal").classList.remove("aberto");
-
-    if (acao === "configuracoes") {
-      const config = lerConfig();
-      $("nomeCaderno").value = config.nome || "Meu Caderno";
-      $("quantidadeDestaques").value = String(config.destaques || 3);
-      mostrarTela("configuracoes");
-    }
-
-    if (acao === "favoritos") {
-      mostrarTela("favoritos");
-    }
-
-    if (acao === "exportar") {
-      exportarTextos();
-    }
-
-    if (acao === "limpar") {
-      if (!confirm("Isso apagará todos os textos salvos neste caderno. Deseja continuar?")) return;
-
-      if (salvarTextos([])) {
-        editandoId = null;
-        atualizarTudo();
-        avisar("Seu caderno foi limpo.");
+      function carregarAnotacoes() {
+        try {
+          const dados = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          anotacoes = Array.isArray(dados) ? dados.filter(item =>
+            item && typeof item.id === "string" &&
+            typeof item.titulo === "string" &&
+            typeof item.texto === "string"
+          ) : [];
+        } catch {
+          anotacoes = [];
+        }
       }
-    }
-  });
 
-  function exportarTextos() {
-    const textos = lerTextos();
+      function salvarAnotacoes(mensagem = "Anotação salva neste navegador.") {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(anotacoes));
+          mostrarStatus(mensagem);
+          renderizar();
+        } catch {
+          mostrarStatus("Não foi possível salvar. Tente remover a foto ou usar uma imagem menor.");
+        }
+      }
 
-    if (!textos.length) {
-      avisar("Não há textos para exportar.");
-      return;
-    }
+      function dataFormatada(valor) {
+        const data = new Date(valor);
+        if (Number.isNaN(data.getTime())) return "Data não disponível";
+        return data.toLocaleString("pt-BR", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit"
+        });
+      }
 
-    const conteudo = textos.map(t =>
-      `${t.titulo}\nCategoria: ${t.categoria}\nEstado: ${t.estado}\n\n${t.corpo}\n\n${"-".repeat(45)}`
-    ).join("\n\n");
+      function escaparHTML(valor) {
+        return String(valor).replace(/[&<>"']/g, caractere => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[caractere]);
+      }
 
-    const arquivo = new Blob(["\uFEFF" + conteudo], {
-      type: "text/plain;charset=utf-8"
-    });
+      function criarCartao(nota) {
+        const article = document.createElement("article");
+        article.className = "note-card";
 
-    const url = URL.createObjectURL(arquivo);
-    const link = document.createElement("a");
+        if (nota.foto) {
+          const img = document.createElement("img");
+          img.className = "note-image";
+          img.src = nota.foto;
+          img.alt = "Foto da anotação " + nota.titulo;
+          img.loading = "lazy";
+          article.appendChild(img);
+        }
 
-    link.href = url;
-    link.download = "meu-caderno-mystic.txt";
-    link.click();
+        const content = document.createElement("div");
+        content.className = "note-content";
 
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    avisar("Exportação iniciada.");
-  }
+        const category = document.createElement("span");
+        category.className = "note-category";
+        category.textContent = nota.categoria || "Outros";
 
-  $("salvarConfiguracoes").addEventListener("click", () => {
-    const nome = $("nomeCaderno").value.trim() || "Meu Caderno";
-    const destaques = Number($("quantidadeDestaques").value) || 3;
+        const title = document.createElement("h3");
+        title.className = "note-title";
+        title.textContent = nota.titulo;
 
-    if (salvarConfig({ nome, destaques })) {
-      avisar("Configurações salvas.");
-      mostrarTela("inicio");
-    }
-  });
+        const preview = document.createElement("p");
+        preview.className = "note-preview";
+        preview.textContent = nota.texto;
 
-  $("formDicionario").addEventListener("submit", async event => {
-    event.preventDefault();
+        const date = document.createElement("p");
+        date.className = "note-date";
+        date.textContent = (nota.favorita ? "♡ Favorita · " : "") +
+          "Atualizada em " + dataFormatada(nota.atualizada || nota.criada);
 
-    const palavra = $("campoPalavra").value.trim();
-    const resultado = $("resultadoDicionario");
+        const actions = document.createElement("div");
+        actions.className = "note-actions";
 
-    resultado.innerHTML = '<p class="subtitulo">Consultando dicionário...</p>';
+        const edit = document.createElement("button");
+        edit.type = "button";
+        edit.className = "btn";
+        edit.textContent = "Editar";
+        edit.addEventListener("click", () => editarAnotacao(nota.id));
 
-    try {
-      const resposta = await fetch(
-        "https://api.dictionaryapi.dev/api/v2/entries/pt/" +
-        encodeURIComponent(palavra)
-      );
+        const favorite = document.createElement("button");
+        favorite.type = "button";
+        favorite.className = "btn";
+        favorite.textContent = nota.favorita ? "♡ Favorita" : "☆ Favoritar";
+        favorite.setAttribute("aria-pressed", String(Boolean(nota.favorita)));
+        favorite.addEventListener("click", () => alternarFavorita(nota.id));
 
-      if (!resposta.ok) {
-        throw new Error(
-          resposta.status === 404
-            ? "Não encontramos essa palavra. Confira a escrita."
-            : "Não foi possível consultar o dicionário agora."
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "btn btn-danger";
+        remove.textContent = "Excluir";
+        remove.addEventListener("click", () => excluirAnotacao(nota.id));
+
+        actions.append(edit, favorite, remove);
+        content.append(category, title, preview, date, actions);
+        article.appendChild(content);
+
+        return article;
+      }
+
+      function obterAnotacoesFiltradas(lista) {
+        const busca = $("buscaTopo").value.trim().toLocaleLowerCase("pt-BR");
+        const categoria = $("filtroCategoria").value;
+        const ordem = $("filtroOrdem").value;
+
+        const filtradas = lista.filter(nota => {
+          const correspondeBusca = !busca ||
+            (nota.titulo + " " + nota.texto + " " + nota.categoria)
+              .toLocaleLowerCase("pt-BR").includes(busca);
+          const correspondeCategoria = !categoria || nota.categoria === categoria;
+          return correspondeBusca && correspondeCategoria;
+        });
+
+        filtradas.sort((a, b) => {
+          if (ordem === "titulo") return a.titulo.localeCompare(b.titulo, "pt-BR");
+          const dataA = new Date(a.atualizada || a.criada).getTime() || 0;
+          const dataB = new Date(b.atualizada || b.criada).getTime() || 0;
+          return ordem === "antigas" ? dataA - dataB : dataB - dataA;
+        });
+
+        return filtradas;
+      }
+
+      function renderizar() {
+        const filtradas = obterAnotacoesFiltradas(anotacoes);
+        const lista = $("listaAnotacoes");
+        const favoritas = $("listaFavoritas");
+
+        lista.replaceChildren();
+        favoritas.replaceChildren();
+
+        filtradas.forEach(nota => lista.appendChild(criarCartao(nota)));
+
+        const favoritasFiltradas = obterAnotacoesFiltradas(
+          anotacoes.filter(nota => nota.favorita)
         );
+
+        favoritasFiltradas.forEach(nota => favoritas.appendChild(criarCartao(nota)));
+
+        $("vazio").classList.toggle("hidden", filtradas.length > 0);
+        $("vazioFavoritas").classList.toggle("hidden", favoritasFiltradas.length > 0);
+
+        if (anotacoes.length === 0) {
+          $("vazio").classList.remove("hidden");
+        } else if (filtradas.length === 0) {
+          $("vazio").classList.remove("hidden");
+          $("vazio").querySelector("strong").textContent = "Nenhuma anotação encontrada";
+          $("vazio").querySelector("p").textContent = "Tente mudar a pesquisa ou o filtro de categoria.";
+          $("criarPrimeira").classList.add("hidden");
+        } else {
+          $("vazio").querySelector("strong").textContent = "Seu caderno está esperando por você";
+          $("vazio").querySelector("p").textContent = "Crie sua primeira anotação para guardar ideias, leituras e momentos especiais.";
+          $("criarPrimeira").classList.remove("hidden");
+        }
       }
 
-      const dados = await resposta.json();
-      const entrada = dados[0];
+      function abrirEditor(nota = null) {
+        $("editor").classList.remove("hidden");
+        $("editorTitulo").textContent = nota ? "Editar anotação" : "Nova anotação";
+        $("notaId").value = nota ? nota.id : "";
+        $("tituloNota").value = nota ? nota.titulo : "";
+        $("categoriaNota").value = nota ? nota.categoria : "Leitura";
+        $("textoNota").value = nota ? nota.texto : "";
+        $("favoritaNota").checked = nota ? Boolean(nota.favorita) : false;
+        fotoAtual = nota ? (nota.foto || "") : "";
 
-      if (!entrada) throw new Error("Nenhuma definição encontrada.");
+        $("fotoNota").value = "";
+        $("previewFoto").src = fotoAtual;
+        $("previewFoto").classList.toggle("visible", Boolean(fotoAtual));
 
-      let html = `<div class="resultado-dicionario">
-        <h3>${escaparHTML(entrada.word || palavra)}</h3>`;
+        $("editor").scrollIntoView({ behavior: "smooth", block: "start" });
+        $("tituloNota").focus({ preventScroll: true });
+      }
 
-      (entrada.meanings || []).forEach(significado => {
-        html += `<p><strong>${escaparHTML(significado.partOfSpeech || "Significado")}</strong></p>`;
+      function fecharEditor() {
+        $("editor").classList.add("hidden");
+        $("formAnotacao").reset();
+        $("notaId").value = "";
+        fotoAtual = "";
+        $("previewFoto").removeAttribute("src");
+        $("previewFoto").classList.remove("visible");
+      }
 
-        (significado.definitions || []).slice(0, 3).forEach(def => {
-          html += `<p>• ${escaparHTML(def.definition || "")}</p>`;
+      function editarAnotacao(id) {
+        const nota = anotacoes.find(item => item.id === id);
+        if (nota) abrirEditor(nota);
+      }
 
-          if (def.example) {
-            html += `<p style="color:var(--suave)">Exemplo: “${escaparHTML(def.example)}”</p>`;
-          }
+      function alternarFavorita(id) {
+        const nota = anotacoes.find(item => item.id === id);
+        if (!nota) return;
+        nota.favorita = !nota.favorita;
+        nota.atualizada = new Date().toISOString();
+        salvarAnotacoes(nota.favorita
+          ? "Anotação adicionada às favoritas."
+          : "Anotação removida das favoritas.");
+      }
+
+      function excluirAnotacao(id) {
+        const nota = anotacoes.find(item => item.id === id);
+        if (!nota) return;
+        if (!confirm('Deseja excluir a anotação "' + nota.titulo + '"?')) return;
+
+        anotacoes = anotacoes.filter(item => item.id !== id);
+        salvarAnotacoes("Anotação excluída.");
+      }
+
+      $("fotoNota").addEventListener("change", event => {
+        const arquivo = event.target.files && event.target.files[0];
+        if (!arquivo) return;
+
+        if (!arquivo.type.startsWith("image/")) {
+          mostrarStatus("Escolha um arquivo de imagem válido.");
+          event.target.value = "";
+          return;
+        }
+
+        if (arquivo.size > 2 * 1024 * 1024) {
+          mostrarStatus("Escolha uma imagem de até 2 MB.");
+          event.target.value = "";
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          fotoAtual = typeof reader.result === "string" ? reader.result : "";
+          $("previewFoto").src = fotoAtual;
+          $("previewFoto").classList.toggle("visible", Boolean(fotoAtual));
+        };
+        reader.onerror = () => mostrarStatus("Não foi possível carregar a imagem.");
+        reader.readAsDataURL(arquivo);
+      });
+
+      $("formAnotacao").addEventListener("submit", event => {
+        event.preventDefault();
+
+        const titulo = $("tituloNota").value.trim();
+        const texto = $("textoNota").value.trim();
+
+        if (!titulo || !texto) {
+          mostrarStatus("Preencha o título e o texto da anotação.");
+          return;
+        }
+
+        const id = $("notaId").value;
+        const existente = anotacoes.find(item => item.id === id);
+        const agora = new Date().toISOString();
+
+        const nota = {
+          id: existente ? existente.id : (
+            window.crypto && crypto.randomUUID
+              ? crypto.randomUUID()
+              : String(Date.now()) + Math.random().toString(16).slice(2)
+          ),
+          titulo,
+          texto,
+          categoria: $("categoriaNota").value,
+          favorita: $("favoritaNota").checked,
+          foto: fotoAtual,
+          criada: existente ? existente.criada : agora,
+          atualizada: agora
+        };
+
+        if (existente) {
+          anotacoes = anotacoes.map(item => item.id === id ? nota : item);
+        } else {
+          anotacoes.unshift(nota);
+        }
+
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(anotacoes));
+          fecharEditor();
+          renderizar();
+          mostrarStatus(existente ? "Anotação atualizada." : "Anotação criada com sucesso.");
+        } catch {
+          mostrarStatus("Não foi possível salvar. Tente remover a foto ou escolher uma imagem menor.");
+        }
+      });
+
+      $("novaAnotacao").addEventListener("click", () => abrirEditor());
+      $("criarPrimeira").addEventListener("click", () => abrirEditor());
+      $("cancelarEdicao").addEventListener("click", fecharEditor);
+
+      $("buscaTopo").addEventListener("input", renderizar);
+      $("filtroCategoria").addEventListener("change", renderizar);
+      $("filtroOrdem").addEventListener("change", renderizar);
+
+      $("apagarTudo").addEventListener("click", () => {
+        if (!anotacoes.length) {
+          mostrarStatus("Não há anotações para apagar.");
+          return;
+        }
+
+        if (!confirm("Tem certeza de que deseja apagar todas as anotações? Esta ação não pode ser desfeita.")) return;
+
+        anotacoes = [];
+        try {
+          localStorage.removeItem(STORAGE_KEY);
+        } catch {}
+        fecharEditor();
+        renderizar();
+        mostrarStatus("Todas as anotações foram apagadas.");
+      });
+
+      $("exportar").addEventListener("click", () => {
+        const arquivo = new Blob(
+          [JSON.stringify(anotacoes, null, 2)],
+          { type: "application/json;charset=utf-8" }
+        );
+
+        const url = URL.createObjectURL(arquivo);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "mystic-meu-caderno-backup.json";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        mostrarStatus("Backup preparado para exportação.");
+      });
+
+      document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+          document.querySelectorAll(".nav-link").forEach(item => item.classList.remove("active"));
+          link.classList.add("active");
         });
       });
 
-      html += "</div>";
-      resultado.innerHTML = html;
-    } catch (erro) {
-      resultado.innerHTML =
-        `<p class="subtitulo">${escaparHTML(erro.message || "Erro ao consultar o dicionário.")}</p>`;
-    }
-  });
-
-  // Atalhos de teclado para facilitar a escrita.
-  document.addEventListener("keydown", event => {
-    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
-      const editorVisivel = $("tela-editor").classList.contains("ativa");
-
-      if (editorVisivel) {
-        event.preventDefault();
-        $("formEditor").requestSubmit();
-      }
-    }
-
-    if (event.key === "Escape") {
-      $("dropdownPrincipal").classList.remove("aberto");
-      document.querySelectorAll(".card-dropdown").forEach(menu => {
-        menu.classList.remove("aberto");
-      });
-    }
-  });
-
-  // Carrega as configurações salvas.
-  const configInicial = lerConfig();
-  if (configInicial.nome) {
-    document.title = configInicial.nome + " | Mystic Livraria";
-  }
-
-  atualizarTudo();
-})();
-</script>
-
+      carregarAnotacoes();
+      renderizar();
+    })();
+  </script>
 </body>
 </html>
