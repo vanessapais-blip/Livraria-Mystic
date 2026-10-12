@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#11110f">
-<title>Meu perfil — Mystic Livraria</title>
+<title>Meu perfil — Mystic</title>
 
 <style>
 :root {
@@ -17,8 +17,6 @@
     --gold-light: #f0d99d;
     --text: #f3f0e8;
     --muted: #a7a397;
-    --danger: #e58b8b;
-    --radius: 16px;
 }
 
 * {
@@ -37,24 +35,26 @@ body {
     min-height: 100vh;
 }
 
-button, input, textarea, select { font: inherit; }
+button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
-
 a { color: inherit; text-decoration: none; }
-
 button { cursor: pointer; }
 
-button:focus-visible, a:focus-visible,
-input:focus-visible, textarea:focus-visible {
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 3px;
 }
+
+/* CABEÇALHO SIMPLIFICADO */
 
 header {
     position: sticky;
     top: 0;
     z-index: 20;
-    background: rgba(17,17,15,.96);
+    background: rgba(17,17,15,.97);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
 }
@@ -66,8 +66,29 @@ header {
     margin: auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    justify-content: flex-start;
+    gap: 18px;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--gold-light);
+    font-size: 24px;
+    transition: .2s;
+}
+
+.back-button:hover {
+    background: var(--surface2);
+    border-color: var(--gold);
+    transform: translateX(-2px);
 }
 
 .brand {
@@ -79,7 +100,6 @@ header {
     font-size: 25px;
     font-weight: bold;
     letter-spacing: 1px;
-    flex-shrink: 0;
 }
 
 .brand img {
@@ -89,37 +109,7 @@ header {
     border-radius: 9px;
 }
 
-nav {
-    display: flex;
-    align-items: center;
-    gap: 23px;
-}
-
-nav a {
-    color: var(--muted);
-    font-size: 14px;
-    transition: color .2s;
-}
-
-nav a:hover, nav a.active { color: var(--gold-light); }
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.icon-btn {
-    border: 1px solid var(--border);
-    background: var(--surface);
-    color: var(--gold-light);
-    border-radius: 10px;
-    min-width: 42px;
-    min-height: 42px;
-    padding: 8px 12px;
-}
-
-.icon-btn:hover { background: var(--surface2); }
+/* CONTEÚDO */
 
 .container {
     max-width: 1200px;
@@ -152,20 +142,21 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     margin-top: 4px;
 }
 
+/* PERFIL */
+
 .profile-hero {
     background:
         radial-gradient(ellipse at 90% 0%, rgba(213,181,107,.10), transparent 45%),
         var(--surface);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 16px;
     overflow: hidden;
     margin-bottom: 24px;
 }
 
 .profile-cover {
     height: 120px;
-    background:
-        linear-gradient(120deg, #242117, #42351e 48%, #1d1c17);
+    background: linear-gradient(120deg, #242117, #42351e 48%, #1d1c17);
     border-bottom: 1px solid var(--border);
     position: relative;
 }
@@ -211,6 +202,7 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     overflow: hidden;
     color: var(--gold-light);
     font-size: 42px;
+    cursor: pointer;
 }
 
 .avatar img {
@@ -277,6 +269,7 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     font-size: 26px;
     line-height: 1.3;
     font-weight: normal;
+    overflow-wrap: anywhere;
 }
 
 .username {
@@ -303,7 +296,7 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     color: var(--muted);
 }
 
-.profile-meta span { display: flex; gap: 6px; align-items: center; }
+/* ESTATÍSTICAS */
 
 .stats {
     display: grid;
@@ -326,7 +319,10 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     transform: translateY(-2px);
 }
 
-.stat-icon { font-size: 19px; margin-bottom: 9px; }
+.stat-icon {
+    font-size: 19px;
+    margin-bottom: 9px;
+}
 
 .stat strong {
     display: block;
@@ -342,6 +338,8 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     font-size: 11px;
     margin-top: 5px;
 }
+
+/* PUBLICAÇÕES */
 
 .section-heading {
     display: flex;
@@ -445,8 +443,6 @@ nav a:hover, nav a.active { color: var(--gold-light); }
     font-size: 12px;
 }
 
-.card-meta span { display: flex; align-items: center; gap: 5px; }
-
 .card-actions {
     display: flex;
     justify-content: space-between;
@@ -493,6 +489,8 @@ nav a:hover, nav a.active { color: var(--gold-light); }
 
 .empty-state p { font-size: 13px; }
 
+/* ATALHOS */
+
 .quick-links {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -525,7 +523,14 @@ nav a:hover, nav a.active { color: var(--gold-light); }
 }
 
 .quick-link strong { display: block; font-size: 13px; }
-.quick-link small { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
+.quick-link small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+/* RODAPÉ */
 
 footer {
     border-top: 1px solid var(--border);
@@ -537,7 +542,7 @@ footer {
 
 footer span { color: var(--gold); }
 
-/* MODAL DE EDIÇÃO */
+/* JANELA DE EDIÇÃO */
 
 .modal-backdrop {
     position: fixed;
@@ -611,7 +616,12 @@ footer span { color: var(--gold); }
 
 .field input:focus, .field textarea:focus { border-color: var(--gold); }
 
-.field small { display: block; color: var(--muted); font-size: 11px; margin-top: 5px; }
+.field small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 5px;
+}
 
 .modal-footer {
     display: flex;
@@ -640,29 +650,30 @@ footer span { color: var(--gold); }
     text-align: center;
 }
 
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-@media (min-width: 1500px) {
-    .container { max-width: 1300px; }
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
 }
+
+/* TABLETS */
 
 @media (max-width: 1050px) {
     .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .header-inner { padding: 12px 20px; }
-    nav { gap: 14px; }
 }
 
+/* CELULARES */
+
 @media (max-width: 760px) {
-    .header-inner { flex-wrap: wrap; gap: 12px; }
-    nav {
-        order: 3;
-        width: 100%;
-        justify-content: flex-start;
-        gap: 20px;
-        overflow-x: auto;
-        padding: 5px 0;
+    .header-inner {
+        min-height: 66px;
+        padding: 10px 16px;
+        gap: 13px;
     }
-    nav a { white-space: nowrap; }
+
+    .brand { font-size: 22px; }
+    .brand img { width: 38px; height: 38px; }
+
     .container { padding: 25px 16px 45px; }
     .profile-cover { height: 90px; }
     .profile-main { padding: 0 18px 20px; }
@@ -675,13 +686,23 @@ footer span { color: var(--gold); }
 }
 
 @media (max-width: 450px) {
-    .brand { font-size: 21px; }
-    .brand img { width: 36px; height: 36px; }
-    .header-inner { padding: 11px 14px; }
+    .header-inner { padding: 10px 12px; }
+    .back-button { width: 39px; height: 39px; font-size: 22px; }
+    .brand { font-size: 20px; gap: 8px; }
+    .brand img { width: 35px; height: 35px; }
+
     .container { padding: 22px 12px 38px; }
     .profile-main { padding-left: 13px; padding-right: 13px; }
-    .profile-top { align-items: flex-start; flex-direction: column; margin-top: -44px; }
-    .profile-actions { width: 100%; justify-content: flex-start; padding-top: 5px; }
+    .profile-top {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-top: -44px;
+    }
+    .profile-actions {
+        width: 100%;
+        justify-content: flex-start;
+        padding-top: 5px;
+    }
     .profile-info { margin-top: 16px; }
     .profile-info h2 { font-size: 23px; }
     .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
@@ -707,24 +728,15 @@ footer span { color: var(--gold); }
 
 <header>
     <div class="header-inner">
-        <a href="home.html" class="brand" aria-label="Mystic, página inicial">
+        <a href="home.html" class="back-button"
+           aria-label="Voltar para a página inicial"
+           title="Voltar para a página inicial">←</a>
+
+        <a href="home.html" class="brand" aria-label="Mystic">
             <img src="logo-mystic.jpg" alt="Logo Mystic"
                  onerror="this.style.display='none'">
             <span>Mystic</span>
         </a>
-
-        <nav aria-label="Navegação principal">
-            <a href="home.html">Início</a>
-            <a href="livros.html">Livros</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="redacoes.html">Redações</a>
-            <a href="perfil.html" class="active">Meu perfil</a>
-        </nav>
-
-        <div class="header-actions">
-            <a href="configuracoes.html" class="icon-btn"
-               aria-label="Configurações" title="Configurações">⚙</a>
-        </div>
     </div>
 </header>
 
@@ -743,25 +755,35 @@ footer span { color: var(--gold); }
         <div class="profile-main">
             <div class="profile-top">
                 <div class="avatar-wrap">
-                    <div class="avatar" id="avatar">
+                    <div class="avatar" id="avatar" title="Alterar foto de perfil">
                         <span id="avatarPlaceholder">👤</span>
                         <img id="avatarImage" alt="Foto de perfil" hidden>
                     </div>
+
                     <button class="avatar-edit" id="changePhotoBtn"
-                            aria-label="Alterar foto de perfil" title="Alterar foto">✎</button>
+                            aria-label="Alterar foto de perfil"
+                            title="Alterar foto">✎</button>
+
                     <input type="file" id="photoInput" accept="image/*" hidden>
                 </div>
 
                 <div class="profile-actions">
-                    <button class="btn btn-gold" id="editProfileBtn">✎ Editar perfil</button>
-                    <button class="btn" id="shareProfileBtn">↗ Compartilhar</button>
+                    <button class="btn btn-gold" id="editProfileBtn">
+                        ✎ Editar perfil
+                    </button>
+                    <button class="btn" id="shareProfileBtn">
+                        ↗ Compartilhar
+                    </button>
                 </div>
             </div>
 
             <div class="profile-info">
                 <h2 id="displayName">Leitor Mystic</h2>
                 <div class="username" id="displayUsername">@leitor</div>
-                <p class="bio" id="displayBio">Conte um pouco sobre você, suas leituras favoritas e as histórias que gosta de escrever.</p>
+
+                <p class="bio" id="displayBio">
+                    Conte um pouco sobre você, suas leituras favoritas e as histórias que gosta de escrever.
+                </p>
 
                 <div class="profile-meta">
                     <span>✦ Comunidade Mystic</span>
@@ -777,29 +799,34 @@ footer span { color: var(--gold); }
             <strong id="viewsCount">0</strong>
             <span>Visualizações</span>
         </article>
+
         <article class="stat">
             <div class="stat-icon">♙</div>
             <strong id="followersCount">0</strong>
             <span>Seguidores</span>
         </article>
+
         <article class="stat">
             <div class="stat-icon">↗</div>
             <strong id="followingCount">0</strong>
             <span>Seguindo</span>
         </article>
+
         <article class="stat">
             <div class="stat-icon">♡</div>
             <strong id="likesCount">0</strong>
             <span>Curtidas recebidas</span>
         </article>
+
         <article class="stat">
             <div class="stat-icon">☆</div>
             <strong id="favoritesCount">0</strong>
             <span>Favoritos salvos</span>
         </article>
+
         <article class="stat">
             <div class="stat-icon">✎</div>
-            <strong id="textsCount">2</strong>
+            <strong id="textsCount">4</strong>
             <span>Textos escritos</span>
         </article>
     </section>
@@ -824,8 +851,8 @@ footer span { color: var(--gold); }
 
     <div class="section-heading">
         <div>
-            <h2>Atalhos da sua conta</h2>
-            <p>Acesse rapidamente outras áreas da Mystic.</p>
+            <h2>Atalhos</h2>
+            <p>Acesse outras áreas da Mystic.</p>
         </div>
     </div>
 
@@ -833,17 +860,19 @@ footer span { color: var(--gold); }
         <a href="redacoes.html" class="quick-link">
             <span class="quick-icon">✎</span>
             <span>
-                <strong>Minhas redações</strong>
+                <strong>Redações</strong>
                 <small>Escreva e organize seus textos</small>
             </span>
         </a>
+
         <a href="blogs.html" class="quick-link">
             <span class="quick-icon">▤</span>
             <span>
-                <strong>Meus blogs</strong>
+                <strong>Blogs</strong>
                 <small>Compartilhe suas ideias</small>
             </span>
         </a>
+
         <a href="configuracoes.html" class="quick-link">
             <span class="quick-icon">⚙</span>
             <span>
@@ -858,9 +887,8 @@ footer span { color: var(--gold); }
     <span>✦ Mystic</span> — Livraria · Um universo de histórias.
 </footer>
 
-<!-- Janela de edição -->
-<div class="modal-backdrop" id="editModal" role="dialog"
-     aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-backdrop" id="editModal"
+     role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
         <div class="modal-header">
             <h2 id="modalTitle">Editar meu perfil</h2>
@@ -877,7 +905,8 @@ footer span { color: var(--gold); }
             <div class="field">
                 <label for="usernameInput">Nome de usuário</label>
                 <input id="usernameInput" maxlength="30"
-                       placeholder="seu_usuario" pattern="[A-Za-z0-9_.-]+">
+                       placeholder="seu_usuario"
+                       pattern="[A-Za-z0-9_.-]+">
                 <small>Use letras, números, ponto, traço ou sublinhado.</small>
             </div>
 
@@ -924,7 +953,6 @@ footer span { color: var(--gold); }
         likes: 0
     };
 
-    // Exemplos iniciais. Substitua pelos textos reais da sua conta.
     const defaultContent = [
         {
             id: "redacao-1",
@@ -972,14 +1000,14 @@ footer span { color: var(--gold); }
         try {
             const value = localStorage.getItem(key);
             return value ? JSON.parse(value) : fallback;
-        } catch (error) {
+        } catch {
             return fallback;
         }
     }
 
     let profile = { ...defaultProfile, ...readJSON(PROFILE_KEY, {}) };
-
     let contents = readJSON(CONTENT_KEY, null);
+
     if (!Array.isArray(contents)) {
         contents = defaultContent.map(item => ({ ...item }));
         saveContents();
@@ -995,7 +1023,7 @@ footer span { color: var(--gold); }
         try {
             localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
             return true;
-        } catch (error) {
+        } catch {
             showToast("Não foi possível salvar. Verifique o espaço disponível.");
             return false;
         }
@@ -1005,8 +1033,8 @@ footer span { color: var(--gold); }
         try {
             localStorage.setItem(CONTENT_KEY, JSON.stringify(contents));
             return true;
-        } catch (error) {
-            showToast("Não foi possível salvar os textos no navegador.");
+        } catch {
+            showToast("Não foi possível salvar os textos.");
             return false;
         }
     }
@@ -1014,7 +1042,7 @@ footer span { color: var(--gold); }
     function saveFavorites() {
         try {
             localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
-        } catch (error) {
+        } catch {
             showToast("Não foi possível salvar os favoritos.");
         }
     }
@@ -1051,19 +1079,18 @@ footer span { color: var(--gold); }
         const totalLikes = contents.reduce(
             (sum, item) => sum + Math.max(0, Number(item.likes) || 0), 0
         );
+
         document.getElementById("likesCount").textContent =
             formatNumber(Math.max(Number(profile.likes) || 0, totalLikes));
 
-        document.getElementById("favoritesCount").textContent = formatNumber(favorites.length);
+        document.getElementById("favoritesCount").textContent =
+            formatNumber(favorites.length);
 
-        const written = contents.filter(item =>
-            ["redacao", "blog", "outro"].includes(item.type)
-        ).length;
-        document.getElementById("textsCount").textContent = formatNumber(written);
+        document.getElementById("textsCount").textContent =
+            formatNumber(contents.length);
 
-        const location = document.getElementById("locationInput").value;
-        const meta = document.getElementById("joinedLabel");
-        meta.textContent = profile.location ? "⌖ " + profile.location : "✧ Perfil literário";
+        document.getElementById("joinedLabel").textContent =
+            profile.location ? "⌖ " + profile.location : "✧ Perfil literário";
 
         const img = document.getElementById("avatarImage");
         const placeholder = document.getElementById("avatarPlaceholder");
@@ -1119,13 +1146,15 @@ footer span { color: var(--gold); }
 
             const category = document.createElement("span");
             category.className = "category";
-            category.textContent = item.category ||
-                ({ redacao: "Redação", blog: "Blog", outro: "Texto" }[item.type] || "Texto");
+            category.textContent = item.category || "Texto";
 
             const typeLabel = document.createElement("span");
             typeLabel.className = "category";
-            typeLabel.textContent =
-                ({ redacao: "✎ Redação", blog: "▤ Blog", outro: "✧ Texto" }[item.type] || "Texto");
+            typeLabel.textContent = {
+                redacao: "✎ Redação",
+                blog: "▤ Blog",
+                outro: "✧ Texto"
+            }[item.type] || "Texto";
 
             top.append(category, typeLabel);
 
@@ -1188,8 +1217,7 @@ footer span { color: var(--gold); }
         document.getElementById("locationInput").value = profile.location || "";
         updateBioLength();
 
-        const modal = document.getElementById("editModal");
-        modal.classList.add("open");
+        document.getElementById("editModal").classList.add("open");
         document.getElementById("nameInput").focus();
     }
 
@@ -1236,7 +1264,13 @@ footer span { color: var(--gold); }
             return;
         }
 
-        profile = { ...profile, name, username: username || "leitor", bio, location };
+        profile = {
+            ...profile,
+            name,
+            username: username || "leitor",
+            bio,
+            location
+        };
 
         if (saveProfile()) {
             renderProfile();
@@ -1263,7 +1297,6 @@ footer span { color: var(--gold); }
             return;
         }
 
-        // Limite para evitar guardar arquivos excessivamente grandes no navegador.
         if (file.size > 3 * 1024 * 1024) {
             showToast("Escolha uma foto de até 3 MB.");
             event.target.value = "";
@@ -1278,7 +1311,10 @@ footer span { color: var(--gold); }
             image.onload = () => {
                 const canvas = document.createElement("canvas");
                 const maxSize = 400;
-                const scale = Math.min(1, maxSize / Math.max(image.width, image.height));
+                const scale = Math.min(
+                    1,
+                    maxSize / Math.max(image.width, image.height)
+                );
 
                 canvas.width = Math.max(1, Math.round(image.width * scale));
                 canvas.height = Math.max(1, Math.round(image.height * scale));
@@ -1286,7 +1322,6 @@ footer span { color: var(--gold); }
                 const context = canvas.getContext("2d");
                 context.drawImage(image, 0, 0, canvas.width, canvas.height);
 
-                // Redimensiona e comprime para reduzir o espaço utilizado.
                 profile.photo = canvas.toDataURL("image/jpeg", 0.82);
 
                 if (saveProfile()) {
@@ -1346,5 +1381,6 @@ footer span { color: var(--gold); }
     renderContents();
 })();
 </script>
+
 </body>
 </html>
