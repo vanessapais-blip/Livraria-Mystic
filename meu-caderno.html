@@ -2,1348 +2,854 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#100e0d">
-<title>Meu Caderno | Mystic</title>
-
-<style>
-:root {
-  --bg: #100e0d;
-  --panel: #191613;
-  --panel2: #211d19;
-  --field: #151210;
-  --border: #393027;
-  --text: #f4eee5;
-  --muted: #b9afa2;
-  --gold: #c9a45c;
-  --gold-light: #e2c783;
-  --gold-bg: #302719;
-  --danger: #d77d70;
-}
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
-}
-
-button, input, textarea, select { font: inherit; }
-
-button { cursor: pointer; }
-
-button:focus-visible, input:focus-visible,
-textarea:focus-visible, select:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--gold-light);
-  outline-offset: 3px;
-}
-
-a { color: inherit; text-decoration: none; }
-
-.topbar {
-  height: 76px;
-  padding: 0 5%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(16,14,13,.96);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-
-.brand img {
-  width: 46px;
-  height: 46px;
-  object-fit: contain;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-}
-
-.brand-name {
-  font-family: Georgia, serif;
-  font-size: 25px;
-  color: var(--gold-light);
-  letter-spacing: 1px;
-}
-
-.brand-sub {
-  color: var(--muted);
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.top-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn {
-  border: 1px solid var(--border);
-  background: var(--panel2);
-  color: var(--text);
-  border-radius: 9px;
-  padding: 10px 15px;
-  transition: .2s;
-}
-
-.btn:hover { border-color: var(--gold); }
-
-.btn.primary {
-  background: var(--gold);
-  color: #17120b;
-  border-color: var(--gold);
-  font-weight: 700;
-}
-
-.btn.primary:hover { background: var(--gold-light); }
-
-.btn.small { padding: 7px 11px; font-size: 13px; }
-
-.btn.danger { color: var(--danger); }
-
-.layout {
-  display: grid;
-  grid-template-columns: 230px minmax(0, 1fr);
-  min-height: calc(100vh - 76px);
-}
-
-.sidebar {
-  padding: 28px 18px;
-  border-right: 1px solid var(--border);
-  background: #14110f;
-}
-
-.sidebar-label {
-  padding: 0 12px;
-  color: #8f8272;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.8px;
-  margin: 16px 0 10px;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 9px;
-  color: var(--muted);
-  margin: 3px 0;
-  cursor: pointer;
-  border: 1px solid transparent;
-  background: transparent;
-  width: 100%;
-  text-align: left;
-}
-
-.nav-link:hover, .nav-link.active {
-  color: var(--gold-light);
-  background: var(--gold-bg);
-  border-color: #4b3c26;
-}
-
-.nav-icon { width: 22px; text-align: center; }
-
-.sidebar-note {
-  margin-top: 35px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.sidebar-note strong {
-  display: block;
-  font-family: Georgia, serif;
-  font-size: 17px;
-  color: var(--gold-light);
-  margin-bottom: 5px;
-}
-
-main {
-  width: 100%;
-  max-width: 1450px;
-  min-width: 0;
-  padding: 36px clamp(18px, 4vw, 58px) 70px;
-  margin: 0 auto;
-}
-
-.page { display: none; }
-.page.active { display: block; }
-
-.eyebrow {
-  color: var(--gold);
-  text-transform: uppercase;
-  font-size: 11px;
-  letter-spacing: 2.5px;
-  font-weight: 700;
-}
-
-h1, h2, h3 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-}
-
-h1 {
-  font-size: clamp(31px, 4vw, 45px);
-  line-height: 1.2;
-  margin: 9px 0 12px;
-}
-
-h2 { font-size: 25px; margin: 0 0 8px; }
-h3 { font-size: 21px; margin: 0 0 8px; }
-
-.subtitle {
-  color: var(--muted);
-  max-width: 720px;
-  margin: 0;
-}
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 18px;
-  margin: 32px 0 16px;
-}
-
-.hero {
-  padding: clamp(23px, 4vw, 43px);
-  border: 1px solid #4b3c26;
-  border-radius: 18px;
-  background:
-    radial-gradient(ellipse at top right, rgba(201,164,92,.13), transparent 55%),
-    linear-gradient(135deg, #211b14, #171310 75%);
-  position: relative;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: "✧";
-  position: absolute;
-  right: 7%;
-  top: 5%;
-  font-size: clamp(100px, 18vw, 220px);
-  color: rgba(201,164,92,.09);
-  pointer-events: none;
-}
-
-.hero-content { position: relative; z-index: 1; }
-
-.hero p {
-  max-width: 650px;
-  color: var(--muted);
-}
-
-.hero-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 22px;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 20px;
-}
-
-.stat {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
-}
-
-.stat strong {
-  display: block;
-  color: var(--gold-light);
-  font-family: Georgia, serif;
-  font-size: 27px;
-}
-
-.stat span { color: var(--muted); font-size: 13px; }
-
-.panel {
-  border: 1px solid var(--border);
-  background: var(--panel);
-  border-radius: 14px;
-  padding: 22px;
-}
-
-.field { margin-bottom: 17px; }
-
-.field label {
-  display: block;
-  margin-bottom: 7px;
-  color: #ddd0bf;
-  font-size: 13px;
-}
-
-input, textarea, select {
-  width: 100%;
-  background: var(--field);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  padding: 12px 13px;
-  color: var(--text);
-}
-
-input::placeholder, textarea::placeholder { color: #81776c; }
-
-textarea {
-  resize: vertical;
-  min-height: 170px;
-  line-height: 1.8;
-}
-
-.editor {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(250px, .8fr);
-  gap: 20px;
-  align-items: start;
-}
-
-.editor textarea { min-height: 260px; }
-
-.helper {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 7px;
-}
-
-.check-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  color: var(--muted);
-  font-size: 13px;
-  margin: 14px 0;
-}
-
-.check-row input { width: auto; accent-color: var(--gold); }
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 18px 0;
-}
-
-.toolbar input { flex: 1 1 220px; }
-.toolbar select { width: auto; min-width: 145px; }
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.note-card {
-  min-width: 0;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 13px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.note-card:hover { border-color: #655032; }
-
-.note-cover {
-  width: 100%;
-  height: 145px;
-  object-fit: cover;
-  background: #211b14;
-  border-bottom: 1px solid var(--border);
-}
-
-.note-body {
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.note-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 11px;
-  margin-bottom: 10px;
-}
-
-.tag {
-  color: var(--gold-light);
-  background: var(--gold-bg);
-  border: 1px solid #4b3c26;
-  border-radius: 30px;
-  padding: 3px 9px;
-}
-
-.note-excerpt {
-  color: var(--muted);
-  font-size: 14px;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin: 0 0 18px;
-}
-
-.note-actions {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
-  margin-top: auto;
-}
-
-.note-actions .btn { font-size: 12px; padding: 7px 10px; }
-
-.empty {
-  border: 1px dashed #4a3d2c;
-  border-radius: 12px;
-  padding: 34px 20px;
-  color: var(--muted);
-  text-align: center;
-  grid-column: 1 / -1;
-}
-
-.empty span {
-  display: block;
-  font-size: 35px;
-  margin-bottom: 8px;
-  color: var(--gold);
-}
-
-.read-content {
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  line-height: 1.95;
-  color: #e4d9ca;
-  margin-top: 20px;
-}
-
-.reader-author { color: var(--gold-light); font-size: 13px; }
-
-.reader-cover {
-  width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-top: 18px;
-}
-
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 25px 5%;
-  color: var(--muted);
-  text-align: center;
-  font-size: 12px;
-}
-
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--gold-light);
-  color: #17120b;
-  padding: 12px 18px;
-  border-radius: 10px;
-  z-index: 100;
-  box-shadow: 0 8px 30px #0008;
-  display: none;
-  max-width: calc(100vw - 30px);
-  font-size: 14px;
-}
-
-.mobile-nav { display: none; }
-
-@media (max-width: 900px) {
-  .layout { grid-template-columns: 190px minmax(0,1fr); }
-  .sidebar { padding: 22px 12px; }
-  main { padding: 28px 20px 50px; }
-  .editor { grid-template-columns: 1fr; }
-  .cards { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 650px) {
-  .topbar { height: 66px; padding: 0 14px; gap: 8px; }
-  .brand { gap: 8px; }
-  .brand img { width: 39px; height: 39px; }
-  .brand-name { font-size: 21px; }
-  .brand-sub { font-size: 8px; letter-spacing: 1.3px; }
-  .top-actions .btn { padding: 8px 10px; font-size: 12px; }
-  .top-actions .hide-mobile { display: none; }
-
-  .layout { display: block; min-height: auto; }
-  .sidebar { display: none; }
-  main { padding: 24px 15px 100px; }
-
-  .mobile-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 30;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
-    background: rgba(20,17,15,.98);
-    border-top: 1px solid var(--border);
-  }
-
-  .mobile-nav .nav-link {
-    margin: 0;
-    padding: 8px 2px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-align: center;
-    justify-content: center;
-    font-size: 10px;
-    border-radius: 8px;
-  }
-
-  .nav-icon { font-size: 18px; width: auto; line-height: 1.3; }
-  .hero { padding: 24px 19px; }
-  .hero::after { right: 2%; top: 10%; }
-  .stats { gap: 8px; }
-  .stat { padding: 12px 9px; }
-  .stat strong { font-size: 22px; }
-  .stat span { font-size: 11px; }
-  .section-head { align-items: flex-start; }
-  .section-head .btn { padding: 8px 10px; font-size: 12px; }
-  .panel { padding: 16px; }
-  .toolbar { display: grid; grid-template-columns: 1fr 1fr; }
-  .toolbar input { grid-column: 1 / -1; }
-  .toolbar select { width: 100%; min-width: 0; }
-  .toolbar .btn { width: 100%; }
-  .note-cover { height: 125px; }
-  .brand-sub { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { transition: none !important; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mystic — Meu Caderno</title>
+
+  <style>
+    :root {
+      --fundo: #0b0907;
+      --painel: #15110d;
+      --dourado: #d9a653;
+      --dourado-claro: #f2cb80;
+      --texto: #f5ead8;
+      --texto-suave: #c6b9a8;
+      --borda: #51402b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea, select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    .topo {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 0 24px;
+      background: #0b0907;
+      border-bottom: 1px solid var(--borda);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .voltar {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--dourado);
+      border-radius: 50%;
+      color: var(--dourado-claro);
+      font-size: 25px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: bold 34px Georgia, serif;
+      color: var(--dourado-claro);
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border: 1px solid var(--dourado);
+      border-radius: 50%;
+    }
+
+    .busca-topo {
+      margin: auto;
+      width: min(400px, 40%);
+    }
+
+    input, select, textarea {
+      background: #0e0c0a;
+      border: 1px solid #5a4a38;
+      border-radius: 10px;
+      padding: 11px 13px;
+      color: var(--texto);
+      width: 100%;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--dourado);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: calc(100vh - 76px);
+    }
+
+    aside {
+      background: #0e0c0a;
+      border-right: 1px solid var(--borda);
+      padding: 18px 12px;
+    }
+
+    .menu {
+      display: grid;
+      gap: 6px;
+    }
+
+    .menu a, .menu button {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      color: var(--texto);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 9px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .menu a:hover, .menu button:hover,
+    .menu .ativo {
+      background: #302316;
+      border-color: #60492c;
+      color: var(--dourado-claro);
+    }
+
+    .destaque {
+      color: var(--dourado-claro);
+      font-size: 19px;
+      width: 22px;
+      text-align: center;
+    }
+
+    .separador {
+      border: 0;
+      border-top: 1px solid var(--borda);
+      margin: 20px 8px;
+    }
+
+    .legenda-menu {
+      color: var(--dourado);
+      font-size: 11px;
+      padding: 0 8px 8px;
+      letter-spacing: 1px;
+    }
+
+    .nota {
+      margin: 28px 6px;
+      padding: 16px;
+      border: 1px solid #6a4b27;
+      border-radius: 11px;
+      line-height: 1.6;
+      color: var(--texto-suave);
+      font-size: 12px;
+    }
+
+    .nota h3 {
+      font: 18px Georgia, serif;
+      color: var(--texto);
+      margin-bottom: 8px;
+    }
+
+    .hero {
+      min-height: 185px;
+      padding: 32px 45px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, #000c, #0003),
+        url("https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=85") center/cover;
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .hero h1 {
+      font: bold clamp(34px, 4vw, 48px) Georgia, serif;
+      margin: 0 0 10px;
+    }
+
+    .hero p {
+      font: 18px/1.5 Georgia, serif;
+      margin: 0;
+      max-width: 520px;
+    }
+
+    .conteudo {
+      padding: 24px 30px;
+      max-width: 1500px;
+      margin: auto;
+    }
+
+    .cabecalho-secao {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .cabecalho-secao h2 {
+      font: bold 27px Georgia, serif;
+      margin: 0;
+    }
+
+    .botao-dourado {
+      background: linear-gradient(135deg, #f1c477, #c78b3b);
+      border: 1px solid #f3c777;
+      color: #1a1007;
+      padding: 11px 17px;
+      border-radius: 11px;
+      font-weight: bold;
+    }
+
+    .filtros {
+      display: grid;
+      grid-template-columns: 1fr 0.7fr auto;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .cartoes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .cartao {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      background: linear-gradient(145deg, #18130e, #0e0c0a);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cartao img {
+      width: 100%;
+      height: 115px;
+      object-fit: cover;
+      border-radius: 8px;
+      background: #24190f;
+    }
+
+    .categoria {
+      align-self: flex-start;
+      margin-top: 9px;
+      padding: 4px 10px;
+      border: 1px solid #72532d;
+      background: #2a2014;
+      border-radius: 20px;
+      color: var(--dourado-claro);
+      font-size: 11px;
+    }
+
+    .cartao h3 {
+      font: bold 17px Georgia, serif;
+      margin: 9px 0 6px;
+    }
+
+    .resumo {
+      color: #d1c7bb;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 0 0 14px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .acoes-cartao {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      margin-top: auto;
+      color: var(--texto-suave);
+      font-size: 11px;
+    }
+
+    .acoes-cartao button {
+      border: 0;
+      background: transparent;
+      color: var(--texto);
+      font-size: 18px;
+      padding: 5px;
+    }
+
+    .acoes-cartao .favoritado { color: #f06b55; }
+
+    .vazio {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px 15px;
+      border: 1px dashed var(--borda);
+      border-radius: 12px;
+      color: var(--texto-suave);
+    }
+
+    footer {
+      text-align: center;
+      border-top: 1px solid #302519;
+      color: #b69b72;
+      padding: 18px;
+      font: 13px Georgia, serif;
+    }
+
+    .modal-fundo {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #000c;
+      z-index: 20;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .modal-fundo.aberto { display: flex; }
+
+    .modal {
+      width: min(600px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 22px;
+      background: #15110d;
+      border: 1px solid var(--dourado);
+      border-radius: 15px;
+    }
+
+    .modal h2 {
+      font: 26px Georgia, serif;
+      margin-top: 0;
+    }
+
+    .campo {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 14px;
+      color: var(--dourado-claro);
+      font-size: 13px;
+    }
+
+    textarea { min-height: 170px; resize: vertical; }
+
+    .acoes-modal {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .cancelar {
+      background: transparent;
+      color: var(--texto);
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    .mobile-nav { display: none; }
+
+    @media (max-width: 1000px) {
+      .cartoes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout { grid-template-columns: 190px minmax(0, 1fr); }
+      .conteudo { padding: 20px; }
+    }
+
+    @media (max-width: 700px) {
+      .topo { height: 65px; padding: 0 10px; gap: 9px; }
+      .logo { font-size: 26px; gap: 7px; }
+      .logo img { width: 40px; height: 40px; }
+      .voltar { width: 35px; height: 35px; flex-shrink: 0; }
+      .busca-topo { display: none; }
+      .layout { display: block; min-height: calc(100vh - 65px); }
+      aside { display: none; }
+      .hero { min-height: 145px; padding: 22px 17px; }
+      .hero h1 { font-size: 34px; }
+      .hero p { font-size: 15px; }
+      .conteudo { padding: 17px 12px 90px; }
+      .cabecalho-secao h2 { font-size: 21px; }
+      .botao-dourado { padding: 10px 12px; font-size: 12px; }
+      .filtros { grid-template-columns: 1fr; gap: 8px; }
+      .cartoes { grid-template-columns: 1fr; gap: 11px; }
+      .cartao {
+        display: grid;
+        grid-template-columns: 105px minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr auto;
+        gap: 0 10px;
+      }
+      .cartao img {
+        grid-column: 1;
+        grid-row: 1 / 5;
+        height: 100%;
+        min-height: 145px;
+      }
+      .cartao .categoria { grid-column: 2; grid-row: 1; }
+      .cartao h3 { grid-column: 2; grid-row: 2; font-size: 15px; }
+      .cartao .resumo {
+        grid-column: 2;
+        grid-row: 3;
+        font-size: 12px;
+        margin-bottom: 6px;
+      }
+      .acoes-cartao { grid-column: 2; grid-row: 4; }
+      .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 65px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: #0d0b09f7;
+        border-top: 1px solid var(--borda);
+        z-index: 10;
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .mobile-nav a {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        color: var(--texto-suave);
+      }
+      .mobile-nav span:first-child {
+        font-size: 20px;
+        color: var(--dourado-claro);
+      }
+      footer { padding-bottom: 80px; }
+    }
+  </style>
 </head>
 
 <body>
-<header class="topbar">
-  <a class="brand" href="home.html" aria-label="Mystic - Início">
-    <img src="logo-mystic.jpg" alt="Logo Mystic"
-         onerror="this.style.display='none'">
-    <div>
-      <div class="brand-name">Mystic</div>
-      <div class="brand-sub">Palavras, sentimentos e mistérios</div>
-    </div>
-  </a>
+  <header class="topo">
+    <a class="voltar" href="home.html" title="Voltar para o início" aria-label="Voltar para home">←</a>
 
-  <div class="top-actions">
-    <button class="btn hide-mobile" onclick="showPage('explore')">Explorar textos</button>
-    <button class="btn primary" onclick="newNote()">＋ Escrever</button>
+    <a class="logo" href="home.html">
+      <img src="logo-mystic.jpg" alt="Logo Mystic"
+           onerror="this.style.display='none'">
+      <span>Mystic</span>
+    </a>
+
+    <div class="busca-topo">
+      <input id="buscaGeral" type="search" placeholder="Buscar no meu caderno...">
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside>
+      <nav class="menu">
+        <a href="home.html"><span class="destaque">⌂</span> Início</a>
+        <a href="explore.html"><span class="destaque">⌕</span> Explore</a>
+        <a href="dicionario.html"><span class="destaque">▤</span> Dicionário</a>
+        <a href="meu-caderno.html" class="ativo"><span class="destaque">▧</span> Seus textos</a>
+        <a href="#escrever" onclick="abrirEditor(); return false;"><span class="destaque">✎</span> Escrever texto</a>
+        <button onclick="alternarFavoritos()"><span class="destaque">♡</span> Favoritos</button>
+      </nav>
+
+      <hr class="separador">
+      <div class="legenda-menu">SUA BIBLIOTECA</div>
+
+      <nav class="menu">
+        <button onclick="exportarTextos()"><span class="destaque">⇩</span> Exportar textos</button>
+        <button onclick="document.getElementById('arquivoImportar').click()"><span class="destaque">⇧</span> Importar textos</button>
+      </nav>
+
+      <div class="nota">
+        <span class="destaque">✧</span>
+        <h3>Um espaço seu</h3>
+        Escreva sem pressa. Algumas palavras só precisam de um lugar para existir.
+      </div>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1>Meu Caderno</h1>
+          <p>Suas ideias, memórias, poemas e histórias reunidos em um só lugar.</p>
+        </div>
+      </section>
+
+      <section class="conteudo">
+        <div class="cabecalho-secao">
+          <h2>▧ Seus textos</h2>
+          <button class="botao-dourado" onclick="abrirEditor()">＋ Novo texto</button>
+        </div>
+
+        <div class="filtros">
+          <input id="buscaTextos" type="search" placeholder="⌕  Buscar nos seus textos...">
+          <select id="filtroCategoria">
+            <option value="">Todas as categorias</option>
+            <option>Reflexão</option>
+            <option>Poesia</option>
+            <option>Diário</option>
+            <option>Conto</option>
+            <option>Romance</option>
+            <option>Outros</option>
+          </select>
+        </div>
+
+        <div class="cartoes" id="listaTextos"></div>
+        <p id="contador" style="font-size:12px;color:#bcb1a3"></p>
+      </section>
+
+      <footer>Mystic · Um lugar para sentir, escrever e descobrir.</footer>
+    </main>
   </div>
-</header>
 
-<div class="layout">
-  <aside class="sidebar">
-    <div class="sidebar-label">Menu principal</div>
-    <a class="nav-link" href="home.html"><span class="nav-icon">⌂</span>Início</a>
-    <button class="nav-link" data-page="explore" onclick="showPage('explore')">
-      <span class="nav-icon">⌕</span>Explore
-    </button>
-    <button class="nav-link active" data-page="mine" onclick="showPage('mine')">
-      <span class="nav-icon">▤</span>Seus textos
-    </button>
-    <button class="nav-link" data-page="editor" onclick="newNote()">
-      <span class="nav-icon">✎</span>Escrever texto
-    </button>
-    <button class="nav-link" data-page="favorites" onclick="showPage('favorites')">
-      <span class="nav-icon">♡</span>Favoritos
-    </button>
+  <nav class="mobile-nav">
+    <a href="home.html"><span>⌂</span>Início</a>
+    <a href="explore.html"><span>⌕</span>Explore</a>
+    <a href="dicionario.html"><span>▤</span>Dicionário</a>
+    <a href="meu-caderno.html"><span>▧</span>Seus textos</a>
+    <a href="#escrever" onclick="abrirEditor(); return false;"><span>✎</span>Escrever</a>
+  </nav>
 
-    <div class="sidebar-label">Sua biblioteca</div>
-    <button class="nav-link" onclick="exportNotes()">
-      <span class="nav-icon">⇩</span>Exportar textos
-    </button>
-    <button class="nav-link" onclick="document.getElementById('importFile').click()">
-      <span class="nav-icon">⇧</span>Importar textos
-    </button>
-    <input id="importFile" type="file" accept=".json,application/json"
-           hidden onchange="importNotes(event)">
+  <input type="file" id="arquivoImportar" accept=".json,application/json" hidden>
 
-    <div class="sidebar-note">
-      <strong>✧ Um espaço seu</strong>
-      Escreva sem pressa. Algumas palavras só precisam de um lugar para existir.
+  <div class="modal-fundo" id="modalEditor">
+    <div class="modal">
+      <h2 id="tituloModal">Escrever texto</h2>
+
+      <form id="formTexto">
+        <label class="campo">
+          Título
+          <input id="tituloTexto" maxlength="100" required placeholder="Dê um título ao seu texto">
+        </label>
+
+        <label class="campo">
+          Categoria
+          <select id="categoriaTexto">
+            <option>Reflexão</option>
+            <option>Poesia</option>
+            <option>Diário</option>
+            <option>Conto</option>
+            <option>Romance</option>
+            <option>Outros</option>
+          </select>
+        </label>
+
+        <label class="campo">
+          Imagem (URL opcional)
+          <input id="imagemTexto" type="url" placeholder="https://...">
+        </label>
+
+        <label class="campo">
+          Seu texto
+          <textarea id="corpoTexto" required placeholder="Comece a escrever aqui..."></textarea>
+        </label>
+
+        <div class="acoes-modal">
+          <button class="cancelar" type="button" onclick="fecharEditor()">Cancelar</button>
+          <button class="botao-dourado" type="submit">Salvar texto</button>
+        </div>
+      </form>
     </div>
-  </aside>
-
-  <main>
-    <section class="page" id="page-home">
-      <div class="hero">
-        <div class="hero-content">
-          <div class="eyebrow">Bem-vindo ao seu universo</div>
-          <h1>Onde suas palavras<br>encontram abrigo.</h1>
-          <p>
-            Um espaço para transformar pensamentos em textos, descobrir
-            novas histórias e encontrar palavras que parecem falar com você.
-          </p>
-          <div class="hero-actions">
-            <button class="btn primary" onclick="newNote()">✎ Criar meu texto</button>
-            <button class="btn" onclick="showPage('explore')">Descobrir histórias →</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats">
-        <div class="stat"><strong id="statMine">0</strong><span>Seus textos</span></div>
-        <div class="stat"><strong id="statFav">0</strong><span>Favoritos</span></div>
-        <div class="stat"><strong id="statWords">0</strong><span>Palavras escritas</span></div>
-      </div>
-
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Continue de onde parou</div>
-          <h2>Seus textos recentes</h2>
-        </div>
-        <button class="btn small" onclick="showPage('mine')">Ver todos →</button>
-      </div>
-      <div class="cards" id="homeNotes"></div>
-
-      <div class="section-head">
-        <div>
-          <div class="eyebrow">Feito para descobrir</div>
-          <h2>Do universo Mystic</h2>
-        </div>
-        <button class="btn small" onclick="showPage('explore')">Explorar →</button>
-      </div>
-      <div class="cards" id="homeExplore"></div>
-    </section>
-
-    <section class="page active" id="page-mine">
-      <div class="eyebrow">Seu espaço de criação</div>
-      <h1>Seus textos</h1>
-      <p class="subtitle">Suas ideias, memórias, poemas e histórias reunidos em um só lugar.</p>
-
-      <div class="toolbar">
-        <input id="mineSearch" type="search" placeholder="Buscar nos seus textos..."
-               oninput="renderMine()">
-        <select id="mineCategory" onchange="renderMine()">
-          <option value="">Todas as categorias</option>
-          <option>Poesia</option><option>Desabafo</option>
-          <option>Romance</option><option>Reflexão</option>
-          <option>Conto</option><option>Diário</option><option>Outros</option>
-        </select>
-        <button class="btn primary" onclick="newNote()">＋ Novo texto</button>
-      </div>
-      <div class="cards" id="mineNotes"></div>
-    </section>
-
-    <section class="page" id="page-explore">
-      <div class="eyebrow">Histórias que se encontram</div>
-      <h1>Explore</h1>
-      <p class="subtitle">
-        Leia poemas, reflexões e histórias. Às vezes, as palavras de alguém
-        expressam exatamente aquilo que não conseguimos dizer.
-      </p>
-
-      <div class="toolbar">
-        <input id="exploreSearch" type="search"
-               placeholder="Buscar títulos, temas ou palavras..."
-               oninput="renderExplore()">
-        <select id="exploreCategory" onchange="renderExplore()">
-          <option value="">Todas as categorias</option>
-          <option>Poesia</option><option>Desabafo</option>
-          <option>Romance</option><option>Reflexão</option>
-          <option>Conto</option><option>Diário</option><option>Outros</option>
-        </select>
-      </div>
-
-      <div class="panel" style="margin-bottom:20px">
-        <strong style="color:var(--gold-light)">✧ Um lembrete</strong>
-        <p class="helper" style="font-size:13px;margin-bottom:0">
-          As publicações exibidas aqui são exemplos locais. Para ler textos
-          publicados por outras pessoas em diferentes dispositivos, conecte
-          este site a um serviço de banco de dados e autenticação.
-        </p>
-      </div>
-
-      <div class="cards" id="exploreNotes"></div>
-    </section>
-
-    <section class="page" id="page-editor">
-      <div class="eyebrow">Seu caderno pessoal</div>
-      <h1 id="editorHeading">Uma página em branco.</h1>
-      <p class="subtitle">Não precisa ser perfeito. Só precisa começar.</p>
-
-      <div class="editor" style="margin-top:25px">
-        <div class="panel">
-          <form id="noteForm">
-            <input type="hidden" id="noteId">
-
-            <div class="field">
-              <label for="noteTitle">Título</label>
-              <input id="noteTitle" maxlength="120"
-                     placeholder="Dê um nome para seus pensamentos..." required>
-            </div>
-
-            <div class="field">
-              <label for="noteCategory">Categoria</label>
-              <select id="noteCategory">
-                <option>Poesia</option>
-                <option>Desabafo</option>
-                <option>Romance</option>
-                <option>Reflexão</option>
-                <option>Conto</option>
-                <option>Diário</option>
-                <option>Outros</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="noteContent">Seu texto</label>
-              <textarea id="noteContent"
-                        placeholder="Escreva aqui... deixe as palavras fluírem."
-                        required></textarea>
-              <div class="helper"><span id="wordCount">0</span> palavras</div>
-            </div>
-
-            <div class="field">
-              <label for="noteImage">Foto ou imagem (opcional)</label>
-              <input id="noteImage" type="file" accept="image/*">
-              <div class="helper">Escolha uma imagem para acompanhar seu texto.</div>
-              <div id="imagePreviewBox" style="display:none;margin-top:12px">
-                <img id="imagePreview" alt="Prévia da imagem"
-                     style="max-width:100%;max-height:220px;border-radius:9px">
-                <button class="btn small danger" type="button"
-                        onclick="removeImage()">Remover imagem</button>
-              </div>
-            </div>
-
-            <label class="check-row">
-              <input id="noteFavorite" type="checkbox">
-              Adicionar aos favoritos
-            </label>
-
-            <div class="helper" style="margin:12px 0 18px">
-              Seus textos ficam salvos neste navegador e não são publicados
-              automaticamente para outras pessoas.
-            </div>
-
-            <div class="hero-actions">
-              <button class="btn primary" type="submit">Salvar texto</button>
-              <button class="btn" type="button" onclick="showPage('mine')">Cancelar</button>
-            </div>
-          </form>
-        </div>
-
-        <div class="panel">
-          <div class="eyebrow">Um pequeno ritual</div>
-          <h2>Escreva como quem acende uma vela.</h2>
-          <p class="subtitle" style="line-height:1.9">
-            Não se preocupe com a ordem. Comece por uma lembrança, uma sensação
-            ou uma frase que insiste em voltar.
-          </p>
-          <div style="font-family:Georgia,serif;color:var(--gold-light);font-size:21px;line-height:1.8;margin-top:22px">
-            “Há coisas que só a escrita consegue abraçar.”
-          </div>
-          <div class="helper" style="margin-top:24px">
-            ✧ Seu espaço é seu. Escreva no seu tempo.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="page" id="page-favorites">
-      <div class="eyebrow">Guardados com carinho</div>
-      <h1>Seus favoritos</h1>
-      <p class="subtitle">Textos que você quer reler, perto de você.</p>
-      <div class="cards" id="favoriteNotes" style="margin-top:25px"></div>
-    </section>
-
-    <section class="page" id="page-reader">
-      <button class="btn small" onclick="goBack()">← Voltar</button>
-      <article class="panel" style="margin-top:20px;max-width:850px;margin-left:auto;margin-right:auto">
-        <div class="eyebrow" id="readerCategory">Texto</div>
-        <h1 id="readerTitle"></h1>
-        <div class="reader-author" id="readerAuthor"></div>
-        <img id="readerImage" class="reader-cover" alt="" style="display:none">
-        <div class="read-content" id="readerContent"></div>
-        <div class="helper" id="readerDate" style="margin-top:25px"></div>
-        <div class="hero-actions">
-          <button class="btn" id="readerFavorite" onclick="toggleReaderFavorite()">♡ Favoritar</button>
-          <button class="btn" id="readerEdit" onclick="editReaderNote()" style="display:none">Editar texto</button>
-        </div>
-      </article>
-    </section>
-  </main>
-</div>
-
-<nav class="mobile-nav" aria-label="Navegação principal">
-  <a class="nav-link" href="home.html"><span class="nav-icon">⌂</span>Início</a>
-  <button class="nav-link" data-page="explore" onclick="showPage('explore')">
-    <span class="nav-icon">⌕</span>Explore
-  </button>
-  <button class="nav-link active" data-page="mine" onclick="showPage('mine')">
-    <span class="nav-icon">▤</span>Seus textos
-  </button>
-  <button class="nav-link" data-page="editor" onclick="newNote()">
-    <span class="nav-icon">✎</span>Escrever
-  </button>
-</nav>
-
-<footer class="footer">
-  Mystic · Um lugar para sentir, escrever e descobrir.
-</footer>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<script>
-"use strict";
-
-const STORAGE_KEY = "mystic_meu_caderno_v1";
-const FAVORITES_KEY = "mystic_favoritos_v1";
-
-let notes = loadNotes();
-let readerNote = null;
-let readerSource = "explore";
-let pendingImage = "";
-let removePendingImage = false;
-
-/* Exemplos demonstrativos. Não são publicações reais de usuários. */
-const samplePosts = [
-  {
-    id: "sample-1",
-    title: "O que deixei nas entrelinhas",
-    category: "Poesia",
-    author: "Lua",
-    content: "Guardei tantas palavras no silêncio,\nque um dia o silêncio aprendeu a falar.\n\nE tudo o que não tive coragem de dizer\nfloresceu nas páginas que deixei por terminar.\n\nTalvez escrever seja isso:\ndar às coisas invisíveis\num lugar onde possam respirar.",
-    date: "2026-09-12"
-  },
-  {
-    id: "sample-2",
-    title: "Aprender a ficar",
-    category: "Reflexão",
-    author: "Alguém por aí",
-    content: "Passei tanto tempo tentando ser tudo para todo mundo que esqueci de descobrir quem eu era quando ninguém estava olhando.\n\nAgora estou aprendendo, devagar, que descansar também é um jeito de continuar. Que não preciso transformar cada dor em uma lição imediatamente. Algumas coisas só precisam de tempo.\n\nHoje, ficar comigo já é um começo.",
-    date: "2026-09-08"
-  },
-  {
-    id: "sample-3",
-    title: "Uma casa dentro do peito",
-    category: "Romance",
-    author: "Entrelinhas",
-    content: "Talvez lar nunca tenha sido um endereço.\nTalvez fosse a calma que aparecia quando sua voz atravessava o dia, a maneira como o mundo parecia menos urgente quando você estava perto.\n\nNão sei se existem encontros escritos antes de acontecerem. Sei apenas que, por alguns instantes, estar ao seu lado fez tudo parecer no lugar.",
-    date: "2026-09-02"
-  },
-  {
-    id: "sample-4",
-    title: "Carta para os dias difíceis",
-    category: "Desabafo",
-    author: "Noite Serena",
-    content: "Se hoje tudo parece pesado, não exija de si a leveza de ontem.\n\nVocê pode ir devagar. Pode mudar de ideia. Pode precisar de silêncio. Não é preciso ter uma resposta para cada pergunta nem transformar todo tropeço em uma vitória.\n\nAtravesse este dia como conseguir. Amanhã você tenta de novo.",
-    date: "2026-08-28"
-  },
-  {
-    id: "sample-5",
-    title: "A biblioteca depois da meia-noite",
-    category: "Conto",
-    author: "Papel Antigo",
-    content: "À meia-noite, a biblioteca fazia um ruído delicado, como se milhares de páginas respirassem ao mesmo tempo.\n\nMara encontrou um livro sem título entre duas prateleiras. Ao abri-lo, leu a primeira frase e sentiu um arrepio: a história começava exatamente com o sonho que tivera na noite anterior.\n\nVirou a página.\n\nDesta vez, o livro descrevia o que ela estava fazendo naquele exato instante.",
-    date: "2026-08-20"
-  },
-  {
-    id: "sample-6",
-    title: "Pequenas coisas",
-    category: "Diário",
-    author: "Aurora",
-    content: "Hoje o café esfriou enquanto eu olhava pela janela. A chuva desenhou caminhos no vidro e, por alguns minutos, não senti vontade de correr para lugar nenhum.\n\nFoi pouco. Foi simples. Mas quero lembrar que o dia também teve essa pausa, e que às vezes a felicidade não chega fazendo barulho.",
-    date: "2026-08-15"
-  }
-];
-
-function loadNotes() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    return Array.isArray(saved) ? saved : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveNotes() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
-    renderAll();
-  } catch (error) {
-    showToast("Não foi possível salvar. Tente remover uma imagem muito grande.");
-  }
-}
-
-function loadFavorites() {
-  try {
-    const data = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveFavorites(items) {
-  localStorage.setItem(FAVORITES_KEY, JSON.stringify(items));
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;",
-    '"': "&quot;", "'": "&#39;"
-  })[char]);
-}
-
-function wordTotal(text) {
-  const trimmed = String(text || "").trim();
-  return trimmed ? trimmed.split(/\s+/).length : 0;
-}
-
-function dateLabel(value) {
-  if (!value) return "Sem data";
-  const date = new Date(value + (value.length === 10 ? "T12:00:00" : ""));
-  if (Number.isNaN(date.getTime())) return "Data não disponível";
-  return date.toLocaleDateString("pt-BR", {
-    day: "2-digit", month: "short", year: "numeric"
-  });
-}
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.style.display = "block";
-  clearTimeout(showToast.timer);
-  showToast.timer = setTimeout(() => toast.style.display = "none", 2800);
-}
-
-function showPage(name) {
-  const pageNames = ["home", "mine", "explore", "editor", "favorites", "reader"];
-  if (!pageNames.includes(name)) name = "mine";
-
-  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-  const target = document.getElementById("page-" + name);
-  if (target) target.classList.add("active");
-
-  document.querySelectorAll("[data-page]").forEach(link => {
-    link.classList.toggle("active", link.dataset.page === name ||
-      (name === "reader" && link.dataset.page === readerSource));
-  });
-
-  if (name !== "reader") readerSource = name;
-  renderAll();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function newNote() {
-  document.getElementById("noteForm").reset();
-  document.getElementById("noteId").value = "";
-  document.getElementById("editorHeading").textContent = "Uma página em branco.";
-  document.getElementById("wordCount").textContent = "0";
-  pendingImage = "";
-  removePendingImage = false;
-  document.getElementById("noteImage").value = "";
-  document.getElementById("imagePreviewBox").style.display = "none";
-  showPage("editor");
-}
-
-function editNote(id) {
-  const note = notes.find(item => item.id === id);
-  if (!note) return;
-
-  document.getElementById("noteId").value = note.id;
-  document.getElementById("noteTitle").value = note.title;
-  document.getElementById("noteCategory").value = note.category || "Outros";
-  document.getElementById("noteContent").value = note.content;
-  document.getElementById("noteFavorite").checked = !!note.favorite;
-  document.getElementById("editorHeading").textContent = "Continue sua história.";
-  document.getElementById("wordCount").textContent = wordTotal(note.content);
-
-  pendingImage = note.image || "";
-  removePendingImage = false;
-  document.getElementById("noteImage").value = "";
-  updateImagePreview();
-  showPage("editor");
-}
-
-function removeImage() {
-  pendingImage = "";
-  removePendingImage = true;
-  document.getElementById("noteImage").value = "";
-  updateImagePreview();
-}
-
-function updateImagePreview() {
-  const box = document.getElementById("imagePreviewBox");
-  const image = document.getElementById("imagePreview");
-  if (pendingImage) {
-    image.src = pendingImage;
-    box.style.display = "block";
-  } else {
-    image.removeAttribute("src");
-    box.style.display = "none";
-  }
-}
-
-document.getElementById("noteImage").addEventListener("change", event => {
-  const file = event.target.files && event.target.files[0];
-  if (!file) return;
-
-  if (!file.type.startsWith("image/")) {
-    showToast("Escolha um arquivo de imagem.");
-    event.target.value = "";
-    return;
-  }
-
-  if (file.size > 3 * 1024 * 1024) {
-    showToast("Escolha uma imagem de até 3 MB.");
-    event.target.value = "";
-    return;
-  }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    pendingImage = String(reader.result || "");
-    removePendingImage = false;
-    updateImagePreview();
-  };
-  reader.onerror = () => showToast("Não foi possível carregar a imagem.");
-  reader.readAsDataURL(file);
-});
-
-document.getElementById("noteContent").addEventListener("input", event => {
-  document.getElementById("wordCount").textContent = wordTotal(event.target.value);
-});
-
-document.getElementById("noteForm").addEventListener("submit", event => {
-  event.preventDefault();
-
-  const id = document.getElementById("noteId").value;
-  const title = document.getElementById("noteTitle").value.trim();
-  const category = document.getElementById("noteCategory").value;
-  const content = document.getElementById("noteContent").value.trim();
-  const favorite = document.getElementById("noteFavorite").checked;
-
-  if (!title || !content) {
-    showToast("Preencha o título e o texto.");
-    return;
-  }
-
-  const old = notes.find(item => item.id === id);
-  const note = {
-    id: id || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
-    title,
-    category,
-    content,
-    favorite,
-    image: removePendingImage ? "" : pendingImage,
-    createdAt: old ? old.createdAt : new Date().toISOString(),
-    updatedAt: new Date().toISOString()
-  };
-
-  if (old) {
-    notes = notes.map(item => item.id === id ? note : item);
-  } else {
-    notes.unshift(note);
-  }
-
-  saveNotes();
-  showPage("mine");
-  showToast(old ? "Texto atualizado!" : "Texto salvo no seu caderno!");
-});
-
-function deleteNote(id) {
-  if (!confirm("Tem certeza de que deseja excluir este texto?")) return;
-  notes = notes.filter(item => item.id !== id);
-  saveNotes();
-  showToast("Texto excluído.");
-}
-
-function toggleFavorite(id) {
-  notes = notes.map(note => note.id === id
-    ? { ...note, favorite: !note.favorite }
-    : note);
-  saveNotes();
-  showToast(notes.find(note => note.id === id)?.favorite
-    ? "Adicionado aos favoritos." : "Removido dos favoritos.");
-}
-
-function noteCard(note, isSample = false) {
-  const id = escapeHTML(note.id);
-  const category = escapeHTML(note.category || "Outros");
-  const title = escapeHTML(note.title);
-  const excerpt = escapeHTML(note.content);
-  const author = escapeHTML(isSample ? note.author : "Você");
-  const date = dateLabel(note.updatedAt || note.date || note.createdAt);
-  const cover = note.image
-    ? `<img class="note-cover" src="${note.image}" alt="Imagem do texto" loading="lazy">`
-    : "";
-
-  return `
-    <article class="note-card">
-      ${cover}
-      <div class="note-body">
-        <div class="note-meta">
-          <span class="tag">${category}</span>
-          <span>${escapeHTML(date)}</span>
-        </div>
-        <h3>${title}</h3>
-        <div class="reader-author" style="margin-bottom:10px">${author}</div>
-        <p class="note-excerpt">${excerpt}</p>
-        <div class="note-actions">
-          <button class="btn primary" onclick="openReader('${id}', ${isSample})">Ler texto →</button>
-          ${!isSample ? `
-            <button class="btn" onclick="editNote('${id}')">Editar</button>
-            <button class="btn" onclick="toggleFavorite('${id}')">${note.favorite ? "♥ Favorito" : "♡ Favoritar"}</button>
-            <button class="btn danger" onclick="deleteNote('${id}')">Excluir</button>
-          ` : `
-            <button class="btn" onclick="toggleSampleFavorite('${id}')">
-              ${loadFavorites().includes(id) ? "♥ Favorito" : "♡ Favoritar"}
-            </button>
-          `}
-        </div>
-      </div>
-    </article>`;
-}
-
-function emptyState(message, detail) {
-  return `<div class="empty"><span>✧</span><strong>${escapeHTML(message)}</strong>
-    <div class="helper">${escapeHTML(detail)}</div></div>`;
-}
-
-function renderMine() {
-  const query = (document.getElementById("mineSearch")?.value || "").toLowerCase().trim();
-  const category = document.getElementById("mineCategory")?.value || "";
-
-  const filtered = notes.filter(note =>
-    (!category || note.category === category) &&
-    (!query || (note.title + " " + note.content + " " + note.category).toLowerCase().includes(query))
-  );
-
-  document.getElementById("mineNotes").innerHTML = filtered.length
-    ? filtered.map(note => noteCard(note)).join("")
-    : emptyState("Seu caderno começa aqui.", "Crie seu primeiro texto e ele aparecerá nesta página.");
-}
-
-function renderExplore() {
-  const query = (document.getElementById("exploreSearch")?.value || "").toLowerCase().trim();
-  const category = document.getElementById("exploreCategory")?.value || "";
-
-  const posts = samplePosts.filter(note =>
-    (!category || note.category === category) &&
-    (!query || (note.title + " " + note.content + " " + note.category + " " + note.author)
-      .toLowerCase().includes(query))
-  );
-
-  document.getElementById("exploreNotes").innerHTML = posts.length
-    ? posts.map(note => noteCard(note, true)).join("")
-    : emptyState("Nenhum texto encontrado.", "Tente outra palavra ou categoria.");
-}
-
-function renderFavorites() {
-  const sampleFavs = loadFavorites();
-  const all = [
-    ...notes.filter(note => note.favorite).map(note => noteCard(note)),
-    ...samplePosts.filter(note => sampleFavs.includes(note.id)).map(note => noteCard(note, true))
-  ];
-
-  document.getElementById("favoriteNotes").innerHTML = all.length
-    ? all.join("")
-    : emptyState("Ainda não há favoritos.", "Marque um texto com ♡ para guardá-lo aqui.");
-}
-
-function renderHome() {
-  document.getElementById("statMine").textContent = notes.length;
-  document.getElementById("statFav").textContent =
-    notes.filter(note => note.favorite).length + loadFavorites().length;
-  document.getElementById("statWords").textContent =
-    notes.reduce((sum, note) => sum + wordTotal(note.content), 0);
-
-  document.getElementById("homeNotes").innerHTML = notes.length
-    ? notes.slice(0, 2).map(note => noteCard(note)).join("")
-    : emptyState("Ainda não há textos.", "Clique em “Criar meu texto” para começar.");
-
-  document.getElementById("homeExplore").innerHTML =
-    samplePosts.slice(0, 2).map(note => noteCard(note, true)).join("");
-}
-
-function renderAll() {
-  renderHome();
-  renderMine();
-  renderExplore();
-  renderFavorites();
-}
-
-function openReader(id, isSample = false) {
-  const note = isSample
-    ? samplePosts.find(item => item.id === id)
-    : notes.find(item => item.id === id);
-
-  if (!note) return;
-
-  readerNote = { ...note, isSample };
-  readerSource = isSample ? "explore" : "mine";
-
-  document.getElementById("readerCategory").textContent = note.category || "Texto";
-  document.getElementById("readerTitle").textContent = note.title;
-  document.getElementById("readerAuthor").textContent =
-    isSample ? "Por " + note.author + " · texto demonstrativo" : "Escrito por você";
-  document.getElementById("readerContent").textContent = note.content;
-  document.getElementById("readerDate").textContent =
-    "Atualizado em " + dateLabel(note.updatedAt || note.date || note.createdAt);
-
-  const image = document.getElementById("readerImage");
-  if (note.image) {
-    image.src = note.image;
-    image.style.display = "block";
-  } else {
-    image.removeAttribute("src");
-    image.style.display = "none";
-  }
-
-  document.getElementById("readerEdit").style.display = isSample ? "none" : "inline-block";
-  updateReaderFavoriteButton();
-  showPage("reader");
-}
-
-function updateReaderFavoriteButton() {
-  if (!readerNote) return;
-  const saved = readerNote.isSample
-    ? loadFavorites().includes(readerNote.id)
-    : !!notes.find(note => note.id === readerNote.id)?.favorite;
-  document.getElementById("readerFavorite").textContent =
-    saved ? "♥ Remover dos favoritos" : "♡ Favoritar";
-}
-
-function toggleReaderFavorite() {
-  if (!readerNote) return;
-
-  if (readerNote.isSample) {
-    toggleSampleFavorite(readerNote.id);
-  } else {
-    toggleFavorite(readerNote.id);
-  }
-  updateReaderFavoriteButton();
-}
-
-function toggleSampleFavorite(id) {
-  let favorites = loadFavorites();
-  if (favorites.includes(id)) {
-    favorites = favorites.filter(item => item !== id);
-    showToast("Removido dos favoritos.");
-  } else {
-    favorites.push(id);
-    showToast("Adicionado aos favoritos.");
-  }
-  saveFavorites(favorites);
-  renderAll();
-  updateReaderFavoriteButton();
-}
-
-function editReaderNote() {
-  if (readerNote && !readerNote.isSample) editNote(readerNote.id);
-}
-
-function goBack() {
-  showPage(readerSource === "explore" ? "explore" : "mine");
-}
-
-function exportNotes() {
-  const data = {
-    app: "Mystic",
-    exportedAt: new Date().toISOString(),
-    notes,
-    sampleFavorites: loadFavorites()
-  };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "meus-textos-mystic.json";
-  link.click();
-  URL.revokeObjectURL(url);
-  showToast("Exportação iniciada.");
-}
-
-function importNotes(event) {
-  const file = event.target.files && event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const data = JSON.parse(String(reader.result));
-      const imported = Array.isArray(data) ? data : data.notes;
-      if (!Array.isArray(imported)) throw new Error("Formato inválido");
-
-      const clean = imported.filter(item =>
-        item && typeof item.title === "string" &&
-        typeof item.content === "string"
-      ).map(item => ({
-        id: String(item.id || (crypto.randomUUID ? crypto.randomUUID() : Date.now())),
-        title: item.title.slice(0, 120),
-        content: item.content,
-        category: item.category || "Outros",
-        favorite: !!item.favorite,
-        image: typeof item.image === "string" ? item.image : "",
-        createdAt: item.createdAt || new Date().toISOString(),
-        updatedAt: item.updatedAt || new Date().toISOString()
-      }));
-
-      const byId = new Map(notes.map(note => [note.id, note]));
-      clean.forEach(note => byId.set(note.id, note));
-      notes = Array.from(byId.values());
-      saveNotes();
-      if (Array.isArray(data.sampleFavorites)) saveFavorites(data.sampleFavorites);
-      showPage("mine");
-      showToast(clean.length + " texto(s) importado(s).");
-    } catch {
-      showToast("Não foi possível importar esse arquivo JSON.");
+  </div>
+
+  <script>
+    const CHAVE = "mystic_meus_textos_v1";
+
+    const exemplos = [
+      {
+        id: "exemplo1",
+        titulo: "O que realmente importa",
+        categoria: "Reflexão",
+        corpo: "Às vezes, a vida nos coloca diante de perguntas que não têm respostas imediatas, mas que nos ensinam a olhar para dentro.",
+        data: "2026-09-12",
+        imagem: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+        favorito: true
+      },
+      {
+        id: "exemplo2",
+        titulo: "Entre o que sinto e o que digo",
+        categoria: "Poesia",
+        corpo: "Há palavras que não cabem em frases, apenas em silêncios, e é nesse espaço que a poesia nasce, devagar.",
+        data: "2026-09-10",
+        imagem: "https://images.unsplash.com/photo-1455390582262-044cdeep?auto=format&fit=crop&w=900&q=80",
+        favorito: false
+      },
+      {
+        id: "exemplo3",
+        titulo: "Mais um dia",
+        categoria: "Diário",
+        corpo: "Hoje escolhi desacelerar. Nem tudo precisa ser urgente. Às vezes, a gente só precisa de tempo para respirar.",
+        data: "2026-09-08",
+        imagem: "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=900&q=80",
+        favorito: true
+      },
+      {
+        id: "exemplo4",
+        titulo: "A floresta e o relógio",
+        categoria: "Conto",
+        corpo: "Ele encontrou um relógio perdido entre as folhas. Não era um relógio comum, mas um objeto que parecia guardar o tempo.",
+        data: "2026-09-05",
+        imagem: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80",
+        favorito: false
+      },
+      {
+        id: "exemplo5",
+        titulo: "Talvez seja sobre nós",
+        categoria: "Romance",
+        corpo: "Talvez o que a gente chama de amor seja a coragem de ficar, mesmo quando o mundo insiste em ir embora.",
+        data: "2026-09-02",
+        imagem: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=900&q=80",
+        favorito: false
+      },
+      {
+        id: "exemplo6",
+        titulo: "Pensamentos da madrugada",
+        categoria: "Outros",
+        corpo: "É curioso como a madrugada faz tudo parecer mais simples. Os problemas ganham outra cor, menos urgente, menos pesado.",
+        data: "2026-08-28",
+        imagem: "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=80",
+        favorito: true
+      }
+    ];
+
+    let textos = carregarTextos();
+    let idEditando = null;
+    let somenteFavoritos = false;
+
+    function carregarTextos() {
+      try {
+        const salvos = localStorage.getItem(CHAVE);
+        if (salvos !== null) return JSON.parse(salvos);
+      } catch (erro) {
+        console.warn("Não foi possível carregar os textos.", erro);
+      }
+      return exemplos.map(texto => ({ ...texto }));
     }
-    event.target.value = "";
-  };
-  reader.readAsText(file);
-}
 
-/* Inicialização */
-renderAll();
-</script>
+    function salvarTextos() {
+      localStorage.setItem(CHAVE, JSON.stringify(textos));
+    }
+
+    function escapar(valor) {
+      return String(valor ?? "").replace(/[&<>"']/g, letra => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[letra]);
+    }
+
+    function dataFormatada(data) {
+      if (!data) return "";
+      const d = new Date(data + "T12:00:00");
+      if (Number.isNaN(d.getTime())) return "";
+      return d.toLocaleDateString("pt-BR", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+      }).replace(".", "");
+    }
+
+    function renderizar() {
+      const busca = document.getElementById("buscaTextos").value.toLocaleLowerCase("pt-BR").trim();
+      const categoria = document.getElementById("filtroCategoria").value;
+
+      const encontrados = textos.filter(texto => {
+        const conteudo = (texto.titulo + " " + texto.corpo + " " + texto.categoria).toLocaleLowerCase("pt-BR");
+        return conteudo.includes(busca)
+          && (!categoria || texto.categoria === categoria)
+          && (!somenteFavoritos || texto.favorito);
+      });
+
+      const lista = document.getElementById("listaTextos");
+
+      if (!encontrados.length) {
+        lista.innerHTML = '<div class="vazio"><h3>Nenhum texto encontrado</h3>Experimente mudar a busca ou crie um novo texto.</div>';
+      } else {
+        lista.innerHTML = encontrados.map(texto => {
+          const imagem = texto.imagem || "";
+          return `
+            <article class="cartao">
+              <img src="${escapar(imagem)}" alt="" loading="lazy"
+                   onerror="this.style.display='none'">
+              <span class="categoria">${escapar(texto.categoria || "Outros")}</span>
+              <h3>${escapar(texto.titulo)}</h3>
+              <p class="resumo">${escapar(texto.corpo)}</p>
+              <div class="acoes-cartao">
+                <span>${dataFormatada(texto.data)}</span>
+                <div>
+                  <button class="${texto.favorito ? "favoritado" : ""}"
+                    onclick="alternarFavorito('${escapar(texto.id)}')"
+                    title="Favoritar" aria-label="Favoritar">${texto.favorito ? "♥" : "♡"}</button>
+                  <button onclick="editarTexto('${escapar(texto.id)}')"
+                    title="Editar" aria-label="Editar">✎</button>
+                  <button onclick="excluirTexto('${escapar(texto.id)}')"
+                    title="Excluir" aria-label="Excluir">♧</button>
+                </div>
+              </div>
+            </article>`;
+        }).join("");
+      }
+
+      document.getElementById("contador").textContent =
+        `Mostrando ${encontrados.length} de ${textos.length} textos${somenteFavoritos ? " favoritos" : ""}.`;
+    }
+
+    function abrirEditor(id = null) {
+      idEditando = id;
+      document.getElementById("formTexto").reset();
+
+      const texto = id ? textos.find(t => t.id === id) : null;
+      document.getElementById("tituloModal").textContent =
+        texto ? "Editar texto" : "Escrever texto";
+
+      if (texto) {
+        document.getElementById("tituloTexto").value = texto.titulo;
+        document.getElementById("categoriaTexto").value = texto.categoria || "Outros";
+        document.getElementById("imagemTexto").value = texto.imagem || "";
+        document.getElementById("corpoTexto").value = texto.corpo;
+      }
+
+      document.getElementById("modalEditor").classList.add("aberto");
+    }
+
+    function fecharEditor() {
+      document.getElementById("modalEditor").classList.remove("aberto");
+      idEditando = null;
+    }
+
+    document.getElementById("formTexto").addEventListener("submit", evento => {
+      evento.preventDefault();
+
+      const titulo = document.getElementById("tituloTexto").value.trim();
+      const categoria = document.getElementById("categoriaTexto").value;
+      const imagem = document.getElementById("imagemTexto").value.trim();
+      const corpo = document.getElementById("corpoTexto").value.trim();
+
+      if (!titulo || !corpo) return;
+
+      if (idEditando) {
+        const indice = textos.findIndex(t => t.id === idEditando);
+        if (indice !== -1) {
+          textos[indice] = {
+            ...textos[indice],
+            titulo, categoria, imagem, corpo
+          };
+        }
+      } else {
+        textos.unshift({
+          id: "texto-" + Date.now(),
+          titulo, categoria, imagem, corpo,
+          data: new Date().toISOString().slice(0, 10),
+          favorito: false
+        });
+      }
+
+      salvarTextos();
+      fecharEditor();
+      renderizar();
+    });
+
+    function editarTexto(id) {
+      abrirEditor(id);
+    }
+
+    function excluirTexto(id) {
+      const texto = textos.find(t => t.id === id);
+      if (!texto) return;
+
+      if (confirm(`Deseja excluir "${texto.titulo}"?`)) {
+        textos = textos.filter(t => t.id !== id);
+        salvarTextos();
+        renderizar();
+      }
+    }
+
+    function alternarFavorito(id) {
+      const texto = textos.find(t => t.id === id);
+      if (!texto) return;
+
+      texto.favorito = !texto.favorito;
+      salvarTextos();
+      renderizar();
+    }
+
+    function alternarFavoritos() {
+      somenteFavoritos = !somenteFavoritos;
+      renderizar();
+      document.querySelector(".conteudo").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function exportarTextos() {
+      const arquivo = new Blob(
+        [JSON.stringify(textos, null, 2)],
+        { type: "application/json" }
+      );
+
+      const url = URL.createObjectURL(arquivo);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "mystic-meus-textos.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("arquivoImportar").addEventListener("change", evento => {
+      const arquivo = evento.target.files[0];
+      if (!arquivo) return;
+
+      const leitor = new FileReader();
+
+      leitor.onload = () => {
+        try {
+          const importados = JSON.parse(leitor.result);
+          if (!Array.isArray(importados)) throw new Error("Formato inválido");
+
+          const validos = importados.filter(t =>
+            t && typeof t.titulo === "string" && typeof t.corpo === "string"
+          ).map(t => ({ ...t, id: "importado-" + Date.now() + Math.random() }));
+
+          textos = [...validos, ...textos];
+          salvarTextos();
+          renderizar();
+          alert(`${validos.length} texto(s) importado(s).`);
+        } catch {
+          alert("Não foi possível importar. Selecione um JSON exportado pelo Mystic.");
+        }
+
+        evento.target.value = "";
+      };
+
+      leitor.readAsText(arquivo);
+    });
+
+    document.getElementById("buscaTextos").addEventListener("input", renderizar);
+    document.getElementById("filtroCategoria").addEventListener("change", renderizar);
+
+    document.getElementById("buscaGeral").addEventListener("input", evento => {
+      document.getElementById("buscaTextos").value = evento.target.value;
+      renderizar();
+    });
+
+    document.getElementById("modalEditor").addEventListener("click", evento => {
+      if (evento.target.id === "modalEditor") fecharEditor();
+    });
+
+    document.addEventListener("keydown", evento => {
+      if (evento.key === "Escape") fecharEditor();
+    });
+
+    renderizar();
+  </script>
 </body>
 </html>
