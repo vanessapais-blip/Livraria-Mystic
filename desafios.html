@@ -1,0 +1,1781 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0907">
+<meta name="description" content="Participe dos desafios literários da Mystic, escreva, leia e descubra sua criatividade.">
+<title>Desafios | Mystic</title>
+
+<style>
+:root {
+  --bg: #0b0907;
+  --panel: #14100c;
+  --panel-light: #1d1710;
+  --gold: #d6a251;
+  --gold-light: #f4d18e;
+  --text: #f5ecdf;
+  --muted: #c0b3a2;
+  --border: #493622;
+  --green: #a4c99a;
+  --red: #ed9b83;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--text);
+  background: var(--bg);
+  font-family: Arial, sans-serif;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+.topbar {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: #0b0907;
+  border: 1px solid var(--border);
+}
+
+.back {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  color: var(--gold-light);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-size: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold-light);
+  font: bold 32px Georgia, serif;
+  white-space: nowrap;
+}
+
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+}
+
+.header-search {
+  width: min(390px, 36%);
+  margin: auto;
+}
+
+.header-search input {
+  width: 100%;
+  padding: 11px 15px;
+  color: var(--text);
+  background: #100d0a;
+  border: 1px solid #51402c;
+  border-radius: 25px;
+  outline: none;
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+  color: var(--gold-light);
+  font-size: 22px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 225px minmax(0, 1fr);
+  min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+  padding: 16px 12px;
+  background: #0e0c0a;
+  border-right: 1px solid var(--border);
+}
+
+.nav { display: grid; gap: 4px; }
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.nav a:hover, .nav a.active {
+  color: var(--gold-light);
+  background: #302316;
+  border-color: #624a2c;
+}
+
+.nav-icon {
+  width: 23px;
+  color: var(--gold-light);
+  text-align: center;
+  font-size: 20px;
+}
+
+.side-label {
+  margin: 23px 8px 9px;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.side-note {
+  margin: 26px 5px;
+  padding: 15px;
+  color: var(--muted);
+  border: 1px solid #634825;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.side-note strong {
+  display: block;
+  margin: 8px 0;
+  color: var(--gold-light);
+  font: 18px Georgia, serif;
+}
+
+main { min-width: 0; }
+
+.hero {
+  min-height: 230px;
+  display: flex;
+  align-items: center;
+  padding: 32px 38px;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(7,5,3,.97), rgba(7,5,3,.63)),
+    url("https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1600&q=85")
+    center 48% / cover;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.eyebrow {
+  color: var(--gold-light);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 10px 0;
+  font: bold clamp(36px, 4vw, 49px) Georgia, serif;
+}
+
+.hero p {
+  max-width: 590px;
+  margin: 0;
+  color: #e4d8c9;
+  font: 17px/1.7 Georgia, serif;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.hero-stat {
+  color: #d4c4ad;
+  font-size: 12px;
+}
+
+.hero-stat strong {
+  color: var(--gold-light);
+  font-size: 17px;
+}
+
+.content { padding: 25px 28px; }
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font: bold 26px Georgia, serif;
+}
+
+.gold-icon { margin-right: 8px; color: var(--gold-light); }
+
+.primary {
+  padding: 11px 17px;
+  color: #1b1207;
+  background: linear-gradient(135deg, #f4d18f, #ce9746);
+  border: 0;
+  border-radius: 9px;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.primary:hover { filter: brightness(1.08); }
+
+.secondary {
+  padding: 10px 14px;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid #72542f;
+  border-radius: 9px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+  margin-bottom: 29px;
+}
+
+.stat-card {
+  padding: 17px;
+  background: linear-gradient(145deg, #1b150e, #100d09);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+}
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-label { color: var(--muted); font-size: 12px; }
+.stat-icon { color: var(--gold-light); font-size: 22px; }
+.stat-number { margin-top: 13px; font: bold 29px Georgia, serif; }
+.stat-caption { margin-top: 5px; color: #a99a85; font-size: 11px; }
+
+.daily-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(210px, .8fr);
+  gap: 22px;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 22px;
+  background: linear-gradient(120deg, #24190e, #130e09);
+  border: 1px solid #6b4c29;
+  border-radius: 13px;
+}
+
+.daily-label {
+  color: var(--gold-light);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+
+.daily-panel h3 {
+  margin: 9px 0;
+  font: bold 24px Georgia, serif;
+}
+
+.daily-panel p {
+  margin: 0;
+  color: #cfc1ad;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.daily-progress { margin-top: 17px; }
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.progress-track {
+  height: 8px;
+  overflow: hidden;
+  background: #090705;
+  border: 1px solid #44301a;
+  border-radius: 20px;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #b47b31, #f4d18e);
+  border-radius: inherit;
+  transition: width .3s;
+}
+
+.daily-action {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.daily-symbol {
+  width: 86px;
+  height: 86px;
+  display: grid;
+  place-items: center;
+  color: var(--gold-light);
+  background: #120d07;
+  border: 1px solid #98703b;
+  border-radius: 50%;
+  font-size: 39px;
+}
+
+.daily-action small { color: var(--muted); font-size: 11px; }
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) 190px 180px;
+  gap: 10px;
+  margin-bottom: 17px;
+}
+
+.toolbar input, .toolbar select,
+.form-field input, .form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 12px 13px;
+  color: var(--text);
+  background: #100d0a;
+  border: 1px solid #4d3923;
+  border-radius: 9px;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus { border-color: var(--gold); }
+select option { background: #17110b; }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 19px;
+}
+
+.tab {
+  padding: 9px 14px;
+  color: var(--muted);
+  background: #15110d;
+  border: 1px solid #3c2c1c;
+  border-radius: 25px;
+  font-size: 12px;
+}
+
+.tab.active, .tab:hover {
+  color: var(--gold-light);
+  background: #302316;
+  border-color: var(--gold);
+}
+
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.challenge-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(150deg, #19130d, #0e0b08);
+  border: 1px solid #4c3924;
+  border-radius: 12px;
+  transition: transform .2s, border-color .2s;
+}
+
+.challenge-card:hover {
+  transform: translateY(-3px);
+  border-color: #9a713c;
+}
+
+.challenge-cover {
+  min-height: 108px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--cover, linear-gradient(135deg,#4a2f1c,#16100b));
+  border-bottom: 1px solid #44301d;
+}
+
+.challenge-cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(8,6,4,.6), rgba(8,6,4,.05));
+}
+
+.challenge-symbol {
+  position: relative;
+  color: #f4ce89;
+  font-size: 44px;
+  text-shadow: 0 2px 15px #000;
+}
+
+.challenge-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.tag {
+  display: inline-block;
+  padding: 5px 8px;
+  color: var(--gold-light);
+  background: #302316;
+  border: 1px solid #654a2a;
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+.tag.easy { color: #b8d9a8; border-color: #496442; background: #172015; }
+.tag.medium { color: #e9c47d; }
+.tag.hard { color: #f0a18d; border-color: #714132; background: #28140f; }
+.tag.done { color: var(--green); border-color: #496442; background: #172015; }
+
+.challenge-body h3 {
+  margin: 12px 0 8px;
+  font: bold 20px Georgia, serif;
+}
+
+.challenge-description {
+  flex: 1;
+  margin: 0;
+  color: #c9beaf;
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.challenge-meta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+  color: #bba98f;
+  font-size: 11px;
+}
+
+.challenge-progress { margin-bottom: 14px; }
+
+.challenge-progress .progress-track { height: 6px; }
+
+.challenge-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.challenge-actions button { flex: 1; }
+
+.challenge-actions .details-btn {
+  flex: 0 0 auto;
+  padding: 10px 12px;
+}
+
+.empty-state {
+  display: none;
+  padding: 38px 15px;
+  color: var(--muted);
+  text-align: center;
+  background: #12100c;
+  border: 1px dashed #624a2c;
+  border-radius: 12px;
+}
+
+.empty-state .big { color: var(--gold-light); font-size: 36px; }
+
+.my-progress {
+  margin-top: 32px;
+  padding: 21px;
+  background: #15110c;
+  border: 1px solid #4a3722;
+  border-radius: 12px;
+}
+
+.my-progress h2 {
+  margin: 0 0 8px;
+  font: 25px Georgia, serif;
+}
+
+.my-progress > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.progress-list { display: grid; gap: 12px; margin-top: 17px; }
+
+.progress-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 13px;
+  background: #0e0c09;
+  border: 1px solid #3e2e1d;
+  border-radius: 9px;
+}
+
+.progress-row strong { font: 17px Georgia, serif; }
+.progress-row p { margin: 6px 0 0; color: var(--muted); font-size: 11px; }
+
+.progress-row button {
+  padding: 8px 10px;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid #634825;
+  border-radius: 8px;
+  font-size: 11px;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+  margin-top: 30px;
+}
+
+.tip-card {
+  padding: 17px;
+  background: #12100c;
+  border: 1px solid #40301f;
+  border-radius: 10px;
+}
+
+.tip-card span { color: var(--gold-light); font-size: 23px; }
+.tip-card h3 { margin: 10px 0 7px; font: 18px Georgia, serif; }
+.tip-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+footer {
+  padding: 23px 12px;
+  color: #b99a6c;
+  border-top: 1px solid #332619;
+  text-align: center;
+  font: 13px Georgia, serif;
+}
+
+/* Janelas */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,.82);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  width: min(550px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px;
+  background: #15110d;
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  box-shadow: 0 20px 70px #000;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: flex-start;
+  margin-bottom: 17px;
+}
+
+.modal-header h2 { margin: 0; font: 26px Georgia, serif; }
+
+.close {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid #4c3823;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.form-field { display: grid; gap: 7px; margin-bottom: 14px; }
+.form-field label { color: #dfcfb9; font-size: 13px; }
+.form-field textarea { min-height: 100px; resize: vertical; }
+
+.modal-note { color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+.modal-actions { display: flex; gap: 9px; margin-top: 18px; }
+.modal-actions button { flex: 1; }
+
+.challenge-detail-symbol {
+  display: grid;
+  place-items: center;
+  min-height: 90px;
+  margin-bottom: 15px;
+  color: var(--gold-light);
+  background: linear-gradient(135deg, #3a2716, #100c08);
+  border: 1px solid #634825;
+  border-radius: 9px;
+  font-size: 42px;
+}
+
+.detail-description {
+  color: #e1d5c6;
+  line-height: 1.8;
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+
+.editor-label {
+  display: block;
+  margin: 16px 0 7px;
+  color: var(--gold-light);
+  font-size: 12px;
+}
+
+#challengeAnswer {
+  width: 100%;
+  min-height: 180px;
+  padding: 13px;
+  color: var(--text);
+  background: #0d0b08;
+  border: 1px solid #4d3923;
+  border-radius: 9px;
+  resize: vertical;
+  outline: none;
+  line-height: 1.7;
+}
+
+.answer-count { display: flex; justify-content: space-between; margin-top: 7px; color: var(--muted); font-size: 11px; }
+
+.mobile-nav { display: none; }
+
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 205px minmax(0, 1fr); }
+  .challenge-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .toolbar { grid-template-columns: minmax(140px, 1fr) 1fr; }
+  .toolbar select:last-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  .topbar { height: 63px; gap: 9px; padding: 0 10px; }
+  .back { width: 36px; height: 36px; font-size: 22px; }
+  .brand { gap: 7px; font-size: 25px; }
+  .brand img { width: 39px; height: 39px; }
+  .header-search { display: none; }
+  .header-actions { margin-left: auto; font-size: 20px; }
+
+  .layout { display: block; }
+  .sidebar { display: none; }
+
+  .hero { min-height: 205px; padding: 25px 17px; background-position: center; }
+  .hero h1 { font-size: 36px; }
+  .hero p { font-size: 15px; }
+  .hero-stats { gap: 15px; }
+
+  .content { padding: 20px 13px; }
+  .section-heading h2 { font-size: 23px; }
+  .stats-grid { gap: 9px; }
+  .stat-card { padding: 13px; }
+  .stat-number { font-size: 25px; }
+
+  .daily-panel { grid-template-columns: 1fr; padding: 17px; }
+  .daily-action { display: flex; justify-content: flex-start; text-align: left; }
+  .daily-symbol { width: 55px; height: 55px; flex-shrink: 0; font-size: 27px; }
+  .daily-action small { display: none; }
+
+  .toolbar { grid-template-columns: 1fr; }
+  .toolbar select:last-child { grid-column: auto; }
+
+  .challenge-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  .challenge-card { display: grid; grid-template-columns: 100px minmax(0, 1fr); }
+  .challenge-cover { min-height: 100%; border-right: 1px solid #44301d; border-bottom: 0; }
+  .challenge-symbol { font-size: 32px; }
+  .challenge-body { padding: 12px; }
+  .challenge-body h3 { font-size: 18px; }
+  .challenge-description { font-size: 12px; }
+  .challenge-meta { margin: 10px 0; }
+
+  .challenge-actions { flex-wrap: wrap; }
+  .challenge-actions button { padding: 9px 8px; font-size: 11px; }
+  .challenge-actions .details-btn { padding: 9px; }
+
+  .progress-row { grid-template-columns: 1fr; }
+  .progress-row button { width: 100%; }
+  .tips-grid { grid-template-columns: 1fr; }
+  .my-progress { padding: 15px; }
+
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 35;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 64px;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: #0d0b09f7;
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 9px;
+  }
+
+  .mobile-nav span { color: var(--gold-light); font-size: 20px; }
+  footer { padding-bottom: 83px; }
+}
+
+@media (max-width: 390px) {
+  .brand { font-size: 22px; }
+  .challenge-card { grid-template-columns: 83px minmax(0, 1fr); }
+  .challenge-body { padding: 10px; }
+  .challenge-actions { flex-direction: column; align-items: stretch; }
+  .challenge-actions button { width: 100%; }
+  .tag { font-size: 9px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="back" href="home.html" title="Voltar para o início"
+     aria-label="Voltar para a página inicial">←</a>
+
+  <a class="brand" href="home.html">
+    <img src="logo-mystic.jpg" alt="Logo Mystic"
+         onerror="this.style.display='none'">
+    <span>Mystic</span>
+  </a>
+
+  <div class="header-search">
+    <input id="headerSearch" type="search" placeholder="⌕  Buscar desafios...">
+  </div>
+
+  <div class="header-actions" aria-hidden="true">
+    <span>✧</span>
+    <span>♙</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <nav class="nav">
+      <a href="home.html"><span class="nav-icon">⌂</span>Início</a>
+      <a href="explore.html"><span class="nav-icon">⌕</span>Explore</a>
+      <a href="dicionario.html"><span class="nav-icon">▤</span>Dicionário</a>
+      <a href="meu-caderno.html"><span class="nav-icon">▧</span>Seus textos</a>
+      <a href="meu-caderno.html"><span class="nav-icon">✎</span>Escrever texto</a>
+      <a href="favoritos.html"><span class="nav-icon">♡</span>Favoritos</a>
+    </nav>
+
+    <div class="side-label">COMUNIDADE</div>
+
+    <nav class="nav">
+      <a href="forum.html"><span class="nav-icon">▢</span>Fórum</a>
+      <a href="grupos.html"><span class="nav-icon">♧</span>Grupos</a>
+      <a href="desafios.html" class="active"><span class="nav-icon">♜</span>Desafios</a>
+      <a href="sobre.html"><span class="nav-icon">ⓘ</span>Sobre a Mystic</a>
+    </nav>
+
+    <div class="side-note">
+      <span style="color:var(--gold-light);font-size:22px">✧</span>
+      <strong>Uma palavra por vez</strong>
+      Toda grande história começa com uma pequena ideia. Descubra do que sua imaginação é capaz.
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Seu próximo capítulo começa aqui</div>
+        <h1>Desafie sua imaginação</h1>
+        <p>Pequenos desafios, grandes descobertas. Leia, escreva e encontre novas maneiras de contar suas histórias.</p>
+
+        <div class="hero-stats">
+          <div class="hero-stat"><strong id="heroCompleted">0</strong><br>desafios concluídos</div>
+          <div class="hero-stat"><strong id="heroPoints">0</strong><br>pontos conquistados</div>
+          <div class="hero-stat"><strong id="heroStreak">0</strong><br>dias de sequência</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+
+      <div class="section-heading">
+        <h2><span class="gold-icon">✧</span>Sua jornada literária</h2>
+        <button class="primary" id="openCreate">＋ Criar desafio</button>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Concluídos</span>
+            <span class="stat-icon">✓</span>
+          </div>
+          <div class="stat-number" id="statCompleted">0</div>
+          <div class="stat-caption">Desafios finalizados</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Pontos</span>
+            <span class="stat-icon">✦</span>
+          </div>
+          <div class="stat-number" id="statPoints">0</div>
+          <div class="stat-caption">Sua experiência Mystic</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Em andamento</span>
+            <span class="stat-icon">✎</span>
+          </div>
+          <div class="stat-number" id="statInProgress">0</div>
+          <div class="stat-caption">Desafios iniciados</div>
+        </article>
+
+        <article class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Disponíveis</span>
+            <span class="stat-icon">♧</span>
+          </div>
+          <div class="stat-number" id="statAvailable">0</div>
+          <div class="stat-caption">Para explorar agora</div>
+        </article>
+      </div>
+
+      <section class="daily-panel">
+        <div>
+          <div class="daily-label">✦ DESAFIO DO DIA</div>
+          <h3 id="dailyTitle">Uma pequena lembrança</h3>
+          <p id="dailyDescription">Escreva um texto curto sobre uma lembrança que ainda aquece seu coração. Não se preocupe em torná-lo perfeito: escreva com sinceridade.</p>
+
+          <div class="daily-progress">
+            <div class="progress-label">
+              <span>Seu progresso diário</span>
+              <span id="dailyProgressText">0 de 1 concluído</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="dailyProgressFill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="daily-action">
+          <div class="daily-symbol">☾</div>
+          <div>
+            <button class="primary" id="dailyButton">Começar desafio</button>
+            <div style="margin-top:8px"><small>Uma nova oportunidade de criar.</small></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-heading">
+        <h2><span class="gold-icon">▤</span>Explore os desafios</h2>
+      </div>
+
+      <div class="toolbar">
+        <input id="challengeSearch" type="search" placeholder="⌕  Buscar por título ou assunto...">
+
+        <select id="categoryFilter" aria-label="Filtrar categoria">
+          <option value="Todas">Todas as categorias</option>
+          <option value="Escrita">Escrita criativa</option>
+          <option value="Leitura">Leitura</option>
+          <option value="Poesia">Poesia</option>
+          <option value="Imaginação">Imaginação</option>
+          <option value="Reflexão">Reflexão</option>
+          <option value="Personalizado">Meus desafios</option>
+        </select>
+
+        <select id="difficultyFilter" aria-label="Filtrar dificuldade">
+          <option value="Todas">Todas as dificuldades</option>
+          <option value="Fácil">Fácil</option>
+          <option value="Médio">Médio</option>
+          <option value="Difícil">Difícil</option>
+        </select>
+      </div>
+
+      <div class="tabs" id="challengeTabs">
+        <button class="tab active" data-filter="Todos">Todos</button>
+        <button class="tab" data-filter="Em andamento">Em andamento</button>
+        <button class="tab" data-filter="Concluídos">Concluídos</button>
+        <button class="tab" data-filter="Não iniciados">Não iniciados</button>
+      </div>
+
+      <div class="challenge-grid" id="challengeGrid"></div>
+
+      <div class="empty-state" id="emptyState">
+        <div class="big">✧</div>
+        <h3>Nenhum desafio encontrado</h3>
+        <p>Tente mudar os filtros ou crie um desafio para você.</p>
+        <button class="primary" id="emptyCreate">＋ Criar desafio</button>
+      </div>
+
+      <section class="my-progress">
+        <h2><span class="gold-icon">✎</span>Seu caderno de progresso</h2>
+        <p>Os desafios que você começou ou concluiu aparecem aqui. Abra um desafio para continuar escrevendo suas respostas.</p>
+        <div class="progress-list" id="progressList"></div>
+      </section>
+
+      <section class="tips-grid">
+        <article class="tip-card">
+          <span>☾</span>
+          <h3>Crie seu ritual</h3>
+          <p>Reserve alguns minutos em um horário tranquilo. Um hábito pequeno pode abrir espaço para grandes ideias.</p>
+        </article>
+
+        <article class="tip-card">
+          <span>✧</span>
+          <h3>Não busque perfeição</h3>
+          <p>O primeiro rascunho é um lugar para experimentar. Você pode revisar e melhorar seu texto depois.</p>
+        </article>
+
+        <article class="tip-card">
+          <span>♧</span>
+          <h3>Experimente algo novo</h3>
+          <p>Leia um gênero diferente, escreva de outro ponto de vista ou explore uma ideia inesperada.</p>
+        </article>
+      </section>
+
+    </section>
+
+    <footer>
+      Mystic &nbsp; · &nbsp; Um lugar para sentir, escrever e descobrir.
+    </footer>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <a href="home.html"><span>⌂</span>Início</a>
+  <a href="explore.html"><span>⌕</span>Explore</a>
+  <a href="dicionario.html"><span>▤</span>Dicionário</a>
+  <a href="meu-caderno.html"><span>▧</span>Caderno</a>
+  <a href="grupos.html"><span>♧</span>Grupos</a>
+</nav>
+
+<!-- Modal para criar desafios -->
+<div class="modal-overlay" id="createOverlay">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="createTitle">
+    <div class="modal-header">
+      <h2 id="createTitle">Criar um desafio</h2>
+      <button class="close" data-close="createOverlay" aria-label="Fechar">✕</button>
+    </div>
+
+    <form id="createForm">
+      <div class="form-field">
+        <label for="newTitle">Título do desafio *</label>
+        <input id="newTitle" maxlength="65" required placeholder="Ex.: Uma carta para o futuro">
+      </div>
+
+      <div class="form-field">
+        <label for="newCategory">Categoria *</label>
+        <select id="newCategory" required>
+          <option value="Escrita">Escrita criativa</option>
+          <option value="Leitura">Leitura</option>
+          <option value="Poesia">Poesia</option>
+          <option value="Imaginação">Imaginação</option>
+          <option value="Reflexão">Reflexão</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="newDifficulty">Dificuldade</label>
+        <select id="newDifficulty">
+          <option value="Fácil">Fácil · 10 pontos</option>
+          <option value="Médio">Médio · 20 pontos</option>
+          <option value="Difícil">Difícil · 30 pontos</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="newDescription">Descrição do desafio *</label>
+        <textarea id="newDescription" maxlength="500" required placeholder="Explique o que você quer se desafiar a fazer..."></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="newSymbol">Símbolo</label>
+        <select id="newSymbol">
+          <option value="✧">✧ Estrela</option>
+          <option value="☾">☾ Lua</option>
+          <option value="♡">♡ Coração</option>
+          <option value="♧">♧ Folha</option>
+          <option value="▤">▤ Livro</option>
+          <option value="✎">✎ Escrita</option>
+        </select>
+      </div>
+
+      <p class="modal-note">O desafio será salvo neste navegador e ficará disponível para você neste dispositivo.</p>
+
+      <div class="modal-actions">
+        <button class="secondary" type="button" data-close="createOverlay">Cancelar</button>
+        <button class="primary" type="submit">Criar desafio</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<!-- Modal para escrever e concluir -->
+<div class="modal-overlay" id="answerOverlay">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="answerTitle">
+    <div class="modal-header">
+      <h2 id="answerTitle">Seu desafio</h2>
+      <button class="close" data-close="answerOverlay" aria-label="Fechar">✕</button>
+    </div>
+
+    <div id="answerDescription" class="detail-description"></div>
+
+    <label class="editor-label" for="challengeAnswer">Sua resposta ou reflexão</label>
+    <textarea id="challengeAnswer" maxlength="10000"
+      placeholder="Comece a escrever aqui..."></textarea>
+
+    <div class="answer-count">
+      <span id="wordCount">0 palavras</span>
+      <span id="characterCount">0 / 10000 caracteres</span>
+    </div>
+
+    <p class="modal-note">Salve seu rascunho para continuar depois. Ao concluir, você recebe os pontos deste desafio. Cada desafio concede pontos apenas uma vez.</p>
+
+    <div class="modal-actions">
+      <button class="secondary" id="saveDraft">Salvar rascunho</button>
+      <button class="primary" id="completeChallenge">✓ Concluir desafio</button>
+    </div>
+  </section>
+</div>
+
+<script>
+const STORAGE_CUSTOM = "mystic_challenges_custom_v1";
+const STORAGE_PROGRESS = "mystic_challenges_progress_v1";
+const STORAGE_DAILY = "mystic_challenges_daily_v1";
+
+const starterChallenges = [
+  {
+    id: "c1",
+    title: "Uma pequena lembrança",
+    category: "Reflexão",
+    difficulty: "Fácil",
+    points: 10,
+    symbol: "☾",
+    description: "Escreva um texto curto sobre uma lembrança que ainda aquece seu coração. Conte onde você estava, quem estava com você e por que esse momento continua especial.",
+    estimated: "10 min",
+    daily: true
+  },
+  {
+    id: "c2",
+    title: "Poema sem medo",
+    category: "Poesia",
+    difficulty: "Fácil",
+    points: 10,
+    symbol: "✧",
+    description: "Escreva um poema de pelo menos seis versos. Você pode escolher qualquer tema, mas tente usar uma imagem sensorial: um cheiro, um som, uma textura ou uma cor.",
+    estimated: "15 min"
+  },
+  {
+    id: "c3",
+    title: "Uma história em 100 palavras",
+    category: "Escrita",
+    difficulty: "Médio",
+    points: 20,
+    symbol: "▤",
+    description: "Crie uma história com começo, desenvolvimento e final em até 100 palavras. Inclua um personagem, um pequeno conflito e uma surpresa.",
+    estimated: "20 min"
+  },
+  {
+    id: "c4",
+    title: "Leia fora da sua zona",
+    category: "Leitura",
+    difficulty: "Fácil",
+    points: 10,
+    symbol: "♧",
+    description: "Leia algumas páginas de um gênero que você normalmente não escolheria. Depois, registre três coisas que chamaram sua atenção e diga se leria mais.",
+    estimated: "20 min"
+  },
+  {
+    id: "c5",
+    title: "O mundo pelo olhar de outro",
+    category: "Imaginação",
+    difficulty: "Médio",
+    points: 20,
+    symbol: "☼",
+    description: "Escolha um objeto comum — uma chave, uma xícara ou uma janela — e escreva uma cena como se esse objeto pudesse observar o mundo e contar o que vê.",
+    estimated: "25 min"
+  },
+  {
+    id: "c6",
+    title: "Carta para o futuro",
+    category: "Reflexão",
+    difficulty: "Médio",
+    points: 20,
+    symbol: "✉",
+    description: "Escreva uma carta para você daqui a um ano. Fale sobre seus sonhos, seus medos, as coisas que deseja aprender e aquilo que gostaria de lembrar.",
+    estimated: "20 min"
+  },
+  {
+    id: "c7",
+    title: "O mistério da última página",
+    category: "Escrita",
+    difficulty: "Difícil",
+    points: 30,
+    symbol: "♜",
+    description: "Escreva um conto de mistério em que uma pista aparentemente insignificante muda o significado de toda a história. Termine com uma revelação inesperada.",
+    estimated: "40 min"
+  },
+  {
+    id: "c8",
+    title: "Um diálogo impossível",
+    category: "Imaginação",
+    difficulty: "Médio",
+    points: 20,
+    symbol: "☯",
+    description: "Imagine uma conversa entre duas pessoas de épocas diferentes. O diálogo deve revelar um conflito, uma curiosidade ou uma descoberta sobre o mundo.",
+    estimated: "25 min"
+  },
+  {
+    id: "c9",
+    title: "Descreva sem nomear",
+    category: "Poesia",
+    difficulty: "Difícil",
+    points: 30,
+    symbol: "❋",
+    description: "Escolha uma emoção e escreva um texto descrevendo-a sem usar seu nome. Faça o leitor reconhecer o sentimento por meio de imagens, ações e sensações.",
+    estimated: "35 min"
+  }
+];
+
+function readStorage(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function saveStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    alert("Não foi possível salvar. Verifique o espaço disponível no navegador.");
+    return false;
+  }
+}
+
+let customChallenges = readStorage(STORAGE_CUSTOM, []);
+let progress = readStorage(STORAGE_PROGRESS, {});
+let dailyState = readStorage(STORAGE_DAILY, { date: "", completed: false });
+let activeChallengeId = null;
+let currentTab = "Todos";
+
+function allChallenges() {
+  return [...starterChallenges, ...customChallenges];
+}
+
+function getChallenge(id) {
+  return allChallenges().find(challenge => challenge.id === id);
+}
+
+function getState(id) {
+  return progress[id] || { status: "Não iniciado", answer: "", completedAt: null };
+}
+
+function isCompleted(id) {
+  return getState(id).status === "Concluído";
+}
+
+function getPoints() {
+  return allChallenges().reduce((sum, challenge) => {
+    return sum + (isCompleted(challenge.id) ? challenge.points : 0);
+  }, 0);
+}
+
+function getCompletedCount() {
+  return allChallenges().filter(challenge => isCompleted(challenge.id)).length;
+}
+
+function getInProgressCount() {
+  return allChallenges().filter(challenge => {
+    return getState(challenge.id).status === "Em andamento";
+  }).length;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function renderStats() {
+  const completed = getCompletedCount();
+  const points = getPoints();
+  const inProgress = getInProgressCount();
+  const available = allChallenges().length - completed;
+
+  document.getElementById("heroCompleted").textContent = completed;
+  document.getElementById("heroPoints").textContent = points;
+  document.getElementById("heroStreak").textContent = getStreak();
+
+  document.getElementById("statCompleted").textContent = completed;
+  document.getElementById("statPoints").textContent = points;
+  document.getElementById("statInProgress").textContent = inProgress;
+  document.getElementById("statAvailable").textContent = available;
+
+  const dailyDone = dailyState.date === todayKey() && dailyState.completed;
+  document.getElementById("dailyProgressText").textContent =
+    dailyDone ? "1 de 1 concluído" : "0 de 1 concluído";
+  document.getElementById("dailyProgressFill").style.width =
+    dailyDone ? "100%" : "0%";
+
+  document.getElementById("dailyButton").textContent =
+    dailyDone ? "✓ Desafio concluído" : "Começar desafio";
+  document.getElementById("dailyButton").disabled = dailyDone;
+  document.getElementById("dailyButton").style.opacity = dailyDone ? ".65" : "1";
+}
+
+function todayKey() {
+  const now = new Date();
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0")
+  ].join("-");
+}
+
+function getStreak() {
+  const completedDates = [...new Set(
+    Object.values(progress)
+      .filter(item => item.status === "Concluído" && item.completedAt)
+      .map(item => item.completedAt.slice(0, 10))
+  )].sort().reverse();
+
+  if (!completedDates.length) return 0;
+
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+
+  const today = todayKey();
+  const yesterdayDate = new Date(date);
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+
+  const yesterday = [
+    yesterdayDate.getFullYear(),
+    String(yesterdayDate.getMonth() + 1).padStart(2, "0"),
+    String(yesterdayDate.getDate()).padStart(2, "0")
+  ].join("-");
+
+  if (!completedDates.includes(today) && !completedDates.includes(yesterday)) {
+    return 0;
+  }
+
+  let streak = 0;
+  const cursor = new Date(date);
+
+  if (!completedDates.includes(today)) cursor.setDate(cursor.getDate() - 1);
+
+  while (true) {
+    const key = [
+      cursor.getFullYear(),
+      String(cursor.getMonth() + 1).padStart(2, "0"),
+      String(cursor.getDate()).padStart(2, "0")
+    ].join("-");
+
+    if (!completedDates.includes(key)) break;
+    streak++;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+
+  return streak;
+}
+
+function getDifficultyClass(difficulty) {
+  if (difficulty === "Fácil") return "easy";
+  if (difficulty === "Difícil") return "hard";
+  return "medium";
+}
+
+function renderChallenges() {
+  const query = document.getElementById("challengeSearch").value
+    .trim().toLocaleLowerCase("pt-BR");
+
+  const category = document.getElementById("categoryFilter").value;
+  const difficulty = document.getElementById("difficultyFilter").value;
+
+  const challenges = allChallenges().filter(challenge => {
+    const state = getState(challenge.id);
+
+    const matchesQuery = (
+      challenge.title + " " + challenge.description + " " + challenge.category
+    ).toLocaleLowerCase("pt-BR").includes(query);
+
+    const matchesCategory =
+      category === "Todas" ||
+      (category === "Personalizado" && customChallenges.some(item => item.id === challenge.id)) ||
+      challenge.category === category;
+
+    const matchesDifficulty =
+      difficulty === "Todas" || challenge.difficulty === difficulty;
+
+    const matchesTab =
+      currentTab === "Todos" ||
+      (currentTab === "Em andamento" && state.status === "Em andamento") ||
+      (currentTab === "Concluídos" && state.status === "Concluído") ||
+      (currentTab === "Não iniciados" && state.status === "Não iniciado");
+
+    return matchesQuery && matchesCategory && matchesDifficulty && matchesTab;
+  });
+
+  const grid = document.getElementById("challengeGrid");
+  grid.innerHTML = "";
+
+  challenges.forEach(challenge => {
+    const state = getState(challenge.id);
+    const completed = state.status === "Concluído";
+    const started = state.status === "Em andamento";
+
+    const card = document.createElement("article");
+    card.className = "challenge-card";
+
+    const cover = document.createElement("div");
+    cover.className = "challenge-cover";
+
+    const symbol = document.createElement("span");
+    symbol.className = "challenge-symbol";
+    symbol.textContent = challenge.symbol || "✧";
+    cover.appendChild(symbol);
+
+    const body = document.createElement("div");
+    body.className = "challenge-body";
+
+    const tagRow = document.createElement("div");
+    tagRow.className = "tag-row";
+
+    const categoryTag = document.createElement("span");
+    categoryTag.className = "tag";
+    categoryTag.textContent = challenge.category;
+    tagRow.appendChild(categoryTag);
+
+    const difficultyTag = document.createElement("span");
+    difficultyTag.className = "tag " + getDifficultyClass(challenge.difficulty);
+    difficultyTag.textContent = challenge.difficulty;
+    tagRow.appendChild(difficultyTag);
+
+    if (completed) {
+      const doneTag = document.createElement("span");
+      doneTag.className = "tag done";
+      doneTag.textContent = "✓ Concluído";
+      tagRow.appendChild(doneTag);
+    }
+
+    const title = document.createElement("h3");
+    title.textContent = challenge.title;
+
+    const description = document.createElement("p");
+    description.className = "challenge-description";
+    description.textContent = challenge.description;
+
+    const meta = document.createElement("div");
+    meta.className = "challenge-meta";
+    meta.innerHTML =
+      `<span>✦ ${Number(challenge.points)} pontos</span>` +
+      `<span>◷ ${escapeHTML(challenge.estimated || "Livre")}</span>`;
+
+    const actions = document.createElement("div");
+    actions.className = "challenge-actions";
+
+    const startButton = document.createElement("button");
+    startButton.className = completed ? "secondary" : "primary";
+    startButton.textContent = completed ? "Ver resposta" : started ? "Continuar" : "Começar";
+    startButton.addEventListener("click", () => openChallenge(challenge.id));
+
+    const detailButton = document.createElement("button");
+    detailButton.className = "secondary details-btn";
+    detailButton.textContent = "Detalhes";
+    detailButton.addEventListener("click", () => showDetails(challenge.id));
+
+    actions.append(startButton, detailButton);
+    body.append(tagRow, title, description, meta);
+
+    if (started) {
+      const progressBlock = document.createElement("div");
+      progressBlock.className = "challenge-progress";
+
+      const label = document.createElement("div");
+      label.className = "progress-label";
+      label.innerHTML = "<span>Seu progresso</span><span>Em andamento</span>";
+
+      const track = document.createElement("div");
+      track.className = "progress-track";
+
+      const fill = document.createElement("div");
+      fill.className = "progress-fill";
+      fill.style.width = state.answer && state.answer.trim() ? "55%" : "15%";
+
+      track.appendChild(fill);
+      progressBlock.append(label, track);
+      body.appendChild(progressBlock);
+    }
+
+    body.appendChild(actions);
+    card.append(cover, body);
+    grid.appendChild(card);
+  });
+
+  document.getElementById("emptyState").style.display =
+    challenges.length ? "none" : "block";
+  grid.style.display = challenges.length ? "grid" : "none";
+
+  document.querySelectorAll(".tab").forEach(button => {
+    button.classList.toggle("active", button.dataset.filter === currentTab);
+  });
+}
+
+function renderProgressList() {
+  const list = document.getElementById("progressList");
+  list.innerHTML = "";
+
+  const started = allChallenges().filter(challenge => {
+    return getState(challenge.id).status !== "Não iniciado";
+  });
+
+  if (!started.length) {
+    const message = document.createElement("p");
+    message.textContent = "Você ainda não começou nenhum desafio. Escolha um dos desafios acima para iniciar sua jornada.";
+    message.style.color = "var(--muted)";
+    list.appendChild(message);
+    return;
+  }
+
+  started.sort((a, b) => {
+    const aDone = isCompleted(a.id) ? 1 : 0;
+    const bDone = isCompleted(b.id) ? 1 : 0;
+    return aDone - bDone;
+  });
+
+  started.forEach(challenge => {
+    const state = getState(challenge.id);
+    const row = document.createElement("div");
+    row.className = "progress-row";
+
+    const info = document.createElement("div");
+    const title = document.createElement("strong");
+    title.textContent = challenge.title;
+
+    const description = document.createElement("p");
+    description.textContent = state.status === "Concluído"
+      ? "✓ Concluído · " + challenge.points + " pontos conquistados"
+      : state.answer && state.answer.trim()
+        ? "Rascunho salvo · Você pode continuar escrevendo."
+        : "Em andamento · Comece a registrar suas ideias.";
+
+    info.append(title, description);
+
+    const button = document.createElement("button");
+    button.textContent = state.status === "Concluído" ? "Ver resposta" : "Continuar";
+    button.addEventListener("click", () => openChallenge(challenge.id));
+
+    row.append(info, button);
+    list.appendChild(row);
+  });
+}
+
+function refresh() {
+  renderStats();
+  renderChallenges();
+  renderProgressList();
+}
+
+function openChallenge(id) {
+  const challenge = getChallenge(id);
+  if (!challenge) return;
+
+  activeChallengeId = id;
+
+  if (!progress[id]) {
+    progress[id] = {
+      status: "Em andamento",
+      answer: "",
+      completedAt: null
+    };
+    saveStorage(STORAGE_PROGRESS, progress);
+  } else if (progress[id].status === "Não iniciado") {
+    progress[id].status = "Em andamento";
+    saveStorage(STORAGE_PROGRESS, progress);
+  }
+
+  document.getElementById("answerTitle").textContent = challenge.title;
+  document.getElementById("answerDescription").textContent = challenge.description;
+  document.getElementById("challengeAnswer").value = progress[id].answer || "";
+  updateAnswerCount();
+
+  const isDone = progress[id].status === "Concluído";
+  document.getElementById("completeChallenge").textContent =
+    isDone ? "✓ Já concluído" : "✓ Concluir desafio";
+  document.getElementById("completeChallenge").disabled = isDone;
+  document.getElementById("completeChallenge").style.opacity = isDone ? ".65" : "1";
+
+  openModal("answerOverlay");
+  refresh();
+}
+
+function saveCurrentDraft() {
+  if (!activeChallengeId) return;
+
+  const existing = progress[activeChallengeId] || {};
+  progress[activeChallengeId] = {
+    ...existing,
+    status: existing.status === "Concluído" ? "Concluído" : "Em andamento",
+    answer: document.getElementById("challengeAnswer").value,
+    completedAt: existing.completedAt || null
+  };
+
+  if (!saveStorage(STORAGE_PROGRESS, progress)) return;
+
+  refresh();
+  alert("Seu rascunho foi salvo neste navegador.");
+}
+
+function completeCurrentChallenge() {
+  if (!activeChallengeId) return;
+
+  const challenge = getChallenge(activeChallengeId);
+  const existing = progress[activeChallengeId] || {};
+
+  if (existing.status === "Concluído") return;
+
+  const answer = document.getElementById("challengeAnswer").value.trim();
+
+  if (!answer) {
+    if (!confirm("Você ainda não escreveu uma resposta. Deseja concluir mesmo assim?")) {
+      return;
+    }
+  }
+
+  progress[activeChallengeId] = {
+    status: "Concluído",
+    answer: document.getElementById("challengeAnswer").value,
+    completedAt: new Date().toISOString()
+  };
+
+  if (!saveStorage(STORAGE_PROGRESS, progress)) return;
+
+  if (challenge && challenge.daily) {
+    dailyState = { date: todayKey(), completed: true };
+    saveStorage(STORAGE_DAILY, dailyState);
+  }
+
+  closeModal("answerOverlay");
+  refresh();
+  alert("Desafio concluído! Você conquistou " + challenge.points + " pontos. ✨");
+}
+
+function showDetails(id) {
+  const challenge = getChallenge(id);
+  if (!challenge) return;
+
+  const state = getState(id);
+  const completed = state.status === "Concluído";
+
+  activeChallengeId = id;
+
+  document.getElementById("answerTitle").textContent = challenge.title;
+  document.getElementById("answerDescription").innerHTML =
+    `<div class="challenge-detail-symbol">${escapeHTML(challenge.symbol || "✧")}</div>` +
+    `<p>${escapeHTML(challenge.description)}</p>` +
+    `<p><strong>Categoria:</strong> ${escapeHTML(challenge.category)}</p>` +
+    `<p><strong>Dificuldade:</strong> ${escapeHTML(challenge.difficulty)}</p>` +
+    `<p><strong>Recompensa:</strong> ${Number(challenge.points)} pontos</p>` +
+    `<p><strong>Tempo estimado:</strong> ${escapeHTML(challenge.estimated || "Livre")}</p>`;
+
+  document.getElementById("challengeAnswer").value = state.answer || "";
+  updateAnswerCount();
+
+  document.getElementById("completeChallenge").textContent =
+    completed ? "✓ Já concluído" : "✓ Concluir desafio";
+  document.getElementById("completeChallenge").disabled = completed;
+  document.getElementById("completeChallenge").style.opacity = completed ? ".65" : "1";
+
+  openModal("answerOverlay");
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add("open");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("open");
+}
+
+function updateAnswerCount() {
+  const text = document.getElementById("challengeAnswer").value;
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+
+  document.getElementById("wordCount").textContent =
+    words + (words === 1 ? " palavra" : " palavras");
+
+  document.getElementById("characterCount").textContent =
+    text.length + " / 10000 caracteres";
+}
+
+document.getElementById("challengeAnswer").addEventListener("input", updateAnswerCount);
+
+document.getElementById("saveDraft").addEventListener("click", saveCurrentDraft);
+document.getElementById("completeChallenge").addEventListener("click", completeCurrentChallenge);
+
+document.getElementById("dailyButton").addEventListener("click", () => {
+  if (dailyState.date === todayKey() && dailyState.completed) return;
+  openChallenge("c1");
+});
+
+document.getElementById("openCreate").addEventListener("click", () => openModal("createOverlay"));
+document.getElementById("emptyCreate").addEventListener("click", () => openModal("createOverlay"));
+
+document.querySelectorAll("[data-close]").forEach(button => {
+  button.addEventListener("click", () => closeModal(button.dataset.close));
+});
+
+document.querySelectorAll(".modal-overlay").forEach(overlay => {
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) closeModal(overlay.id);
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal-overlay").forEach(modal => {
+      modal.classList.remove("open");
+    });
+  }
+});
+
+document.getElementById("createForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const title = document.getElementById("newTitle").value.trim();
+  const category = document.getElementById("newCategory").value;
+  const difficulty = document.getElementById("newDifficulty").value;
+  const description = document.getElementById("newDescription").value.trim();
+  const symbol = document.getElementById("newSymbol").value;
+
+  if (!title || !description) {
+    alert("Preencha o título e a descrição do desafio.");
+    return;
+  }
+
+  const points = difficulty === "Fácil" ? 10 : difficulty === "Médio" ? 20 : 30;
+
+  const challenge = {
+    id: "custom-" + Date.now(),
+    title,
+    category,
+    difficulty,
+    points,
+    description,
+    symbol,
+    estimated: "Livre",
+    createdAt: new Date().toISOString()
+  };
+
+  customChallenges.unshift(challenge);
+
+  if (!saveStorage(STORAGE_CUSTOM, customChallenges)) {
+    customChallenges.shift();
+    return;
+  }
+
+  document.getElementById("createForm").reset();
+  closeModal("createOverlay");
+
+  currentTab = "Todos";
+  document.getElementById("challengeSearch").value = "";
+  document.getElementById("categoryFilter").value = "Todas";
+  document.getElementById("difficultyFilter").value = "Todas";
+
+  refresh();
+  alert("Seu desafio foi criado! ✨");
+});
+
+document.getElementById("challengeSearch").addEventListener("input", refresh);
+document.getElementById("categoryFilter").addEventListener("change", refresh);
+document.getElementById("difficultyFilter").addEventListener("change", refresh);
+
+document.getElementById("headerSearch").addEventListener("input", event => {
+  document.getElementById("challengeSearch").value = event.target.value;
+  refresh();
+});
+
+document.querySelectorAll(".tab").forEach(button => {
+  button.addEventListener("click", () => {
+    currentTab = button.dataset.filter;
+    refresh();
+  });
+});
+
+/* Atualiza a lista e a pontuação ao iniciar a página. */
+refresh();
+</script>
+
+</body>
+</html>
