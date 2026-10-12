@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notificações | Mystic Livraria</title>
+
+<style>
+:root {
+  --bg: #0b0b0b;
+  --panel: #141414;
+  --panel-hover: #1c1a16;
+  --gold: #d6a441;
+  --gold-light: #f1cb73;
+  --text: #f4f0e8;
+  --muted: #a7a7a7;
+  --border: #292929;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+button, a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: #0d0d0d;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back {
+  text-decoration: none;
+  color: var(--gold);
+  border: 1px solid #493b20;
+  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 27px;
+}
+
+.brand img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.header-space {
+  flex: 1;
+}
+
+.header-label {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+main {
+  width: min(850px, 100%);
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(27px, 5vw, 36px);
+  font-weight: normal;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.menu-wrap {
+  position: relative;
+}
+
+.more-button {
+  width: 43px;
+  height: 43px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--gold-light);
+  font-size: 26px;
+}
+
+.more-button:hover {
+  border-color: var(--gold);
+  background: var(--panel-hover);
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  width: 235px;
+  background: #191919;
+  border: 1px solid #38322a;
+  border-radius: 12px;
+  padding: 7px;
+  box-shadow: 0 12px 35px #000a;
+  z-index: 20;
+}
+
+.dropdown.open {
+  display: block;
+}
+
+.dropdown button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  border-radius: 7px;
+  padding: 12px;
+  font-size: 13px;
+}
+
+.dropdown button:hover {
+  background: #292319;
+  color: var(--gold-light);
+}
+
+.dropdown .danger {
+  color: #e69b9b;
+}
+
+.tabs {
+  display: flex;
+  gap: 22px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+  overflow-x: auto;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 0 2px 14px;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 23px 0 12px;
+  font-size: 14px;
+  color: var(--gold-light);
+  font-weight: normal;
+}
+
+.section-title small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.notice-list {
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  overflow: hidden;
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.notice:last-child {
+  border-bottom: none;
+}
+
+.notice:hover {
+  background: var(--panel-hover);
+}
+
+.notice.unread {
+  background: #19160f;
+}
+
+.notice.unread::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gold);
+}
+
+.notice-icon {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #493b20;
+  border-radius: 50%;
+  background: #211b10;
+  font-size: 19px;
+}
+
+.notice-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notice-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 2px 0 7px;
+  line-height: 1.4;
+}
+
+.notice-message {
+  font-size: 13px;
+  color: #c0c0c0;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.notice-time {
+  display: block;
+  color: #858585;
+  font-size: 11px;
+  margin-top: 9px;
+}
+
+.unread-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.empty {
+  text-align: center;
+  padding: 48px 18px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.empty-icon {
+  display: block;
+  font-size: 34px;
+  margin-bottom: 12px;
+  filter: grayscale(.3);
+}
+
+.settings {
+  display: none;
+  margin-top: 24px;
+}
+
+.settings.show {
+  display: block;
+}
+
+.settings-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+
+.settings-card h2 {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: normal;
+  margin-bottom: 7px;
+}
+
+.settings-card > p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 0;
+  border-top: 1px solid var(--border);
+}
+
+.setting-row strong {
+  display: block;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.setting-row small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+.switch {
+  position: relative;
+  width: 42px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background: #414141;
+  border-radius: 30px;
+  transition: .2s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: .2s;
+}
+
+.switch input:checked + .slider {
+  background: var(--gold);
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+
+.primary-button {
+  border: 1px solid var(--gold);
+  background: #241d10;
+  color: var(--gold-light);
+  padding: 12px 19px;
+  border-radius: 9px;
+  margin-top: 5px;
+}
+
+.primary-button:hover {
+  background: #342817;
+}
+
+.footer-note {
+  color: #777;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 24px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  header {
+    height: 65px;
+    padding: 0 13px;
+    gap: 10px;
+  }
+
+  .brand {
+    font-size: 22px;
+    gap: 7px;
+  }
+
+  .brand img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .header-label {
+    display: none;
+  }
+
+  main {
+    padding: 26px 13px 45px;
+  }
+
+  .page-heading {
+    margin-bottom: 25px;
+  }
+
+  .notice {
+    padding: 15px 12px;
+    gap: 11px;
+  }
+
+  .notice-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
+
+  .tabs {
+    gap: 19px;
+  }
+
+  .settings-card {
+    padding: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="back" href="home.html" aria-label="Voltar para a página inicial">←</a>
+
+  <a class="brand" href="home.html">
+    <img src="logo-mystic.jpg" alt="Logo Mystic">
+    <span>Mystic</span>
+  </a>
+
+  <div class="header-space"></div>
+  <span class="header-label">Central de notificações</span>
+</header>
+
+<main>
+  <div class="page-heading">
+    <div>
+      <h1>Notificações</h1>
+      <p class="subtitle">Acompanhe as novidades da sua jornada literária.</p>
+    </div>
+
+    <div class="menu-wrap">
+      <button class="more-button" id="moreButton"
+        aria-label="Mais opções" aria-expanded="false">⋮</button>
+
+      <div class="dropdown" id="dropdown">
+        <button id="markAll">✓ Marcar todas como lidas</button>
+        <button id="openSettings">⚙ Configurações de notificações</button>
+        <button id="clearAll" class="danger">✕ Limpar notificações</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="notificationsView">
+    <nav class="tabs" aria-label="Filtrar notificações">
+      <button class="tab active" data-filter="all">Todas</button>
+      <button class="tab" data-filter="unread">Não lidas</button>
+      <button class="tab" data-filter="read">Lidas</button>
+    </nav>
+
+    <h2 class="section-title">
+      Recentes
+      <small id="countLabel">0 notificações</small>
+    </h2>
+
+    <div class="notice-list" id="noticeList"></div>
+
+    <p class="footer-note">
+      Suas notificações ficam organizadas aqui para você não perder nenhuma novidade.
+    </p>
+  </div>
+
+  <section class="settings" id="settingsView">
+    <div class="page-heading">
+      <div>
+        <h1 style="font-size:28px">Preferências</h1>
+        <p class="subtitle">Escolha quais avisos deseja visualizar.</p>
+      </div>
+      <button class="primary-button" id="backToNotices">← Voltar</button>
+    </div>
+
+    <div class="settings-card">
+      <h2>Atividades do perfil</h2>
+      <p>Controle os avisos relacionados às suas publicações e à sua conta.</p>
+
+      <div class="setting-row">
+        <div><strong>Novos seguidores</strong><small>Quando alguém começar a seguir você.</small></div>
+        <label class="switch"><input type="checkbox" data-pref="followers" checked><span class="slider"></span></label>
+      </div>
+
+      <div class="setting-row">
+        <div><strong>Curtidas e favoritos</strong><small>Quando alguém interagir com seus textos.</small></div>
+        <label class="switch"><input type="checkbox" data-pref="likes" checked><span class="slider"></span></label>
+      </div>
+
+      <div class="setting-row">
+        <div><strong>Comentários e respostas</strong><small>Quando comentarem ou responderem às suas publicações.</small></div>
+        <label class="switch"><input type="checkbox" data-pref="comments" checked><span class="slider"></span></label>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <h2>Conteúdos</h2>
+      <p>Escolha quais novidades deseja receber.</p>
+
+      <div class="setting-row">
+        <div><strong>Novas redações</strong><small>Avisos de novas redações publicadas.</small></div>
+        <label class="switch"><input type="checkbox" data-pref="essays" checked><span class="slider"></span></label>
+      </div>
+
+      <div class="setting-row">
+        <div><strong>Novos blogs</strong><small>Avisos de novas publicações em blogs.</small></div>
+        <label class="switch"><input type="checkbox" data-pref="blogs" checked><span class="slider"></span></label>
+      </div>
+
+      <div class="setting-row">
+        <div><strong>Avisos da plataforma</strong><small>Informações importantes sobre a Mystic.</small></div>
+        <label class="switch"><input type="checkbox" data-pref="platform" checked><span class="slider"></span></label>
+      </div>
+    </div>
+
+    <button class="primary-button" id="saveSettings">Salvar preferências</button>
+  </section>
+</main>
+
+<script>
+const STORAGE_NOTICES = "mystic_notificacoes_v1";
+const STORAGE_PREFS = "mystic_notificacoes_preferencias_v1";
+
+const examples = [
+  {
+    id: "example-follow",
+    type: "followers",
+    icon: "♙",
+    title: "Novos seguidores",
+    message: "Quando alguém começar a seguir seu perfil, o aviso aparecerá aqui.",
+    time: "Exemplo",
+    read: false
+  },
+  {
+    id: "example-like",
+    type: "likes",
+    icon: "♡",
+    title: "Curtidas e favoritos",
+    message: "Você poderá acompanhar as interações com seus textos nesta área.",
+    time: "Exemplo",
+    read: false
+  },
+  {
+    id: "example-comment",
+    type: "comments",
+    icon: "▤",
+    title: "Comentários e respostas",
+    message: "As respostas e os comentários das suas publicações aparecerão aqui.",
+    time: "Exemplo",
+    read: true
+  },
+  {
+    id: "example-blog",
+    type: "blogs",
+    icon: "▧",
+    title: "Novos blogs",
+    message: "As novidades dos blogs publicados na Mystic aparecerão aqui.",
+    time: "Exemplo",
+    read: true
+  }
+];
+
+let notifications = loadNotifications();
+let activeFilter = "all";
+
+const defaultPrefs = {
+  followers: true,
+  likes: true,
+  comments: true,
+  essays: true,
+  blogs: true,
+  platform: true
+};
+
+function loadNotifications() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_NOTICES));
+    return Array.isArray(saved) ? saved : examples.map(n => ({...n}));
+  } catch {
+    return examples.map(n => ({...n}));
+  }
+}
+
+function loadPrefs() {
+  try {
+    return {
+      ...defaultPrefs,
+      ...JSON.parse(localStorage.getItem(STORAGE_PREFS) || "{}")
+    };
+  } catch {
+    return {...defaultPrefs};
+  }
+}
+
+function saveNotifications() {
+  localStorage.setItem(STORAGE_NOTICES, JSON.stringify(notifications));
+}
+
+function savePrefs() {
+  const prefs = {};
+  document.querySelectorAll("[data-pref]").forEach(input => {
+    prefs[input.dataset.pref] = input.checked;
+  });
+  localStorage.setItem(STORAGE_PREFS, JSON.stringify(prefs));
+}
+
+function renderNotifications() {
+  const list = document.getElementById("noticeList");
+  const filtered = notifications.filter(n => {
+    if (activeFilter === "unread") return !n.read;
+    if (activeFilter === "read") return n.read;
+    return true;
+  });
+
+  const unreadCount = notifications.filter(n => !n.read).length;
+  document.getElementById("countLabel").textContent =
+    activeFilter === "all"
+      ? `${notifications.length} notificações · ${unreadCount} não lidas`
+      : `${filtered.length} notificações`;
+
+  list.replaceChildren();
+
+  if (!filtered.length) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.innerHTML = '<span class="empty-icon">✧</span><strong>Nenhuma notificação por aqui</strong><br><span>Quando houver novidades, elas aparecerão nesta área.</span>';
+    list.appendChild(empty);
+    return;
+  }
+
+  filtered.forEach(n => {
+    const item = document.createElement("article");
+    item.className = "notice" + (n.read ? "" : " unread");
+    item.tabIndex = 0;
+    item.setAttribute("role", "button");
+    item.setAttribute("aria-label", n.title + ". Marcar como " + (n.read ? "não lida" : "lida"));
+
+    const icon = document.createElement("div");
+    icon.className = "notice-icon";
+    icon.textContent = n.icon || "✧";
+
+    const content = document.createElement("div");
+    content.className = "notice-content";
+
+    const title = document.createElement("h3");
+    title.className = "notice-title";
+    title.textContent = n.title;
+
+    const message = document.createElement("p");
+    message.className = "notice-message";
+    message.textContent = n.message;
+
+    const time = document.createElement("time");
+    time.className = "notice-time";
+    time.textContent = n.time || "";
+
+    content.append(title, message, time);
+    item.append(icon, content);
+
+    if (!n.read) {
+      const dot = document.createElement("span");
+      dot.className = "unread-dot";
+      dot.setAttribute("aria-label", "Não lida");
+      item.appendChild(dot);
+    }
+
+    function toggleRead() {
+      n.read = !n.read;
+      saveNotifications();
+      renderNotifications();
+    }
+
+    item.addEventListener("click", toggleRead);
+    item.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleRead();
+      }
+    });
+
+    list.appendChild(item);
+  });
+}
+
+const moreButton = document.getElementById("moreButton");
+const dropdown = document.getElementById("dropdown");
+
+function closeMenu() {
+  dropdown.classList.remove("open");
+  moreButton.setAttribute("aria-expanded", "false");
+}
+
+moreButton.addEventListener("click", e => {
+  e.stopPropagation();
+  const opened = dropdown.classList.toggle("open");
+  moreButton.setAttribute("aria-expanded", String(opened));
+});
+
+document.addEventListener("click", e => {
+  if (!e.target.closest(".menu-wrap")) closeMenu();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeMenu();
+});
+
+document.getElementById("markAll").addEventListener("click", () => {
+  notifications.forEach(n => n.read = true);
+  saveNotifications();
+  renderNotifications();
+  closeMenu();
+});
+
+document.getElementById("clearAll").addEventListener("click", () => {
+  if (!confirm("Deseja apagar todas as notificações desta lista?")) return;
+  notifications = [];
+  saveNotifications();
+  renderNotifications();
+  closeMenu();
+});
+
+document.getElementById("openSettings").addEventListener("click", () => {
+  document.getElementById("notificationsView").style.display = "none";
+  document.getElementById("settingsView").classList.add("show");
+  closeMenu();
+});
+
+document.getElementById("backToNotices").addEventListener("click", showNotifications);
+
+function showNotifications() {
+  document.getElementById("settingsView").classList.remove("show");
+  document.getElementById("notificationsView").style.display = "block";
+}
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    activeFilter = tab.dataset.filter;
+    renderNotifications();
+  });
+});
+
+const prefs = loadPrefs();
+document.querySelectorAll("[data-pref]").forEach(input => {
+  input.checked = prefs[input.dataset.pref] !== false;
+});
+
+document.getElementById("saveSettings").addEventListener("click", () => {
+  savePrefs();
+  alert("Preferências salvas neste navegador!");
+  showNotifications();
+});
+
+renderNotifications();
+</script>
+
+</body>
+</html>
