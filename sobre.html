@@ -1,1 +1,1331 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0907">
+<title>Sobre a Mystic</title>
+
+<style>
+:root {
+  --bg: #0b0907;
+  --panel: #15110d;
+  --panel2: #1d160f;
+  --gold: #d5a04f;
+  --gold-light: #f4cf88;
+  --text: #f6ecdd;
+  --muted: #c4b8a8;
+  --border: #4b3823;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+button, input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  background: #0b0907;
+  border: 1px solid #42321f;
+}
+
+.back-button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--gold-light);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-size: 27px;
+  transition: .2s;
+}
+
+.back-button:hover {
+  background: #302216;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold-light);
+  font: bold 34px Georgia, serif;
+  white-space: nowrap;
+}
+
+.brand img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+}
+
+.search-box {
+  width: min(400px, 38%);
+  margin: auto;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 11px 15px;
+  color: var(--text);
+  background: #100d0a;
+  border: 1px solid #51402c;
+  border-radius: 25px;
+  outline: none;
+}
+
+.search-box input:focus {
+  border-color: var(--gold);
+}
+
+.header-icons {
+  display: flex;
+  gap: 20px;
+  color: var(--gold-light);
+  font-size: 23px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  min-height: calc(100vh - 78px);
+}
+
+.sidebar {
+  padding: 17px 12px;
+  background: #0e0c0a;
+  border-right: 1px solid var(--border);
+}
+
+.nav {
+  display: grid;
+  gap: 4px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  font-size: 14px;
+  transition: .2s;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--gold-light);
+  background: #302316;
+  border-color: #624a2c;
+}
+
+.nav-icon {
+  width: 22px;
+  color: var(--gold-light);
+  text-align: center;
+  font-size: 20px;
+}
+
+.divider {
+  margin: 20px 7px;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.menu-label {
+  padding: 0 8px 9px;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.sidebar-note {
+  margin: 25px 6px;
+  padding: 15px;
+  border: 1px solid #75552d;
+  border-radius: 11px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.sidebar-note h3 {
+  margin: 8px 0;
+  color: var(--gold-light);
+  font: 18px Georgia, serif;
+}
+
+main {
+  min-width: 0;
+}
+
+.hero {
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  padding: 30px 40px;
+  background:
+    linear-gradient(90deg, rgba(5,4,3,.95), rgba(5,4,3,.4)),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=85")
+    center 55% / cover;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font: bold clamp(36px, 4vw, 48px) Georgia, serif;
+}
+
+.hero p {
+  max-width: 550px;
+  margin: 0;
+  font: 18px/1.5 Georgia, serif;
+}
+
+.section {
+  padding: 24px 30px;
+  border-bottom: 1px solid #3a2a19;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 15px;
+  font: bold 27px Georgia, serif;
+}
+
+.section-title .symbol {
+  color: var(--gold-light);
+  font-family: Arial, sans-serif;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(250px, .9fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.story-text p {
+  color: #e2d8cb;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 20px;
+}
+
+.value {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 7px;
+  text-align: center;
+  border-right: 1px solid #4c3821;
+}
+
+.value:last-child {
+  border-right: 0;
+}
+
+.value span {
+  color: var(--gold-light);
+  font-size: 30px;
+}
+
+.value small {
+  font: 14px Georgia, serif;
+}
+
+.quote-card {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at center, #21170d 0%, #100d09 72%);
+  border: 1px solid #674a27;
+  border-radius: 13px;
+}
+
+.quote-logo {
+  width: 125px;
+  height: 125px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+  color: var(--gold-light);
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  font-size: 65px;
+}
+
+.quote-card p {
+  margin: 0;
+  font: italic 24px/1.4 Georgia, serif;
+}
+
+.ornament {
+  width: 70%;
+  margin-top: 22px;
+  border-top: 1px solid var(--gold);
+  position: relative;
+}
+
+.ornament::after {
+  content: "✧";
+  position: absolute;
+  left: 50%;
+  top: -14px;
+  padding: 0 8px;
+  color: var(--gold-light);
+  background: #15100b;
+  font-size: 20px;
+  transform: translateX(-50%);
+}
+
+.section-intro {
+  max-width: 670px;
+  margin: -3px 0 17px;
+  color: #d4c8b9;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 18px 12px;
+  text-align: center;
+  background: linear-gradient(145deg, #17120d, #0c0a08);
+  border: 1px solid #5a4023;
+  border-radius: 12px;
+  transition: transform .2s, border-color .2s;
+}
+
+.game-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+}
+
+.game-icon {
+  margin-bottom: 9px;
+  color: var(--gold-light);
+  font-size: 36px;
+}
+
+.game-card h3 {
+  margin: 0 0 8px;
+  font: 17px Georgia, serif;
+}
+
+.game-card p {
+  flex: 1;
+  margin: 0 0 15px;
+  color: #c9beaf;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.game-button {
+  padding: 9px 15px;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid var(--gold);
+  border-radius: 25px;
+  font-size: 12px;
+  transition: .2s;
+}
+
+.game-button:hover {
+  color: #170f07;
+  background: var(--gold-light);
+}
+
+footer {
+  padding: 22px 15px;
+  color: #bba078;
+  text-align: center;
+  font: 13px Georgia, serif;
+}
+
+/* Jogos em janela */
+.game-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(0,0,0,.85);
+}
+
+.game-overlay.open {
+  display: flex;
+}
+
+.game-modal {
+  width: min(540px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px;
+  background: #15110d;
+  border: 1px solid var(--gold);
+  border-radius: 15px;
+  box-shadow: 0 15px 60px #000;
+}
+
+.game-modal h2 {
+  margin: 0 0 8px;
+  font: 27px Georgia, serif;
+}
+
+.game-modal p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.close-button {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.game-area {
+  margin-top: 18px;
+  padding: 15px;
+  background: #0c0a08;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.primary-button {
+  padding: 10px 15px;
+  color: #211406;
+  background: linear-gradient(135deg, #f3cb82, #c99042);
+  border: 0;
+  border-radius: 9px;
+  font-weight: bold;
+}
+
+.secondary-button {
+  padding: 10px 15px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.memory-card {
+  min-height: 65px;
+  display: grid;
+  place-items: center;
+  color: var(--gold-light);
+  background: #21180f;
+  border: 1px solid #604624;
+  border-radius: 8px;
+  font-size: 25px;
+}
+
+.memory-card:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.word-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.word-chip {
+  padding: 8px 11px;
+  color: var(--text);
+  background: #241a10;
+  border: 1px solid #674b28;
+  border-radius: 7px;
+}
+
+.word-chip.found {
+  color: #d5f0d5;
+  background: #19301f;
+  border-color: #4c8b58;
+  text-decoration: line-through;
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 11px;
+  color: var(--text);
+  background: #21180f;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: left;
+}
+
+.quiz-option:hover {
+  border-color: var(--gold);
+}
+
+.result {
+  margin-top: 12px;
+  color: var(--gold-light);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.puzzle-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+  max-width: 300px;
+  margin: 15px auto;
+}
+
+.puzzle-tile {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: #211406;
+  background: linear-gradient(135deg, #f3cb82, #c99042);
+  border: 0;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.puzzle-tile.empty {
+  background: #0b0907;
+  border: 1px dashed #4b3823;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 1050px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quote-card {
+    min-height: 230px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    height: 64px;
+    gap: 9px;
+    padding: 0 10px;
+  }
+
+  .back-button {
+    width: 37px;
+    height: 37px;
+    font-size: 23px;
+  }
+
+  .brand {
+    gap: 7px;
+    font-size: 25px;
+  }
+
+  .brand img {
+    width: 39px;
+    height: 39px;
+  }
+
+  .search-box {
+    display: none;
+  }
+
+  .header-icons {
+    margin-left: auto;
+    font-size: 20px;
+  }
+
+  .layout {
+    display: block;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .hero {
+    min-height: 125px;
+    padding: 20px 17px;
+    background-position: center;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .section {
+    padding: 20px 14px;
+  }
+
+  .section-title {
+    font-size: 23px;
+  }
+
+  .story-text p {
+    font-size: 13px;
+  }
+
+  .values {
+    margin-top: 14px;
+  }
+
+  .value {
+    padding: 5px 2px;
+  }
+
+  .value span {
+    font-size: 25px;
+  }
+
+  .value small {
+    font-size: 11px;
+  }
+
+  .quote-card {
+    min-height: 190px;
+    padding: 17px;
+  }
+
+  .quote-logo {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+    font-size: 43px;
+  }
+
+  .quote-card p {
+    font-size: 20px;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .game-card {
+    padding: 14px 9px;
+  }
+
+  .game-card h3 {
+    font-size: 15px;
+  }
+
+  .game-card p {
+    font-size: 11px;
+  }
+
+  .game-icon {
+    font-size: 31px;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 25;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 65px;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: #0d0b09f7;
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-nav a {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .mobile-nav span {
+    color: var(--gold-light);
+    font-size: 20px;
+  }
+
+  footer {
+    padding-bottom: 85px;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand {
+    font-size: 22px;
+  }
+
+  .header-icons {
+    gap: 10px;
+  }
+
+  .games-grid {
+    gap: 7px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="back-button" href="home.html"
+     aria-label="Voltar para a página inicial" title="Voltar para início">←</a>
+
+  <a href="home.html" class="brand">
+    <img src="logo-mystic.jpg" alt="Logo Mystic"
+         onerror="this.style.display='none'">
+    <span>Mystic</span>
+  </a>
+
+  <div class="search-box">
+    <input id="siteSearch" type="search" placeholder="⌕  Buscar no site...">
+  </div>
+
+  <div class="header-icons" aria-hidden="true">
+    <span>♧</span>
+    <span>♙</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <nav class="nav">
+      <a href="home.html"><span class="nav-icon">⌂</span>Início</a>
+      <a href="explore.html"><span class="nav-icon">⌕</span>Explore</a>
+      <a href="dicionario.html"><span class="nav-icon">▤</span>Dicionário</a>
+      <a href="meu-caderno.html"><span class="nav-icon">▧</span>Seus textos</a>
+      <a href="meu-caderno.html"><span class="nav-icon">✎</span>Escrever texto</a>
+      <a href="favoritos.html"><span class="nav-icon">♡</span>Favoritos</a>
+    </nav>
+
+    <hr class="divider">
+
+    <div class="menu-label">COMUNIDADE</div>
+
+    <nav class="nav">
+      <a href="forum.html"><span class="nav-icon">▢</span>Fórum</a>
+      <a href="grupos.html"><span class="nav-icon">♧</span>Grupos</a>
+      <a href="desafios.html"><span class="nav-icon">♜</span>Desafios</a>
+      <a href="sobre.html" class="active"><span class="nav-icon">ⓘ</span>Sobre</a>
+    </nav>
+
+    <div class="sidebar-note">
+      <span style="font-size:22px;color:var(--gold-light)">✧</span>
+      <h3>Juntos somos mais fortes</h3>
+      Troque ideias, compartilhe leituras e faça parte da comunidade Mystic.
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Sobre a Mystic</h1>
+        <p>Mais que um site, um refúgio para mentes curiosas, sonhadoras e apaixonadas por boas histórias.</p>
+      </div>
+    </section>
+
+    <section class="section" id="historia">
+      <h2 class="section-title">
+        <span class="symbol">✧</span>
+        Nossa história
+      </h2>
+
+      <div class="story-grid">
+        <div class="story-text">
+          <p>
+            A Mystic nasceu de um simples desejo: criar um espaço onde
+            pessoas que amam livros, ideias e boas conversas pudessem
+            se encontrar. Aqui, acreditamos que a leitura é apenas o
+            começo — ela nos conecta, nos inspira e nos faz enxergar
+            o mundo de novas formas.
+          </p>
+
+          <p>
+            Somos uma comunidade em constante crescimento, formada por
+            leitores, escritores e sonhadores, que compartilham o mesmo
+            propósito: tornar o conhecimento e a imaginação acessíveis
+            a todos.
+          </p>
+
+          <div class="values">
+            <div class="value">
+              <span>♧</span>
+              <small>Leitura</small>
+            </div>
+            <div class="value">
+              <span>♙</span>
+              <small>Comunidade</small>
+            </div>
+            <div class="value">
+              <span>♧</span>
+              <small>Conhecimento</small>
+            </div>
+            <div class="value">
+              <span>♡</span>
+              <small>Conexão</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="quote-logo">♧</div>
+          <p>Aqui, cada história<br>tem um lugar.</p>
+          <div class="ornament"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="jogos">
+      <h2 class="section-title">
+        <span class="symbol">♧</span>
+        Jogos e Passatempos
+      </h2>
+
+      <p class="section-intro">
+        Para deixar sua experiência ainda mais divertida, a Mystic também
+        oferece joguinhos e passatempos. São atividades leves, criativas
+        e perfeitas para aqueles momentos de pausa.
+      </p>
+
+      <div class="games-grid">
+
+        <article class="game-card">
+          <div class="game-icon">🧩</div>
+          <h3>Quebra-cabeça</h3>
+          <p>Organize os números na ordem certa e treine sua mente.</p>
+          <button class="game-button" onclick="openGame('puzzle')">
+            Jogar agora →
+          </button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">▧</div>
+          <h3>Jogo da Memória</h3>
+          <p>Teste sua memória encontrando os pares de símbolos.</p>
+          <button class="game-button" onclick="openGame('memory')">
+            Jogar agora →
+          </button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">▦</div>
+          <h3>Caça-palavras</h3>
+          <p>Encontre palavras e descubra novos termos.</p>
+          <button class="game-button" onclick="openGame('words')">
+            Jogar agora →
+          </button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">♧</div>
+          <h3>Quiz Literário</h3>
+          <p>Quanto você sabe sobre livros e literatura?</p>
+          <button class="game-button" onclick="openGame('quiz')">
+            Jogar agora →
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      Mystic &nbsp; · &nbsp; Um lugar para sentir, escrever e descobrir.
+    </footer>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <a href="home.html"><span>⌂</span>Início</a>
+  <a href="explore.html"><span>⌕</span>Explore</a>
+  <a href="dicionario.html"><span>▤</span>Dicionário</a>
+  <a href="meu-caderno.html"><span>▧</span>Seus textos</a>
+  <a href="forum.html"><span>▢</span>Fórum</a>
+</nav>
+
+<!-- Janela dos jogos -->
+<div class="game-overlay" id="gameOverlay">
+  <section class="game-modal">
+    <div class="modal-head">
+      <div>
+        <h2 id="gameTitle">Jogo</h2>
+        <p id="gameDescription">Divirta-se!</p>
+      </div>
+      <button class="close-button" onclick="closeGame()" aria-label="Fechar jogo">✕</button>
+    </div>
+
+    <div class="game-area" id="gameArea"></div>
+  </section>
+</div>
+
+<script>
+const overlay = document.getElementById("gameOverlay");
+const gameTitle = document.getElementById("gameTitle");
+const gameDescription = document.getElementById("gameDescription");
+const gameArea = document.getElementById("gameArea");
+
+let memoryFirst = null;
+let memoryLock = false;
+let memoryMatches = 0;
+let memoryMoves = 0;
+let quizIndex = 0;
+let quizScore = 0;
+let foundWords = [];
+let puzzleMoves = 0;
+
+function shuffle(array) {
+  const copy = [...array];
+
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+
+  return copy;
+}
+
+function openGame(type) {
+  overlay.classList.add("open");
+
+  if (type === "memory") startMemory();
+  if (type === "words") startWords();
+  if (type === "quiz") startQuiz();
+  if (type === "puzzle") startPuzzle();
+}
+
+function closeGame() {
+  overlay.classList.remove("open");
+}
+
+overlay.addEventListener("click", event => {
+  if (event.target === overlay) closeGame();
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") closeGame();
+});
+
+/* JOGO DA MEMÓRIA */
+function startMemory() {
+  gameTitle.textContent = "Jogo da Memória";
+  gameDescription.textContent = "Encontre todos os pares de símbolos.";
+  memoryFirst = null;
+  memoryLock = false;
+  memoryMatches = 0;
+  memoryMoves = 0;
+
+  const symbols = shuffle(["✧", "♡", "☾", "♧", "✦", "☆"]);
+  const cards = shuffle([...symbols, ...symbols]);
+
+  gameArea.innerHTML = `
+    <p id="memoryStatus">Movimentos: 0 · Pares: 0 de 6</p>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <button class="primary-button" onclick="startMemory()" style="margin-top:15px">
+      Reiniciar
+    </button>
+  `;
+
+  const grid = document.getElementById("memoryGrid");
+
+  cards.forEach((symbol, index) => {
+    const button = document.createElement("button");
+    button.className = "memory-card";
+    button.textContent = "?";
+    button.dataset.symbol = symbol;
+    button.dataset.index = index;
+    button.setAttribute("aria-label", "Carta virada");
+
+    button.addEventListener("click", () => flipMemoryCard(button));
+    grid.appendChild(button);
+  });
+}
+
+function flipMemoryCard(button) {
+  if (memoryLock || button.disabled || button === memoryFirst) return;
+
+  button.textContent = button.dataset.symbol;
+  button.setAttribute("aria-label", button.dataset.symbol);
+
+  if (!memoryFirst) {
+    memoryFirst = button;
+    return;
+  }
+
+  memoryMoves++;
+
+  const first = memoryFirst;
+  const second = button;
+  memoryFirst = null;
+
+  if (first.dataset.symbol === second.dataset.symbol) {
+    first.disabled = true;
+    second.disabled = true;
+    memoryMatches++;
+
+    updateMemoryStatus();
+
+    if (memoryMatches === 6) {
+      document.getElementById("memoryStatus").textContent =
+        `Parabéns! Você encontrou todos os pares em ${memoryMoves} movimentos.`;
+    }
+  } else {
+    memoryLock = true;
+
+    setTimeout(() => {
+      first.textContent = "?";
+      second.textContent = "?";
+      first.setAttribute("aria-label", "Carta virada");
+      second.setAttribute("aria-label", "Carta virada");
+      memoryLock = false;
+    }, 700);
+
+    updateMemoryStatus();
+  }
+}
+
+function updateMemoryStatus() {
+  const status = document.getElementById("memoryStatus");
+  if (status) {
+    status.textContent =
+      `Movimentos: ${memoryMoves} · Pares: ${memoryMatches} de 6`;
+  }
+}
+
+/* CAÇA-PALAVRAS SIMPLES */
+function startWords() {
+  gameTitle.textContent = "Caça-palavras";
+  gameDescription.textContent =
+    "Encontre as cinco palavras relacionadas ao universo dos livros.";
+
+  const words = ["LIVRO", "POEMA", "CONTO", "LEITURA", "VERSO"];
+  foundWords = [];
+
+  gameArea.innerHTML = `
+    <p>Toque em cada palavra quando encontrá-la na lista.</p>
+    <div style="padding:12px;background:#17120d;border:1px solid #44321f;border-radius:8px;line-height:2;letter-spacing:4px;text-align:center">
+      L I V R O &nbsp; P O E M A<br>
+      C O N T O &nbsp; V E R S O<br>
+      L E I T U R A &nbsp; L I V R O<br>
+      P O E M A &nbsp; C O N T O<br>
+      V E R S O &nbsp; L E I T U R A
+    </div>
+    <div class="word-grid" id="wordGrid"></div>
+    <p class="result" id="wordResult">Palavras encontradas: 0 de 5</p>
+    <button class="primary-button" onclick="startWords()">Recomeçar</button>
+  `;
+
+  const grid = document.getElementById("wordGrid");
+
+  words.forEach(word => {
+    const button = document.createElement("button");
+    button.className = "word-chip";
+    button.textContent = word;
+
+    button.addEventListener("click", () => {
+      if (foundWords.includes(word)) return;
+
+      foundWords.push(word);
+      button.classList.add("found");
+
+      document.getElementById("wordResult").textContent =
+        foundWords.length === words.length
+          ? "Muito bem! Você encontrou todas as palavras!"
+          : `Palavras encontradas: ${foundWords.length} de ${words.length}`;
+    });
+
+    grid.appendChild(button);
+  });
+}
+
+/* QUIZ LITERÁRIO */
+const quizQuestions = [
+  {
+    question: "Quem escreveu Dom Casmurro?",
+    options: ["Machado de Assis", "José de Alencar", "Clarice Lispector", "Cecília Meireles"],
+    answer: 0,
+    explanation: "Machado de Assis é o autor de Dom Casmurro."
+  },
+  {
+    question: "Qual destes é um gênero literário?",
+    options: ["Fotografia", "Poesia", "Escultura", "Arquitetura"],
+    answer: 1,
+    explanation: "A poesia é uma forma de expressão literária."
+  },
+  {
+    question: "Quem escreveu O Pequeno Príncipe?",
+    options: ["Victor Hugo", "Antoine de Saint-Exupéry", "Jules Verne", "Fernando Pessoa"],
+    answer: 1,
+    explanation: "O Pequeno Príncipe foi escrito por Antoine de Saint-Exupéry."
+  },
+  {
+    question: "Como chamamos a pessoa que escreve poemas?",
+    options: ["Pintor", "Editor", "Poeta", "Leitor"],
+    answer: 2,
+    explanation: "A pessoa que escreve poemas é chamada de poeta ou poetisa."
+  },
+  {
+    question: "Qual é o lugar onde normalmente encontramos livros para empréstimo?",
+    options: ["Biblioteca", "Estádio", "Laboratório", "Ateliê"],
+    answer: 0,
+    explanation: "Bibliotecas oferecem acesso a livros e outros materiais de leitura."
+  }
+];
+
+function startQuiz() {
+  gameTitle.textContent = "Quiz Literário";
+  gameDescription.textContent = "Responda às perguntas e teste seus conhecimentos.";
+  quizIndex = 0;
+  quizScore = 0;
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  if (quizIndex >= quizQuestions.length) {
+    gameArea.innerHTML = `
+      <h3>Quiz concluído!</h3>
+      <p>Você acertou ${quizScore} de ${quizQuestions.length} perguntas.</p>
+      <p class="result">${
+        quizScore === quizQuestions.length
+          ? "Incrível! Você é uma estrela literária! ✨"
+          : "Continue explorando o mundo dos livros e tente novamente."
+      }</p>
+      <button class="primary-button" onclick="startQuiz()">Jogar novamente</button>
+    `;
+    return;
+  }
+
+  const question = quizQuestions[quizIndex];
+
+  gameArea.innerHTML = `
+    <p>Pergunta ${quizIndex + 1} de ${quizQuestions.length}</p>
+    <h3>${question.question}</h3>
+    <div id="quizOptions"></div>
+    <p id="quizFeedback" class="result"></p>
+    <button id="quizNext" class="primary-button" style="display:none">
+      Próxima pergunta →
+    </button>
+  `;
+
+  const options = document.getElementById("quizOptions");
+
+  question.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "quiz-option";
+    button.textContent = option;
+
+    button.addEventListener("click", () => {
+      if (options.dataset.answered) return;
+      options.dataset.answered = "true";
+
+      const correct = index === question.answer;
+      if (correct) quizScore++;
+
+      document.getElementById("quizFeedback").textContent =
+        (correct ? "Resposta correta! " : "Ainda não! ") + question.explanation;
+
+      document.getElementById("quizNext").style.display = "inline-block";
+
+      [...options.children].forEach((item, itemIndex) => {
+        item.disabled = true;
+        if (itemIndex === question.answer) {
+          item.style.borderColor = "#6d9d65";
+        }
+      });
+    });
+
+    options.appendChild(button);
+  });
+
+  document.getElementById("quizNext").addEventListener("click", () => {
+    quizIndex++;
+    renderQuizQuestion();
+  });
+}
+
+/* QUEBRA-CABEÇA NUMÉRICO */
+function startPuzzle() {
+  gameTitle.textContent = "Quebra-cabeça";
+  gameDescription.textContent =
+    "Organize os números de 1 a 8. O espaço vazio deve ficar no final.";
+
+  puzzleMoves = 0;
+
+  // Começa resolvido e faz movimentos válidos aleatórios.
+  const board = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+
+  for (let i = 0; i < 100; i++) {
+    const empty = board.indexOf(0);
+    const neighbors = getPuzzleNeighbors(empty);
+    const choice = neighbors[Math.floor(Math.random() * neighbors.length)];
+    [board[empty], board[choice]] = [board[choice], board[empty]];
+  }
+
+  renderPuzzle(board);
+}
+
+function getPuzzleNeighbors(index) {
+  const row = Math.floor(index / 3);
+  const col = index % 3;
+  const neighbors = [];
+
+  if (row > 0) neighbors.push(index - 3);
+  if (row < 2) neighbors.push(index + 3);
+  if (col > 0) neighbors.push(index - 1);
+  if (col < 2) neighbors.push(index + 1);
+
+  return neighbors;
+}
+
+function renderPuzzle(board) {
+  gameArea.innerHTML = `
+    <p id="puzzleStatus">Movimentos: ${puzzleMoves}</p>
+    <div class="puzzle-board" id="puzzleBoard"></div>
+    <button class="primary-button" onclick="startPuzzle()">Novo jogo</button>
+  `;
+
+  const grid = document.getElementById("puzzleBoard");
+
+  board.forEach((number, index) => {
+    const button = document.createElement("button");
+    button.className = "puzzle-tile" + (number === 0 ? " empty" : "");
+    button.textContent = number || "";
+    button.setAttribute("aria-label", number ? `Número ${number}` : "Espaço vazio");
+
+    button.addEventListener("click", () => {
+      const empty = board.indexOf(0);
+      if (!getPuzzleNeighbors(empty).includes(index)) return;
+
+      [board[empty], board[index]] = [board[index], board[empty]];
+      puzzleMoves++;
+
+      if (board.every((value, i) => value === (i === 8 ? 0 : i + 1))) {
+        renderPuzzle(board);
+        document.getElementById("puzzleStatus").textContent =
+          `Parabéns! Você resolveu em ${puzzleMoves} movimentos.`;
+      } else {
+        renderPuzzle(board);
+      }
+    });
+
+    grid.appendChild(button);
+  });
+}
+
+/* Busca rápida nesta página */
+document.getElementById("siteSearch").addEventListener("keydown", event => {
+  if (event.key !== "Enter") return;
+
+  const query = event.target.value.trim().toLocaleLowerCase("pt-BR");
+  if (!query) return;
+
+  const searchableSections = [...document.querySelectorAll(".section")];
+
+  const match = searchableSections.find(section =>
+    section.textContent.toLocaleLowerCase("pt-BR").includes(query)
+  );
+
+  if (match) {
+    match.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    alert("Não encontramos esse assunto nesta página.");
+  }
+});
+</script>
+
+</body>
+</html>
+
