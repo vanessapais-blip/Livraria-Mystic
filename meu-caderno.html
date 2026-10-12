@@ -2,1124 +2,1348 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#100e0d">
-  <title>Meu Caderno | Mystic Livraria">
-
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #100e0d;
-      --panel: #191613;
-      --panel2: #211d19;
-      --field: #151210;
-      --border: #393027;
-      --text: #f4eee5;
-      --muted: #b9afa2;
-      --gold: #c9a45c;
-      --gold-light: #e2c783;
-      --gold-bg: #302719;
-      --danger: #e78d83;
-      --radius: 12px;
-    }
-
-    * { box-sizing: border-box; }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-      -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      min-height: 100dvh;
-      background: var(--bg);
-      color: var(--text);
-      font: 14px/1.6 Arial, Helvetica, sans-serif;
-    }
-
-    button, input, textarea, select {
-      font: inherit;
-    }
-
-    button, a, input, textarea, select {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    button { cursor: pointer; }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button:focus-visible, a:focus-visible,
-    input:focus-visible, textarea:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-height: 72px;
-      padding: 12px clamp(12px, 4vw, 56px);
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .back {
-      display: grid;
-      place-items: center;
-      flex: 0 0 42px;
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      background: var(--panel);
-      color: var(--gold-light);
-      font-size: 24px;
-    }
-
-    .back:hover { background: var(--gold-bg); }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      min-width: 0;
-    }
-
-    .brand img {
-      display: block;
-      width: 42px;
-      height: 42px;
-      object-fit: contain;
-    }
-
-    .brand-name {
-      color: var(--gold-light);
-      font: bold clamp(23px, 2.5vw, 30px) Georgia, "Times New Roman", serif;
-      letter-spacing: 1px;
-    }
-
-    .top-search {
-      position: relative;
-      width: min(360px, 40%);
-      margin-left: auto;
-    }
-
-    .top-search input {
-      width: 100%;
-      min-height: 42px;
-      padding: 10px 40px 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      background: var(--field);
-      color: var(--text);
-    }
-
-    .search-icon {
-      position: absolute;
-      top: 50%;
-      right: 14px;
-      transform: translateY(-50%);
-      color: var(--gold);
-      pointer-events: none;
-      font-size: 19px;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: 238px minmax(0, 1fr);
-      width: 100%;
-      max-width: 1440px;
-      min-height: calc(100vh - 72px);
-      margin: 0 auto;
-    }
-
-    .sidebar {
-      padding: 25px 13px;
-      background: var(--panel);
-      border-right: 1px solid var(--border);
-    }
-
-    .sidebar-title {
-      padding: 0 12px 13px;
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: bold;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .nav-list { display: grid; gap: 5px; }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      min-height: 42px;
-      padding: 10px 12px;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      background: var(--gold-bg);
-      border-color: var(--border);
-      color: var(--text);
-    }
-
-    .nav-icon {
-      display: inline-grid;
-      width: 20px;
-      flex: 0 0 20px;
-      place-items: center;
-      color: var(--gold);
-      font-size: 17px;
-    }
-
-    main {
-      width: 100%;
-      min-width: 0;
-      padding: 30px clamp(14px, 3vw, 42px) 45px;
-    }
-
-    .page-title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-
-    .page-icon {
-      flex: 0 0 auto;
-      color: var(--gold);
-      font-size: 30px;
-    }
-
-    h1, h2, p { margin-top: 0; }
-
-    h1 {
-      margin-bottom: 3px;
-      font: 29px/1.25 Georgia, "Times New Roman", serif;
-    }
-
-    h2 {
-      margin: 0 0 4px;
-      font: 19px/1.3 Georgia, "Times New Roman", serif;
-    }
-
-    .muted, .description { color: var(--muted); }
-
-    .description {
-      margin-bottom: 0;
-      font-size: 13px;
-    }
-
-    .status {
-      min-height: 18px;
-      margin: 0 0 12px;
-      color: var(--gold-light);
-      font-size: 12px;
-    }
-
-    .card {
-      min-width: 0;
-      padding: clamp(14px, 1.7vw, 20px);
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-
-    .card-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      margin-bottom: 15px;
-    }
-
-    .card-icon {
-      width: 27px;
-      flex: 0 0 27px;
-      color: var(--gold);
-      text-align: center;
-      font-size: 22px;
-      line-height: 1.3;
-    }
-
-    .card-description {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .toolbar select {
-      flex: 0 1 180px;
-      min-height: 40px;
-      padding: 9px 11px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      background: var(--field);
-      color: var(--text);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-height: 38px;
-      max-width: 100%;
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      background: var(--panel2);
-      color: var(--text);
-      font-size: 12px;
-      text-align: center;
-      transition: border-color .2s, color .2s;
-    }
-
-    .btn:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-    }
-
-    .btn-primary {
-      border-color: var(--gold);
-      background: var(--gold);
-      color: #1a140a;
-      font-weight: bold;
-    }
-
-    .btn-primary:hover { color: #1a140a; filter: brightness(1.08); }
-
-    .btn-danger { color: var(--danger); }
-
-    .editor {
-      display: grid;
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .field { min-width: 0; }
-
-    .field label {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .field input[type="text"],
-    .field textarea,
-    .field select,
-    .field input[type="file"] {
-      display: block;
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      padding: 11px 12px;
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      background: var(--field);
-      color: var(--text);
-    }
-
-    .field textarea {
-      min-height: 190px;
-      resize: vertical;
-      line-height: 1.8;
-    }
-
-    .field input::placeholder,
-    .field textarea::placeholder {
-      color: #938779;
-    }
-
-    .editor-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: 9px;
-    }
-
-    .image-preview {
-      display: none;
-      width: 100%;
-      max-height: 300px;
-      object-fit: contain;
-      object-position: left center;
-      margin-top: 10px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--field);
-    }
-
-    .image-preview.visible { display: block; }
-
-    .note-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .note-card {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-      overflow: hidden;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      transition: border-color .2s;
-    }
-
-    .note-card:hover { border-color: var(--gold); }
-
-    .note-image {
-      display: block;
-      width: 100%;
-      max-height: 220px;
-      object-fit: cover;
-      background: var(--panel2);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .note-content {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      padding: 16px;
-    }
-
-    .note-category {
-      display: inline-block;
-      align-self: flex-start;
-      margin-bottom: 9px;
-      padding: 3px 8px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--gold-bg);
-      color: var(--gold-light);
-      font-size: 10px;
-    }
-
-    .note-title {
-      margin-bottom: 8px;
-      overflow-wrap: anywhere;
-      font: 20px/1.35 Georgia, "Times New Roman", serif;
-    }
-
-    .note-preview {
-      flex: 1;
-      margin-bottom: 13px;
-      color: var(--muted);
-      font-size: 12px;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 5;
-      overflow: hidden;
-    }
-
-    .note-date {
-      margin-bottom: 13px;
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .note-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: auto;
-    }
-
-    .note-actions .btn { flex: 1 1 auto; }
-
-    .empty {
-      padding: 35px 18px;
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .empty-icon {
-      display: block;
-      margin-bottom: 10px;
-      color: var(--gold);
-      font-size: 35px;
-    }
-
-    .empty strong {
-      display: block;
-      margin-bottom: 5px;
-      color: var(--text);
-      font: 20px Georgia, "Times New Roman", serif;
-    }
-
-    .note-info {
-      margin-top: 18px;
-      padding: 11px;
-      border-radius: 7px;
-      background: var(--panel2);
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-
-    .hidden { display: none !important; }
-
-    footer {
-      display: flex;
-      justify-content: center;
-      padding: 22px 14px;
-      border-top: 1px solid var(--border);
-      background: var(--panel);
-      color: var(--gold-light);
-      font: 19px Georgia, "Times New Roman", serif;
-      text-align: center;
-    }
-
-    @media (max-width: 1050px) {
-      .layout { grid-template-columns: 1fr; }
-
-      .sidebar {
-        position: sticky;
-        top: 72px;
-        z-index: 10;
-        padding: 9px 12px;
-        border-right: 0;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .sidebar-title { padding: 0 5px 7px; }
-
-      .nav-list {
-        display: flex;
-        gap: 6px;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scrollbar-width: thin;
-        padding-bottom: 3px;
-      }
-
-      .nav-link {
-        flex: 0 0 auto;
-        min-height: 38px;
-        padding: 8px 11px;
-        white-space: nowrap;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .topbar {
-        display: grid;
-        grid-template-columns: 38px minmax(0, 1fr);
-        gap: 10px;
-        padding: 10px 12px;
-      }
-
-      .back {
-        width: 38px;
-        height: 38px;
-        flex-basis: 38px;
-        font-size: 22px;
-      }
-
-      .brand { gap: 8px; }
-
-      .brand img {
-        width: 36px;
-        height: 36px;
-      }
-
-      .brand-name { font-size: 25px; }
-
-      .top-search {
-        grid-column: 1 / -1;
-        width: 100%;
-        margin: 0;
-      }
-
-      .sidebar {
-        top: 0;
-        padding: 8px 10px;
-      }
-
-      main { padding: 20px 12px 30px; }
-
-      .page-title {
-        gap: 10px;
-        margin-bottom: 19px;
-      }
-
-      .page-icon { font-size: 26px; }
-      h1 { font-size: 25px; }
-
-      .note-grid {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 13px;
-      }
-
-      .card {
-        padding: 15px;
-        border-radius: 10px;
-      }
-
-      .toolbar select { flex: 1 1 140px; }
-
-      .editor-actions .btn { flex: 1 1 auto; }
-
-      .note-content { padding: 14px; }
-      .note-title { font-size: 19px; }
-    }
-
-    @media (max-width: 380px) {
-      .brand-name { font-size: 23px; }
-      main { padding-right: 9px; padding-left: 9px; }
-      .card { padding: 12px; }
-      .note-content { padding: 12px; }
-      .note-actions .btn { font-size: 11px; padding: 8px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100e0d">
+<title>Meu Caderno | Mystic</title>
+
+<style>
+:root {
+  --bg: #100e0d;
+  --panel: #191613;
+  --panel2: #211d19;
+  --field: #151210;
+  --border: #393027;
+  --text: #f4eee5;
+  --muted: #b9afa2;
+  --gold: #c9a45c;
+  --gold-light: #e2c783;
+  --gold-bg: #302719;
+  --danger: #d77d70;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+button, input, textarea, select { font: inherit; }
+
+button { cursor: pointer; }
+
+button:focus-visible, input:focus-visible,
+textarea:focus-visible, select:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.topbar {
+  height: 76px;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(16,14,13,.96);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.brand img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+}
+
+.brand-name {
+  font-family: Georgia, serif;
+  font-size: 25px;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+}
+
+.brand-sub {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  border-radius: 9px;
+  padding: 10px 15px;
+  transition: .2s;
+}
+
+.btn:hover { border-color: var(--gold); }
+
+.btn.primary {
+  background: var(--gold);
+  color: #17120b;
+  border-color: var(--gold);
+  font-weight: 700;
+}
+
+.btn.primary:hover { background: var(--gold-light); }
+
+.btn.small { padding: 7px 11px; font-size: 13px; }
+
+.btn.danger { color: var(--danger); }
+
+.layout {
+  display: grid;
+  grid-template-columns: 230px minmax(0, 1fr);
+  min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+  padding: 28px 18px;
+  border-right: 1px solid var(--border);
+  background: #14110f;
+}
+
+.sidebar-label {
+  padding: 0 12px;
+  color: #8f8272;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  margin: 16px 0 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 9px;
+  color: var(--muted);
+  margin: 3px 0;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--gold-light);
+  background: var(--gold-bg);
+  border-color: #4b3c26;
+}
+
+.nav-icon { width: 22px; text-align: center; }
+
+.sidebar-note {
+  margin-top: 35px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.sidebar-note strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  color: var(--gold-light);
+  margin-bottom: 5px;
+}
+
+main {
+  width: 100%;
+  max-width: 1450px;
+  min-width: 0;
+  padding: 36px clamp(18px, 4vw, 58px) 70px;
+  margin: 0 auto;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  font-weight: 700;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(31px, 4vw, 45px);
+  line-height: 1.2;
+  margin: 9px 0 12px;
+}
+
+h2 { font-size: 25px; margin: 0 0 8px; }
+h3 { font-size: 21px; margin: 0 0 8px; }
+
+.subtitle {
+  color: var(--muted);
+  max-width: 720px;
+  margin: 0;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+  margin: 32px 0 16px;
+}
+
+.hero {
+  padding: clamp(23px, 4vw, 43px);
+  border: 1px solid #4b3c26;
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at top right, rgba(201,164,92,.13), transparent 55%),
+    linear-gradient(135deg, #211b14, #171310 75%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "✧";
+  position: absolute;
+  right: 7%;
+  top: 5%;
+  font-size: clamp(100px, 18vw, 220px);
+  color: rgba(201,164,92,.09);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; }
+
+.hero p {
+  max-width: 650px;
+  color: var(--muted);
+}
+
+.hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.stat {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.stat strong {
+  display: block;
+  color: var(--gold-light);
+  font-family: Georgia, serif;
+  font-size: 27px;
+}
+
+.stat span { color: var(--muted); font-size: 13px; }
+
+.panel {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.field { margin-bottom: 17px; }
+
+.field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #ddd0bf;
+  font-size: 13px;
+}
+
+input, textarea, select {
+  width: 100%;
+  background: var(--field);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 12px 13px;
+  color: var(--text);
+}
+
+input::placeholder, textarea::placeholder { color: #81776c; }
+
+textarea {
+  resize: vertical;
+  min-height: 170px;
+  line-height: 1.8;
+}
+
+.editor {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, .8fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.editor textarea { min-height: 260px; }
+
+.helper {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.check-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 14px 0;
+}
+
+.check-row input { width: auto; accent-color: var(--gold); }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.toolbar input { flex: 1 1 220px; }
+.toolbar select { width: auto; min-width: 145px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.note-card {
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card:hover { border-color: #655032; }
+
+.note-cover {
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  background: #211b14;
+  border-bottom: 1px solid var(--border);
+}
+
+.note-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.note-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  color: var(--gold-light);
+  background: var(--gold-bg);
+  border: 1px solid #4b3c26;
+  border-radius: 30px;
+  padding: 3px 9px;
+}
+
+.note-excerpt {
+  color: var(--muted);
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 18px;
+}
+
+.note-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.note-actions .btn { font-size: 12px; padding: 7px 10px; }
+
+.empty {
+  border: 1px dashed #4a3d2c;
+  border-radius: 12px;
+  padding: 34px 20px;
+  color: var(--muted);
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.empty span {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 8px;
+  color: var(--gold);
+}
+
+.read-content {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.95;
+  color: #e4d9ca;
+  margin-top: 20px;
+}
+
+.reader-author { color: var(--gold-light); font-size: 13px; }
+
+.reader-cover {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 18px;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 5%;
+  color: var(--muted);
+  text-align: center;
+  font-size: 12px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold-light);
+  color: #17120b;
+  padding: 12px 18px;
+  border-radius: 10px;
+  z-index: 100;
+  box-shadow: 0 8px 30px #0008;
+  display: none;
+  max-width: calc(100vw - 30px);
+  font-size: 14px;
+}
+
+.mobile-nav { display: none; }
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 190px minmax(0,1fr); }
+  .sidebar { padding: 22px 12px; }
+  main { padding: 28px 20px 50px; }
+  .editor { grid-template-columns: 1fr; }
+  .cards { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 650px) {
+  .topbar { height: 66px; padding: 0 14px; gap: 8px; }
+  .brand { gap: 8px; }
+  .brand img { width: 39px; height: 39px; }
+  .brand-name { font-size: 21px; }
+  .brand-sub { font-size: 8px; letter-spacing: 1.3px; }
+  .top-actions .btn { padding: 8px 10px; font-size: 12px; }
+  .top-actions .hide-mobile { display: none; }
+
+  .layout { display: block; min-height: auto; }
+  .sidebar { display: none; }
+  main { padding: 24px 15px 100px; }
+
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+    background: rgba(20,17,15,.98);
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-nav .nav-link {
+    margin: 0;
+    padding: 8px 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: center;
+    justify-content: center;
+    font-size: 10px;
+    border-radius: 8px;
+  }
+
+  .nav-icon { font-size: 18px; width: auto; line-height: 1.3; }
+  .hero { padding: 24px 19px; }
+  .hero::after { right: 2%; top: 10%; }
+  .stats { gap: 8px; }
+  .stat { padding: 12px 9px; }
+  .stat strong { font-size: 22px; }
+  .stat span { font-size: 11px; }
+  .section-head { align-items: flex-start; }
+  .section-head .btn { padding: 8px 10px; font-size: 12px; }
+  .panel { padding: 16px; }
+  .toolbar { display: grid; grid-template-columns: 1fr 1fr; }
+  .toolbar input { grid-column: 1 / -1; }
+  .toolbar select { width: 100%; min-width: 0; }
+  .toolbar .btn { width: 100%; }
+  .note-cover { height: 125px; }
+  .brand-sub { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
 </head>
 
 <body>
-  <header class="topbar">
-    <a class="back" href="home.html" aria-label="Voltar para a página inicial" title="Voltar">&#8592;</a>
-
-    <a class="brand" href="home.html" aria-label="Mystic - início">
-      <img src="logo-mystic.jpg" alt="Logo Mystic">
-      <span class="brand-name">Mystic</span>
-    </a>
-
-    <div class="top-search">
-      <input id="buscaTopo" type="search" placeholder="Pesquisar no meu caderno..." aria-label="Pesquisar anotações">
-      <span class="search-icon" aria-hidden="true">&#8981;</span>
+<header class="topbar">
+  <a class="brand" href="home.html" aria-label="Mystic - Início">
+    <img src="logo-mystic.jpg" alt="Logo Mystic"
+         onerror="this.style.display='none'">
+    <div>
+      <div class="brand-name">Mystic</div>
+      <div class="brand-sub">Palavras, sentimentos e mistérios</div>
     </div>
-  </header>
+  </a>
 
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="sidebar-title">Meu espaço</div>
-      <nav class="nav-list" aria-label="Navegação do caderno">
-        <a class="nav-link active" href="#inicio"><span class="nav-icon">⌂</span>Visão geral</a>
-        <a class="nav-link" href="#editor"><span class="nav-icon">✎</span>Nova anotação</a>
-        <a class="nav-link" href="#anotacoes"><span class="nav-icon">▤</span>Minhas anotações</a>
-        <a class="nav-link" href="#favoritas"><span class="nav-icon">♡</span>Favoritas</a>
-      </nav>
-    </aside>
+  <div class="top-actions">
+    <button class="btn hide-mobile" onclick="showPage('explore')">Explorar textos</button>
+    <button class="btn primary" onclick="newNote()">＋ Escrever</button>
+  </div>
+</header>
 
-    <main>
-      <section id="inicio">
-        <div class="page-title">
-          <span class="page-icon" aria-hidden="true">▤</span>
-          <div>
-            <h1>Meu Caderno</h1>
-            <p class="muted description">Seu espaço pessoal para ideias, leituras e inspirações.</p>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-label">Menu principal</div>
+    <a class="nav-link" href="home.html"><span class="nav-icon">⌂</span>Início</a>
+    <button class="nav-link" data-page="explore" onclick="showPage('explore')">
+      <span class="nav-icon">⌕</span>Explore
+    </button>
+    <button class="nav-link active" data-page="mine" onclick="showPage('mine')">
+      <span class="nav-icon">▤</span>Seus textos
+    </button>
+    <button class="nav-link" data-page="editor" onclick="newNote()">
+      <span class="nav-icon">✎</span>Escrever texto
+    </button>
+    <button class="nav-link" data-page="favorites" onclick="showPage('favorites')">
+      <span class="nav-icon">♡</span>Favoritos
+    </button>
+
+    <div class="sidebar-label">Sua biblioteca</div>
+    <button class="nav-link" onclick="exportNotes()">
+      <span class="nav-icon">⇩</span>Exportar textos
+    </button>
+    <button class="nav-link" onclick="document.getElementById('importFile').click()">
+      <span class="nav-icon">⇧</span>Importar textos
+    </button>
+    <input id="importFile" type="file" accept=".json,application/json"
+           hidden onchange="importNotes(event)">
+
+    <div class="sidebar-note">
+      <strong>✧ Um espaço seu</strong>
+      Escreva sem pressa. Algumas palavras só precisam de um lugar para existir.
+    </div>
+  </aside>
+
+  <main>
+    <section class="page" id="page-home">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">Bem-vindo ao seu universo</div>
+          <h1>Onde suas palavras<br>encontram abrigo.</h1>
+          <p>
+            Um espaço para transformar pensamentos em textos, descobrir
+            novas histórias e encontrar palavras que parecem falar com você.
+          </p>
+          <div class="hero-actions">
+            <button class="btn primary" onclick="newNote()">✎ Criar meu texto</button>
+            <button class="btn" onclick="showPage('explore')">Descobrir histórias →</button>
           </div>
         </div>
+      </div>
 
-        <p id="status" class="status" role="status" aria-live="polite"></p>
+      <div class="stats">
+        <div class="stat"><strong id="statMine">0</strong><span>Seus textos</span></div>
+        <div class="stat"><strong id="statFav">0</strong><span>Favoritos</span></div>
+        <div class="stat"><strong id="statWords">0</strong><span>Palavras escritas</span></div>
+      </div>
 
-        <div class="toolbar">
-          <button class="btn btn-primary" id="novaAnotacao" type="button">＋ Nova anotação</button>
-          <select id="filtroCategoria" aria-label="Filtrar por categoria">
-            <option value="">Todas as categorias</option>
-            <option value="Leitura">Leitura</option>
-            <option value="Ideias">Ideias</option>
-            <option value="Citações">Citações</option>
-            <option value="Pessoal">Pessoal</option>
-            <option value="Outros">Outros</option>
-          </select>
-          <select id="filtroOrdem" aria-label="Ordenar anotações">
-            <option value="recentes">Mais recentes</option>
-            <option value="antigas">Mais antigas</option>
-            <option value="titulo">Ordem alfabética</option>
-          </select>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Continue de onde parou</div>
+          <h2>Seus textos recentes</h2>
         </div>
-      </section>
+        <button class="btn small" onclick="showPage('mine')">Ver todos →</button>
+      </div>
+      <div class="cards" id="homeNotes"></div>
 
-      <section class="card editor hidden" id="editor" aria-labelledby="editorTitulo">
-        <div class="card-header">
-          <span class="card-icon">✎</span>
-          <div>
-            <h2 id="editorTitulo">Nova anotação</h2>
-            <p class="card-description">Registre seus pensamentos e guarde suas inspirações.</p>
-          </div>
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Feito para descobrir</div>
+          <h2>Do universo Mystic</h2>
         </div>
+        <button class="btn small" onclick="showPage('explore')">Explorar →</button>
+      </div>
+      <div class="cards" id="homeExplore"></div>
+    </section>
 
-        <form id="formAnotacao">
-          <input type="hidden" id="notaId">
+    <section class="page active" id="page-mine">
+      <div class="eyebrow">Seu espaço de criação</div>
+      <h1>Seus textos</h1>
+      <p class="subtitle">Suas ideias, memórias, poemas e histórias reunidos em um só lugar.</p>
 
-          <div class="field">
-            <label for="tituloNota">Título</label>
-            <input id="tituloNota" type="text" maxlength="120" placeholder="Dê um título à sua anotação" required>
-          </div>
+      <div class="toolbar">
+        <input id="mineSearch" type="search" placeholder="Buscar nos seus textos..."
+               oninput="renderMine()">
+        <select id="mineCategory" onchange="renderMine()">
+          <option value="">Todas as categorias</option>
+          <option>Poesia</option><option>Desabafo</option>
+          <option>Romance</option><option>Reflexão</option>
+          <option>Conto</option><option>Diário</option><option>Outros</option>
+        </select>
+        <button class="btn primary" onclick="newNote()">＋ Novo texto</button>
+      </div>
+      <div class="cards" id="mineNotes"></div>
+    </section>
 
-          <div class="field">
-            <label for="categoriaNota">Categoria</label>
-            <select id="categoriaNota">
-              <option value="Leitura">Leitura</option>
-              <option value="Ideias">Ideias</option>
-              <option value="Citações">Citações</option>
-              <option value="Pessoal">Pessoal</option>
-              <option value="Outros">Outros</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="textoNota">Sua anotação</label>
-            <textarea id="textoNota" placeholder="Escreva aqui seus pensamentos, trechos favoritos ou ideias..." required></textarea>
-          </div>
-
-          <div class="field">
-            <label for="fotoNota">Adicionar foto (opcional)</label>
-            <input id="fotoNota" type="file" accept="image/*">
-            <img id="previewFoto" class="image-preview" alt="Prévia da foto escolhida">
-            <p class="card-description" style="margin-top:7px">Escolha uma imagem de até 2 MB para ilustrar a anotação.</p>
-          </div>
-
-          <div class="setting-row" style="display:flex;align-items:center;gap:10px;padding:12px 0;border-top:1px solid var(--border);margin-top:12px">
-            <input id="favoritaNota" type="checkbox" style="width:19px;height:19px;accent-color:var(--gold)">
-            <label for="favoritaNota">Adicionar às favoritas</label>
-          </div>
-
-          <div class="editor-actions">
-            <button class="btn" id="cancelarEdicao" type="button">Cancelar</button>
-            <button class="btn btn-primary" type="submit">Salvar anotação</button>
-          </div>
-        </form>
-      </section>
-
-      <section id="anotacoes">
-        <div class="card-header">
-          <span class="card-icon">▤</span>
-          <div>
-            <h2>Minhas anotações</h2>
-            <p class="card-description">Tudo o que você deseja guardar em um só lugar.</p>
-          </div>
-        </div>
-
-        <div id="listaAnotacoes" class="note-grid"></div>
-
-        <div id="vazio" class="empty hidden">
-          <span class="empty-icon">✧</span>
-          <strong>Seu caderno está esperando por você</strong>
-          <p>Crie sua primeira anotação para guardar ideias, leituras e momentos especiais.</p>
-          <button class="btn btn-primary" id="criarPrimeira" type="button">＋ Criar anotação</button>
-        </div>
-      </section>
-
-      <section id="favoritas" style="margin-top:28px">
-        <div class="card-header">
-          <span class="card-icon">♡</span>
-          <div>
-            <h2>Anotações favoritas</h2>
-            <p class="card-description">Acesse rapidamente as anotações que marcou como favoritas.</p>
-          </div>
-        </div>
-        <div id="listaFavoritas" class="note-grid"></div>
-        <p id="vazioFavoritas" class="note-info hidden">Você ainda não marcou nenhuma anotação como favorita.</p>
-      </section>
-
-      <p class="note-info">
-        Suas anotações ficam salvas neste navegador. Se limpar os dados do navegador ou trocar de dispositivo, elas podem não estar disponíveis. Exporte uma cópia se quiser guardar um backup.
+    <section class="page" id="page-explore">
+      <div class="eyebrow">Histórias que se encontram</div>
+      <h1>Explore</h1>
+      <p class="subtitle">
+        Leia poemas, reflexões e histórias. Às vezes, as palavras de alguém
+        expressam exatamente aquilo que não conseguimos dizer.
       </p>
 
-      <div class="toolbar" style="margin-top:14px">
-        <button class="btn" id="exportar" type="button">⇩ Exportar backup</button>
-        <button class="btn btn-danger" id="apagarTudo" type="button">Apagar todas as anotações</button>
+      <div class="toolbar">
+        <input id="exploreSearch" type="search"
+               placeholder="Buscar títulos, temas ou palavras..."
+               oninput="renderExplore()">
+        <select id="exploreCategory" onchange="renderExplore()">
+          <option value="">Todas as categorias</option>
+          <option>Poesia</option><option>Desabafo</option>
+          <option>Romance</option><option>Reflexão</option>
+          <option>Conto</option><option>Diário</option><option>Outros</option>
+        </select>
       </div>
-    </main>
-  </div>
 
-  <footer>Mystic Livraria</footer>
+      <div class="panel" style="margin-bottom:20px">
+        <strong style="color:var(--gold-light)">✧ Um lembrete</strong>
+        <p class="helper" style="font-size:13px;margin-bottom:0">
+          As publicações exibidas aqui são exemplos locais. Para ler textos
+          publicados por outras pessoas em diferentes dispositivos, conecte
+          este site a um serviço de banco de dados e autenticação.
+        </p>
+      </div>
 
-  <script>
-    (() => {
-      "use strict";
+      <div class="cards" id="exploreNotes"></div>
+    </section>
 
-      const STORAGE_KEY = "mysticMeuCadernoV1";
-      const $ = id => document.getElementById(id);
+    <section class="page" id="page-editor">
+      <div class="eyebrow">Seu caderno pessoal</div>
+      <h1 id="editorHeading">Uma página em branco.</h1>
+      <p class="subtitle">Não precisa ser perfeito. Só precisa começar.</p>
 
-      let anotacoes = [];
-      let fotoAtual = "";
+      <div class="editor" style="margin-top:25px">
+        <div class="panel">
+          <form id="noteForm">
+            <input type="hidden" id="noteId">
 
-      function mostrarStatus(mensagem) {
-        $("status").textContent = mensagem;
-      }
+            <div class="field">
+              <label for="noteTitle">Título</label>
+              <input id="noteTitle" maxlength="120"
+                     placeholder="Dê um nome para seus pensamentos..." required>
+            </div>
 
-      function carregarAnotacoes() {
-        try {
-          const dados = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-          anotacoes = Array.isArray(dados) ? dados.filter(item =>
-            item && typeof item.id === "string" &&
-            typeof item.titulo === "string" &&
-            typeof item.texto === "string"
-          ) : [];
-        } catch {
-          anotacoes = [];
-        }
-      }
+            <div class="field">
+              <label for="noteCategory">Categoria</label>
+              <select id="noteCategory">
+                <option>Poesia</option>
+                <option>Desabafo</option>
+                <option>Romance</option>
+                <option>Reflexão</option>
+                <option>Conto</option>
+                <option>Diário</option>
+                <option>Outros</option>
+              </select>
+            </div>
 
-      function salvarAnotacoes(mensagem = "Anotação salva neste navegador.") {
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(anotacoes));
-          mostrarStatus(mensagem);
-          renderizar();
-        } catch {
-          mostrarStatus("Não foi possível salvar. Tente remover a foto ou usar uma imagem menor.");
-        }
-      }
+            <div class="field">
+              <label for="noteContent">Seu texto</label>
+              <textarea id="noteContent"
+                        placeholder="Escreva aqui... deixe as palavras fluírem."
+                        required></textarea>
+              <div class="helper"><span id="wordCount">0</span> palavras</div>
+            </div>
 
-      function dataFormatada(valor) {
-        const data = new Date(valor);
-        if (Number.isNaN(data.getTime())) return "Data não disponível";
-        return data.toLocaleString("pt-BR", {
-          day: "2-digit",
-          month: "short",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit"
-        });
-      }
+            <div class="field">
+              <label for="noteImage">Foto ou imagem (opcional)</label>
+              <input id="noteImage" type="file" accept="image/*">
+              <div class="helper">Escolha uma imagem para acompanhar seu texto.</div>
+              <div id="imagePreviewBox" style="display:none;margin-top:12px">
+                <img id="imagePreview" alt="Prévia da imagem"
+                     style="max-width:100%;max-height:220px;border-radius:9px">
+                <button class="btn small danger" type="button"
+                        onclick="removeImage()">Remover imagem</button>
+              </div>
+            </div>
 
-      function escaparHTML(valor) {
-        return String(valor).replace(/[&<>"']/g, caractere => ({
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        })[caractere]);
-      }
+            <label class="check-row">
+              <input id="noteFavorite" type="checkbox">
+              Adicionar aos favoritos
+            </label>
 
-      function criarCartao(nota) {
-        const article = document.createElement("article");
-        article.className = "note-card";
+            <div class="helper" style="margin:12px 0 18px">
+              Seus textos ficam salvos neste navegador e não são publicados
+              automaticamente para outras pessoas.
+            </div>
 
-        if (nota.foto) {
-          const img = document.createElement("img");
-          img.className = "note-image";
-          img.src = nota.foto;
-          img.alt = "Foto da anotação " + nota.titulo;
-          img.loading = "lazy";
-          article.appendChild(img);
-        }
+            <div class="hero-actions">
+              <button class="btn primary" type="submit">Salvar texto</button>
+              <button class="btn" type="button" onclick="showPage('mine')">Cancelar</button>
+            </div>
+          </form>
+        </div>
 
-        const content = document.createElement("div");
-        content.className = "note-content";
+        <div class="panel">
+          <div class="eyebrow">Um pequeno ritual</div>
+          <h2>Escreva como quem acende uma vela.</h2>
+          <p class="subtitle" style="line-height:1.9">
+            Não se preocupe com a ordem. Comece por uma lembrança, uma sensação
+            ou uma frase que insiste em voltar.
+          </p>
+          <div style="font-family:Georgia,serif;color:var(--gold-light);font-size:21px;line-height:1.8;margin-top:22px">
+            “Há coisas que só a escrita consegue abraçar.”
+          </div>
+          <div class="helper" style="margin-top:24px">
+            ✧ Seu espaço é seu. Escreva no seu tempo.
+          </div>
+        </div>
+      </div>
+    </section>
 
-        const category = document.createElement("span");
-        category.className = "note-category";
-        category.textContent = nota.categoria || "Outros";
+    <section class="page" id="page-favorites">
+      <div class="eyebrow">Guardados com carinho</div>
+      <h1>Seus favoritos</h1>
+      <p class="subtitle">Textos que você quer reler, perto de você.</p>
+      <div class="cards" id="favoriteNotes" style="margin-top:25px"></div>
+    </section>
 
-        const title = document.createElement("h3");
-        title.className = "note-title";
-        title.textContent = nota.titulo;
+    <section class="page" id="page-reader">
+      <button class="btn small" onclick="goBack()">← Voltar</button>
+      <article class="panel" style="margin-top:20px;max-width:850px;margin-left:auto;margin-right:auto">
+        <div class="eyebrow" id="readerCategory">Texto</div>
+        <h1 id="readerTitle"></h1>
+        <div class="reader-author" id="readerAuthor"></div>
+        <img id="readerImage" class="reader-cover" alt="" style="display:none">
+        <div class="read-content" id="readerContent"></div>
+        <div class="helper" id="readerDate" style="margin-top:25px"></div>
+        <div class="hero-actions">
+          <button class="btn" id="readerFavorite" onclick="toggleReaderFavorite()">♡ Favoritar</button>
+          <button class="btn" id="readerEdit" onclick="editReaderNote()" style="display:none">Editar texto</button>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>
 
-        const preview = document.createElement("p");
-        preview.className = "note-preview";
-        preview.textContent = nota.texto;
+<nav class="mobile-nav" aria-label="Navegação principal">
+  <a class="nav-link" href="home.html"><span class="nav-icon">⌂</span>Início</a>
+  <button class="nav-link" data-page="explore" onclick="showPage('explore')">
+    <span class="nav-icon">⌕</span>Explore
+  </button>
+  <button class="nav-link active" data-page="mine" onclick="showPage('mine')">
+    <span class="nav-icon">▤</span>Seus textos
+  </button>
+  <button class="nav-link" data-page="editor" onclick="newNote()">
+    <span class="nav-icon">✎</span>Escrever
+  </button>
+</nav>
 
-        const date = document.createElement("p");
-        date.className = "note-date";
-        date.textContent = (nota.favorita ? "♡ Favorita · " : "") +
-          "Atualizada em " + dataFormatada(nota.atualizada || nota.criada);
+<footer class="footer">
+  Mystic · Um lugar para sentir, escrever e descobrir.
+</footer>
 
-        const actions = document.createElement("div");
-        actions.className = "note-actions";
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        const edit = document.createElement("button");
-        edit.type = "button";
-        edit.className = "btn";
-        edit.textContent = "Editar";
-        edit.addEventListener("click", () => editarAnotacao(nota.id));
+<script>
+"use strict";
 
-        const favorite = document.createElement("button");
-        favorite.type = "button";
-        favorite.className = "btn";
-        favorite.textContent = nota.favorita ? "♡ Favorita" : "☆ Favoritar";
-        favorite.setAttribute("aria-pressed", String(Boolean(nota.favorita)));
-        favorite.addEventListener("click", () => alternarFavorita(nota.id));
+const STORAGE_KEY = "mystic_meu_caderno_v1";
+const FAVORITES_KEY = "mystic_favoritos_v1";
 
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "btn btn-danger";
-        remove.textContent = "Excluir";
-        remove.addEventListener("click", () => excluirAnotacao(nota.id));
+let notes = loadNotes();
+let readerNote = null;
+let readerSource = "explore";
+let pendingImage = "";
+let removePendingImage = false;
 
-        actions.append(edit, favorite, remove);
-        content.append(category, title, preview, date, actions);
-        article.appendChild(content);
+/* Exemplos demonstrativos. Não são publicações reais de usuários. */
+const samplePosts = [
+  {
+    id: "sample-1",
+    title: "O que deixei nas entrelinhas",
+    category: "Poesia",
+    author: "Lua",
+    content: "Guardei tantas palavras no silêncio,\nque um dia o silêncio aprendeu a falar.\n\nE tudo o que não tive coragem de dizer\nfloresceu nas páginas que deixei por terminar.\n\nTalvez escrever seja isso:\ndar às coisas invisíveis\num lugar onde possam respirar.",
+    date: "2026-09-12"
+  },
+  {
+    id: "sample-2",
+    title: "Aprender a ficar",
+    category: "Reflexão",
+    author: "Alguém por aí",
+    content: "Passei tanto tempo tentando ser tudo para todo mundo que esqueci de descobrir quem eu era quando ninguém estava olhando.\n\nAgora estou aprendendo, devagar, que descansar também é um jeito de continuar. Que não preciso transformar cada dor em uma lição imediatamente. Algumas coisas só precisam de tempo.\n\nHoje, ficar comigo já é um começo.",
+    date: "2026-09-08"
+  },
+  {
+    id: "sample-3",
+    title: "Uma casa dentro do peito",
+    category: "Romance",
+    author: "Entrelinhas",
+    content: "Talvez lar nunca tenha sido um endereço.\nTalvez fosse a calma que aparecia quando sua voz atravessava o dia, a maneira como o mundo parecia menos urgente quando você estava perto.\n\nNão sei se existem encontros escritos antes de acontecerem. Sei apenas que, por alguns instantes, estar ao seu lado fez tudo parecer no lugar.",
+    date: "2026-09-02"
+  },
+  {
+    id: "sample-4",
+    title: "Carta para os dias difíceis",
+    category: "Desabafo",
+    author: "Noite Serena",
+    content: "Se hoje tudo parece pesado, não exija de si a leveza de ontem.\n\nVocê pode ir devagar. Pode mudar de ideia. Pode precisar de silêncio. Não é preciso ter uma resposta para cada pergunta nem transformar todo tropeço em uma vitória.\n\nAtravesse este dia como conseguir. Amanhã você tenta de novo.",
+    date: "2026-08-28"
+  },
+  {
+    id: "sample-5",
+    title: "A biblioteca depois da meia-noite",
+    category: "Conto",
+    author: "Papel Antigo",
+    content: "À meia-noite, a biblioteca fazia um ruído delicado, como se milhares de páginas respirassem ao mesmo tempo.\n\nMara encontrou um livro sem título entre duas prateleiras. Ao abri-lo, leu a primeira frase e sentiu um arrepio: a história começava exatamente com o sonho que tivera na noite anterior.\n\nVirou a página.\n\nDesta vez, o livro descrevia o que ela estava fazendo naquele exato instante.",
+    date: "2026-08-20"
+  },
+  {
+    id: "sample-6",
+    title: "Pequenas coisas",
+    category: "Diário",
+    author: "Aurora",
+    content: "Hoje o café esfriou enquanto eu olhava pela janela. A chuva desenhou caminhos no vidro e, por alguns minutos, não senti vontade de correr para lugar nenhum.\n\nFoi pouco. Foi simples. Mas quero lembrar que o dia também teve essa pausa, e que às vezes a felicidade não chega fazendo barulho.",
+    date: "2026-08-15"
+  }
+];
 
-        return article;
-      }
+function loadNotes() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    return Array.isArray(saved) ? saved : [];
+  } catch {
+    return [];
+  }
+}
 
-      function obterAnotacoesFiltradas(lista) {
-        const busca = $("buscaTopo").value.trim().toLocaleLowerCase("pt-BR");
-        const categoria = $("filtroCategoria").value;
-        const ordem = $("filtroOrdem").value;
+function saveNotes() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+    renderAll();
+  } catch (error) {
+    showToast("Não foi possível salvar. Tente remover uma imagem muito grande.");
+  }
+}
 
-        const filtradas = lista.filter(nota => {
-          const correspondeBusca = !busca ||
-            (nota.titulo + " " + nota.texto + " " + nota.categoria)
-              .toLocaleLowerCase("pt-BR").includes(busca);
-          const correspondeCategoria = !categoria || nota.categoria === categoria;
-          return correspondeBusca && correspondeCategoria;
-        });
+function loadFavorites() {
+  try {
+    const data = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
 
-        filtradas.sort((a, b) => {
-          if (ordem === "titulo") return a.titulo.localeCompare(b.titulo, "pt-BR");
-          const dataA = new Date(a.atualizada || a.criada).getTime() || 0;
-          const dataB = new Date(b.atualizada || b.criada).getTime() || 0;
-          return ordem === "antigas" ? dataA - dataB : dataB - dataA;
-        });
+function saveFavorites(items) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(items));
+}
 
-        return filtradas;
-      }
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  })[char]);
+}
 
-      function renderizar() {
-        const filtradas = obterAnotacoesFiltradas(anotacoes);
-        const lista = $("listaAnotacoes");
-        const favoritas = $("listaFavoritas");
+function wordTotal(text) {
+  const trimmed = String(text || "").trim();
+  return trimmed ? trimmed.split(/\s+/).length : 0;
+}
 
-        lista.replaceChildren();
-        favoritas.replaceChildren();
+function dateLabel(value) {
+  if (!value) return "Sem data";
+  const date = new Date(value + (value.length === 10 ? "T12:00:00" : ""));
+  if (Number.isNaN(date.getTime())) return "Data não disponível";
+  return date.toLocaleDateString("pt-BR", {
+    day: "2-digit", month: "short", year: "numeric"
+  });
+}
 
-        filtradas.forEach(nota => lista.appendChild(criarCartao(nota)));
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.style.display = "none", 2800);
+}
 
-        const favoritasFiltradas = obterAnotacoesFiltradas(
-          anotacoes.filter(nota => nota.favorita)
-        );
+function showPage(name) {
+  const pageNames = ["home", "mine", "explore", "editor", "favorites", "reader"];
+  if (!pageNames.includes(name)) name = "mine";
 
-        favoritasFiltradas.forEach(nota => favoritas.appendChild(criarCartao(nota)));
+  document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+  const target = document.getElementById("page-" + name);
+  if (target) target.classList.add("active");
 
-        $("vazio").classList.toggle("hidden", filtradas.length > 0);
-        $("vazioFavoritas").classList.toggle("hidden", favoritasFiltradas.length > 0);
+  document.querySelectorAll("[data-page]").forEach(link => {
+    link.classList.toggle("active", link.dataset.page === name ||
+      (name === "reader" && link.dataset.page === readerSource));
+  });
 
-        if (anotacoes.length === 0) {
-          $("vazio").classList.remove("hidden");
-        } else if (filtradas.length === 0) {
-          $("vazio").classList.remove("hidden");
-          $("vazio").querySelector("strong").textContent = "Nenhuma anotação encontrada";
-          $("vazio").querySelector("p").textContent = "Tente mudar a pesquisa ou o filtro de categoria.";
-          $("criarPrimeira").classList.add("hidden");
-        } else {
-          $("vazio").querySelector("strong").textContent = "Seu caderno está esperando por você";
-          $("vazio").querySelector("p").textContent = "Crie sua primeira anotação para guardar ideias, leituras e momentos especiais.";
-          $("criarPrimeira").classList.remove("hidden");
-        }
-      }
+  if (name !== "reader") readerSource = name;
+  renderAll();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-      function abrirEditor(nota = null) {
-        $("editor").classList.remove("hidden");
-        $("editorTitulo").textContent = nota ? "Editar anotação" : "Nova anotação";
-        $("notaId").value = nota ? nota.id : "";
-        $("tituloNota").value = nota ? nota.titulo : "";
-        $("categoriaNota").value = nota ? nota.categoria : "Leitura";
-        $("textoNota").value = nota ? nota.texto : "";
-        $("favoritaNota").checked = nota ? Boolean(nota.favorita) : false;
-        fotoAtual = nota ? (nota.foto || "") : "";
+function newNote() {
+  document.getElementById("noteForm").reset();
+  document.getElementById("noteId").value = "";
+  document.getElementById("editorHeading").textContent = "Uma página em branco.";
+  document.getElementById("wordCount").textContent = "0";
+  pendingImage = "";
+  removePendingImage = false;
+  document.getElementById("noteImage").value = "";
+  document.getElementById("imagePreviewBox").style.display = "none";
+  showPage("editor");
+}
 
-        $("fotoNota").value = "";
-        $("previewFoto").src = fotoAtual;
-        $("previewFoto").classList.toggle("visible", Boolean(fotoAtual));
+function editNote(id) {
+  const note = notes.find(item => item.id === id);
+  if (!note) return;
 
-        $("editor").scrollIntoView({ behavior: "smooth", block: "start" });
-        $("tituloNota").focus({ preventScroll: true });
-      }
+  document.getElementById("noteId").value = note.id;
+  document.getElementById("noteTitle").value = note.title;
+  document.getElementById("noteCategory").value = note.category || "Outros";
+  document.getElementById("noteContent").value = note.content;
+  document.getElementById("noteFavorite").checked = !!note.favorite;
+  document.getElementById("editorHeading").textContent = "Continue sua história.";
+  document.getElementById("wordCount").textContent = wordTotal(note.content);
 
-      function fecharEditor() {
-        $("editor").classList.add("hidden");
-        $("formAnotacao").reset();
-        $("notaId").value = "";
-        fotoAtual = "";
-        $("previewFoto").removeAttribute("src");
-        $("previewFoto").classList.remove("visible");
-      }
+  pendingImage = note.image || "";
+  removePendingImage = false;
+  document.getElementById("noteImage").value = "";
+  updateImagePreview();
+  showPage("editor");
+}
 
-      function editarAnotacao(id) {
-        const nota = anotacoes.find(item => item.id === id);
-        if (nota) abrirEditor(nota);
-      }
+function removeImage() {
+  pendingImage = "";
+  removePendingImage = true;
+  document.getElementById("noteImage").value = "";
+  updateImagePreview();
+}
 
-      function alternarFavorita(id) {
-        const nota = anotacoes.find(item => item.id === id);
-        if (!nota) return;
-        nota.favorita = !nota.favorita;
-        nota.atualizada = new Date().toISOString();
-        salvarAnotacoes(nota.favorita
-          ? "Anotação adicionada às favoritas."
-          : "Anotação removida das favoritas.");
-      }
+function updateImagePreview() {
+  const box = document.getElementById("imagePreviewBox");
+  const image = document.getElementById("imagePreview");
+  if (pendingImage) {
+    image.src = pendingImage;
+    box.style.display = "block";
+  } else {
+    image.removeAttribute("src");
+    box.style.display = "none";
+  }
+}
 
-      function excluirAnotacao(id) {
-        const nota = anotacoes.find(item => item.id === id);
-        if (!nota) return;
-        if (!confirm('Deseja excluir a anotação "' + nota.titulo + '"?')) return;
+document.getElementById("noteImage").addEventListener("change", event => {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
 
-        anotacoes = anotacoes.filter(item => item.id !== id);
-        salvarAnotacoes("Anotação excluída.");
-      }
+  if (!file.type.startsWith("image/")) {
+    showToast("Escolha um arquivo de imagem.");
+    event.target.value = "";
+    return;
+  }
 
-      $("fotoNota").addEventListener("change", event => {
-        const arquivo = event.target.files && event.target.files[0];
-        if (!arquivo) return;
+  if (file.size > 3 * 1024 * 1024) {
+    showToast("Escolha uma imagem de até 3 MB.");
+    event.target.value = "";
+    return;
+  }
 
-        if (!arquivo.type.startsWith("image/")) {
-          mostrarStatus("Escolha um arquivo de imagem válido.");
-          event.target.value = "";
-          return;
-        }
+  const reader = new FileReader();
+  reader.onload = () => {
+    pendingImage = String(reader.result || "");
+    removePendingImage = false;
+    updateImagePreview();
+  };
+  reader.onerror = () => showToast("Não foi possível carregar a imagem.");
+  reader.readAsDataURL(file);
+});
 
-        if (arquivo.size > 2 * 1024 * 1024) {
-          mostrarStatus("Escolha uma imagem de até 2 MB.");
-          event.target.value = "";
-          return;
-        }
+document.getElementById("noteContent").addEventListener("input", event => {
+  document.getElementById("wordCount").textContent = wordTotal(event.target.value);
+});
 
-        const reader = new FileReader();
-        reader.onload = () => {
-          fotoAtual = typeof reader.result === "string" ? reader.result : "";
-          $("previewFoto").src = fotoAtual;
-          $("previewFoto").classList.toggle("visible", Boolean(fotoAtual));
-        };
-        reader.onerror = () => mostrarStatus("Não foi possível carregar a imagem.");
-        reader.readAsDataURL(arquivo);
-      });
+document.getElementById("noteForm").addEventListener("submit", event => {
+  event.preventDefault();
 
-      $("formAnotacao").addEventListener("submit", event => {
-        event.preventDefault();
+  const id = document.getElementById("noteId").value;
+  const title = document.getElementById("noteTitle").value.trim();
+  const category = document.getElementById("noteCategory").value;
+  const content = document.getElementById("noteContent").value.trim();
+  const favorite = document.getElementById("noteFavorite").checked;
 
-        const titulo = $("tituloNota").value.trim();
-        const texto = $("textoNota").value.trim();
+  if (!title || !content) {
+    showToast("Preencha o título e o texto.");
+    return;
+  }
 
-        if (!titulo || !texto) {
-          mostrarStatus("Preencha o título e o texto da anotação.");
-          return;
-        }
+  const old = notes.find(item => item.id === id);
+  const note = {
+    id: id || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now())),
+    title,
+    category,
+    content,
+    favorite,
+    image: removePendingImage ? "" : pendingImage,
+    createdAt: old ? old.createdAt : new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
 
-        const id = $("notaId").value;
-        const existente = anotacoes.find(item => item.id === id);
-        const agora = new Date().toISOString();
+  if (old) {
+    notes = notes.map(item => item.id === id ? note : item);
+  } else {
+    notes.unshift(note);
+  }
 
-        const nota = {
-          id: existente ? existente.id : (
-            window.crypto && crypto.randomUUID
-              ? crypto.randomUUID()
-              : String(Date.now()) + Math.random().toString(16).slice(2)
-          ),
-          titulo,
-          texto,
-          categoria: $("categoriaNota").value,
-          favorita: $("favoritaNota").checked,
-          foto: fotoAtual,
-          criada: existente ? existente.criada : agora,
-          atualizada: agora
-        };
+  saveNotes();
+  showPage("mine");
+  showToast(old ? "Texto atualizado!" : "Texto salvo no seu caderno!");
+});
 
-        if (existente) {
-          anotacoes = anotacoes.map(item => item.id === id ? nota : item);
-        } else {
-          anotacoes.unshift(nota);
-        }
+function deleteNote(id) {
+  if (!confirm("Tem certeza de que deseja excluir este texto?")) return;
+  notes = notes.filter(item => item.id !== id);
+  saveNotes();
+  showToast("Texto excluído.");
+}
 
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(anotacoes));
-          fecharEditor();
-          renderizar();
-          mostrarStatus(existente ? "Anotação atualizada." : "Anotação criada com sucesso.");
-        } catch {
-          mostrarStatus("Não foi possível salvar. Tente remover a foto ou escolher uma imagem menor.");
-        }
-      });
+function toggleFavorite(id) {
+  notes = notes.map(note => note.id === id
+    ? { ...note, favorite: !note.favorite }
+    : note);
+  saveNotes();
+  showToast(notes.find(note => note.id === id)?.favorite
+    ? "Adicionado aos favoritos." : "Removido dos favoritos.");
+}
 
-      $("novaAnotacao").addEventListener("click", () => abrirEditor());
-      $("criarPrimeira").addEventListener("click", () => abrirEditor());
-      $("cancelarEdicao").addEventListener("click", fecharEditor);
+function noteCard(note, isSample = false) {
+  const id = escapeHTML(note.id);
+  const category = escapeHTML(note.category || "Outros");
+  const title = escapeHTML(note.title);
+  const excerpt = escapeHTML(note.content);
+  const author = escapeHTML(isSample ? note.author : "Você");
+  const date = dateLabel(note.updatedAt || note.date || note.createdAt);
+  const cover = note.image
+    ? `<img class="note-cover" src="${note.image}" alt="Imagem do texto" loading="lazy">`
+    : "";
 
-      $("buscaTopo").addEventListener("input", renderizar);
-      $("filtroCategoria").addEventListener("change", renderizar);
-      $("filtroOrdem").addEventListener("change", renderizar);
+  return `
+    <article class="note-card">
+      ${cover}
+      <div class="note-body">
+        <div class="note-meta">
+          <span class="tag">${category}</span>
+          <span>${escapeHTML(date)}</span>
+        </div>
+        <h3>${title}</h3>
+        <div class="reader-author" style="margin-bottom:10px">${author}</div>
+        <p class="note-excerpt">${excerpt}</p>
+        <div class="note-actions">
+          <button class="btn primary" onclick="openReader('${id}', ${isSample})">Ler texto →</button>
+          ${!isSample ? `
+            <button class="btn" onclick="editNote('${id}')">Editar</button>
+            <button class="btn" onclick="toggleFavorite('${id}')">${note.favorite ? "♥ Favorito" : "♡ Favoritar"}</button>
+            <button class="btn danger" onclick="deleteNote('${id}')">Excluir</button>
+          ` : `
+            <button class="btn" onclick="toggleSampleFavorite('${id}')">
+              ${loadFavorites().includes(id) ? "♥ Favorito" : "♡ Favoritar"}
+            </button>
+          `}
+        </div>
+      </div>
+    </article>`;
+}
 
-      $("apagarTudo").addEventListener("click", () => {
-        if (!anotacoes.length) {
-          mostrarStatus("Não há anotações para apagar.");
-          return;
-        }
+function emptyState(message, detail) {
+  return `<div class="empty"><span>✧</span><strong>${escapeHTML(message)}</strong>
+    <div class="helper">${escapeHTML(detail)}</div></div>`;
+}
 
-        if (!confirm("Tem certeza de que deseja apagar todas as anotações? Esta ação não pode ser desfeita.")) return;
+function renderMine() {
+  const query = (document.getElementById("mineSearch")?.value || "").toLowerCase().trim();
+  const category = document.getElementById("mineCategory")?.value || "";
 
-        anotacoes = [];
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch {}
-        fecharEditor();
-        renderizar();
-        mostrarStatus("Todas as anotações foram apagadas.");
-      });
+  const filtered = notes.filter(note =>
+    (!category || note.category === category) &&
+    (!query || (note.title + " " + note.content + " " + note.category).toLowerCase().includes(query))
+  );
 
-      $("exportar").addEventListener("click", () => {
-        const arquivo = new Blob(
-          [JSON.stringify(anotacoes, null, 2)],
-          { type: "application/json;charset=utf-8" }
-        );
+  document.getElementById("mineNotes").innerHTML = filtered.length
+    ? filtered.map(note => noteCard(note)).join("")
+    : emptyState("Seu caderno começa aqui.", "Crie seu primeiro texto e ele aparecerá nesta página.");
+}
 
-        const url = URL.createObjectURL(arquivo);
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "mystic-meu-caderno-backup.json";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(url);
-        mostrarStatus("Backup preparado para exportação.");
-      });
+function renderExplore() {
+  const query = (document.getElementById("exploreSearch")?.value || "").toLowerCase().trim();
+  const category = document.getElementById("exploreCategory")?.value || "";
 
-      document.querySelectorAll(".nav-link").forEach(link => {
-        link.addEventListener("click", () => {
-          document.querySelectorAll(".nav-link").forEach(item => item.classList.remove("active"));
-          link.classList.add("active");
-        });
-      });
+  const posts = samplePosts.filter(note =>
+    (!category || note.category === category) &&
+    (!query || (note.title + " " + note.content + " " + note.category + " " + note.author)
+      .toLowerCase().includes(query))
+  );
 
-      carregarAnotacoes();
-      renderizar();
-    })();
-  </script>
+  document.getElementById("exploreNotes").innerHTML = posts.length
+    ? posts.map(note => noteCard(note, true)).join("")
+    : emptyState("Nenhum texto encontrado.", "Tente outra palavra ou categoria.");
+}
+
+function renderFavorites() {
+  const sampleFavs = loadFavorites();
+  const all = [
+    ...notes.filter(note => note.favorite).map(note => noteCard(note)),
+    ...samplePosts.filter(note => sampleFavs.includes(note.id)).map(note => noteCard(note, true))
+  ];
+
+  document.getElementById("favoriteNotes").innerHTML = all.length
+    ? all.join("")
+    : emptyState("Ainda não há favoritos.", "Marque um texto com ♡ para guardá-lo aqui.");
+}
+
+function renderHome() {
+  document.getElementById("statMine").textContent = notes.length;
+  document.getElementById("statFav").textContent =
+    notes.filter(note => note.favorite).length + loadFavorites().length;
+  document.getElementById("statWords").textContent =
+    notes.reduce((sum, note) => sum + wordTotal(note.content), 0);
+
+  document.getElementById("homeNotes").innerHTML = notes.length
+    ? notes.slice(0, 2).map(note => noteCard(note)).join("")
+    : emptyState("Ainda não há textos.", "Clique em “Criar meu texto” para começar.");
+
+  document.getElementById("homeExplore").innerHTML =
+    samplePosts.slice(0, 2).map(note => noteCard(note, true)).join("");
+}
+
+function renderAll() {
+  renderHome();
+  renderMine();
+  renderExplore();
+  renderFavorites();
+}
+
+function openReader(id, isSample = false) {
+  const note = isSample
+    ? samplePosts.find(item => item.id === id)
+    : notes.find(item => item.id === id);
+
+  if (!note) return;
+
+  readerNote = { ...note, isSample };
+  readerSource = isSample ? "explore" : "mine";
+
+  document.getElementById("readerCategory").textContent = note.category || "Texto";
+  document.getElementById("readerTitle").textContent = note.title;
+  document.getElementById("readerAuthor").textContent =
+    isSample ? "Por " + note.author + " · texto demonstrativo" : "Escrito por você";
+  document.getElementById("readerContent").textContent = note.content;
+  document.getElementById("readerDate").textContent =
+    "Atualizado em " + dateLabel(note.updatedAt || note.date || note.createdAt);
+
+  const image = document.getElementById("readerImage");
+  if (note.image) {
+    image.src = note.image;
+    image.style.display = "block";
+  } else {
+    image.removeAttribute("src");
+    image.style.display = "none";
+  }
+
+  document.getElementById("readerEdit").style.display = isSample ? "none" : "inline-block";
+  updateReaderFavoriteButton();
+  showPage("reader");
+}
+
+function updateReaderFavoriteButton() {
+  if (!readerNote) return;
+  const saved = readerNote.isSample
+    ? loadFavorites().includes(readerNote.id)
+    : !!notes.find(note => note.id === readerNote.id)?.favorite;
+  document.getElementById("readerFavorite").textContent =
+    saved ? "♥ Remover dos favoritos" : "♡ Favoritar";
+}
+
+function toggleReaderFavorite() {
+  if (!readerNote) return;
+
+  if (readerNote.isSample) {
+    toggleSampleFavorite(readerNote.id);
+  } else {
+    toggleFavorite(readerNote.id);
+  }
+  updateReaderFavoriteButton();
+}
+
+function toggleSampleFavorite(id) {
+  let favorites = loadFavorites();
+  if (favorites.includes(id)) {
+    favorites = favorites.filter(item => item !== id);
+    showToast("Removido dos favoritos.");
+  } else {
+    favorites.push(id);
+    showToast("Adicionado aos favoritos.");
+  }
+  saveFavorites(favorites);
+  renderAll();
+  updateReaderFavoriteButton();
+}
+
+function editReaderNote() {
+  if (readerNote && !readerNote.isSample) editNote(readerNote.id);
+}
+
+function goBack() {
+  showPage(readerSource === "explore" ? "explore" : "mine");
+}
+
+function exportNotes() {
+  const data = {
+    app: "Mystic",
+    exportedAt: new Date().toISOString(),
+    notes,
+    sampleFavorites: loadFavorites()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "meus-textos-mystic.json";
+  link.click();
+  URL.revokeObjectURL(url);
+  showToast("Exportação iniciada.");
+}
+
+function importNotes(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(String(reader.result));
+      const imported = Array.isArray(data) ? data : data.notes;
+      if (!Array.isArray(imported)) throw new Error("Formato inválido");
+
+      const clean = imported.filter(item =>
+        item && typeof item.title === "string" &&
+        typeof item.content === "string"
+      ).map(item => ({
+        id: String(item.id || (crypto.randomUUID ? crypto.randomUUID() : Date.now())),
+        title: item.title.slice(0, 120),
+        content: item.content,
+        category: item.category || "Outros",
+        favorite: !!item.favorite,
+        image: typeof item.image === "string" ? item.image : "",
+        createdAt: item.createdAt || new Date().toISOString(),
+        updatedAt: item.updatedAt || new Date().toISOString()
+      }));
+
+      const byId = new Map(notes.map(note => [note.id, note]));
+      clean.forEach(note => byId.set(note.id, note));
+      notes = Array.from(byId.values());
+      saveNotes();
+      if (Array.isArray(data.sampleFavorites)) saveFavorites(data.sampleFavorites);
+      showPage("mine");
+      showToast(clean.length + " texto(s) importado(s).");
+    } catch {
+      showToast("Não foi possível importar esse arquivo JSON.");
+    }
+    event.target.value = "";
+  };
+  reader.readAsText(file);
+}
+
+/* Inicialização */
+renderAll();
+</script>
 </body>
 </html>
