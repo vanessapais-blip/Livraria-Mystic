@@ -1,0 +1,1376 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0907">
+<title>Grupos | Mystic</title>
+
+<style>
+:root {
+  --bg: #0b0907;
+  --panel: #14100c;
+  --panel2: #1c160f;
+  --gold: #d5a04f;
+  --gold-light: #f4cf88;
+  --text: #f5ecdf;
+  --muted: #c3b7a7;
+  --border: #493622;
+  --green: #92bd8c;
+  --red: #ed9b83;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+.topbar {
+  height: 76px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 22px;
+  background: #0b0907;
+  border: 1px solid var(--border);
+}
+
+.back {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  color: var(--gold-light);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-size: 25px;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold-light);
+  font: bold 32px Georgia, serif;
+  white-space: nowrap;
+}
+
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+}
+
+.header-search {
+  width: min(400px, 38%);
+  margin: auto;
+}
+
+.header-search input {
+  width: 100%;
+  padding: 11px 15px;
+  color: var(--text);
+  background: #100d0a;
+  border: 1px solid #51402c;
+  border-radius: 25px;
+  outline: none;
+}
+
+.header-search input:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--gold);
+}
+
+.header-actions {
+  display: flex;
+  gap: 15px;
+  color: var(--gold-light);
+  font-size: 22px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 225px minmax(0, 1fr);
+  min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+  padding: 16px 12px;
+  background: #0e0c0a;
+  border-right: 1px solid var(--border);
+}
+
+.nav {
+  display: grid;
+  gap: 4px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: .2s;
+}
+
+.nav a:hover, .nav a.active {
+  color: var(--gold-light);
+  background: #302316;
+  border-color: #624a2c;
+}
+
+.nav-icon {
+  width: 23px;
+  color: var(--gold-light);
+  text-align: center;
+  font-size: 20px;
+}
+
+.side-label {
+  margin: 23px 8px 9px;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.side-note {
+  margin: 26px 5px;
+  padding: 15px;
+  border: 1px solid #634825;
+  border-radius: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.side-note strong {
+  display: block;
+  margin: 8px 0;
+  color: var(--gold-light);
+  font: 18px Georgia, serif;
+}
+
+main { min-width: 0; }
+
+.hero {
+  min-height: 190px;
+  display: flex;
+  align-items: center;
+  padding: 30px 38px;
+  background:
+    linear-gradient(90deg, rgba(7,5,3,.96), rgba(7,5,3,.52)),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=85")
+    center 52% / cover;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-content { max-width: 700px; }
+
+.eyebrow {
+  color: var(--gold-light);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 9px 0;
+  font: bold clamp(36px, 4vw, 48px) Georgia, serif;
+}
+
+.hero p {
+  max-width: 570px;
+  margin: 0;
+  color: #e4d8c9;
+  font: 17px/1.6 Georgia, serif;
+}
+
+.content { padding: 25px 28px; }
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 17px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font: bold 27px Georgia, serif;
+}
+
+.gold-icon {
+  margin-right: 8px;
+  color: var(--gold-light);
+}
+
+.primary {
+  padding: 11px 17px;
+  color: #1b1207;
+  background: linear-gradient(135deg, #f4d18f, #ce9746);
+  border: 0;
+  border-radius: 9px;
+  font-weight: bold;
+  transition: .2s;
+}
+
+.primary:hover { filter: brightness(1.08); }
+
+.secondary {
+  padding: 10px 14px;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid #72542f;
+  border-radius: 9px;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(170px, 1fr) 210px auto;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.toolbar input, .toolbar select,
+.form-field input, .form-field textarea,
+.form-field select, .post-form textarea {
+  width: 100%;
+  padding: 12px 13px;
+  color: var(--text);
+  background: #100d0a;
+  border: 1px solid #4d3923;
+  border-radius: 9px;
+  outline: none;
+}
+
+select option { background: #17110b; }
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 19px;
+}
+
+.tab {
+  padding: 9px 14px;
+  color: var(--muted);
+  background: #15110d;
+  border: 1px solid #3c2c1c;
+  border-radius: 25px;
+  font-size: 13px;
+}
+
+.tab.active, .tab:hover {
+  color: var(--gold-light);
+  background: #302316;
+  border-color: var(--gold);
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.group-card {
+  min-width: 0;
+  overflow: hidden;
+  background: linear-gradient(150deg, #19130d, #0e0b08);
+  border: 1px solid #4c3924;
+  border-radius: 12px;
+  transition: transform .2s, border-color .2s;
+}
+
+.group-card:hover {
+  transform: translateY(-3px);
+  border-color: #9a713c;
+}
+
+.group-cover {
+  height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(0deg, rgba(8,6,4,.6), rgba(8,6,4,.1)),
+    var(--cover, linear-gradient(135deg,#4a2f1c,#16100b));
+  background-size: cover;
+  background-position: center;
+}
+
+.group-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(10,7,4,.55), transparent);
+}
+
+.cover-symbol {
+  position: relative;
+  z-index: 1;
+  color: #f4ce89;
+  font-size: 47px;
+  text-shadow: 0 2px 15px #000;
+}
+
+.group-body { padding: 14px; }
+
+.group-category {
+  display: inline-block;
+  padding: 5px 9px;
+  color: var(--gold-light);
+  background: #302316;
+  border: 1px solid #654a2a;
+  border-radius: 20px;
+  font-size: 10px;
+}
+
+.group-body h3 {
+  margin: 10px 0 7px;
+  font: bold 20px Georgia, serif;
+}
+
+.group-description {
+  min-height: 58px;
+  margin: 0;
+  color: #c9beaf;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.group-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 13px 0;
+  color: #bba98f;
+  font-size: 11px;
+}
+
+.group-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.group-footer button { flex: 1; }
+
+.group-footer .open-group {
+  flex: 0 0 auto;
+  padding: 9px 11px;
+}
+
+.joined {
+  color: var(--green);
+  font-size: 11px;
+}
+
+.empty-state {
+  display: none;
+  padding: 38px 15px;
+  color: var(--muted);
+  text-align: center;
+  background: #12100c;
+  border: 1px dashed #624a2c;
+  border-radius: 12px;
+}
+
+.empty-state .big { font-size: 36px; }
+
+.community-panel {
+  margin-top: 32px;
+  padding: 20px;
+  background: #15110c;
+  border: 1px solid #4a3722;
+  border-radius: 12px;
+}
+
+.community-panel h2 {
+  margin: 0 0 8px;
+  font: 25px Georgia, serif;
+}
+
+.community-panel p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.post-form {
+  display: grid;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.post-form textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.post-list {
+  display: grid;
+  gap: 10px;
+}
+
+.post {
+  padding: 14px;
+  background: #0e0c09;
+  border: 1px solid #3e2e1d;
+  border-radius: 9px;
+}
+
+.post-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--gold-light);
+  font-size: 12px;
+}
+
+.post p {
+  color: #e3d9cc;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.post-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.post-actions button {
+  padding: 7px 10px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid #473522;
+  border-radius: 7px;
+  font-size: 11px;
+}
+
+.post-actions button:hover {
+  color: var(--gold-light);
+  border-color: var(--gold);
+}
+
+footer {
+  padding: 23px 12px;
+  color: #b99a6c;
+  border-top: 1px solid #332619;
+  text-align: center;
+  font: 13px Georgia, serif;
+}
+
+/* Modais */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(0,0,0,.82);
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  width: min(540px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 22px;
+  background: #15110d;
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  box-shadow: 0 20px 70px #000;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font: 26px Georgia, serif;
+}
+
+.close {
+  width: 36px;
+  height: 36px;
+  color: var(--gold-light);
+  background: transparent;
+  border: 1px solid #4c3823;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.form-field {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.form-field label {
+  color: #dfcfb9;
+  font-size: 13px;
+}
+
+.form-field textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.modal-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.modal-actions button { flex: 1; }
+
+.detail-banner {
+  min-height: 110px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 14px;
+  color: var(--gold-light);
+  background: linear-gradient(135deg, #3a2716, #100c08);
+  border: 1px solid #634825;
+  border-radius: 9px;
+  font-size: 45px;
+}
+
+.detail-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+  color: var(--gold-light);
+  font-size: 12px;
+}
+
+.mobile-nav { display: none; }
+
+@media (max-width: 1100px) {
+  .group-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .layout { grid-template-columns: 205px minmax(0, 1fr); }
+  .toolbar { grid-template-columns: minmax(130px, 1fr) 180px; }
+  .toolbar .primary { grid-column: 1 / -1; }
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    height: 63px;
+    gap: 9px;
+    padding: 0 10px;
+  }
+
+  .back {
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+  }
+
+  .brand { gap: 7px; font-size: 25px; }
+  .brand img { width: 39px; height: 39px; }
+  .header-search { display: none; }
+  .header-actions { margin-left: auto; font-size: 20px; }
+
+  .layout { display: block; }
+  .sidebar { display: none; }
+
+  .hero {
+    min-height: 145px;
+    padding: 22px 17px;
+    background-position: center;
+  }
+
+  .hero h1 { font-size: 35px; }
+  .hero p { font-size: 15px; }
+
+  .content { padding: 20px 13px; }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .section-heading h2 { font-size: 24px; }
+
+  .toolbar {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .toolbar .primary { grid-column: auto; }
+
+  .group-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  .group-card {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+  }
+
+  .group-cover {
+    height: 100%;
+    min-height: 190px;
+  }
+
+  .cover-symbol { font-size: 35px; }
+
+  .group-body { padding: 12px; }
+  .group-body h3 { font-size: 17px; }
+  .group-description { min-height: 0; }
+  .group-meta { flex-wrap: wrap; margin: 10px 0; }
+  .group-footer { flex-wrap: wrap; }
+  .group-footer button { padding: 9px 8px; font-size: 11px; }
+
+  .community-panel { padding: 14px; }
+
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 35;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 64px;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: #0d0b09f7;
+    border-top: 1px solid var(--border);
+  }
+
+  .mobile-nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 9px;
+  }
+
+  .mobile-nav span {
+    color: var(--gold-light);
+    font-size: 20px;
+  }
+
+  footer { padding-bottom: 83px; }
+}
+
+@media (max-width: 390px) {
+  .brand { font-size: 22px; }
+  .group-card { grid-template-columns: 94px minmax(0, 1fr); }
+  .group-body { padding: 10px; }
+  .group-cover { min-height: 205px; }
+  .group-footer { flex-direction: column; align-items: stretch; }
+  .group-footer button { width: 100%; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="back" href="home.html" title="Voltar para o início"
+     aria-label="Voltar para a página inicial">←</a>
+
+  <a class="brand" href="home.html">
+    <img src="logo-mystic.jpg" alt="Logo Mystic"
+         onerror="this.style.display='none'">
+    <span>Mystic</span>
+  </a>
+
+  <div class="header-search">
+    <input id="headerSearch" type="search" placeholder="⌕  Buscar grupos...">
+  </div>
+
+  <div class="header-actions" aria-hidden="true">
+    <span>♧</span>
+    <span>♙</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <nav class="nav">
+      <a href="home.html"><span class="nav-icon">⌂</span>Início</a>
+      <a href="explore.html"><span class="nav-icon">⌕</span>Explore</a>
+      <a href="dicionario.html"><span class="nav-icon">▤</span>Dicionário</a>
+      <a href="meu-caderno.html"><span class="nav-icon">▧</span>Seus textos</a>
+      <a href="meu-caderno.html"><span class="nav-icon">✎</span>Escrever texto</a>
+      <a href="favoritos.html"><span class="nav-icon">♡</span>Favoritos</a>
+    </nav>
+
+    <div class="side-label">COMUNIDADE</div>
+
+    <nav class="nav">
+      <a href="forum.html"><span class="nav-icon">▢</span>Fórum</a>
+      <a href="grupos.html" class="active"><span class="nav-icon">♧</span>Grupos</a>
+      <a href="desafios.html"><span class="nav-icon">♜</span>Desafios</a>
+      <a href="sobre.html"><span class="nav-icon">ⓘ</span>Sobre a Mystic</a>
+    </nav>
+
+    <div class="side-note">
+      <span style="color:var(--gold-light);font-size:22px">✧</span>
+      <strong>Encontre sua tribo</strong>
+      Compartilhe leituras, conheça pessoas e converse sobre os livros que fazem parte da sua vida.
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Comunidade Mystic</div>
+        <h1>Nossos Grupos</h1>
+        <p>Encontre pessoas que amam as mesmas histórias que você. Leia, converse, descubra e compartilhe.</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="section-heading">
+        <h2><span class="gold-icon">♧</span>Explore os grupos</h2>
+        <button class="primary" id="openCreate">＋ Criar grupo</button>
+      </div>
+
+      <div class="toolbar">
+        <input id="groupSearch" type="search" placeholder="⌕  Buscar por nome ou assunto...">
+
+        <select id="categoryFilter" aria-label="Filtrar por categoria">
+          <option value="Todas">Todas as categorias</option>
+          <option value="Literatura">Literatura</option>
+          <option value="Escrita">Escrita</option>
+          <option value="Fantasia">Fantasia</option>
+          <option value="Poesia">Poesia</option>
+          <option value="Leitura">Clube de leitura</option>
+          <option value="Outros">Outros</option>
+        </select>
+
+        <button class="primary" id="myGroupsButton">Meus grupos</button>
+      </div>
+
+      <div class="tabs" id="groupTabs">
+        <button class="tab active" data-filter="Todos">Todos</button>
+        <button class="tab" data-filter="Populares">Populares</button>
+        <button class="tab" data-filter="Recentes">Recentes</button>
+        <button class="tab" data-filter="Meus">Meus grupos</button>
+      </div>
+
+      <div class="group-grid" id="groupGrid"></div>
+
+      <div class="empty-state" id="emptyState">
+        <div class="big">✧</div>
+        <h3>Nenhum grupo encontrado</h3>
+        <p>Tente outra busca ou crie seu próprio grupo.</p>
+        <button class="primary" id="emptyCreate">＋ Criar grupo</button>
+      </div>
+
+      <section class="community-panel" id="communityPanel">
+        <h2><span class="gold-icon">✎</span>Mural da comunidade</h2>
+        <p>Compartilhe uma ideia, recomende um livro ou deixe uma pergunta para outros leitores. Estas publicações ficam salvas neste navegador.</p>
+
+        <form class="post-form" id="postForm">
+          <input id="postAuthor" maxlength="40" placeholder="Seu apelido (opcional)">
+          <textarea id="postText" maxlength="700" required
+                    placeholder="O que você gostaria de compartilhar com a comunidade?"></textarea>
+          <div>
+            <button class="primary" type="submit">Publicar mensagem</button>
+          </div>
+        </form>
+
+        <div class="post-list" id="postList"></div>
+      </section>
+    </section>
+
+    <footer>
+      Mystic &nbsp; · &nbsp; Um lugar para sentir, escrever e descobrir.
+    </footer>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <a href="home.html"><span>⌂</span>Início</a>
+  <a href="explore.html"><span>⌕</span>Explore</a>
+  <a href="dicionario.html"><span>▤</span>Dicionário</a>
+  <a href="meu-caderno.html"><span>▧</span>Caderno</a>
+  <a href="forum.html"><span>▢</span>Fórum</a>
+</nav>
+
+<!-- Modal para criar grupo -->
+<div class="modal-overlay" id="createOverlay">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="createTitle">
+    <div class="modal-header">
+      <h2 id="createTitle">Criar um grupo</h2>
+      <button class="close" data-close="createOverlay" aria-label="Fechar">✕</button>
+    </div>
+
+    <form id="createForm">
+      <div class="form-field">
+        <label for="newGroupName">Nome do grupo *</label>
+        <input id="newGroupName" maxlength="55" required
+               placeholder="Ex.: Amantes da Fantasia">
+      </div>
+
+      <div class="form-field">
+        <label for="newGroupCategory">Categoria *</label>
+        <select id="newGroupCategory" required>
+          <option value="Literatura">Literatura</option>
+          <option value="Escrita">Escrita criativa</option>
+          <option value="Fantasia">Fantasia</option>
+          <option value="Poesia">Poesia</option>
+          <option value="Leitura">Clube de leitura</option>
+          <option value="Outros">Outros</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label for="newGroupDescription">Descrição *</label>
+        <textarea id="newGroupDescription" maxlength="350" required
+          placeholder="Conte às pessoas o que torna seu grupo especial..."></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="newGroupSymbol">Símbolo do grupo</label>
+        <select id="newGroupSymbol">
+          <option value="✧">✧ Estrela</option>
+          <option value="☾">☾ Lua</option>
+          <option value="♡">♡ Coração</option>
+          <option value="♧">♧ Folha</option>
+          <option value="✦">✦ Brilho</option>
+          <option value="▤">▤ Livro</option>
+        </select>
+      </div>
+
+      <p class="modal-note">Seu grupo será criado neste navegador. Para que outras pessoas o encontrem em seus dispositivos, será necessário um sistema com servidor e banco de dados.</p>
+
+      <div class="modal-actions">
+        <button class="secondary" type="button" data-close="createOverlay">Cancelar</button>
+        <button class="primary" type="submit">Criar grupo</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<!-- Modal de detalhes do grupo -->
+<div class="modal-overlay" id="detailOverlay">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="modal-header">
+      <h2 id="detailTitle">Detalhes do grupo</h2>
+      <button class="close" data-close="detailOverlay" aria-label="Fechar">✕</button>
+    </div>
+
+    <div id="detailContent"></div>
+  </section>
+</div>
+
+<script>
+const STORAGE_GROUPS = "mystic_groups_v1";
+const STORAGE_JOINED = "mystic_joined_groups_v1";
+const STORAGE_POSTS = "mystic_community_posts_v1";
+
+const starterGroups = [
+  {
+    id: "g1",
+    name: "Clube dos Leitores",
+    category: "Leitura",
+    description: "Um cantinho para conversar sobre livros, compartilhar recomendações e descobrir novas histórias.",
+    symbol: "▤",
+    members: 128,
+    createdAt: 3,
+    popular: true,
+    owner: "Mystic"
+  },
+  {
+    id: "g2",
+    name: "Mundos de Fantasia",
+    category: "Fantasia",
+    description: "Entre em universos mágicos, fale sobre criaturas fantásticas e indique suas sagas favoritas.",
+    symbol: "✧",
+    members: 96,
+    createdAt: 2,
+    popular: true,
+    owner: "Mystic"
+  },
+  {
+    id: "g3",
+    name: "Poetas da Meia-Noite",
+    category: "Poesia",
+    description: "Um espaço para versos, sentimentos, poemas autorais e conversas sobre a beleza das palavras.",
+    symbol: "☾",
+    members: 74,
+    createdAt: 4,
+    popular: true,
+    owner: "Mystic"
+  },
+  {
+    id: "g4",
+    name: "Oficina de Escrita",
+    category: "Escrita",
+    description: "Compartilhe ideias, exercite a criatividade e aprenda junto com quem também ama escrever.",
+    symbol: "✎",
+    members: 62,
+    createdAt: 5,
+    popular: false,
+    owner: "Mystic"
+  },
+  {
+    id: "g5",
+    name: "Literatura Brasileira",
+    category: "Literatura",
+    description: "Autores brasileiros, clássicos, livros contemporâneos e conversas sobre nossa literatura.",
+    symbol: "♧",
+    members: 53,
+    createdAt: 1,
+    popular: false,
+    owner: "Mystic"
+  },
+  {
+    id: "g6",
+    name: "Contos e Mistérios",
+    category: "Literatura",
+    description: "Histórias intrigantes, finais surpreendentes e teorias sobre os mistérios dos livros.",
+    symbol: "✦",
+    members: 41,
+    createdAt: 6,
+    popular: false,
+    owner: "Mystic"
+  }
+];
+
+function readStorage(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+function saveStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    alert("Não foi possível salvar os dados neste navegador.");
+    return false;
+  }
+}
+
+let customGroups = readStorage(STORAGE_GROUPS, []);
+let joinedGroups = readStorage(STORAGE_JOINED, []);
+let posts = readStorage(STORAGE_POSTS, [
+  {
+    id: "p1",
+    author: "Leitora Mystic",
+    text: "Qual livro fez vocês se apaixonarem pela leitura? Quero descobrir novas recomendações! ✨",
+    date: new Date().toLocaleDateString("pt-BR"),
+    likes: 2,
+    liked: false
+  },
+  {
+    id: "p2",
+    author: "Entre Páginas",
+    text: "Desafio da semana: reserve alguns minutos para ler algo que você nunca escolheria normalmente.",
+    date: new Date().toLocaleDateString("pt-BR"),
+    likes: 4,
+    liked: false
+  }
+]);
+
+let currentTab = "Todos";
+let showOnlyJoined = false;
+let selectedGroupId = null;
+
+function allGroups() {
+  return [...starterGroups, ...customGroups];
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function groupIsJoined(id) {
+  return joinedGroups.includes(id);
+}
+
+function getGroup(id) {
+  return allGroups().find(group => group.id === id);
+}
+
+function renderGroups() {
+  const query = document.getElementById("groupSearch").value
+    .trim().toLocaleLowerCase("pt-BR");
+
+  const category = document.getElementById("categoryFilter").value;
+
+  let groups = allGroups().filter(group => {
+    const matchesQuery =
+      (group.name + " " + group.description + " " + group.category)
+        .toLocaleLowerCase("pt-BR").includes(query);
+
+    const matchesCategory =
+      category === "Todas" || group.category === category;
+
+    const matchesTab =
+      currentTab === "Todos" ||
+      (currentTab === "Populares" && group.popular) ||
+      (currentTab === "Recentes" && group.createdAt <= 2) ||
+      (currentTab === "Meus" && groupIsJoined(group.id));
+
+    const matchesJoined = !showOnlyJoined || groupIsJoined(group.id);
+
+    return matchesQuery && matchesCategory && matchesTab && matchesJoined;
+  });
+
+  const grid = document.getElementById("groupGrid");
+  grid.innerHTML = "";
+
+  groups.forEach(group => {
+    const joined = groupIsJoined(group.id);
+    const card = document.createElement("article");
+    card.className = "group-card";
+
+    card.innerHTML = `
+      <div class="group-cover">
+        <span class="cover-symbol">${escapeHTML(group.symbol || "✧")}</span>
+      </div>
+      <div class="group-body">
+        <span class="group-category">${escapeHTML(group.category)}</span>
+        <h3>${escapeHTML(group.name)}</h3>
+        <p class="group-description">${escapeHTML(group.description)}</p>
+        <div class="group-meta">
+          <span>♙ ${Number(group.members) + (joined && !group.memberCountIncludesUser ? 1 : 0)} participantes</span>
+          <span>${joined ? '<span class="joined">✓ Você participa</span>' : 'Grupo aberto'}</span>
+        </div>
+        <div class="group-footer">
+          <button class="${joined ? "secondary" : "primary"} join-button"
+                  data-join="${escapeHTML(group.id)}">
+            ${joined ? "Sair do grupo" : "＋ Participar"}
+          </button>
+          <button class="secondary open-group" data-open="${escapeHTML(group.id)}"
+                  aria-label="Ver detalhes do grupo">Ver →</button>
+        </div>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  document.getElementById("emptyState").style.display =
+    groups.length ? "none" : "block";
+
+  grid.style.display = groups.length ? "grid" : "none";
+
+  document.querySelectorAll(".tab").forEach(button => {
+    button.classList.toggle("active", button.dataset.filter === currentTab);
+  });
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add("open");
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("open");
+}
+
+document.getElementById("openCreate").addEventListener("click", () => {
+  openModal("createOverlay");
+});
+
+document.getElementById("emptyCreate").addEventListener("click", () => {
+  openModal("createOverlay");
+});
+
+document.querySelectorAll("[data-close]").forEach(button => {
+  button.addEventListener("click", () => closeModal(button.dataset.close));
+});
+
+document.querySelectorAll(".modal-overlay").forEach(overlay => {
+  overlay.addEventListener("click", event => {
+    if (event.target === overlay) closeModal(overlay.id);
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal-overlay").forEach(modal => {
+      modal.classList.remove("open");
+    });
+  }
+});
+
+document.getElementById("createForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const name = document.getElementById("newGroupName").value.trim();
+  const category = document.getElementById("newGroupCategory").value;
+  const description = document.getElementById("newGroupDescription").value.trim();
+  const symbol = document.getElementById("newGroupSymbol").value;
+
+  if (!name || !description) {
+    alert("Preencha o nome e a descrição do grupo.");
+    return;
+  }
+
+  const group = {
+    id: "custom-" + Date.now(),
+    name,
+    category,
+    description,
+    symbol,
+    members: 0,
+    createdAt: 0,
+    popular: false,
+    owner: "Você",
+    memberCountIncludesUser: true
+  };
+
+  customGroups.unshift(group);
+
+  if (!saveStorage(STORAGE_GROUPS, customGroups)) {
+    customGroups.shift();
+    return;
+  }
+
+  joinedGroups.push(group.id);
+  saveStorage(STORAGE_JOINED, joinedGroups);
+
+  document.getElementById("createForm").reset();
+  closeModal("createOverlay");
+
+  currentTab = "Todos";
+  showOnlyJoined = false;
+  document.getElementById("categoryFilter").value = "Todas";
+  document.getElementById("groupSearch").value = "";
+
+  renderGroups();
+  alert("Seu grupo foi criado! Ele já aparece na lista de grupos.");
+});
+
+document.getElementById("groupGrid").addEventListener("click", event => {
+  const joinButton = event.target.closest("[data-join]");
+  const openButton = event.target.closest("[data-open]");
+
+  if (joinButton) {
+    const id = joinButton.dataset.join;
+
+    if (groupIsJoined(id)) {
+      if (!confirm("Deseja sair deste grupo?")) return;
+      joinedGroups = joinedGroups.filter(groupId => groupId !== id);
+    } else {
+      joinedGroups.push(id);
+    }
+
+    saveStorage(STORAGE_JOINED, joinedGroups);
+    renderGroups();
+  }
+
+  if (openButton) {
+    showGroupDetails(openButton.dataset.open);
+  }
+});
+
+function showGroupDetails(id) {
+  const group = getGroup(id);
+  if (!group) return;
+
+  selectedGroupId = id;
+  const joined = groupIsJoined(id);
+
+  document.getElementById("detailTitle").textContent = group.name;
+
+  document.getElementById("detailContent").innerHTML = `
+    <div class="detail-banner">${escapeHTML(group.symbol || "✧")}</div>
+    <span class="group-category">${escapeHTML(group.category)}</span>
+    <p style="line-height:1.8;color:#e1d5c6">${escapeHTML(group.description)}</p>
+    <div class="detail-stats">
+      <span>♙ ${Number(group.members) + (joined && !group.memberCountIncludesUser ? 1 : 0)} participantes</span>
+      <span>✧ ${escapeHTML(group.category)}</span>
+    </div>
+    <p class="modal-note">
+      ${group.owner === "Você"
+        ? "Este grupo foi criado neste navegador."
+        : "Este é um grupo de demonstração da Mystic."}
+    </p>
+    <div class="modal-actions">
+      <button class="secondary" id="detailClose">Fechar</button>
+      <button class="${joined ? "secondary" : "primary"}" id="detailJoin">
+        ${joined ? "Sair do grupo" : "＋ Participar"}
+      </button>
+    </div>
+  `;
+
+  openModal("detailOverlay");
+
+  document.getElementById("detailClose").addEventListener("click", () => {
+    closeModal("detailOverlay");
+  });
+
+  document.getElementById("detailJoin").addEventListener("click", () => {
+    if (groupIsJoined(id)) {
+      joinedGroups = joinedGroups.filter(groupId => groupId !== id);
+    } else {
+      joinedGroups.push(id);
+    }
+
+    saveStorage(STORAGE_JOINED, joinedGroups);
+    closeModal("detailOverlay");
+    renderGroups();
+  });
+}
+
+document.getElementById("groupSearch").addEventListener("input", renderGroups);
+
+document.getElementById("headerSearch").addEventListener("input", event => {
+  document.getElementById("groupSearch").value = event.target.value;
+  renderGroups();
+});
+
+document.getElementById("categoryFilter").addEventListener("change", renderGroups);
+
+document.querySelectorAll(".tab").forEach(button => {
+  button.addEventListener("click", () => {
+    currentTab = button.dataset.filter;
+    showOnlyJoined = false;
+    renderGroups();
+  });
+});
+
+document.getElementById("myGroupsButton").addEventListener("click", () => {
+  showOnlyJoined = !showOnlyJoined;
+  currentTab = showOnlyJoined ? "Meus" : "Todos";
+  document.getElementById("myGroupsButton").textContent =
+    showOnlyJoined ? "Ver todos" : "Meus grupos";
+  renderGroups();
+});
+
+document.getElementById("postForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const author = document.getElementById("postAuthor").value.trim() || "Leitor Mystic";
+  const text = document.getElementById("postText").value.trim();
+
+  if (!text) return;
+
+  posts.unshift({
+    id: "post-" + Date.now(),
+    author,
+    text,
+    date: new Date().toLocaleDateString("pt-BR"),
+    likes: 0,
+    liked: false
+  });
+
+  if (!saveStorage(STORAGE_POSTS, posts)) {
+    posts.shift();
+    return;
+  }
+
+  document.getElementById("postText").value = "";
+  renderPosts();
+});
+
+function renderPosts() {
+  const list = document.getElementById("postList");
+  list.innerHTML = "";
+
+  if (!posts.length) {
+    list.innerHTML = "<p>Ainda não há mensagens no mural. Seja a primeira pessoa a publicar!</p>";
+    return;
+  }
+
+  posts.forEach(post => {
+    const article = document.createElement("article");
+    article.className = "post";
+
+    const head = document.createElement("div");
+    head.className = "post-head";
+
+    const author = document.createElement("strong");
+    author.textContent = post.author;
+
+    const date = document.createElement("span");
+    date.textContent = post.date;
+
+    head.append(author, date);
+
+    const content = document.createElement("p");
+    content.textContent = post.text;
+
+    const actions = document.createElement("div");
+    actions.className = "post-actions";
+
+    const likeButton = document.createElement("button");
+    likeButton.textContent = `${post.liked ? "♥" : "♡"} Curtir (${post.likes})`;
+    likeButton.addEventListener("click", () => {
+      post.liked = !post.liked;
+      post.likes = Math.max(0, post.likes + (post.liked ? 1 : -1));
+      saveStorage(STORAGE_POSTS, posts);
+      renderPosts();
+    });
+
+    const reportButton = document.createElement("button");
+    reportButton.textContent = "Denunciar";
+    reportButton.addEventListener("click", () => {
+      alert("Para um sistema real de denúncias, é necessário um serviço de moderação. Esta demonstração não envia denúncias.");
+    });
+
+    actions.append(likeButton, reportButton);
+    article.append(head, content, actions);
+    list.appendChild(article);
+  });
+}
+
+renderGroups();
+renderPosts();
+</script>
+
+</body>
+</html>
