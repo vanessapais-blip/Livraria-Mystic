@@ -1,0 +1,1124 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mystic — Fórum</title>
+
+<style>
+:root {
+  --bg: #0b0907;
+  --panel: #15110d;
+  --panel2: #1c160f;
+  --gold: #d9a653;
+  --gold-light: #f2cb80;
+  --text: #f5ead8;
+  --muted: #bdb1a2;
+  --border: #4b3a27;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+}
+
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+a { text-decoration: none; color: inherit; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 0 22px;
+  background: #0b0907;
+  border-bottom: 1px solid var(--border);
+}
+
+.back {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 43px;
+  height: 43px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  color: var(--gold-light);
+  font-size: 25px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold-light);
+  font: bold 34px Georgia, serif;
+  white-space: nowrap;
+}
+
+.brand img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+}
+
+.top-search {
+  width: min(400px, 40%);
+  margin: auto;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 12px;
+  color: var(--text);
+  background: #0e0c0a;
+  border: 1px solid #514331;
+  border-radius: 10px;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--gold);
+}
+
+select option { background: #17110c; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  min-height: calc(100vh - 76px);
+}
+
+.sidebar {
+  padding: 18px 12px;
+  background: #0e0c0a;
+  border-right: 1px solid var(--border);
+}
+
+.nav {
+  display: grid;
+  gap: 5px;
+}
+
+.nav a, .nav button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.nav a:hover, .nav button:hover, .nav .active {
+  color: var(--gold-light);
+  background: #302316;
+  border-color: #5a442a;
+}
+
+.nav-icon {
+  width: 22px;
+  color: var(--gold-light);
+  text-align: center;
+  font-size: 19px;
+}
+
+.divider {
+  margin: 20px 8px;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.menu-label {
+  padding: 0 8px 8px;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.sidebar-note {
+  margin: 28px 6px;
+  padding: 15px;
+  border: 1px solid #73542e;
+  border-radius: 11px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.sidebar-note h3 {
+  margin: 7px 0;
+  color: var(--text);
+  font: 18px Georgia, serif;
+}
+
+.hero {
+  min-height: 170px;
+  display: flex;
+  align-items: center;
+  padding: 28px 42px;
+  background:
+    linear-gradient(90deg, #050403e8, #05040366),
+    url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1600&q=85")
+    center/cover;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font: bold clamp(36px, 4vw, 48px) Georgia, serif;
+}
+
+.hero p {
+  max-width: 500px;
+  margin: 0;
+  font: 18px/1.5 Georgia, serif;
+}
+
+.content {
+  padding: 22px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.gold-button {
+  padding: 12px 17px;
+  color: #1b1107;
+  font-weight: bold;
+  background: linear-gradient(135deg, #f1c477, #cb9144);
+  border: 1px solid #f0c276;
+  border-radius: 11px;
+}
+
+.gold-button:hover { filter: brightness(1.08); }
+
+.categories {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #302519;
+  margin-bottom: 16px;
+}
+
+.category-tab {
+  flex-shrink: 0;
+  padding: 10px 12px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+}
+
+.category-tab.active {
+  color: var(--gold-light);
+  border-bottom-color: var(--gold);
+}
+
+.forum-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 18px;
+  align-items: start;
+}
+
+.topic-list {
+  display: grid;
+  gap: 11px;
+}
+
+.topic {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 13px;
+  padding: 15px;
+  background: linear-gradient(140deg, #17120d, #0e0c0a);
+  border: 1px solid #403222;
+  border-radius: 12px;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: #352619;
+  font-size: 25px;
+}
+
+.topic h3 {
+  margin: 0 0 6px;
+  font: 17px/1.35 Georgia, serif;
+  overflow-wrap: anywhere;
+}
+
+.topic h3 button {
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font: inherit;
+}
+
+.topic h3 button:hover { color: var(--gold-light); }
+
+.topic-description {
+  margin: 0 0 12px;
+  color: #c7bdb1;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.topic-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 5px 10px;
+  color: var(--gold-light);
+  background: #352817;
+  border-radius: 18px;
+}
+
+.tag.duvidas { background: #272648; color: #d7d4ff; }
+.tag.sugestoes { background: #1c3829; color: #c5f0d0; }
+.tag.apresentacoes { background: #382344; color: #f0d3ff; }
+
+.topic-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.topic-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  padding: 3px;
+}
+
+.topic-actions button:hover { color: var(--gold-light); }
+.topic-actions .liked { color: #f07861; }
+
+.right-column {
+  display: grid;
+  gap: 12px;
+}
+
+.widget {
+  padding: 15px;
+  background: linear-gradient(145deg, #15110d, #0c0a08);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.widget h3 {
+  margin: 0 0 14px;
+  font: 18px Georgia, serif;
+}
+
+.widget-category {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 11px 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.widget-category .count {
+  margin-left: auto;
+  padding: 4px 8px;
+  background: #352817;
+  border-radius: 12px;
+}
+
+.trending-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.trending-item span:first-child { font-size: 20px; }
+
+.trending-item small {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+}
+
+.empty {
+  padding: 35px 15px;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  text-align: center;
+}
+
+footer {
+  padding: 20px;
+  border-top: 1px solid #302519;
+  text-align: center;
+  color: #b69b72;
+  font: 13px Georgia, serif;
+}
+
+/* Modal para criar tópico e responder */
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: #000c;
+}
+
+.modal-bg.open { display: flex; }
+
+.modal {
+  width: min(600px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 23px;
+  background: #15110d;
+  border: 1px solid var(--gold);
+  border-radius: 15px;
+}
+
+.modal h2 {
+  margin-top: 0;
+  font: 26px Georgia, serif;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 15px;
+  color: var(--gold-light);
+  font-size: 13px;
+}
+
+textarea {
+  min-height: 145px;
+  resize: vertical;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+}
+
+.cancel-button {
+  padding: 10px 14px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.comments {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.comment {
+  margin: 10px 0;
+  padding: 10px;
+  background: #211910;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.comment small {
+  display: block;
+  color: var(--gold-light);
+  margin-bottom: 5px;
+}
+
+.mobile-nav { display: none; }
+
+@media (max-width: 1100px) {
+  .forum-grid { grid-template-columns: minmax(0, 1fr); }
+  .right-column { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .topbar { height: 64px; padding: 0 10px; gap: 9px; }
+  .brand { font-size: 26px; gap: 7px; }
+  .brand img { width: 39px; height: 39px; }
+  .back { width: 36px; height: 36px; }
+  .top-search { display: none; }
+  .layout { display: block; min-height: calc(100vh - 64px); }
+  .sidebar { display: none; }
+  .hero { min-height: 125px; padding: 20px 17px; }
+  .hero h1 { font-size: 34px; }
+  .hero p { font-size: 15px; }
+  .content { padding: 14px 10px 90px; }
+  .toolbar { align-items: center; }
+  .toolbar h2 { font-size: 20px !important; }
+  .gold-button { padding: 10px 12px; font-size: 12px; }
+  .categories { gap: 3px; }
+  .category-tab { padding: 9px 10px; font-size: 12px; }
+  .topic { grid-template-columns: 38px minmax(0, 1fr); gap: 9px; padding: 11px; }
+  .avatar { width: 37px; height: 37px; font-size: 21px; }
+  .topic h3 { font-size: 15px; }
+  .topic-description { font-size: 12px; }
+  .topic-meta { gap: 7px; }
+  .topic-actions { gap: 7px; }
+  .right-column { grid-template-columns: 1fr; }
+  .mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 12;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 65px;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: #0d0b09f7;
+    border-top: 1px solid var(--border);
+  }
+  .mobile-nav a {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: var(--muted);
+    font-size: 10px;
+  }
+  .mobile-nav span { color: var(--gold-light); font-size: 20px; }
+  footer { padding-bottom: 82px; }
+}
+
+@media (max-width: 390px) {
+  .brand { font-size: 23px; }
+  .topic { padding: 9px; }
+  .topic-actions { gap: 4px; }
+}
+</style>
+</head>
+
+<body>
+<header class="topbar">
+  <a class="back" href="home.html" aria-label="Voltar para a página inicial" title="Voltar para início">←</a>
+
+  <a href="home.html" class="brand">
+    <img src="logo-mystic.jpg" alt="Mystic"
+         onerror="this.style.display='none'">
+    <span>Mystic</span>
+  </a>
+
+  <div class="top-search">
+    <input id="searchTop" type="search" placeholder="⌕  Buscar no fórum...">
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <nav class="nav">
+      <a href="home.html"><span class="nav-icon">⌂</span>Início</a>
+      <a href="explore.html"><span class="nav-icon">⌕</span>Explore</a>
+      <a href="dicionario.html"><span class="nav-icon">▤</span>Dicionário</a>
+      <a href="meu-caderno.html"><span class="nav-icon">▧</span>Seus textos</a>
+      <a href="meu-caderno.html"><span class="nav-icon">✎</span>Escrever texto</a>
+      <a href="favoritos.html"><span class="nav-icon">♡</span>Favoritos</a>
+    </nav>
+
+    <hr class="divider">
+    <div class="menu-label">COMUNIDADE</div>
+
+    <nav class="nav">
+      <a class="active" href="forum.html"><span class="nav-icon">▢</span>Fórum</a>
+      <a href="grupos.html"><span class="nav-icon">♧</span>Grupos</a>
+      <a href="desafios.html"><span class="nav-icon">♜</span>Desafios</a>
+    </nav>
+
+    <div class="sidebar-note">
+      <span style="font-size:20px;color:var(--gold-light)">✧</span>
+      <h3>Juntos somos mais fortes</h3>
+      Troque ideias, compartilhe leituras e faça parte da comunidade Mystic.
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Fórum</h1>
+        <p>Converse, compartilhe ideias, tire dúvidas e faça parte da nossa comunidade.</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="toolbar">
+        <h2 style="font:25px Georgia,serif;margin:0">Comunidade Mystic</h2>
+        <button class="gold-button" onclick="abrirNovoTopico()">＋ Novo tópico</button>
+      </div>
+
+      <div class="categories" id="tabs">
+        <button class="category-tab active" data-category="Todos">Todos</button>
+        <button class="category-tab" data-category="Discussões">Discussões</button>
+        <button class="category-tab" data-category="Dúvidas">Dúvidas</button>
+        <button class="category-tab" data-category="Sugestões">Sugestões</button>
+        <button class="category-tab" data-category="Apresentações">Apresentações</button>
+      </div>
+
+      <div class="forum-grid">
+        <div>
+          <div class="topic-list" id="topicList"></div>
+          <p id="topicCount" style="color:var(--muted);font-size:12px"></p>
+        </div>
+
+        <aside class="right-column">
+          <section class="widget">
+            <h3>♧ Categorias</h3>
+            <div class="widget-category" onclick="selecionarCategoria('Discussões')">
+              <span>🟤</span>Discussões <span class="count" id="countDiscussões">0</span>
+            </div>
+            <div class="widget-category" onclick="selecionarCategoria('Dúvidas')">
+              <span>🔵</span>Dúvidas <span class="count" id="countDúvidas">0</span>
+            </div>
+            <div class="widget-category" onclick="selecionarCategoria('Sugestões')">
+              <span>🟢</span>Sugestões <span class="count" id="countSugestões">0</span>
+            </div>
+            <div class="widget-category" onclick="selecionarCategoria('Apresentações')">
+              <span>🟣</span>Apresentações <span class="count" id="countApresentações">0</span>
+            </div>
+          </section>
+
+          <section class="widget">
+            <h3>🔥 Tópicos em destaque</h3>
+            <div id="trending"></div>
+          </section>
+
+          <section class="widget">
+            <h3>✧ Sobre o fórum</h3>
+            <p style="font-size:12px;line-height:1.7;color:var(--muted);margin:0">
+              Um espaço para leitores e escritores trocarem experiências, recomendarem livros, compartilharem ideias e ajudarem uns aos outros.
+            </p>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <footer>Mystic · Um lugar para sentir, escrever e descobrir.</footer>
+  </main>
+</div>
+
+<nav class="mobile-nav">
+  <a href="home.html"><span>⌂</span>Início</a>
+  <a href="explore.html"><span>⌕</span>Explore</a>
+  <a href="dicionario.html"><span>▤</span>Dicionário</a>
+  <a href="meu-caderno.html"><span>▧</span>Textos</a>
+  <a href="forum.html"><span>▢</span>Fórum</a>
+</nav>
+
+<!-- Modal: criar ou editar tópico -->
+<div class="modal-bg" id="topicModal">
+  <div class="modal">
+    <h2 id="modalTitle">Novo tópico</h2>
+
+    <form id="topicForm">
+      <label class="field">
+        Seu nome
+        <input id="authorName" maxlength="50" placeholder="Como devemos chamar você?" required>
+      </label>
+
+      <label class="field">
+        Título do tópico
+        <input id="topicTitle" maxlength="120" placeholder="Qual é o assunto?" required>
+      </label>
+
+      <label class="field">
+        Categoria
+        <select id="topicCategory">
+          <option>Discussões</option>
+          <option>Dúvidas</option>
+          <option>Sugestões</option>
+          <option>Apresentações</option>
+        </select>
+      </label>
+
+      <label class="field">
+        Sua mensagem
+        <textarea id="topicBody" maxlength="5000" placeholder="Compartilhe sua ideia com a comunidade..." required></textarea>
+      </label>
+
+      <div class="modal-actions">
+        <button class="cancel-button" type="button" onclick="fecharModal()">Cancelar</button>
+        <button class="gold-button" type="submit">Publicar tópico</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: visualizar tópico e comentários -->
+<div class="modal-bg" id="detailModal">
+  <div class="modal">
+    <button class="cancel-button" onclick="fecharDetalhes()" style="float:right">Fechar ✕</button>
+    <div id="detailContent"></div>
+
+    <form id="commentForm">
+      <label class="field">
+        Seu nome
+        <input id="commentAuthor" maxlength="50" placeholder="Seu nome" required>
+      </label>
+      <label class="field">
+        Escreva um comentário
+        <textarea id="commentBody" maxlength="2000" placeholder="Escreva uma resposta respeitosa..." required style="min-height:90px"></textarea>
+      </label>
+      <button class="gold-button" type="submit">Enviar comentário</button>
+    </form>
+  </div>
+</div>
+
+<script>
+const STORAGE_KEY = "mystic_forum_v1";
+
+const initialTopics = [
+  {
+    id: "welcome",
+    title: "Bem-vindos ao fórum da Mystic!",
+    category: "Apresentações",
+    author: "Equipe Mystic",
+    body: "Este é um espaço para todos que amam livros e boas conversas. Apresente-se, conte o que está lendo e sinta-se à vontade para participar!",
+    date: Date.now() - 5 * 86400000,
+    avatar: "📚",
+    likes: 56,
+    liked: false,
+    comments: []
+  },
+  {
+    id: "favorite-book",
+    title: "Qual o seu livro favorito de todos os tempos?",
+    category: "Discussões",
+    author: "Lívia Martins",
+    body: "Estou curiosa para saber quais livros marcaram vocês. O meu é O Pequeno Príncipe. Qual livro mudou sua maneira de ver o mundo?",
+    date: Date.now() - 2 * 86400000,
+    avatar: "👩🏻",
+    likes: 128,
+    liked: false,
+    comments: [
+      { author: "Rafael", body: "O Hobbit sempre vai ter um lugar especial para mim." }
+    ]
+  },
+  {
+    id: "reading-habit",
+    title: "Como dar continuidade a um bom hábito de leitura?",
+    category: "Dúvidas",
+    author: "Rafael Costa",
+    body: "Comecei a ler mais este ano, mas estou tendo dificuldade em manter a constância. Como vocês organizam o tempo para ler todos os dias?",
+    date: Date.now() - 3 * 86400000,
+    avatar: "👨🏻",
+    likes: 76,
+    liked: false,
+    comments: []
+  },
+  {
+    id: "fantasy",
+    title: "Indicação de livros de fantasia",
+    category: "Sugestões",
+    author: "Beatriz Lima",
+    body: "Quero começar a ler fantasia, mas não sei por onde. Alguém tem recomendações para quem está começando?",
+    date: Date.now() - 4 * 86400000,
+    avatar: "👩🏽",
+    likes: 93,
+    liked: false,
+    comments: []
+  },
+  {
+    id: "meaning",
+    title: "Qual é o significado da vida para vocês?",
+    category: "Discussões",
+    author: "Lucas Oliveira",
+    body: "Essa pergunta pode parecer grande, mas acredito que cada livro nos mostra um pouco sobre como diferentes pessoas encontram sentido na vida.",
+    date: Date.now() - 6 * 86400000,
+    avatar: "🧔🏻",
+    likes: 102,
+    liked: false,
+    comments: []
+  },
+  {
+    id: "translation",
+    title: "Erro na tradução deste livro",
+    category: "Dúvidas",
+    author: "Fernanda Alves",
+    body: "Alguém mais percebeu diferenças entre as traduções de um mesmo livro? Como vocês escolhem qual edição ler?",
+    date: Date.now() - 7 * 86400000,
+    avatar: "👩🏼",
+    likes: 48,
+    liked: false,
+    comments: []
+  }
+];
+
+let topics = loadTopics();
+let activeCategory = "Todos";
+let editingId = null;
+let selectedTopicId = null;
+
+function loadTopics() {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    if (data !== null) return JSON.parse(data);
+  } catch (e) {
+    console.warn("Não foi possível carregar os tópicos.", e);
+  }
+  return initialTopics.map(t => ({ ...t, comments: [...t.comments] }));
+}
+
+function saveTopics() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(topics));
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[ch]);
+}
+
+function relativeDate(timestamp) {
+  const days = Math.max(0, Math.floor((Date.now() - timestamp) / 86400000));
+  if (days === 0) return "hoje";
+  if (days === 1) return "1 dia atrás";
+  if (days < 7) return `${days} dias atrás`;
+  if (days < 14) return "1 semana atrás";
+  return `${Math.floor(days / 7)} semanas atrás`;
+}
+
+function categoryClass(category) {
+  if (category === "Dúvidas") return "duvidas";
+  if (category === "Sugestões") return "sugestoes";
+  if (category === "Apresentações") return "apresentacoes";
+  return "";
+}
+
+function render() {
+  const query = (
+    document.getElementById("searchTop").value
+  ).trim().toLocaleLowerCase("pt-BR");
+
+  const filtered = topics.filter(topic => {
+    const searchable = `${topic.title} ${topic.body} ${topic.author} ${topic.category}`
+      .toLocaleLowerCase("pt-BR");
+
+    return (activeCategory === "Todos" || topic.category === activeCategory)
+      && searchable.includes(query);
+  });
+
+  const list = document.getElementById("topicList");
+
+  if (!filtered.length) {
+    list.innerHTML = `
+      <div class="empty">
+        <h3>Nenhum tópico encontrado</h3>
+        <p>Tente outra busca ou comece uma nova conversa.</p>
+      </div>`;
+  } else {
+    list.innerHTML = filtered.map(topic => `
+      <article class="topic">
+        <div class="avatar">${escapeHTML(topic.avatar || "✧")}</div>
+
+        <div>
+          <h3>
+            <button onclick="abrirDetalhes('${escapeHTML(topic.id)}')">
+              ${escapeHTML(topic.title)}
+            </button>
+          </h3>
+
+          <p class="topic-description">${escapeHTML(topic.body)}</p>
+
+          <div class="topic-meta">
+            <span class="tag ${categoryClass(topic.category)}">
+              ${escapeHTML(topic.category)}
+            </span>
+            <span>${escapeHTML(topic.author)}</span>
+            <span>· ${relativeDate(topic.date)}</span>
+
+            <div class="topic-actions">
+              <button onclick="abrirDetalhes('${escapeHTML(topic.id)}')" title="Ver comentários">
+                ♧ ${topic.comments.length}
+              </button>
+              <button class="${topic.liked ? "liked" : ""}"
+                onclick="toggleLike('${escapeHTML(topic.id)}')" title="Curtir">
+                ${topic.liked ? "♥" : "♡"} ${topic.likes}
+              </button>
+              ${topic.author !== "Equipe Mystic" ? `
+                <button onclick="editarTopico('${escapeHTML(topic.id)}')" title="Editar tópico">✎</button>
+                <button onclick="excluirTopico('${escapeHTML(topic.id)}')" title="Excluir tópico">⌫</button>
+              ` : ""}
+            </div>
+          </div>
+        </div>
+      </article>
+    `).join("");
+  }
+
+  document.getElementById("topicCount").textContent =
+    `${filtered.length} tópico(s) encontrado(s).`;
+
+  ["Discussões", "Dúvidas", "Sugestões", "Apresentações"].forEach(category => {
+    const id = "count" + category;
+    const el = document.getElementById(id);
+    if (el) el.textContent = topics.filter(t => t.category === category).length;
+  });
+
+  const trending = [...topics]
+    .sort((a, b) => b.likes + b.comments.length * 2 - (a.likes + a.comments.length * 2))
+    .slice(0, 4);
+
+  document.getElementById("trending").innerHTML = trending.map(topic => `
+    <div class="trending-item">
+      <span>${escapeHTML(topic.avatar || "✧")}</span>
+      <div>
+        <a href="#topico" onclick="abrirDetalhes('${escapeHTML(topic.id)}');return false;">
+          ${escapeHTML(topic.title)}
+        </a>
+        <small>${topic.comments.length} comentário(s) · ${topic.likes} curtida(s)</small>
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById("tabs").addEventListener("click", event => {
+  const button = event.target.closest("[data-category]");
+  if (!button) return;
+
+  activeCategory = button.dataset.category;
+
+  document.querySelectorAll(".category-tab").forEach(tab => {
+    tab.classList.toggle("active", tab === button);
+  });
+
+  render();
+});
+
+function selecionarCategoria(category) {
+  activeCategory = category;
+
+  document.querySelectorAll(".category-tab").forEach(tab => {
+    tab.classList.toggle("active", tab.dataset.category === category);
+  });
+
+  render();
+  document.querySelector(".content").scrollIntoView({ behavior: "smooth" });
+}
+
+document.getElementById("searchTop").addEventListener("input", render);
+
+function abrirNovoTopico() {
+  editingId = null;
+  document.getElementById("topicForm").reset();
+  document.getElementById("modalTitle").textContent = "Novo tópico";
+  document.getElementById("topicModal").classList.add("open");
+}
+
+function editarTopico(id) {
+  const topic = topics.find(t => t.id === id);
+  if (!topic) return;
+
+  editingId = id;
+  document.getElementById("modalTitle").textContent = "Editar tópico";
+  document.getElementById("authorName").value = topic.author;
+  document.getElementById("topicTitle").value = topic.title;
+  document.getElementById("topicCategory").value = topic.category;
+  document.getElementById("topicBody").value = topic.body;
+  document.getElementById("topicModal").classList.add("open");
+}
+
+function fecharModal() {
+  document.getElementById("topicModal").classList.remove("open");
+  editingId = null;
+}
+
+document.getElementById("topicForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const author = document.getElementById("authorName").value.trim();
+  const title = document.getElementById("topicTitle").value.trim();
+  const category = document.getElementById("topicCategory").value;
+  const body = document.getElementById("topicBody").value.trim();
+
+  if (!author || !title || !body) return;
+
+  if (editingId) {
+    const topic = topics.find(t => t.id === editingId);
+    if (topic) {
+      topic.author = author;
+      topic.title = title;
+      topic.category = category;
+      topic.body = body;
+    }
+  } else {
+    topics.unshift({
+      id: "topic-" + Date.now(),
+      title,
+      category,
+      author,
+      body,
+      date: Date.now(),
+      avatar: "✍️",
+      likes: 0,
+      liked: false,
+      comments: []
+    });
+  }
+
+  saveTopics();
+  fecharModal();
+  render();
+});
+
+function excluirTopico(id) {
+  const topic = topics.find(t => t.id === id);
+  if (!topic) return;
+
+  if (!confirm(`Deseja excluir o tópico "${topic.title}"?`)) return;
+
+  topics = topics.filter(t => t.id !== id);
+  saveTopics();
+  render();
+}
+
+function toggleLike(id) {
+  const topic = topics.find(t => t.id === id);
+  if (!topic) return;
+
+  if (topic.liked) {
+    topic.likes = Math.max(0, topic.likes - 1);
+    topic.liked = false;
+  } else {
+    topic.likes++;
+    topic.liked = true;
+  }
+
+  saveTopics();
+  render();
+}
+
+function abrirDetalhes(id) {
+  const topic = topics.find(t => t.id === id);
+  if (!topic) return;
+
+  selectedTopicId = id;
+
+  const comments = topic.comments.map(comment => `
+    <div class="comment">
+      <small>${escapeHTML(comment.author)}</small>
+      ${escapeHTML(comment.body)}
+    </div>
+  `).join("");
+
+  document.getElementById("detailContent").innerHTML = `
+    <span class="tag ${categoryClass(topic.category)}">${escapeHTML(topic.category)}</span>
+    <h2 style="margin-top:13px">${escapeHTML(topic.title)}</h2>
+    <p style="font-size:12px;color:var(--gold-light)">
+      Por ${escapeHTML(topic.author)} · ${relativeDate(topic.date)}
+    </p>
+    <p style="line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere">${escapeHTML(topic.body)}</p>
+    <div class="comments">
+      <h3>Comentários (${topic.comments.length})</h3>
+      ${comments || '<p style="color:var(--muted);font-size:13px">Ainda não há comentários. Seja o primeiro a responder!</p>'}
+    </div>
+  `;
+
+  document.getElementById("commentForm").reset();
+  document.getElementById("detailModal").classList.add("open");
+}
+
+function fecharDetalhes() {
+  document.getElementById("detailModal").classList.remove("open");
+  selectedTopicId = null;
+}
+
+document.getElementById("commentForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const topic = topics.find(t => t.id === selectedTopicId);
+  if (!topic) return;
+
+  const author = document.getElementById("commentAuthor").value.trim();
+  const body = document.getElementById("commentBody").value.trim();
+
+  if (!author || !body) return;
+
+  topic.comments.push({ author, body });
+  saveTopics();
+
+  const id = selectedTopicId;
+  render();
+  abrirDetalhes(id);
+});
+
+document.querySelectorAll(".modal-bg").forEach(modal => {
+  modal.addEventListener("click", event => {
+    if (event.target !== modal) return;
+    modal.classList.remove("open");
+    editingId = null;
+    selectedTopicId = null;
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    fecharModal();
+    fecharDetalhes();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
