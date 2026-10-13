@@ -17,13 +17,11 @@
     :root {
       --fundo: #100e0d;
       --fundo-card: #1b1816;
-      --fundo-menu: #151210;
       --dourado: #c9a45c;
       --dourado-claro: #e2c783;
       --texto: #f4eee5;
       --texto-suave: #b9afa2;
       --borda: #393027;
-      --largura-menu: 260px;
     }
 
     html {
@@ -39,165 +37,14 @@
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    body.menu-aberto {
-      overflow: hidden;
-    }
-
-    button, input, select {
-      font: inherit;
-    }
-
     a {
       color: inherit;
     }
 
-    /* MENU LATERAL */
-
-    .menu-lateral {
-      position: fixed;
-      z-index: 1000;
-      inset: 0 auto 0 0;
-      width: var(--largura-menu);
-      padding: 25px 18px;
-      display: flex;
-      flex-direction: column;
-      background: var(--fundo-menu);
-      border-right: 1px solid var(--borda);
-      transform: translateX(-100%);
-      transition: transform .25s ease;
-      overflow-y: auto;
-    }
-
-    .menu-lateral.aberto {
-      transform: translateX(0);
-    }
-
-    .menu-topo {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 5px 5px 25px;
-      border-bottom: 1px solid var(--borda);
-    }
-
-    .marca {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-      text-decoration: none;
-    }
-
-    .logo-mystic {
-      width: 43px;
-      height: 43px;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-
-    .nome-site {
-      color: var(--dourado-claro);
-      font-size: 26px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    .fechar-menu,
-    .botao-menu {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--borda);
-      border-radius: 8px;
-      background: #211d19;
-      color: var(--dourado-claro);
-      cursor: pointer;
-      transition: background .2s, color .2s;
-    }
-
-    .fechar-menu {
-      width: 36px;
-      height: 36px;
-      font-size: 22px;
-    }
-
-    .fechar-menu:hover,
-    .botao-menu:hover {
-      background: var(--dourado);
-      color: #17120b;
-    }
-
-    .menu-legenda {
-      margin: 27px 12px 12px;
-      color: #8f8271;
-      font: 11px Arial, sans-serif;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .navegacao {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .navegacao a {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      padding: 13px 14px;
-      border: 1px solid transparent;
-      border-radius: 7px;
-      color: var(--texto-suave);
-      text-decoration: none;
-      font-size: 15px;
-      transition: .2s ease;
-    }
-
-    .navegacao a:hover,
-    .navegacao a.ativo {
-      color: var(--dourado-claro);
-      background: #211d19;
-      border-color: var(--borda);
-    }
-
-    .navegacao a.ativo {
-      border-left: 3px solid var(--dourado);
-    }
-
-    .nav-icone {
-      width: 23px;
-      text-align: center;
-      font-family: Arial, sans-serif;
-      font-size: 18px;
-    }
-
-    .menu-rodape {
-      margin-top: auto;
-      padding: 25px 12px 5px;
-      color: #8f8271;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .menu-rodape strong {
-      color: var(--dourado);
-      letter-spacing: 1px;
-    }
-
-    .fundo-menu {
-      position: fixed;
-      z-index: 900;
-      inset: 0;
-      background: rgba(0, 0, 0, .65);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity .25s, visibility .25s;
-    }
-
-    .fundo-menu.visivel {
-      opacity: 1;
-      visibility: visible;
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
     /* CABEÇALHO */
@@ -207,54 +54,53 @@
       top: 0;
       z-index: 100;
       width: 100%;
-      background: rgba(21, 18, 16, .96);
+      background: rgba(21, 18, 16, 0.97);
       border-bottom: 1px solid var(--borda);
       backdrop-filter: blur(12px);
     }
 
     .cabecalho {
+      width: 100%;
       max-width: 1500px;
       min-height: 86px;
       margin: 0 auto;
       padding: 16px 5%;
       display: flex;
       align-items: center;
-      gap: 22px;
+      justify-content: space-between;
+      gap: 25px;
     }
 
-    .botao-menu {
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-      font-size: 23px;
-    }
+    /* LOGO */
 
-    .marca-cabecalho {
+    .marca {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-shrink: 0;
       text-decoration: none;
     }
 
-    .marca-cabecalho img {
-      width: 43px;
-      height: 43px;
+    .logo-mystic {
+      width: 46px;
+      height: 46px;
       object-fit: contain;
+      display: block;
     }
 
-    .marca-cabecalho span {
+    .nome-site {
       color: var(--dourado-claro);
-      font-size: 27px;
+      font-size: clamp(25px, 3vw, 32px);
       font-weight: bold;
       letter-spacing: 2px;
     }
 
+    /* PESQUISA */
+
     .area-pesquisa {
-      position: relative;
       width: 100%;
       max-width: 500px;
-      margin-left: auto;
+      position: relative;
     }
 
     .area-pesquisa input {
@@ -266,12 +112,12 @@
       background: #211d19;
       color: var(--texto);
       font-size: 14px;
-      transition: border-color .2s, box-shadow .2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .area-pesquisa input:focus {
       border-color: var(--dourado);
-      box-shadow: 0 0 0 3px rgba(201, 164, 92, .09);
+      box-shadow: 0 0 0 3px rgba(201, 164, 92, 0.09);
     }
 
     .area-pesquisa input::placeholder {
@@ -280,28 +126,29 @@
 
     .icone-pesquisa {
       position: absolute;
-      top: 50%;
       right: 17px;
+      top: 50%;
       transform: translateY(-50%);
       color: var(--dourado);
-      font: 22px Arial, sans-serif;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
       pointer-events: none;
     }
 
-    /* CONTEÚDO */
+    /* CONTEÚDO PRINCIPAL */
 
     main {
       flex: 1;
       width: 100%;
       max-width: 1500px;
       margin: 0 auto;
-      padding: 43px 5% 60px;
+      padding: 40px 5% 60px;
     }
 
     .caminho {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       color: var(--texto-suave);
-      font: 13px Arial, sans-serif;
+      font-size: 13px;
     }
 
     .caminho a {
@@ -313,15 +160,21 @@
       text-decoration: underline;
     }
 
+    /* DESTAQUE DA BIBLIOTECA */
+
     .apresentacao {
       position: relative;
       overflow: hidden;
-      margin-bottom: 35px;
-      padding: 34px;
+      margin-bottom: 38px;
+      padding: 35px;
       border: 1px solid #4a3825;
       border-radius: 12px;
       background:
-        radial-gradient(ellipse at 90% 10%, rgba(201,164,92,.12), transparent 45%),
+        radial-gradient(
+          ellipse at 90% 10%,
+          rgba(201, 164, 92, 0.12),
+          transparent 45%
+        ),
         linear-gradient(135deg, #211a15, #151210 75%);
     }
 
@@ -331,7 +184,7 @@
       right: 35px;
       top: 50%;
       transform: translateY(-50%);
-      color: rgba(201, 164, 92, .07);
+      color: rgba(201, 164, 92, 0.07);
       font-size: clamp(120px, 19vw, 230px);
       font-weight: bold;
       pointer-events: none;
@@ -341,7 +194,8 @@
       display: inline-block;
       margin-bottom: 13px;
       color: var(--dourado);
-      font: 11px Arial, sans-serif;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
       letter-spacing: 3px;
       text-transform: uppercase;
     }
@@ -363,6 +217,8 @@
       font-size: 16px;
       line-height: 1.8;
     }
+
+    /* TÍTULO DO CATÁLOGO */
 
     .titulo-catalogo {
       margin-bottom: 8px;
@@ -409,17 +265,18 @@
     }
 
     .contador {
-      margin-left: auto;
       align-self: center;
+      margin-left: auto;
       color: var(--texto-suave);
-      font: 13px Arial, sans-serif;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
     }
 
     .contador strong {
       color: var(--dourado-claro);
     }
 
-    /* CATÁLOGO */
+    /* GRADE DOS LIVROS */
 
     .catalogo {
       display: grid;
@@ -429,22 +286,26 @@
 
     .livro {
       min-width: 0;
+      overflow: hidden;
+      padding: 15px;
       display: flex;
       flex-direction: column;
-      padding: 15px;
-      overflow: hidden;
       border: 1px solid var(--borda);
       border-radius: 10px;
       background: var(--fundo-card);
-      transition: transform .22s ease, border-color .22s ease,
-                  box-shadow .22s ease;
+      transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
     }
 
     .livro:hover {
       transform: translateY(-5px);
       border-color: var(--dourado);
-      box-shadow: 0 10px 30px rgba(0,0,0,.28);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
     }
+
+    /* CAPAS */
 
     .capa {
       position: relative;
@@ -458,7 +319,12 @@
       border: 1px solid #4a3825;
       border-radius: 5px;
       background:
-        radial-gradient(circle at 50% 25%, #493521 0%, #211a15 48%, #151210 100%);
+        radial-gradient(
+          circle at 50% 25%,
+          #493521 0%,
+          #211a15 48%,
+          #151210 100%
+        );
     }
 
     .capa::before,
@@ -466,13 +332,13 @@
       content: "";
       position: absolute;
       inset: 10px;
-      border: 1px solid rgba(201,164,92,.25);
+      border: 1px solid rgba(201, 164, 92, 0.25);
       pointer-events: none;
     }
 
     .capa::after {
       inset: 16px;
-      border-color: rgba(201,164,92,.12);
+      border-color: rgba(201, 164, 92, 0.12);
     }
 
     .capa-placeholder {
@@ -481,7 +347,7 @@
       color: var(--dourado);
       font-size: clamp(65px, 8vw, 100px);
       font-weight: bold;
-      text-shadow: 0 0 28px rgba(201,164,92,.24);
+      text-shadow: 0 0 28px rgba(201, 164, 92, 0.24);
     }
 
     .titulo-livro {
@@ -506,9 +372,11 @@
       line-height: 1.6;
     }
 
+    /* BOTÕES */
+
     .botao-ler {
-      width: 100%;
       display: block;
+      width: 100%;
       margin-top: auto;
       padding: 12px 14px;
       border: 1px solid var(--dourado);
@@ -520,7 +388,7 @@
       text-align: center;
       text-decoration: none;
       cursor: pointer;
-      transition: background .2s, color .2s;
+      transition: background 0.2s, color 0.2s;
     }
 
     .botao-ler:hover {
@@ -534,6 +402,8 @@
       color: #b6a58b;
       cursor: not-allowed;
     }
+
+    /* SEM RESULTADOS */
 
     .sem-resultados {
       display: none;
@@ -573,15 +443,7 @@
       color: var(--dourado-claro);
     }
 
-    /* RESPONSIVIDADE */
-
-    @media (min-width: 1100px) {
-      body.menu-aberto main,
-      body.menu-aberto header,
-      body.menu-aberto footer {
-        padding-left: calc(5% + 0px);
-      }
-    }
+    /* TABLETS */
 
     @media (max-width: 1100px) {
       .catalogo {
@@ -590,28 +452,38 @@
       }
     }
 
+    /* CELULARES */
+
     @media (max-width: 760px) {
       .cabecalho {
-        gap: 13px;
-        padding: 14px 4%;
+        padding: 15px 4%;
+        gap: 15px;
       }
 
-      .marca-cabecalho span {
-        font-size: 23px;
+      .marca {
+        gap: 8px;
       }
 
-      .marca-cabecalho img {
-        width: 38px;
-        height: 38px;
+      .logo-mystic {
+        width: 40px;
+        height: 40px;
+      }
+
+      .nome-site {
+        font-size: 25px;
+      }
+
+      .area-pesquisa {
+        max-width: 360px;
+      }
+
+      main {
+        padding: 30px 4% 45px;
       }
 
       .catalogo {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 14px;
-      }
-
-      main {
-        padding: 30px 4% 45px;
       }
 
       .apresentacao {
@@ -627,34 +499,16 @@
     @media (max-width: 520px) {
       .cabecalho {
         flex-wrap: wrap;
+        gap: 13px;
       }
 
-      .botao-menu {
-        width: 40px;
-        height: 40px;
-      }
-
-      .marca-cabecalho {
-        gap: 7px;
-      }
-
-      .marca-cabecalho span {
-        font-size: 22px;
-      }
-
-      .marca-cabecalho img {
-        width: 35px;
-        height: 35px;
+      .marca {
+        margin-right: auto;
       }
 
       .area-pesquisa {
         flex-basis: 100%;
         max-width: none;
-      }
-
-      .area-pesquisa input {
-        padding-top: 12px;
-        padding-bottom: 12px;
       }
 
       .filtros {
@@ -715,9 +569,11 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
+      *,
+      *::before,
+      *::after {
         scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -725,65 +581,17 @@
 
 <body>
 
-  <!-- MENU LATERAL -->
-  <aside class="menu-lateral" id="menuLateral" aria-label="Menu principal">
-    <div class="menu-topo">
-      <a class="marca" href="home.html">
-        <img src="logo-mystic.jpg" alt="" class="logo-mystic">
-        <span class="nome-site">Mystic</span>
-      </a>
-
-      <button class="fechar-menu" id="fecharMenu"
-        type="button" aria-label="Fechar menu">×</button>
-    </div>
-
-    <p class="menu-legenda">Navegação</p>
-
-    <nav class="navegacao">
-      <a href="home.html">
-        <span class="nav-icone">⌂</span> Início
-      </a>
-
-      <a href="livros.html" class="ativo" aria-current="page">
-        <span class="nav-icone">▤</span> Biblioteca
-      </a>
-
-      <a href="forum.html">
-        <span class="nav-icone">☷</span> Fórum
-      </a>
-
-      <a href="escrever.html">
-        <span class="nav-icone">✎</span> Escrever
-      </a>
-
-      <a href="sobre.html">
-        <span class="nav-icone">✧</span> Sobre nós
-      </a>
-    </nav>
-
-    <div class="menu-rodape">
-      <strong>MYSTIC</strong><br>
-      Um universo de histórias para descobrir.
-    </div>
-  </aside>
-
-  <div class="fundo-menu" id="fundoMenu"></div>
-
-  <!-- CABEÇALHO -->
+  <!-- CABEÇALHO SEM AS TRÊS BARRINHAS -->
   <header>
     <div class="cabecalho">
-      <button
-        class="botao-menu"
-        id="abrirMenu"
-        type="button"
-        aria-label="Abrir menu"
-        aria-controls="menuLateral"
-        aria-expanded="false"
-      >☰</button>
 
-      <a href="home.html" class="marca-cabecalho">
-        <img src="logo-mystic.jpg" alt="">
-        <span>Mystic</span>
+      <a href="home.html" class="marca" aria-label="Mystic - Início">
+        <img
+          src="logo-mystic.jpg"
+          alt="Logo da Mystic"
+          class="logo-mystic"
+        >
+        <span class="nome-site">Mystic</span>
       </a>
 
       <div class="area-pesquisa">
@@ -795,18 +603,22 @@
         >
         <span class="icone-pesquisa" aria-hidden="true">⌕</span>
       </div>
+
     </div>
   </header>
 
   <!-- CONTEÚDO PRINCIPAL -->
   <main>
+
     <p class="caminho">
       <a href="home.html">Início</a> / Biblioteca
     </p>
 
     <section class="apresentacao">
       <span class="etiqueta">Biblioteca Mystic</span>
+
       <h1 class="titulo-secao">Explore novos mundos</h1>
+
       <p class="descricao-secao">
         Descubra histórias, conheça novos autores e encontre sua próxima
         leitura. Deixe a imaginação guiar você por cada página.
@@ -814,12 +626,18 @@
     </section>
 
     <section aria-labelledby="tituloCatalogo">
-      <h2 class="titulo-catalogo" id="tituloCatalogo">Nosso catálogo</h2>
+
+      <h2 class="titulo-catalogo" id="tituloCatalogo">
+        Nosso catálogo
+      </h2>
+
       <p class="subtitulo-catalogo">
         Use a pesquisa e os filtros para encontrar uma história.
       </p>
 
+      <!-- FILTROS -->
       <div class="filtros">
+
         <select id="filtroGenero" aria-label="Filtrar por gênero">
           <option value="">Todos os gêneros</option>
           <option value="fantasia">Fantasia</option>
@@ -849,54 +667,207 @@
         <p class="contador" id="contador" aria-live="polite">
           <strong>4</strong> livros no catálogo
         </p>
+
       </div>
 
+      <!-- CATÁLOGO -->
       <div class="catalogo" id="catalogo" aria-label="Catálogo de livros">
 
-        <!-- LIVRO 1 -->
-        <article class="livro"
+        <article
+          class="livro"
           data-genero="clássicos"
           data-subgenero="literatura clássica"
           data-titulo="O Pequeno Príncipe"
-          data-autor="Antoine de Saint-Exupéry">
-
-          <div class="capa" aria-label="Capa decorativa da Mystic">
+          data-autor="Antoine de Saint-Exupéry"
+        >
+          <div class="capa">
             <span class="capa-placeholder">M</span>
           </div>
 
           <h3 class="titulo-livro">O Pequeno Príncipe</h3>
-          <p class="autor-livro">Antoine de Saint-Exupéry</p>
-          <p class="genero-livro">Clássicos · Literatura clássica</p>
 
-          <a class="botao-ler"
+          <p class="autor-livro">
+            Antoine de Saint-Exupéry
+          </p>
+
+          <p class="genero-livro">
+            Clássicos · Literatura clássica
+          </p>
+
+          <a
+            class="botao-ler"
             href="https://pt.wikipedia.org/wiki/O_Pequeno_Pr%C3%ADncipe"
-            target="_blank" rel="noopener noreferrer">Conhecer livro</a>
+            target="_blank"
+            rel="noopener noreferrer"
+          >Conhecer livro</a>
         </article>
 
-        <!-- LIVRO 2 -->
-        <article class="livro"
+        <article
+          class="livro"
           data-genero="fantasia"
           data-subgenero="fantasia épica"
           data-titulo="Em breve"
-          data-autor="">
-
-          <div class="capa" aria-label="Capa decorativa da Mystic">
+          data-autor=""
+        >
+          <div class="capa">
             <span class="capa-placeholder">M</span>
           </div>
 
           <h3 class="titulo-livro">Em breve</h3>
-          <p class="autor-livro">Novas histórias estão chegando.</p>
-          <p class="genero-livro">Fantasia · Fantasia épica</p>
 
-          <button class="botao-ler" type="button" disabled>Em breve</button>
+          <p class="autor-livro">
+            Novas histórias estão chegando.
+          </p>
+
+          <p class="genero-livro">
+            Fantasia · Fantasia épica
+          </p>
+
+          <button class="botao-ler" type="button" disabled>
+            Em breve
+          </button>
         </article>
 
-        <!-- LIVRO 3 -->
-        <article class="livro"
+        <article
+          class="livro"
           data-genero="romance"
           data-subgenero="romance contemporâneo"
           data-titulo="Em breve"
-          data-autor="">
+          data-autor=""
+        >
+          <div class="capa">
+            <span class="capa-placeholder">M</span>
+          </div>
 
-          <div class="capa" aria-label="Capa decorativa da Mystic">
-       
+          <h3 class="titulo-livro">Em breve</h3>
+
+          <p class="autor-livro">
+            Novas histórias estão chegando.
+          </p>
+
+          <p class="genero-livro">
+            Romance · Romance contemporâneo
+          </p>
+
+          <button class="botao-ler" type="button" disabled>
+            Em breve
+          </button>
+        </article>
+
+        <article
+          class="livro"
+          data-genero="mistério"
+          data-subgenero="mistério"
+          data-titulo="Em breve"
+          data-autor=""
+        >
+          <div class="capa">
+            <span class="capa-placeholder">M</span>
+          </div>
+
+          <h3 class="titulo-livro">Em breve</h3>
+
+          <p class="autor-livro">
+            Novas histórias estão chegando.
+          </p>
+
+          <p class="genero-livro">
+            Mistério
+          </p>
+
+          <button class="botao-ler" type="button" disabled>
+            Em breve
+          </button>
+        </article>
+
+      </div>
+
+      <!-- MENSAGEM QUANDO NÃO HOUVER RESULTADOS -->
+      <div class="sem-resultados" id="semResultados" role="status">
+        <strong>Nenhum livro encontrado</strong>
+        Tente outro termo ou altere os filtros selecionados.
+      </div>
+
+    </section>
+  </main>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p>
+      <strong>Mystic</strong> · Histórias que despertam a imaginação.
+    </p>
+  </footer>
+
+  <!-- PESQUISA E FILTROS -->
+  <script>
+    const pesquisa = document.getElementById("pesquisa");
+    const filtroGenero = document.getElementById("filtroGenero");
+    const filtroSubgenero = document.getElementById("filtroSubgenero");
+    const livros = [...document.querySelectorAll(".livro")];
+    const semResultados = document.getElementById("semResultados");
+    const contador = document.getElementById("contador");
+
+    function normalizar(texto) {
+      return texto
+        .toLocaleLowerCase("pt-BR")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function filtrarLivros() {
+      const termo = normalizar(pesquisa.value.trim());
+      const generoSelecionado = normalizar(filtroGenero.value);
+      const subgeneroSelecionado = normalizar(filtroSubgenero.value);
+
+      let quantidadeVisivel = 0;
+
+      livros.forEach((livro) => {
+        const titulo = normalizar(livro.dataset.titulo || "");
+        const autor = normalizar(livro.dataset.autor || "");
+        const genero = normalizar(livro.dataset.genero || "");
+        const subgenero = normalizar(livro.dataset.subgenero || "");
+        const textoCompleto = normalizar(livro.textContent);
+
+        const correspondePesquisa =
+          !termo ||
+          titulo.includes(termo) ||
+          autor.includes(termo) ||
+          textoCompleto.includes(termo);
+
+        const correspondeGenero =
+          !generoSelecionado ||
+          genero === generoSelecionado;
+
+        const correspondeSubgenero =
+          !subgeneroSelecionado ||
+          subgenero === subgeneroSelecionado;
+
+        const mostrar =
+          correspondePesquisa &&
+          correspondeGenero &&
+          correspondeSubgenero;
+
+        livro.style.display = mostrar ? "flex" : "none";
+
+        if (mostrar) {
+          quantidadeVisivel++;
+        }
+      });
+
+      semResultados.style.display =
+        quantidadeVisivel === 0 ? "block" : "none";
+
+      contador.innerHTML =
+        "<strong>" + quantidadeVisivel + "</strong> " +
+        (quantidadeVisivel === 1
+          ? "livro encontrado"
+          : "livros encontrados");
+    }
+
+    pesquisa.addEventListener("input", filtrarLivros);
+    filtroGenero.addEventListener("change", filtrarLivros);
+    filtroSubgenero.addEventListener("change", filtrarLivros);
+  </script>
+
+</body>
+</html>
