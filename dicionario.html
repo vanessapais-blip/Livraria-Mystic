@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mystic | Dicionário</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --fundo: #100e0d;
+      --fundo-card: #1b1816;
+      --dourado: #c9a45c;
+      --dourado-claro: #e2c783;
+      --texto: #f4eee5;
+      --texto-suave: #b9afa2;
+      --borda: #393027;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    /* CABEÇALHO */
+
+    header {
+      width: 100%;
+      background: #151210;
+      border-bottom: 1px solid var(--borda);
+      padding: 20px 6%;
+    }
+
+    .cabecalho {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .logo-mystic {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nome-site {
+      color: var(--dourado-claro);
+      font-size: clamp(27px, 4vw, 36px);
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    /* CONTEÚDO */
+
+    main {
+      flex: 1;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 45px 6% 60px;
+    }
+
+    .introducao {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .introducao h1 {
+      color: var(--dourado-claro);
+      font-size: clamp(30px, 5vw, 43px);
+      margin-bottom: 14px;
+    }
+
+    .introducao p {
+      color: var(--texto-suave);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    /* PESQUISA */
+
+    .caixa-pesquisa {
+      max-width: 750px;
+      margin: 0 auto 35px;
+    }
+
+    .caixa-pesquisa label {
+      display: block;
+      color: var(--dourado-claro);
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .campo-pesquisa {
+      display: flex;
+      gap: 10px;
+    }
+
+    .campo-pesquisa input {
+      flex: 1;
+      min-width: 0;
+      padding: 15px 17px;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+      outline: none;
+      background: #211d19;
+      color: var(--texto);
+      font-family: inherit;
+      font-size: 16px;
+    }
+
+    .campo-pesquisa input::placeholder {
+      color: var(--texto-suave);
+    }
+
+    .campo-pesquisa input:focus {
+      border-color: var(--dourado);
+    }
+
+    .botao-pesquisar {
+      padding: 0 23px;
+      border: none;
+      border-radius: 8px;
+      background: var(--dourado);
+      color: #17120b;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .botao-pesquisar:hover {
+      background: var(--dourado-claro);
+    }
+
+    .dica {
+      color: var(--texto-suave);
+      font-size: 13px;
+      margin-top: 11px;
+      line-height: 1.6;
+    }
+
+    /* MENSAGENS */
+
+    .mensagem {
+      display: none;
+      max-width: 750px;
+      margin: 0 auto 22px;
+      padding: 15px;
+      border: 1px solid var(--borda);
+      border-radius: 8px;
+      background: var(--fundo-card);
+      color: var(--texto-suave);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .mensagem.erro {
+      color: #e8a39a;
+      border-color: #75443d;
+    }
+
+    /* RESULTADO */
+
+    .resultado {
+      display: none;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: clamp(20px, 4vw, 35px);
+      background: var(--fundo-card);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .topo-resultado {
+      padding-bottom: 23px;
+      border-bottom: 1px solid var(--borda);
+      margin-bottom: 25px;
+    }
+
+    .palavra {
+      color: var(--dourado-claro);
+      font-size: clamp(30px, 5vw, 42px);
+      overflow-wrap: anywhere;
+      margin-bottom: 10px;
+    }
+
+    .pronuncia {
+      color: var(--texto-suave);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .secao-significado {
+      margin-bottom: 28px;
+    }
+
+    .secao-significado h3 {
+      color: var(--dourado);
+      font-size: 19px;
+      margin-bottom: 14px;
+    }
+
+    .definicao {
+      color: var(--texto);
+      font-size: 16px;
+      line-height: 1.9;
+      margin-bottom: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .numero-definicao {
+      color: var(--dourado);
+      font-weight: bold;
+      margin-right: 7px;
+    }
+
+    .exemplo {
+      color: var(--texto-suave);
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.8;
+      margin: 8px 0 0 25px;
+    }
+
+    .classe {
+      display: inline-block;
+      padding: 6px 11px;
+      margin: 0 6px 8px 0;
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      background: #211d19;
+      color: var(--dourado-claro);
+      font-size: 13px;
+    }
+
+    .acoes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 20px;
+      border-top: 1px solid var(--borda);
+    }
+
+    .botao-secundario {
+      padding: 11px 15px;
+      border: 1px solid var(--borda);
+      border-radius: 7px;
+      background: #211d19;
+      color: var(--texto);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .botao-secundario:hover {
+      border-color: var(--dourado);
+      color: var(--dourado-claro);
+    }
+
+    /* HISTÓRICO */
+
+    .historico {
+      max-width: 850px;
+      margin: 35px auto 0;
+    }
+
+    .historico h2 {
+      color: var(--dourado-claro);
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .lista-historico {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .palavra-historico {
+      padding: 9px 13px;
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      background: var(--fundo-card);
+      color: var(--texto-suave);
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .palavra-historico:hover {
+      border-color: var(--dourado);
+      color: var(--dourado-claro);
+    }
+
+    .historico-vazio {
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* RODAPÉ */
+
+    footer {
+      margin-top: auto;
+      padding: 24px 6%;
+      border-top: 1px solid var(--borda);
+      background: #151210;
+      text-align: center;
+    }
+
+    footer p {
+      color: #ffffff;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    /* ACESSIBILIDADE */
+
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid var(--dourado-claro);
+      outline-offset: 3px;
+    }
+
+    /* CELULAR */
+
+    @media (max-width: 600px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      .logo-mystic {
+        width: 42px;
+        height: 42px;
+      }
+
+      .nome-site {
+        font-size: 29px;
+      }
+
+      main {
+        padding: 32px 5% 40px;
+      }
+
+      .introducao {
+        margin-bottom: 28px;
+      }
+
+      .introducao p {
+        font-size: 15px;
+      }
+
+      .campo-pesquisa {
+        flex-direction: column;
+      }
+
+      .campo-pesquisa input {
+        width: 100%;
+      }
+
+      .botao-pesquisar {
+        width: 100%;
+        padding: 14px;
+      }
+
+      .resultado {
+        padding: 20px 16px;
+      }
+
+      .definicao {
+        font-size: 15px;
+      }
+
+      .acoes {
+        flex-direction: column;
+      }
+
+      .botao-secundario {
+        width: 100%;
+      }
+
+      footer {
+        padding: 20px 5%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="cabecalho">
+      <div class="marca">
+        <img
+          src="logo-mystic.jpg"
+          alt="Logo da Mystic"
+          class="logo-mystic"
+        >
+        <span class="nome-site">Mystic</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="introducao">
+      <h1>Dicionário Mystic</h1>
+      <p>
+        Descubra o significado das palavras, aprenda novos termos
+        e explore a riqueza da língua portuguesa.
+      </p>
+    </section>
+
+    <section class="caixa-pesquisa">
+      <form id="formularioPesquisa">
+        <label for="campoPalavra">Qual palavra você deseja pesquisar?</label>
+
+        <div class="campo-pesquisa">
+          <input
+            type="search"
+            id="campoPalavra"
+            placeholder="Digite uma palavra..."
+            autocomplete="off"
+            maxlength="100"
+            required
+          >
+
+          <button
+            type="submit"
+            class="botao-pesquisar"
+            id="botaoPesquisar"
+          >
+            Pesquisar
+          </button>
+        </div>
+      </form>
+
+      <p class="dica">
+        Dica: você pode pesquisar substantivos, verbos, adjetivos
+        e muitas outras palavras em português.
+      </p>
+    </section>
+
+    <div
+      class="mensagem"
+      id="mensagem"
+      role="status"
+      aria-live="polite"
+    ></div>
+
+    <section
+      class="resultado"
+      id="resultado"
+      aria-label="Resultado do dicionário"
+      aria-live="polite"
+    >
+      <div class="topo-resultado">
+        <h2 class="palavra" id="palavraResultado"></h2>
+        <p class="pronuncia" id="pronunciaResultado"></p>
+      </div>
+
+      <div class="secao-significado" id="secaoClasses">
+        <h3>Classe gramatical</h3>
+        <div id="classesResultado"></div>
+      </div>
+
+      <div class="secao-significado">
+        <h3>Significados</h3>
+        <div id="definicoesResultado"></div>
+      </div>
+
+      <div class="acoes">
+        <button
+          type="button"
+          class="botao-secundario"
+          id="botaoCopiar"
+        >
+          Copiar significado
+        </button>
+
+        <button
+          type="button"
+          class="botao-secundario"
+          id="botaoLimpar"
+        >
+          Limpar resultado
+        </button>
+      </div>
+    </section>
+
+    <section class="historico">
+      <h2>Pesquisas recentes</h2>
+
+      <div class="lista-historico" id="listaHistorico">
+        <p class="historico-vazio">
+          Suas palavras pesquisadas aparecerão aqui.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Mystic · Conhecimento em cada palavra</p>
+  </footer>
+
+  <script>
+    const formulario = document.getElementById("formularioPesquisa");
+    const campoPalavra = document.getElementById("campoPalavra");
+    const botaoPesquisar = document.getElementById("botaoPesquisar");
+    const mensagem = document.getElementById("mensagem");
+    const resultado = document.getElementById("resultado");
+
+    const palavraResultado = document.getElementById("palavraResultado");
+    const pronunciaResultado = document.getElementById("pronunciaResultado");
+    const classesResultado = document.getElementById("classesResultado");
+    const definicoesResultado = document.getElementById("definicoesResultado");
+
+    const listaHistorico = document.getElementById("listaHistorico");
+    const botaoCopiar = document.getElementById("botaoCopiar");
+    const botaoLimpar = document.getElementById("botaoLimpar");
+
+    let textoParaCopiar = "";
+    let historico = [];
+    let pesquisaAtual = 0;
+
+    function mostrarMensagem(texto, erro = false) {
+      mensagem.textContent = texto;
+      mensagem.className = erro
+        ? "mensagem erro"
+        : "mensagem";
+
+      mensagem.style.display = "block";
+    }
+
+    function esconderMensagem() {
+      mensagem.textContent = "";
+      mensagem.style.display = "none";
+      mensagem.className = "mensagem";
+    }
+
+    function criarElemento(tag, classe, texto) {
+      const elemento = document.createElement(tag);
+
+      if (classe) {
+        elemento.className = classe;
+      }
+
+      if (texto !== undefined) {
+        elemento.textContent = texto;
+      }
+
+      return elemento;
+    }
+
+    function adicionarHistorico(palavra) {
+      historico = [
+        palavra,
+        ...historico.filter(
+          item => item.toLowerCase() !== palavra.toLowerCase()
+        )
+      ].slice(0, 10);
+
+      renderizarHistorico();
+    }
+
+    function renderizarHistorico() {
+      listaHistorico.replaceChildren();
+
+      if (historico.length === 0) {
+        listaHistorico.appendChild(
+          criarElemento(
+            "p",
+            "historico-vazio",
+            "Suas palavras pesquisadas aparecerão aqui."
+          )
+        );
+
+        return;
+      }
+
+      historico.forEach(palavra => {
+        const botao = criarElemento(
+          "button",
+          "palavra-historico",
+          palavra
+        );
+
+        botao.type = "button";
+
+        botao.addEventListener("click", () => {
+          campoPalavra.value = palavra;
+          pesquisarPalavra(palavra);
+        });
+
+        listaHistorico.appendChild(botao);
+      });
+    }
+
+    function renderizarResultado(dados, palavraPesquisada) {
+      palavraResultado.textContent =
+        dados.word || palavraPesquisada;
+
+      pronunciaResultado.textContent = "";
+
+      if (dados.phonetic) {
+        pronunciaResultado.textContent =
+          "Pronúncia: " + dados.phonetic;
+      }
+
+      classesResultado.replaceChildren();
+      definicoesResultado.replaceChildren();
+
+      const significados = Array.isArray(dados.meanings)
+        ? dados.meanings
+        : [];
+
+      const classes = [
+        ...new Set(
+          significados
+            .map(item => item.partOfSpeech)
+            .filter(Boolean)
+        )
+      ];
+
+      if (classes.length > 0) {
+        classes.forEach(classe => {
+          classesResultado.appendChild(
+            criarElemento("span", "classe", classe)
+          );
+        });
+      } else {
+        classesResultado.appendChild(
+          criarElemento(
+            "p",
+            "definicao",
+            "Classe gramatical não informada."
+          )
+        );
+      }
+
+      let numero = 0;
+      const linhasCopiar = [
+        "Palavra: " + (dados.word || palavraPesquisada),
+        ""
+      ];
+
+      significados.forEach(grupo => {
+        const definicoes = Array.isArray(grupo.definitions)
+          ? grupo.definitions
+          : [];
+
+        definicoes.forEach(item => {
+          if (!item.definition) return;
+
+          numero++;
+
+          const paragrafo = criarElemento("p", "definicao");
+          const numeroElemento = criarElemento(
+            "span",
+            "numero-definicao",
+            numero + "."
+          );
+
+          paragrafo.appendChild(numeroElemento);
+          paragrafo.appendChild(
+            document.createTextNode(item.definition)
+          );
+
+          definicoesResultado.appendChild(paragrafo);
+
+          linhasCopiar.push(
+            numero + ". " + item.definition
+          );
+
+          if (item.example) {
+            const exemplo = criarElemento(
+              "p",
+              "exemplo",
+              "Exemplo: " + item.example
+            );
+
+            definicoesResultado.appendChild(exemplo);
+
+            linhasCopiar.push(
+              "Exemplo: " + item.example
+            );
+          }
+
+          linhasCopiar.push("");
+        });
+      });
+
+      if (numero === 0) {
+        definicoesResultado.appendChild(
+          criarElemento(
+            "p",
+            "definicao",
+            "Nenhuma definição foi encontrada para esta palavra."
+          )
+        );
+
+        linhasCopiar.push(
+          "Nenhuma definição encontrada."
+        );
+      }
+
+      textoParaCopiar = linhasCopiar.join("\n");
+
+      resultado.style.display = "block";
+
+      adicionarHistorico(
+        dados.word || palavraPesquisada
+      );
+    }
+
+    async function pesquisarPalavra(palavraInformada) {
+      const palavra = palavraInformada.trim();
+
+      if (!palavra) {
+        mostrarMensagem(
+          "Digite uma palavra antes de pesquisar.",
+          true
+        );
+
+        campoPalavra.focus();
+        return;
+      }
+
+      if (palavra.length > 100) {
+        mostrarMensagem(
+          "A palavra ou expressão é muito longa.",
+          true
+        );
+
+        return;
+      }
+
+      const numeroPesquisa = ++pesquisaAtual;
+
+      esconderMensagem();
+      resultado.style.display = "none";
+
+      botaoPesquisar.disabled = true;
+      botaoPesquisar.textContent = "Pesquisando...";
+
+      try {
+        const url =
+          "https://api.dictionaryapi.dev/api/v2/entries/pt/" +
+          encodeURIComponent(palavra);
+
+        const resposta = await fetch(url);
+
+        if (numeroPesquisa !== pesquisaAtual) {
+          return;
+        }
+
+        if (resposta.status === 404) {
+          mostrarMensagem(
+            'Não encontramos "' + palavra +
+            '". Verifique a escrita ou tente outra palavra.',
+            true
+          );
+
+          return;
+        }
+
+        if (!resposta.ok) {
+          throw new Error("Falha ao consultar o dicionário.");
+        }
+
+        const dados = await resposta.json();
+
+        if (numeroPesquisa !== pesquisaAtual) {
+          return;
+        }
+
+        if (!Array.isArray(dados) || dados.length === 0) {
+          mostrarMensagem(
+            "Nenhuma definição foi encontrada.",
+            true
+          );
+
+          return;
+        }
+
+        renderizarResultado(dados[0], palavra);
+      } catch (erro) {
+        if (numeroPesquisa !== pesquisaAtual) {
+          return;
+        }
+
+        mostrarMensagem(
+          "Não foi possível consultar o dicionário agora. " +
+          "Verifique sua conexão com a internet e tente novamente. " +
+          "Algumas palavras podem não estar disponíveis na API.",
+          true
+        );
+      } finally {
+        if (numeroPesquisa === pesquisaAtual) {
+          botaoPesquisar.disabled = false;
+          botaoPesquisar.textContent = "Pesquisar";
+        }
+      }
+    }
+
+    formulario.addEventListener("submit", evento => {
+      evento.preventDefault();
+      pesquisarPalavra(campoPalavra.value);
+    });
+
+    botaoLimpar.addEventListener("click", () => {
+      pesquisaAtual++;
+      resultado.style.display = "none";
+      esconderMensagem();
+
+      textoParaCopiar = "";
+      campoPalavra.focus();
+    });
+
+    botaoCopiar.addEventListener("click", async () => {
+      if (!textoParaCopiar) {
+        mostrarMensagem(
+          "Não há significado para copiar.",
+          true
+        );
+
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(textoParaCopiar);
+
+        mostrarMensagem(
+          "Significado copiado com sucesso!"
+        );
+      } catch (erro) {
+        mostrarMensagem(
+          "Não foi possível copiar automaticamente. " +
+          "Tente abrir a página em uma conexão segura (HTTPS).",
+          true
+        );
+      }
+    });
+  </script>
+
+</body>
+</html>
