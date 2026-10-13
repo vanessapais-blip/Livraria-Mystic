@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17120f">
+  <title>Favoritos | Mystic</title>
+
+  <style>
+    :root {
+      --bg: #17120f;
+      --panel: #211914;
+      --panel-2: #2a2019;
+      --gold: #d4ad62;
+      --gold-light: #f0d89d;
+      --text: #f4ead8;
+      --muted: #b9a995;
+      --line: rgba(212, 173, 98, .25);
+      --danger: #e39a8b;
+      --shadow: 0 14px 35px rgba(0,0,0,.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(
+          ellipse at top,
+          rgba(111, 72, 39, .18),
+          transparent 48%
+        ),
+        var(--bg);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* CABEÇALHO */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px clamp(16px, 4vw, 42px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(23, 18, 15, .94);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+
+    .brand-name {
+      font-size: 1.45rem;
+      letter-spacing: .12em;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .nav a {
+      padding: 9px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .95rem;
+      transition: .2s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--gold-light);
+      border-color: var(--line);
+      background: rgba(212,173,98,.08);
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 42px 0 64px;
+    }
+
+    .intro {
+      margin-bottom: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font-size: .76rem;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--gold-light);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: normal;
+    }
+
+    .subtitle {
+      max-width: 680px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* BARRA DE BUSCA */
+
+    .toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin: 24px 0;
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+    }
+
+    .search-wrap span {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: var(--gold);
+      pointer-events: none;
+    }
+
+    .search {
+      width: 100%;
+      padding: 13px 15px 13px 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      outline: none;
+      color: var(--text);
+      background: var(--panel);
+    }
+
+    .search:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(212,173,98,.1);
+    }
+
+    .count {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .count strong {
+      color: var(--gold-light);
+      font-weight: normal;
+    }
+
+    /* CARTÕES DE FAVORITOS */
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .favorite-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 230px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(
+        145deg,
+        rgba(42,32,25,.98),
+        rgba(31,23,18,.98)
+      );
+      box-shadow: var(--shadow);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .favorite-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(212,173,98,.55);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .category {
+      display: inline-block;
+      color: var(--gold);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .favorite-card h2 {
+      margin: 8px 0 10px;
+      color: var(--gold-light);
+      font-size: 1.3rem;
+      line-height: 1.3;
+      font-weight: normal;
+      overflow-wrap: anywhere;
+    }
+
+    .excerpt {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--gold-light);
+      background: rgba(212,173,98,.07);
+      cursor: pointer;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .btn:hover {
+      border-color: var(--gold);
+      background: rgba(212,173,98,.14);
+    }
+
+    .btn.remove {
+      color: var(--danger);
+      border-color: rgba(227,154,139,.25);
+    }
+
+    .btn.remove:hover {
+      border-color: var(--danger);
+      background: rgba(227,154,139,.08);
+    }
+
+    .heart {
+      border: 0;
+      padding: 0;
+      color: var(--gold);
+      background: transparent;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* ESTADO VAZIO */
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 48px 22px;
+      border: 1px dashed var(--line);
+      border-radius: 18px;
+      text-align: center;
+      background: rgba(33,25,20,.55);
+    }
+
+    .empty-icon {
+      margin-bottom: 12px;
+      font-size: 2.3rem;
+    }
+
+    .empty h2 {
+      margin: 0 0 10px;
+      color: var(--gold-light);
+      font-weight: normal;
+    }
+
+    .empty p {
+      max-width: 500px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .notice {
+      margin-top: 22px;
+      padding: 13px 15px;
+      border-left: 2px solid var(--gold);
+      color: var(--muted);
+      background: rgba(212,173,98,.05);
+      font-size: .9rem;
+      line-height: 1.55;
+    }
+
+    footer {
+      padding: 22px 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: .85rem;
+    }
+
+    /* RESPONSIVIDADE */
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 540px) {
+      main {
+        padding-top: 30px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .count {
+        text-align: right;
+      }
+
+      .brand-name {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="meu-caderno.html" aria-label="Mystic - página inicial">
+      <img
+        src="logo-mystic.jpg"
+        alt="Logo Mystic"
+        onerror="this.style.display='none'"
+      >
+      <span class="brand-name">MYSTIC</span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="meu-caderno.html">Meu Caderno</a>
+      <a class="active" href="favoritos.html" aria-current="page">
+        Favoritos
+      </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">Sua coleção pessoal</p>
+      <h1>Meus Favoritos</h1>
+      <p class="subtitle">
+        Guarde aqui os textos, ideias e anotações que deseja encontrar
+        facilmente depois.
+      </p>
+    </section>
+
+    <section class="toolbar" aria-label="Ferramentas dos favoritos">
+      <label class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input
+          id="searchInput"
+          class="search"
+          type="search"
+          placeholder="Buscar nos favoritos..."
+          aria-label="Buscar nos favoritos"
+        >
+      </label>
+
+      <div class="count" aria-live="polite">
+        <strong id="favoriteCount">0</strong> itens favoritos
+      </div>
+    </section>
+
+    <section id="favoritesGrid" class="grid" aria-live="polite"></section>
+
+    <div class="notice">
+      <strong>Importante:</strong> os favoritos são lidos do armazenamento
+      local deste navegador. Para que apareçam aqui, o arquivo principal do
+      Mystic precisa salvar os favoritos no mesmo formato e na mesma chave
+      do <code>localStorage</code>.
+    </div>
+  </main>
+
+  <footer>✦ Mystic · Seu espaço de inspiração ✦</footer>
+
+  <script>
+    /*
+      INTEGRAÇÃO:
+      Este arquivo tenta reconhecer alguns nomes comuns de chaves do
+      localStorage.
+
+      Se o seu meu-caderno.html usar outro nome ou formato, altere
+      STORAGE_KEYS para corresponder ao código da página principal.
+    */
+
+    const STORAGE_KEYS = [
+      "mystic-favoritos",
+      "mystic_favoritos",
+      "favoritos",
+      "favorites",
+      "mysticFavorites",
+      "meuCadernoFavoritos"
+    ];
+
+    const grid = document.getElementById("favoritesGrid");
+    const searchInput = document.getElementById("searchInput");
+    const favoriteCount = document.getElementById("favoriteCount");
+
+    function safeParse(value) {
+      try {
+        return JSON.parse(value);
+      } catch {
+        return null;
+      }
+    }
+
+    function getRawFavorites() {
+      for (const key of STORAGE_KEYS) {
+        const parsed = safeParse(localStorage.getItem(key));
+
+        if (Array.isArray(parsed)) {
+          return {
+            key,
+            items: parsed
+          };
+        }
+
+        if (parsed && Array.isArray(parsed.favoritos)) {
+          return {
+            key,
+            items: parsed.favoritos
+          };
+        }
+
+        if (parsed && Array.isArray(parsed.favorites)) {
+          return {
+            key,
+            items: parsed.favorites
+          };
+        }
+      }
+
+      /*
+        Também tenta encontrar anotações guardadas em uma lista
+        e marcadas com favorito: true, favorite: true ou favorited: true.
+      */
+
+      const possibleNotesKeys = [
+        "mystic-notas",
+        "notas",
+        "caderno",
+        "mystic-notes",
+        "notes"
+      ];
+
+      for (const key of possibleNotesKeys) {
+        const parsed = safeParse(localStorage.getItem(key));
+
+        if (Array.isArray(parsed)) {
+          const items = parsed.filter(item =>
+            item && (
+              item.favorito === true ||
+              item.favorite === true ||
+              item.favorited === true
+            )
+          );
+
+          if (items.length) {
+            return {
+              key,
+              items,
+              notesMode: true,
+              sourceItems: parsed
+            };
+          }
+        }
+      }
+
+      return {
+        key: STORAGE_KEYS[0],
+        items: []
+      };
+    }
+
+    let store = getRawFavorites();
+    let favorites = normalizeFavorites(store.items);
+
+    function normalizeFavorites(items) {
+      return items.map((item, index) => {
+        if (typeof item === "string") {
+          return {
+            id: item,
+            title: item,
+            content: "",
+            category: "Favorito",
+            original: item,
+            index
+          };
+        }
+
+        const note = item || {};
+
+        return {
+          id: String(
+            note.id ??
+            note.uuid ??
+            note.title ??
+            note.titulo ??
+            index
+          ),
+
+          title: String(
+            note.title ??
+            note.titulo ??
+            note.name ??
+            note.nome ??
+            "Sem título"
+          ),
+
+          content: String(
+            note.content ??
+            note.conteudo ??
+            note.text ??
+            note.texto ??
+            note.description ??
+            note.descricao ??
+            ""
+          ),
+
+          category: String(
+            note.category ??
+            note.categoria ??
+            note.type ??
+            note.tipo ??
+            "Anotação"
+          ),
+
+          original: item,
+          index
+        };
+      });
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function removeFavorite(id) {
+      const confirmed = confirm(
+        "Remover este item dos favoritos?"
+      );
+
+      if (!confirmed) return;
+
+      const target = favorites.find(item => item.id === id);
+
+      if (!target) return;
+
+      if (
+        store.notesMode &&
+        Array.isArray(store.sourceItems)
+      ) {
+        const source = store.sourceItems.map(item => {
+          const same = String(
+            item.id ??
+            item.uuid ??
+            item.title ??
+            item.titulo ??
+            ""
+          ) === target.id;
+
+          if (!same) return item;
+
+          if ("favorito" in item) {
+            return {
+              ...item,
+              favorito: false
+            };
+          }
+
+          if ("favorite" in item) {
+            return {
+              ...item,
+              favorite: false
+            };
+          }
+
+          if ("favorited" in item) {
+            return {
+              ...item,
+              favorited: false
+            };
+          }
+
+          return item;
+        });
+
+        localStorage.setItem(
+          store.key,
+          JSON.stringify(source)
+        );
+
+      } else {
+        const raw = safeParse(
+          localStorage.getItem(store.key)
+        );
+
+        if (Array.isArray(raw)) {
+          const updated = raw.filter((item, index) => {
+            const rawId = typeof item === "string"
+              ? item
+              : String(
+                  item?.id ??
+                  item?.uuid ??
+                  item?.title ??
+                  item?.titulo ??
+                  index
+                );
+
+            return rawId !== target.id;
+          });
+
+          localStorage.setItem(
+            store.key,
+            JSON.stringify(updated)
+          );
+
+        } else if (
+          raw &&
+          Array.isArray(raw.favoritos)
+        ) {
+          raw.favoritos = raw.favoritos.filter(
+            item => String(
+              item?.id ??
+              item?.title ??
+              item?.titulo ??
+              ""
+            ) !== target.id
+          );
+
+          localStorage.setItem(
+            store.key,
+            JSON.stringify(raw)
+          );
+
+        } else if (
+          raw &&
+          Array.isArray(raw.favorites)
+        ) {
+          raw.favorites = raw.favorites.filter(
+            item => String(
+              item?.id ??
+              item?.title ??
+              item?.titulo ??
+              ""
+            ) !== target.id
+          );
+
+          localStorage.setItem(
+            store.key,
+            JSON.stringify(raw)
+          );
+        }
+      }
+
+      store = getRawFavorites();
+      favorites = normalizeFavorites(store.items);
+
+      renderFavorites();
+    }
+
+    function openNote(item) {
+      /*
+        Envia o identificador e os dados da anotação para a página
+        principal. O meu-caderno.html precisa interpretar esses
+        parâmetros para abrir a anotação correspondente.
+      */
+
+      const params = new URLSearchParams();
+
+      params.set("id", item.id);
+      params.set("titulo", item.title);
+      params.set("conteudo", item.content);
+
+      window.location.href =
+        "meu-caderno.html?" + params.toString();
+    }
+
+    function renderFavorites() {
+      const query = searchInput.value
+        .trim()
+        .toLocaleLowerCase("pt-BR");
+
+      const filtered = favorites.filter(item =>
+        (
+          item.title + " " +
+          item.content + " " +
+          item.category
+        )
+          .toLocaleLowerCase("pt-BR")
+          .includes(query)
+      );
+
+      favoriteCount.textContent = String(favorites.length);
+
+      if (!filtered.length) {
+        const hasFavorites = favorites.length > 0;
+
+        grid.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">
+              ${hasFavorites ? "⌕" : "♡"}
+            </div>
+
+            <h2>
+              ${
+                hasFavorites
+                  ? "Nenhum resultado encontrado"
+                  : "Ainda não há favoritos"
+              }
+            </h2>
+
+            <p>
+              ${
+                hasFavorites
+                  ? "Tente buscar por outro termo."
+                  : "Quando você marcar anotações como favoritas no seu caderno, elas aparecerão aqui."
+              }
+            </p>
+
+            ${
+              hasFavorites
+                ? ""
+                : '<a class="btn" href="meu-caderno.html">Voltar ao Meu Caderno</a>'
+            }
+          </div>
+        `;
+
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => `
+        <article class="favorite-card">
+
+          <div class="card-top">
+            <span class="category">
+              ${escapeHTML(item.category)}
+            </span>
+
+            <button
+              class="heart"
+              type="button"
+              title="Remover dos favoritos"
+              aria-label="Remover ${escapeHTML(item.title)} dos favoritos"
+              data-remove="${escapeHTML(item.id)}"
+            >♥</button>
+          </div>
+
+          <h2>${escapeHTML(item.title)}</h2>
+
+          <p class="excerpt">${
+            escapeHTML(
+              item.content ||
+              "Este favorito não possui uma prévia de texto."
+            )
+          }</p>
+
+          <div class="card-actions">
+            <button
+              class="btn"
+              type="button"
+              data-open="${escapeHTML(item.id)}"
+            >Abrir no caderno</button>
+
+            <button
+              class="btn remove"
+              type="button"
+              data-remove="${escapeHTML(item.id)}"
+            >Remover</button>
+          </div>
+
+        </article>
+      `).join("");
+    }
+
+    grid.addEventListener("click", event => {
+      const removeButton = event.target.closest("[data-remove]");
+
+      if (removeButton) {
+        removeFavorite(removeButton.dataset.remove);
+        return;
+      }
+
+      const openButton = event.target.closest("[data-open]");
+
+      if (openButton) {
+        const item = favorites.find(
+          favorite => favorite.id === openButton.dataset.open
+        );
+
+        if (item) {
+          openNote(item);
+        }
+      }
+    });
+
+    searchInput.addEventListener(
+      "input",
+      renderFavorites
+    );
+
+    /*
+      Atualiza a página se os dados forem alterados em outra
+      aba do mesmo site.
+    */
+
+    window.addEventListener("storage", () => {
+      store = getRawFavorites();
+      favorites = normalizeFavorites(store.items);
+      renderFavorites();
+    });
+
+    renderFavorites();
+  </script>
+
+</body>
+</html>
