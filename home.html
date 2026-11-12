@@ -2,45 +2,41 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0b0907">
-  <meta name="description" content="Mystic — um espaço para ler, escrever e descobrir histórias.">
-  <title>Mystic — Início</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#100d09">
+  <meta name="description" content="Mystic — um espaço para leitura, escrita e criatividade.">
+
+  <title>Mystic | Início</title>
 
   <style>
     :root {
-      --bg: #0b0907;
-      --panel: #14100c;
-      --panel-light: #1d1710;
+      --background: #100d09;
+      --background-light: #17120d;
+      --card: #1b160f;
       --gold: #d6a251;
       --gold-light: #f4d18e;
-      --text: #f5ecdf;
-      --muted: #c0b3a2;
+      --text: #eee5d7;
+      --muted: #b9ac9b;
       --border: #493622;
       --header-height: 72px;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html {
-      min-height: 100%;
       scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
     }
 
     body {
       min-height: 100vh;
-      min-height: 100dvh;
-      overflow-x: hidden;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(ellipse at 90% 0%, #302316 0%, transparent 35%),
-        var(--bg);
+      background: var(--background);
       color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
     }
 
     body.menu-aberto {
@@ -49,72 +45,55 @@
 
     button,
     input,
-    a {
+    textarea {
       font: inherit;
-      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
     }
 
     a {
       color: inherit;
     }
 
-    button,
-    a,
-    input {
-      outline-offset: 3px;
-    }
-
-    button:focus-visible,
-    a:focus-visible,
-    input:focus-visible {
-      outline: 2px solid var(--gold-light);
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
     /* CABEÇALHO */
 
     header {
-      height: var(--header-height);
       position: sticky;
       top: 0;
-      z-index: 15;
+      z-index: 20;
+      width: 100%;
+      height: var(--header-height);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      padding: 0 26px;
-      background: rgba(11, 9, 7, .96);
-      border-bottom: 1px solid var(--border);
-      box-shadow: 0 5px 24px rgba(0, 0, 0, .2);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      padding: 0 35px;
+      background: rgba(16, 13, 9, .97);
+      border-bottom: 1px solid #493622;
+      backdrop-filter: blur(12px);
     }
 
     .lado-esquerdo {
       display: flex;
       align-items: center;
-      gap: 12px;
-      min-width: 0;
+      gap: 13px;
     }
 
     .botao-menu {
       width: 43px;
       height: 43px;
-      flex-shrink: 0;
       display: grid;
       place-items: center;
-      color: var(--text);
       background: transparent;
       border: 1px solid transparent;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background .2s, border-color .2s;
     }
 
     .botao-menu:hover {
-      background: var(--panel-light);
+      background: #211a12;
       border-color: var(--border);
     }
 
@@ -126,55 +105,49 @@
 
     .hamburguer span {
       display: block;
-      width: 21px;
+      width: 22px;
       height: 2px;
+      background: var(--gold-light);
       border-radius: 3px;
-      background: currentColor;
     }
 
     .logo {
       display: flex;
       align-items: center;
       gap: 9px;
-      min-width: 0;
       color: var(--gold-light);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 29px;
+      font-size: 27px;
       font-weight: bold;
-      letter-spacing: .5px;
       text-decoration: none;
+      letter-spacing: .3px;
     }
 
     .logo img {
-      width: 37px;
-      height: 37px;
-      object-fit: cover;
-      border: 1px solid rgba(214, 162, 81, .3);
-      border-radius: 9px;
-      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
     }
 
     .link-livros {
-      min-height: 42px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 10px 20px;
-      color: var(--text);
-      background: var(--panel-light);
-      border: 1px solid var(--border);
-      border-radius: 999px;
+      min-height: 40px;
+      padding: 9px 19px;
+      color: var(--gold-light);
+      background: #211a12;
+      border: 1px solid #5a4429;
+      border-radius: 8px;
       font-size: 14px;
       font-weight: bold;
       text-decoration: none;
-      white-space: nowrap;
-      transition: .2s;
+      transition: background .2s, border-color .2s;
     }
 
     .link-livros:hover {
-      color: var(--gold-light);
+      background: #302315;
       border-color: var(--gold);
-      background: #292015;
     }
 
     /* MENU LATERAL */
@@ -182,36 +155,36 @@
     .fundo-menu {
       position: fixed;
       inset: 0;
-      z-index: 19;
-      background: rgba(0, 0, 0, .72);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .25s, visibility .25s;
+      z-index: 29;
+      display: none;
+      background: rgba(0, 0, 0, .65);
+      backdrop-filter: blur(3px);
     }
 
     .fundo-menu.aberto {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
+      display: block;
     }
 
     .menu-lateral {
       position: fixed;
-      inset: 0 auto 0 0;
-      z-index: 20;
-      width: 285px;
-      max-width: 88vw;
-      max-width: 88dvw;
-      padding: 20px 16px;
-      padding-bottom: max(22px, env(safe-area-inset-bottom));
+      top: 0;
+      left: 0;
+      z-index: 30;
+      width: 290px;
+      max-width: 85vw;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
       overflow-y: auto;
       overscroll-behavior: contain;
-      background: #100d09;
-      border-right: 1px solid var(--border);
-      box-shadow: 12px 0 35px rgba(0, 0, 0, .2);
+      padding: 22px 15px;
+      background: #15100b;
+      border-right: 1px solid #5a4429;
+      box-shadow: 10px 0 35px rgba(0, 0, 0, .4);
       transform: translateX(-105%);
-      transition: transform .25s ease;
+      transition: transform .28s ease;
     }
 
     .menu-lateral.aberto {
@@ -222,10 +195,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 0 7px 18px;
-      margin-bottom: 13px;
-      border-bottom: 1px solid var(--border);
+      padding: 3px 5px 19px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #493622;
     }
 
     .topo-menu h2 {
@@ -235,46 +207,49 @@
     }
 
     .fechar-menu {
-      width: 40px;
-      height: 40px;
-      border: 1px solid transparent;
-      border-radius: 9px;
-      color: var(--text);
+      width: 35px;
+      height: 35px;
+      display: grid;
+      place-items: center;
+      color: var(--gold-light);
       background: transparent;
-      font-size: 28px;
-      cursor: pointer;
+      border: 1px solid #493622;
+      border-radius: 7px;
+      font-size: 23px;
     }
 
     .fechar-menu:hover {
-      background: var(--panel-light);
+      background: #302315;
     }
 
-    .menu-lateral a {
-      min-height: 45px;
+    .titulo-menu {
+      padding: 18px 10px 7px;
+      color: #a98b5c;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+    }
+
+    .menu-lateral > a {
+      min-height: 43px;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 10px 12px;
-      margin-bottom: 4px;
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 14px;
+      padding: 10px;
+      color: #d8cbbb;
       border: 1px solid transparent;
-      border-radius: 9px;
-      transition: background .2s, color .2s, border-color .2s, transform .2s;
+      border-radius: 8px;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background .2s, color .2s, border-color .2s;
     }
 
-    .menu-lateral a:hover {
-      color: var(--text);
-      background: var(--panel-light);
-      transform: translateX(2px);
-    }
-
-    .menu-lateral a.ativo {
+    .menu-lateral > a:hover,
+    .menu-lateral > a.ativo {
       color: var(--gold-light);
-      background: rgba(214, 162, 81, .12);
-      border-color: rgba(214, 162, 81, .25);
-      box-shadow: inset 3px 0 0 var(--gold);
+      background: #251c12;
+      border-color: #493622;
     }
 
     .icone-menu {
@@ -283,190 +258,169 @@
       flex-shrink: 0;
       display: grid;
       place-items: center;
+      color: var(--gold);
     }
 
     .icone-menu svg {
-      width: 21px;
-      height: 21px;
+      width: 20px;
+      height: 20px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.7;
+      stroke-width: 1.6;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
-    .titulo-menu {
-      margin: 22px 12px 10px;
-      color: var(--gold);
-      font-size: 10px;
-      font-weight: bold;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
     .nota-menu {
-      margin: 24px 5px 5px;
-      padding: 14px 12px;
+      margin-top: auto;
+      padding: 15px 11px 5px;
       color: var(--muted);
-      background: rgba(214, 162, 81, .06);
-      border: 1px solid rgba(214, 162, 81, .18);
-      border-radius: 10px;
       font-size: 12px;
       line-height: 1.7;
     }
 
     .nota-menu strong {
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       color: var(--gold-light);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 15px;
+      font-size: 16px;
     }
 
-    /* CONTEÚDO */
+    /* ESTRUTURA PRINCIPAL */
 
     .estrutura {
       min-height: calc(100vh - var(--header-height));
-      min-height: calc(100dvh - var(--header-height));
       display: flex;
       flex-direction: column;
     }
 
     main {
       width: 100%;
-      max-width: 1320px;
+      max-width: 1250px;
       flex: 1;
       margin: 0 auto;
-      padding: 34px 28px 65px;
+      padding: 38px 35px 65px;
     }
 
     /* BOAS-VINDAS */
 
     .boas-vindas {
       position: relative;
-      isolation: isolate;
-      min-height: 260px;
+      min-height: 255px;
       display: flex;
       align-items: center;
-      padding: 36px 40px;
-      margin-bottom: 30px;
       overflow: hidden;
+      padding: 38px 42px;
+      margin-bottom: 30px;
       background:
-        radial-gradient(ellipse at 85% 45%, rgba(214, 162, 81, .18), transparent 55%),
-        linear-gradient(125deg, #19130d, #100d09 75%);
-      border: 1px solid var(--border);
+        radial-gradient(ellipse at 85% 40%, rgba(214, 162, 81, .13), transparent 48%),
+        linear-gradient(115deg, #21190f, #15100b 70%);
+      border: 1px solid #5a4429;
       border-radius: 15px;
-      box-shadow: 0 14px 35px rgba(0, 0, 0, .18);
     }
 
     .boas-vindas::after {
-      content: "✦";
+      content: "✧";
       position: absolute;
-      z-index: -1;
-      right: 8%;
+      right: 35px;
       top: 50%;
-      transform: translateY(-50%);
-      color: rgba(244, 209, 142, .12);
+      color: rgba(214, 162, 81, .13);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(110px, 19vw, 200px);
+      font-size: 170px;
+      line-height: 1;
+      transform: translateY(-50%);
       pointer-events: none;
     }
 
     .conteudo-boas-vindas {
-      width: 100%;
+      position: relative;
+      z-index: 1;
       max-width: 680px;
     }
 
     .subtitulo {
-      margin-bottom: 12px;
+      margin-bottom: 13px;
       color: var(--gold);
       font-size: 11px;
       font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
-      line-height: 1.6;
     }
 
     .boas-vindas h1 {
-      margin-bottom: 14px;
+      margin-bottom: 13px;
       color: var(--gold-light);
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(32px, 4.2vw, 49px);
+      font-size: clamp(32px, 5vw, 47px);
+      font-weight: normal;
       line-height: 1.2;
-      overflow-wrap: anywhere;
     }
 
     .boas-vindas p {
-      max-width: 560px;
-      color: #d5cabb;
+      max-width: 570px;
+      color: #c9bdad;
       font-size: 15px;
       line-height: 1.8;
     }
 
     .linha-dourada {
+      width: 65px;
+      height: 2px;
       display: block;
-      width: 62px;
-      height: 3px;
-      margin-top: 22px;
-      border-radius: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      margin-top: 20px;
+      background: var(--gold);
     }
 
     /* PESQUISA */
 
     .area-pesquisa {
-      margin-bottom: 36px;
+      margin-bottom: 35px;
     }
 
     .pesquisa {
-      display: block;
       width: 100%;
-      min-width: 0;
       min-height: 52px;
       padding: 14px 17px;
       color: var(--text);
-      background: rgba(20, 16, 12, .92);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 15px;
+      background: #19130d;
+      border: 1px solid #493622;
+      border-radius: 9px;
       outline: none;
-      appearance: none;
-      -webkit-appearance: none;
+      font-size: 15px;
       transition: border-color .2s, box-shadow .2s;
     }
 
     .pesquisa::placeholder {
-      color: #b9ac9b;
-      opacity: .9;
+      color: #958675;
     }
 
     .pesquisa:focus {
-      border-color: var(--gold-light);
-      box-shadow: 0 0 0 3px rgba(214, 162, 81, .12);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(214, 162, 81, .1);
     }
 
-    /* TÍTULOS DAS SEÇÕES */
+    /* TÍTULOS DE SEÇÃO */
 
     .cabecalho-secao {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 17px;
       margin-bottom: 20px;
     }
 
     .secao-titulo {
+      flex-shrink: 0;
       color: var(--gold-light);
       font-family: Georgia, "Times New Roman", serif;
       font-size: 27px;
       font-weight: normal;
-      line-height: 1.35;
     }
 
     .linha-secao {
       height: 1px;
-      min-width: 12px;
       flex: 1;
-      background: linear-gradient(90deg, rgba(214, 162, 81, .65), transparent);
+      background: linear-gradient(90deg, #71532e, transparent);
     }
 
     /* LIVROS */
@@ -479,26 +433,73 @@
 
     .card {
       min-width: 0;
-      min-height: 375px;
+      min-height: 370px;
       display: flex;
       flex-direction: column;
       padding: 18px;
-      background: linear-gradient(145deg, #1c1711, #120f0b);
-      border: 1px solid #493a29;
-      border-radius: 13px;
-      box-shadow: 0 10px 28px rgba(0, 0, 0, .2);
+      background: linear-gradient(145deg, #1e1811, #15100b);
+      border: 1px solid #493622;
+      border-radius: 11px;
       transition: transform .2s, border-color .2s, box-shadow .2s;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(214, 162, 81, .65);
-      box-shadow: 0 15px 32px rgba(0, 0, 0, .28);
+      transform: translateY(-3px);
+      border-color: #8a6b37;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, .2);
     }
 
     .capa {
-      height: 172px;
+      height: 175px;
       flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      margin-bottom: 17px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at center, rgba(214, 162, 81, .13), transparent 72%),
+        #100d09;
+      border: 1px solid #392b1c;
+      border-radius: 10px;
+    }
+
+    .capa svg {
+      width: 68px;
+      height: 68px;
+      fill: none;
+      stroke: #d0a45b;
+      stroke-width: 1.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .capa-principal {
+      background:
+        radial-gradient(ellipse at center, rgba(65, 75, 115, .32), transparent 75%),
+        #111019;
+    }
+
+    .capa-principal svg {
+      stroke: var(--gold-light);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: normal;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .card p {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+          flex-shrink: 0;
       display: grid;
       place-items: center;
       margin-bottom: 17px;
@@ -997,8 +998,7 @@
         padding: 17px 12px;
       }
     }
-
-    @media (max-width: 360px) {
+        @media (max-width: 360px) {
       header {
         padding: 0 7px;
       }
@@ -1048,6 +1048,71 @@
         transition-duration: .01ms !important;
       }
     }
+
+    /* PAINEL DO DESENVOLVEDOR */
+    .acesso-dev {
+      margin: 12px 0 0;
+      padding: 8px 13px;
+      color: var(--gold-light);
+      background: transparent;
+      border: 1px solid rgba(214,162,81,.35);
+      border-radius: 7px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .acesso-dev:hover { background: rgba(214,162,81,.1); border-color: var(--gold); }
+    .dev-overlay {
+      position: fixed; inset: 0; z-index: 100;
+      display: none; align-items: center; justify-content: center;
+      padding: 16px; background: rgba(0,0,0,.82);
+      backdrop-filter: blur(8px);
+    }
+    .dev-overlay.aberto { display: flex; }
+    .dev-painel {
+      width: min(900px, 100%); max-height: min(92dvh, 900px);
+      overflow: auto; padding: 24px;
+      color: var(--text); background: #120f0b;
+      border: 1px solid var(--gold); border-radius: 15px;
+      box-shadow: 0 20px 70px #000;
+    }
+    .dev-topo { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
+    .dev-topo h2 { color:var(--gold-light); font: bold 25px Georgia,serif; }
+    .dev-fechar { color:var(--text); background:transparent; border:1px solid var(--border); border-radius:8px; padding:7px 12px; cursor:pointer; }
+    .dev-aviso { padding:11px 13px; margin-bottom:18px; color:#e8d6b7; background:rgba(214,162,81,.08); border:1px solid rgba(214,162,81,.25); border-radius:8px; font-size:12px; line-height:1.6; }
+    .dev-grade { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; }
+    .dev-bloco { min-width:0; padding:16px; background:#1b160f; border:1px solid #493622; border-radius:10px; }
+    .dev-bloco h3 { margin-bottom:12px; color:var(--gold-light); font:20px Georgia,serif; }
+    .dev-bloco label { display:block; margin:10px 0 5px; color:var(--muted); font-size:12px; }
+    .dev-bloco input,.dev-bloco textarea {
+      width:100%; min-width:0; padding:10px; color:var(--text);
+      background:#0b0907; border:1px solid #59452d; border-radius:7px;
+      font:14px Arial,sans-serif;
+    }
+    .dev-bloco textarea { min-height:65px; resize:vertical; }
+    .dev-salvar {
+      margin-top:11px; padding:10px 13px; color:#171109;
+      background:linear-gradient(110deg,#d6a251,#f4d18e);
+      border:0; border-radius:7px; font-weight:bold; cursor:pointer;
+    }
+    .dev-lista { margin-top:12px; display:grid; gap:7px; }
+    .dev-item { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:9px; background:#100d09; border:1px solid #392b1c; border-radius:7px; font-size:12px; }
+    .dev-item span { overflow-wrap:anywhere; }
+    .dev-acoes { display:flex; gap:5px; flex-shrink:0; }
+    .dev-acoes button { padding:6px 8px; color:var(--gold-light); background:#211a12; border:1px solid #5a4429; border-radius:5px; cursor:pointer; font-size:11px; }
+    .dev-login { max-width:360px; margin:auto; }
+    .dev-login input { width:100%; margin:12px 0; padding:12px; color:var(--text); background:#0b0907; border:1px solid #59452d; border-radius:7px; }
+    .dev-login p { color:var(--muted); font-size:13px; line-height:1.6; }
+    .conteudo-dinamico { margin:0 0 28px; padding:17px; background:linear-gradient(135deg,#21190f,#120f0b); border:1px solid var(--border); border-radius:11px; }
+    .conteudo-dinamico h2 { margin-bottom:8px; color:var(--gold-light); font:23px Georgia,serif; }
+    .conteudo-dinamico p { color:var(--muted); font-size:14px; line-height:1.7; white-space:pre-wrap; }
+    .conteudo-dinamico .selo { display:inline-block; margin-bottom:8px; color:var(--gold); font-size:10px; font-weight:bold; letter-spacing:1.4px; text-transform:uppercase; }
+    .preco-promocional { margin-top:8px; color:var(--gold-light) !important; font-weight:bold; }
+    @media(max-width:650px) {
+      .dev-grade { grid-template-columns:1fr; }
+      .dev-painel { padding:16px; }
+      .dev-topo h2 { font-size:21px; }
+    }
+
   </style>
 </head>
 
@@ -1384,7 +1449,7 @@
     <!-- O SOBRE NÓS FICA NO MENU LATERAL, NÃO NO RODAPÉ -->
 
     <footer>
-      <span class="texto-rodape">Mystic · Um lugar para sentir, escrever e descobrir.</span>
+      <div><span class="texto-rodape">Mystic · Um lugar para sentir, escrever e descobrir.</span><br><button class="acesso-dev" id="devAcesso" type="button">Acesso do desenvolvedor</button></div>
     </footer>
   </div>
 
@@ -1433,7 +1498,7 @@
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M21 11.5a8.5 8.5 0 0 1-9 8.5 9.7 9.7 0 0 1-4-.9L3 21l1.7-4.2A8.1 8.1 0 0 1 3 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z"></path>
       </svg>
-    </a>
+          </a>
 
     <button
       class="botao-flutuante botao-criar"
@@ -1445,6 +1510,79 @@
       title="Escrever"
     >+</button>
   </div>
+
+
+  <!-- ACESSO DO DESENVOLVEDOR -->
+  <section class="dev-overlay" id="devOverlay" aria-hidden="true">
+    <div class="dev-painel" role="dialog" aria-modal="true" aria-labelledby="devTitulo">
+      <div class="dev-topo">
+        <h2 id="devTitulo">Painel da Mystic</h2>
+        <button class="dev-fechar" id="devFechar" type="button">Fechar ×</button>
+      </div>
+      <div id="devLogin" class="dev-login">
+        <p>Área de gerenciamento do conteúdo da página inicial.</p>
+        <label for="devPin">PIN de acesso</label>
+        <input id="devPin" type="password" inputmode="numeric" autocomplete="off" placeholder="Digite o PIN">
+        <button class="dev-salvar" id="devEntrar" type="button">Acessar painel</button>
+        <p id="devErro" role="status" style="margin-top:9px;color:#ff9999"></p>
+      </div>
+      <div id="devConteudo" hidden>
+        <p class="dev-aviso">As alterações são salvas neste navegador e nesta origem. Para que todos os visitantes vejam as mesmas atualizações, a Mystic precisará de um banco de dados/servidor. O PIN deste painel fica no código do navegador e não protege uma administração real.</p>
+        <div class="dev-grade">
+          <section class="dev-bloco">
+            <h3>Apresentação da página</h3>
+            <form id="formHero">
+              <label for="heroSub">Texto pequeno</label><input id="heroSub" maxlength="90">
+              <label for="heroTitulo">Título principal</label><input id="heroTitulo" maxlength="100">
+              <label for="heroTexto">Descrição</label><textarea id="heroTexto" maxlength="500"></textarea>
+              <button class="dev-salvar">Salvar apresentação</button>
+            </form>
+          </section>
+          <section class="dev-bloco">
+            <h3>Aviso em destaque</h3>
+            <form id="formAviso">
+              <label for="avisoTitulo">Título do aviso</label><input id="avisoTitulo" maxlength="80" required>
+              <label for="avisoTexto">Mensagem</label><textarea id="avisoTexto" maxlength="400" required></textarea>
+              <button class="dev-salvar">Publicar aviso</button>
+            </form>
+            <div class="dev-lista" id="listaAvisos"></div>
+          </section>
+          <section class="dev-bloco">
+            <h3>Promoções e descontos</h3>
+            <form id="formPromo">
+              <label for="promoTitulo">Nome da promoção</label><input id="promoTitulo" maxlength="80" required>
+              <label for="promoTexto">Descrição</label><textarea id="promoTexto" maxlength="300"></textarea>
+              <label for="promoDesconto">Desconto (ex.: 20% OFF)</label><input id="promoDesconto" maxlength="30" placeholder="20% OFF">
+              <button class="dev-salvar">Salvar promoção</button>
+            </form>
+            <div class="dev-lista" id="listaPromos"></div>
+          </section>
+          <section class="dev-bloco">
+            <h3>Eventos</h3>
+            <form id="formEvento">
+              <label for="eventoTitulo">Nome do evento</label><input id="eventoTitulo" maxlength="80" required>
+              <label for="eventoData">Data e horário</label><input id="eventoData" maxlength="70" placeholder="Ex.: 20/12 às 19h">
+              <label for="eventoTexto">Descrição</label><textarea id="eventoTexto" maxlength="300"></textarea>
+              <button class="dev-salvar">Publicar evento</button>
+            </form>
+            <div class="dev-lista" id="listaEventos"></div>
+          </section>
+          <section class="dev-bloco" style="grid-column:1/-1">
+            <h3>Adicionar livro à vitrine</h3>
+            <form id="formLivro">
+              <label for="livroTitulo">Título</label><input id="livroTitulo" maxlength="100" required>
+              <label for="livroAutor">Autor ou informação</label><input id="livroAutor" maxlength="100" required>
+              <label for="livroDescricao">Descrição curta</label><textarea id="livroDescricao" maxlength="300"></textarea>
+              <label for="livroLink">Link da página do livro (opcional)</label><input id="livroLink" maxlength="250" placeholder="livro.html">
+              <button class="dev-salvar" id="livroSalvar">Adicionar livro</button>
+              <button class="dev-fechar" id="livroCancelar" type="button" hidden>Cancelar edição</button>
+            </form>
+            <div class="dev-lista" id="listaLivrosDev"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
     // MENU LATERAL
@@ -1564,23 +1702,18 @@
         .replace(/[\u0300-\u036f]/g, "");
     }
 
-    pesquisaLivros.addEventListener("input", function() {
+    function atualizarPesquisa() {
       const termo = normalizarTexto(pesquisaLivros.value.trim());
       let encontrados = 0;
-
-      cardsLivros.forEach(function(card) {
-        const texto = normalizarTexto(
-          (card.dataset.titulo || "") + " " + card.textContent
-        );
-
+      document.querySelectorAll("#listaLivros .card").forEach(function(card) {
+        const texto = normalizarTexto((card.dataset.titulo || "") + " " + card.textContent);
         const corresponde = texto.includes(termo);
         card.style.display = corresponde ? "flex" : "none";
-
         if (corresponde) encontrados++;
       });
-
       semResultados.hidden = encontrados > 0;
-    });
+    }
+    pesquisaLivros.addEventListener("input", atualizarPesquisa);
 
     // SAUDAÇÃO PERSONALIZADA, SE HOUVER SESSÃO SALVA
 
@@ -1606,6 +1739,203 @@
     } catch (erro) {
       console.warn("Não foi possível carregar a saudação.");
     }
+  </script>
+
+  <script>
+    // PAINEL DO DESENVOLVEDOR — conteúdo local da página inicial
+    (function() {
+      const PIN_DEV = "2354";
+      const KEYS = {
+        hero: "mysticHomeHero",
+        avisos: "mysticHomeAvisos",
+        promos: "mysticHomePromos",
+        eventos: "mysticHomeEventos",
+        livros: "mysticHomeLivros"
+      };
+      const $ = id => document.getElementById(id);
+      const ler = (key, fallback) => {
+        try { const value = localStorage.getItem(key); return value ? JSON.parse(value) : fallback; }
+        catch { return fallback; }
+      };
+      const salvar = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+      const overlay = $("devOverlay");
+      let editandoLivro = null;
+
+      function abrirPainel() {
+        overlay.classList.add("aberto");
+        overlay.setAttribute("aria-hidden", "false");
+        $("devLogin").hidden = false;
+        $("devConteudo").hidden = true;
+        $("devPin").value = "";
+        $("devErro").textContent = "";
+        $("devPin").focus();
+      }
+      function fecharPainel() {
+        overlay.classList.remove("aberto");
+        overlay.setAttribute("aria-hidden", "true");
+      }
+      $("devAcesso").addEventListener("click", abrirPainel);
+      $("devFechar").addEventListener("click", fecharPainel);
+      overlay.addEventListener("click", e => { if (e.target === overlay) fecharPainel(); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape" && overlay.classList.contains("aberto")) fecharPainel(); });
+
+      function entrar() {
+        if ($("devPin").value !== PIN_DEV) { $("devErro").textContent = "PIN incorreto."; return; }
+        $("devLogin").hidden = true;
+        $("devConteudo").hidden = false;
+        carregarFormHero();
+        renderTudo();
+      }
+      $("devEntrar").addEventListener("click", entrar);
+      $("devPin").addEventListener("keydown", e => { if (e.key === "Enter") entrar(); });
+
+      function carregarFormHero() {
+        const hero = ler(KEYS.hero, null);
+        $("heroSub").value = hero?.sub || document.querySelector(".conteudo-boas-vindas .subtitulo")?.textContent.trim() || "";
+        $("heroTitulo").value = hero?.titulo || $("tituloBoasVindas").textContent;
+        $("heroTexto").value = hero?.texto || document.querySelector(".conteudo-boas-vindas > p")?.textContent.trim() || "";
+      }
+      $("formHero").addEventListener("submit", e => {
+        e.preventDefault();
+        const data = { sub: $("heroSub").value.trim(), titulo: $("heroTitulo").value.trim(), texto: $("heroTexto").value.trim() };
+        salvar(KEYS.hero, data); aplicarHero(data); alert("Apresentação atualizada!");
+      });
+      function aplicarHero(data) {
+        document.querySelector(".conteudo-boas-vindas .subtitulo").textContent = data.sub;
+        $("tituloBoasVindas").textContent = data.titulo;
+        document.querySelector(".conteudo-boas-vindas > p").textContent = data.texto;
+      }
+
+      function adicionarCard(container, classe, titulo, texto, selo, detalhe) {
+        const section = document.createElement("section");
+        section.className = "conteudo-dinamico " + classe;
+        const tag = document.createElement("span"); tag.className = "selo"; tag.textContent = selo;
+        const h = document.createElement("h2"); h.textContent = titulo;
+        const p = document.createElement("p"); p.textContent = texto;
+        section.append(tag, h, p);
+        if (detalhe) { const d = document.createElement("p"); d.className = "preco-promocional"; d.textContent = detalhe; section.append(d); }
+        container.append(section);
+      }
+      function renderConteudo() {
+        document.querySelectorAll(".conteudo-dinamico").forEach(el => el.remove());
+        const anchor = document.querySelector(".boas-vindas");
+        const avisos = ler(KEYS.avisos, []);
+        const promos = ler(KEYS.promos, []);
+        const eventos = ler(KEYS.eventos, []);
+        const frag = document.createDocumentFragment();
+        avisos.forEach(x => adicionarCard(frag, "bloco-aviso", x.titulo, x.texto, "Aviso da Mystic"));
+        promos.forEach(x => adicionarCard(frag, "bloco-promo", x.titulo, x.texto, "Promoção", x.desconto));
+        eventos.forEach(x => adicionarCard(frag, "bloco-evento", x.titulo, x.texto, "Evento · " + (x.data || "Data a confirmar")));
+        anchor.after(frag);
+      }
+
+      function renderLista(key, id, label) {
+        const list = $(id); list.replaceChildren();
+        const items = ler(key, []);
+        items.forEach((item, index) => {
+          const row = document.createElement("div"); row.className = "dev-item";
+          const name = document.createElement("span"); name.textContent = item.titulo;
+          const actions = document.createElement("div"); actions.className = "dev-acoes";
+          const del = document.createElement("button"); del.type = "button"; del.textContent = "Excluir";
+          del.addEventListener("click", () => {
+            if (!confirm("Excluir este " + label + "?")) return;
+            const next = ler(key, []); next.splice(index, 1); salvar(key, next); renderTudo();
+          });
+          actions.append(del); row.append(name, actions); list.append(row);
+        });
+      }
+      function ligarFormulario(formId, key, fields, listId, label) {
+        $(formId).addEventListener("submit", e => {
+          e.preventDefault();
+          const item = {};
+          fields.forEach(([field, prop]) => item[prop] = $(field).value.trim());
+          const items = ler(key, []); items.unshift(item); salvar(key, items);
+          $(formId).reset(); renderTudo();
+        });
+      }
+      ligarFormulario("formAviso", KEYS.avisos, [["avisoTitulo","titulo"],["avisoTexto","texto"]], "listaAvisos", "aviso");
+      ligarFormulario("formPromo", KEYS.promos, [["promoTitulo","titulo"],["promoTexto","texto"],["promoDesconto","desconto"]], "listaPromos", "promoção");
+      ligarFormulario("formEvento", KEYS.eventos, [["eventoTitulo","titulo"],["eventoData","data"],["eventoTexto","texto"]], "listaEventos", "evento");
+
+      function renderLivros() {
+        const list = $("listaLivrosDev"); list.replaceChildren();
+        const livros = ler(KEYS.livros, []);
+        livros.forEach((livro, index) => {
+          const row = document.createElement("div"); row.className = "dev-item";
+          const name = document.createElement("span"); name.textContent = livro.titulo + " — " + livro.autor;
+          const actions = document.createElement("div"); actions.className = "dev-acoes";
+          const edit = document.createElement("button"); edit.type = "button"; edit.textContent = "Editar";
+          edit.addEventListener("click", () => {
+            editandoLivro = index;
+            $("livroTitulo").value = livro.titulo; $("livroAutor").value = livro.autor;
+            $("livroDescricao").value = livro.descricao; $("livroLink").value = livro.link;
+            $("livroSalvar").textContent = "Salvar edição"; $("livroCancelar").hidden = false;
+            $("livroTitulo").focus();
+          });
+          const del = document.createElement("button"); del.type = "button"; del.textContent = "Excluir";
+          del.addEventListener("click", () => {
+            if (!confirm("Excluir este livro da vitrine?")) return;
+            const next = ler(KEYS.livros, []); next.splice(index, 1); salvar(KEYS.livros, next); renderTudo();
+          });
+          actions.append(edit, del); row.append(name, actions); list.append(row);
+        });
+      }
+      $("formLivro").addEventListener("submit", e => {
+        e.preventDefault();
+        const livro = {
+          titulo: $("livroTitulo").value.trim(), autor: $("livroAutor").value.trim(),
+          descricao: $("livroDescricao").value.trim(), link: $("livroLink").value.trim() || "livro.html"
+        };
+        const livros = ler(KEYS.livros, []);
+        if (editandoLivro === null) livros.push(livro); else livros[editandoLivro] = livro;
+        salvar(KEYS.livros, livros); limparEdicaoLivro(); renderTudo();
+      });
+      function limparEdicaoLivro() {
+        editandoLivro = null; $("formLivro").reset();
+        $("livroSalvar").textContent = "Adicionar livro"; $("livroCancelar").hidden = true;
+      }
+      $("livroCancelar").addEventListener("click", limparEdicaoLivro);
+
+      function renderLivrosNaVitrine() {
+        document.querySelectorAll(".card[data-mystic-admin='true']").forEach(el => el.remove());
+        const list = $("listaLivros");
+        ler(KEYS.livros, []).forEach(livro => {
+          const card = document.createElement("article"); card.className = "card"; card.dataset.mysticAdmin = "true";
+          card.dataset.titulo = (livro.titulo + " " + livro.autor + " " + livro.descricao).toLocaleLowerCase("pt-BR");
+          const cover = document.createElement("div"); cover.className = "capa";
+          const symbol = document.createElement("span"); symbol.textContent = "✦"; symbol.style.cssText = "font-size:48px;color:var(--gold-light)";
+          cover.append(symbol);
+          const h = document.createElement("h3"); h.textContent = livro.titulo;
+          const p = document.createElement("p"); p.textContent = livro.autor + (livro.descricao ? " · " + livro.descricao : "");
+          const a = document.createElement("a"); a.className = "botao"; a.textContent = "Ver livro";
+          a.href = /^(https?:|\/|[a-z0-9_-]+\.html)/i.test(livro.link) ? livro.link : "livro.html";
+          card.append(cover, h, p, a); list.append(card);
+        });
+        atualizarPesquisa();
+      }
+      function atualizarPesquisa() {
+        const term = normalizarTexto(pesquisaLivros.value.trim());
+        let count = 0;
+        document.querySelectorAll("#listaLivros .card").forEach(card => {
+          const text = normalizarTexto((card.dataset.titulo || "") + " " + card.textContent);
+          const match = text.includes(term); card.style.display = match ? "flex" : "none";
+          if (match) count++;
+        });
+        semResultados.hidden = count > 0;
+      }
+      function renderTudo() {
+        renderConteudo();
+        renderLista(KEYS.avisos, "listaAvisos", "aviso");
+        renderLista(KEYS.promos, "listaPromos", "promoção");
+        renderLista(KEYS.eventos, "listaEventos", "evento");
+        renderLivros(); renderLivrosNaVitrine();
+      }
+      const heroSalvo = ler(KEYS.hero, null);
+      if (heroSalvo) aplicarHero(heroSalvo);
+      renderConteudo();
+      renderLivrosNaVitrine();
+    })();
+
   </script>
 </body>
 </html>
