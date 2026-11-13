@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Dicionário | Mystic</title>
-  <meta name="description" content="Explore palavras, significados, exemplos e pronúncias em diversos idiomas no Dicionário Mystic.">
+  <meta name="description" content="Explore palavras, significados, exemplos e pronúncias em português e inglês no Dicionário Mystic.">
   <meta name="theme-color" content="#100e0b">
 
   <link rel="stylesheet" href="css/mystic.css">
@@ -441,6 +441,21 @@
       margin-bottom: 3px;
     }
 
+    .definition-translation {
+      margin-top: 9px;
+      padding: 9px 12px;
+      border-left: 2px solid var(--gold);
+      background: rgba(214, 181, 109, 0.07);
+      color: var(--gold-light);
+      font-size: 14px;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .definition-translation strong {
+      color: var(--gold);
+      font-weight: normal;
+    }
+
     .word-list {
       margin-top: 15px;
       font-size: 14px;
@@ -645,7 +660,7 @@
       <h1>Dicionário Mystic</h1>
       <p>
         Descubra significados, explore novas palavras e amplie
-        seu conhecimento em diversos idiomas.
+        seu conhecimento em português e inglês.
       </p>
       <div class="ornament" aria-hidden="true">✧ ─ ✦ ─ ✧</div>
     </section>
@@ -677,24 +692,8 @@
           <label class="language-control" for="languageSelect">
             Idioma:
             <select id="languageSelect" class="language-select">
-              <option value="auto">Detectar automaticamente</option>
-              <option value="pt-BR">Português (Brasil)</option>
+              <option value="pt-BR" selected>Português (Brasil)</option>
               <option value="en">Inglês</option>
-              <option value="es">Espanhol</option>
-              <option value="fr">Francês</option>
-              <option value="de">Alemão</option>
-              <option value="it">Italiano</option>
-              <option value="ru">Russo</option>
-              <option value="ar">Árabe</option>
-              <option value="hi">Hindi</option>
-              <option value="ja">Japonês</option>
-              <option value="ko">Coreano</option>
-              <option value="zh">Chinês</option>
-              <option value="tr">Turco</option>
-              <option value="nl">Holandês</option>
-              <option value="sv">Sueco</option>
-              <option value="pl">Polonês</option>
-              <option value="uk">Ucraniano</option>
             </select>
           </label>
 
@@ -711,8 +710,6 @@
         <button class="suggestion" type="button" data-word="sabedoria" data-language="pt-BR">Sabedoria</button>
         <button class="suggestion" type="button" data-word="love" data-language="en">Love</button>
         <button class="suggestion" type="button" data-word="dream" data-language="en">Dream</button>
-        <button class="suggestion" type="button" data-word="amour" data-language="fr">Amour</button>
-        <button class="suggestion" type="button" data-word="amor" data-language="es">Amor (ES)</button>
       </div>
     </section>
 
@@ -750,7 +747,8 @@
     <p>Uma palavra pode abrir um universo.</p>
     <p class="footer-note">
       As definições são fornecidas por um serviço externo de dicionário.
-      A disponibilidade pode variar conforme o idioma e a palavra.
+      As traduções são fornecidas por um serviço externo de tradução.
+      A disponibilidade pode variar.
     </p>
   </footer>
 
@@ -766,37 +764,19 @@
     const historyList = document.getElementById("historyList");
     const clearHistoryButton = document.getElementById("clearHistory");
 
-    const API_BASE = "https://api.dictionaryapi.dev/api/v2/entries";
+    const DICTIONARY_API =
+      "https://api.dictionaryapi.dev/api/v2/entries/en";
+
+    const TRANSLATION_API =
+      "https://api.mymemory.translated.net/get";
+
     const HISTORY_KEY = "mystic_dictionary_history_v2";
     const MAX_HISTORY = 8;
 
     const LANGUAGES = {
       "pt-BR": "Português (Brasil)",
-      "en": "Inglês",
-      "es": "Espanhol",
-      "fr": "Francês",
-      "de": "Alemão",
-      "it": "Italiano",
-      "ru": "Russo",
-      "ar": "Árabe",
-      "hi": "Hindi",
-      "ja": "Japonês",
-      "ko": "Coreano",
-      "zh": "Chinês",
-      "tr": "Turco",
-      "nl": "Holandês",
-      "sv": "Sueco",
-      "pl": "Polonês",
-      "uk": "Ucraniano"
+      "en": "Inglês"
     };
-
-    // Idiomas que a API será consultada ao tentar detectar automaticamente.
-    // A ordem é apenas uma prioridade de busca, não uma identificação garantida.
-    const AUTO_LANGUAGES = [
-      "pt-BR", "en", "es", "fr", "de", "it",
-      "nl", "tr", "pl", "sv", "ru", "uk",
-      "ar", "hi", "ja", "ko", "zh"
-    ];
 
     let requestNumber = 0;
     let history = loadHistory();
@@ -815,14 +795,19 @@
 
     function saveHistory() {
       try {
-        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+        localStorage.setItem(
+          HISTORY_KEY,
+          JSON.stringify(history)
+        );
       } catch {
         // O dicionário continua funcionando sem histórico.
       }
     }
 
     function showMessage(message, type = "") {
-      statusMessage.className = "message" + (type ? " " + type : "");
+      statusMessage.className =
+        "message" + (type ? " " + type : "");
+
       statusMessage.textContent = message;
       statusMessage.hidden = false;
     }
@@ -834,7 +819,11 @@
 
     function setLoading(loading) {
       searchButton.disabled = loading;
-      searchButton.textContent = loading ? "Buscando..." : "Pesquisar";
+
+      searchButton.textContent = loading
+        ? "Buscando..."
+        : "Pesquisar";
+
       input.setAttribute("aria-busy", String(loading));
     }
 
@@ -843,10 +832,13 @@
 
       if (history.length === 0) {
         const empty = document.createElement("p");
+
         empty.className = "empty-history";
         empty.textContent = "Suas pesquisas aparecerão aqui.";
+
         historyList.appendChild(empty);
         clearHistoryButton.hidden = true;
+
         return;
       }
 
@@ -854,11 +846,15 @@
 
       history.forEach(item => {
         const button = document.createElement("button");
+
         button.type = "button";
         button.className = "history-item";
 
-        const languageName = LANGUAGES[item.language] || item.language;
-        button.textContent = item.word + " · " + languageName;
+        const languageName =
+          LANGUAGES[item.language] || item.language;
+
+        button.textContent =
+          item.word + " · " + languageName;
 
         button.addEventListener("click", () => {
           languageSelect.value = item.language;
@@ -885,42 +881,56 @@
       renderHistory();
     }
 
-    function detectScriptLanguages(word) {
-      // Caracteres específicos ajudam a reduzir as tentativas.
-      if (/[\u3040-\u30ff]/.test(word)) return ["ja"];
-      if (/[\uac00-\ud7af]/.test(word)) return ["ko"];
-      if (/[\u4e00-\u9fff]/.test(word)) return ["zh"];
-      if (/[\u0600-\u06ff]/.test(word)) return ["ar"];
-      if (/[\u0900-\u097f]/.test(word)) return ["hi"];
-
-      if (/[\u0400-\u04ff]/.test(word)) {
-        return ["ru", "uk"];
+    async function translateText(text, from, to) {
+      if (!text || !text.trim()) {
+        return null;
       }
 
-      // Para palavras com alfabeto latino, não é possível
-      // determinar com segurança o idioma apenas pela escrita.
-      const browserLanguage =
-        (navigator.language || "").toLowerCase();
+      const cleanText = text.trim();
 
-      let preferred = [];
+      if (
+        new TextEncoder().encode(cleanText).length > 500
+      ) {
+        return null;
+      }
 
-      if (browserLanguage.startsWith("pt")) preferred.push("pt-BR");
-      if (browserLanguage.startsWith("en")) preferred.push("en");
-      if (browserLanguage.startsWith("es")) preferred.push("es");
-      if (browserLanguage.startsWith("fr")) preferred.push("fr");
-      if (browserLanguage.startsWith("de")) preferred.push("de");
-      if (browserLanguage.startsWith("it")) preferred.push("it");
+      const params = new URLSearchParams({
+        q: cleanText,
+        langpair: from + "|" + to
+      });
 
-      return [...new Set([...preferred, ...AUTO_LANGUAGES])];
+      const response = await fetch(
+        TRANSLATION_API + "?" + params.toString()
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          "Serviço de tradução indisponível."
+        );
+      }
+
+      const data = await response.json();
+
+      if (
+        data.responseStatus !== 200 ||
+        !data.responseData ||
+        !data.responseData.translatedText
+      ) {
+        return null;
+      }
+
+      return data.responseData.translatedText;
     }
 
-    async function fetchDictionary(word, language) {
-      const url = API_BASE + "/" + language + "/" +
-        encodeURIComponent(word);
+    async function fetchDictionary(word) {
+      const url =
+        DICTIONARY_API + "/" + encodeURIComponent(word);
 
       const response = await fetch(url, {
         method: "GET",
-        headers: { "Accept": "application/json" }
+        headers: {
+          "Accept": "application/json"
+        }
       });
 
       if (response.status === 404) {
@@ -928,7 +938,9 @@
       }
 
       if (!response.ok) {
-        throw new Error("O serviço de dicionário está temporariamente indisponível.");
+        throw new Error(
+          "O serviço de dicionário está temporariamente indisponível."
+        );
       }
 
       const data = await response.json();
@@ -940,186 +952,348 @@
       return data;
     }
 
-    async function searchAutomatically(word, currentRequest) {
-      const languages = detectScriptLanguages(word);
+    function createElement(tag, className, text) {
+      const element = document.createElement(tag);
 
-      for (const language of languages) {
-        if (currentRequest !== requestNumber) return null;
-
-        try {
-          const data = await fetchDictionary(word, language);
-
-          if (data) {
-            return { data, language };
-          }
-        } catch (error) {
-          // Uma falha isolada não impede tentar outro idioma.
-          if (currentRequest !== requestNumber) return null;
-        }
+      if (className) {
+        element.className = className;
       }
 
-      return null;
+      if (text !== undefined) {
+        element.textContent = text;
+      }
+
+      return element;
     }
 
-    function renderResults(entries, language) {
+    async function renderResults(
+      entries,
+      language,
+      searchedWord,
+      englishWord,
+      currentRequest
+    ) {
       results.replaceChildren();
 
-      entries.forEach(entry => {
-        const card = document.createElement("article");
-        card.className = "result-card";
+      for (const entry of entries) {
+        if (currentRequest !== requestNumber) return;
 
-        const heading = document.createElement("div");
-        heading.className = "word-heading";
+        const card = createElement(
+          "article",
+          "result-card"
+        );
+
+        const heading = createElement(
+          "div",
+          "word-heading"
+        );
 
         const wordInfo = document.createElement("div");
 
-        const title = document.createElement("h2");
-        title.className = "word-title";
-        title.textContent = entry.word || "Palavra";
+        const title = createElement(
+          "h2",
+          "word-title",
+          searchedWord
+        );
 
-        const phoneticText = entry.phonetic ||
-          (entry.phonetics || []).find(item => item.text)?.text || "";
+        const phoneticText =
+          entry.phonetic ||
+          (entry.phonetics || []).find(
+            item => item.text
+          )?.text ||
+          "";
 
-        const phonetic = document.createElement("p");
-        phonetic.className = "phonetic";
-        phonetic.textContent = phoneticText
-          ? "Pronúncia: " + phoneticText
-          : "Pronúncia não disponível.";
+        const phonetic = createElement(
+          "p",
+          "phonetic",
+          phoneticText
+            ? "Pronúncia em inglês: " + phoneticText
+            : "Pronúncia não disponível."
+        );
 
-        const languageBadge = document.createElement("span");
-        languageBadge.className = "language-badge";
-        languageBadge.textContent = LANGUAGES[language] || language;
+        const badge = createElement(
+          "span",
+          "language-badge",
+          LANGUAGES[language]
+        );
 
-        wordInfo.append(title, phonetic, languageBadge);
+        wordInfo.append(title, phonetic, badge);
+
+        if (language === "pt-BR") {
+          wordInfo.appendChild(
+            createElement(
+              "p",
+              "word-origin",
+              "Correspondência em inglês: " + englishWord
+            )
+          );
+        }
+
         heading.appendChild(wordInfo);
 
         const audioUrl = (entry.phonetics || [])
           .map(item => item.audio)
-          .find(audio => typeof audio === "string" && audio.trim());
+          .find(
+            audio =>
+              typeof audio === "string" &&
+              audio.trim()
+          );
 
-        const audioButton = document.createElement("button");
+        const audioButton = createElement(
+          "button",
+          "audio-button",
+          "♫ Ouvir pronúncia"
+        );
+
         audioButton.type = "button";
-        audioButton.className = "audio-button";
-        audioButton.textContent = "♫ Ouvir pronúncia";
         audioButton.disabled = !audioUrl;
 
         if (audioUrl) {
-          audioButton.addEventListener("click", async () => {
-            try {
-              const audio = new Audio(
-                audioUrl.startsWith("//") ? "https:" + audioUrl : audioUrl
-              );
+          audioButton.addEventListener(
+            "click",
+            async () => {
+              try {
+                const audio = new Audio(
+                  audioUrl.startsWith("//")
+                    ? "https:" + audioUrl
+                    : audioUrl
+                );
 
-              await audio.play();
-            } catch {
-              showMessage(
-                "Não foi possível reproduzir o áudio. Tente novamente.",
-                "error"
-              );
+                await audio.play();
+              } catch {
+                showMessage(
+                  "Não foi possível reproduzir o áudio.",
+                  "error"
+                );
+              }
             }
-          });
+          );
         }
 
         heading.appendChild(audioButton);
         card.appendChild(heading);
 
         if (entry.origin) {
-          const origin = document.createElement("p");
-          origin.className = "word-origin";
-          origin.textContent = "Origem: " + entry.origin;
-          card.appendChild(origin);
+          card.appendChild(
+            createElement(
+              "p",
+              "word-origin",
+              "Origem: " + entry.origin
+            )
+          );
         }
 
-        (entry.meanings || []).forEach(meaning => {
-          const section = document.createElement("section");
-          section.className = "meaning";
+        let translationsUsed = 0;
+        const translationLimit = 6;
 
-          const partOfSpeech = document.createElement("h3");
-          partOfSpeech.className = "part-of-speech";
-          partOfSpeech.textContent =
-            meaning.partOfSpeech || "Significado";
+        for (const meaning of entry.meanings || []) {
+          if (currentRequest !== requestNumber) return;
 
-          section.appendChild(partOfSpeech);
+          const section = createElement(
+            "section",
+            "meaning"
+          );
 
-          (meaning.definitions || []).forEach((definition, index) => {
-            const definitionBlock = document.createElement("div");
-            definitionBlock.className = "definition";
+          section.appendChild(
+            createElement(
+              "h3",
+              "part-of-speech",
+              meaning.partOfSpeech || "Significado"
+            )
+          );
+
+          for (
+            let index = 0;
+            index < (meaning.definitions || []).length;
+            index++
+          ) {
+            if (currentRequest !== requestNumber) return;
+
+            const definition = meaning.definitions[index];
+
+            const block = createElement(
+              "div",
+              "definition"
+            );
 
             const paragraph = document.createElement("p");
 
-            const number = document.createElement("span");
-            number.className = "definition-number";
-            number.textContent = (index + 1) + ".";
+            const number = createElement(
+              "span",
+              "definition-number",
+              (index + 1) + "."
+            );
 
-            const definitionText = document.createElement("span");
-            definitionText.textContent =
-              definition.definition || "Definição não disponível.";
+            const definitionText = createElement(
+              "span",
+              "",
+              definition.definition ||
+                "Definição não disponível."
+            );
 
             paragraph.append(number, definitionText);
-            definitionBlock.appendChild(paragraph);
+            block.appendChild(paragraph);
 
-            if (definition.example) {
-              const example = document.createElement("blockquote");
-              example.className = "example";
+            if (
+              language === "pt-BR" &&
+              translationsUsed < translationLimit &&
+              definition.definition
+            ) {
+              try {
+                const translated = await translateText(
+                  definition.definition,
+                  "en",
+                  "pt"
+                );
 
-              const label = document.createElement("span");
-              label.className = "example-label";
-              label.textContent = "Exemplo de uso";
+                if (currentRequest !== requestNumber) return;
 
-              const exampleText = document.createElement("p");
-              exampleText.textContent = definition.example;
+                if (translated) {
+                  const translation = createElement(
+                    "p",
+                    "definition-translation"
+                  );
 
-              example.append(label, exampleText);
-              definitionBlock.appendChild(example);
+                  const label = createElement(
+                    "strong",
+                    "",
+                    "Português: "
+                  );
+
+                  translation.append(
+                    label,
+                    document.createTextNode(translated)
+                  );
+
+                  block.appendChild(translation);
+                }
+
+                translationsUsed++;
+              } catch {
+                // A definição original continua visível.
+              }
             }
 
-            section.appendChild(definitionBlock);
-          });
+            if (definition.example) {
+              const example = createElement(
+                "blockquote",
+                "example"
+              );
 
-          if (meaning.synonyms && meaning.synonyms.length) {
+              example.appendChild(
+                createElement(
+                  "span",
+                  "example-label",
+                  "Exemplo de uso"
+                )
+              );
+
+              example.appendChild(
+                createElement(
+                  "p",
+                  "",
+                  definition.example
+                )
+              );
+
+              block.appendChild(example);
+
+              if (
+                language === "pt-BR" &&
+                translationsUsed < translationLimit
+              ) {
+                try {
+                  const translatedExample =
+                    await translateText(
+                      definition.example,
+                      "en",
+                      "pt"
+                    );
+
+                  if (currentRequest !== requestNumber) return;
+
+                  if (translatedExample) {
+                    example.appendChild(
+                      createElement(
+                        "p",
+                        "definition-translation",
+                        "Tradução: " + translatedExample
+                      )
+                    );
+                  }
+
+                  translationsUsed++;
+                } catch {
+                  // Mantém o exemplo original.
+                }
+              }
+            }
+
+            section.appendChild(block);
+          }
+
+          if (meaning.synonyms?.length) {
             section.appendChild(
-              makeWordList("Sinônimos", meaning.synonyms)
+              makeWordList(
+                "Sinônimos",
+                meaning.synonyms
+              )
             );
           }
 
-          if (meaning.antonyms && meaning.antonyms.length) {
+          if (meaning.antonyms?.length) {
             section.appendChild(
-              makeWordList("Antônimos", meaning.antonyms)
+              makeWordList(
+                "Antônimos",
+                meaning.antonyms
+              )
             );
           }
 
           card.appendChild(section);
-        });
+        }
 
         if (!(entry.meanings || []).length) {
-          const empty = document.createElement("p");
-          empty.className = "word-origin";
-          empty.textContent =
-            "Não há definições disponíveis para esta entrada.";
-          card.appendChild(empty);
+          card.appendChild(
+            createElement(
+              "p",
+              "word-origin",
+              "Não há definições disponíveis."
+            )
+          );
         }
 
         results.appendChild(card);
-      });
+      }
 
       results.hidden = false;
     }
 
     function makeWordList(label, words) {
-      const container = document.createElement("div");
-      container.className = "word-list";
+      const container = createElement(
+        "div",
+        "word-list"
+      );
 
-      const heading = document.createElement("strong");
-      heading.textContent = label + ": ";
+      const heading = createElement(
+        "strong",
+        "",
+        label + ": "
+      );
+
       container.appendChild(heading);
 
       words.slice(0, 15).forEach(word => {
-        const button = document.createElement("button");
+        const button = createElement(
+          "button",
+          "word-chip",
+          word
+        );
+
         button.type = "button";
-        button.className = "word-chip";
-        button.textContent = word;
 
         button.addEventListener("click", () => {
+          languageSelect.value = "en";
           input.value = word;
           searchWord(word);
         });
@@ -1132,75 +1306,102 @@
 
     async function searchWord(rawWord) {
       const word = rawWord.trim();
-      const selectedLanguage = languageSelect.value;
+      const language = languageSelect.value;
+
       const currentRequest = ++requestNumber;
 
       if (!word) {
-        showMessage("Digite uma palavra para pesquisar.", "error");
+        showMessage(
+          "Digite uma palavra para pesquisar.",
+          "error"
+        );
+
         input.focus();
         return;
       }
 
       if (word.length > 100) {
-        showMessage("Digite uma palavra com até 100 caracteres.", "error");
+        showMessage(
+          "Digite uma palavra com até 100 caracteres.",
+          "error"
+        );
+
         return;
       }
 
       hideMessage();
       results.hidden = true;
       results.replaceChildren();
+
       setLoading(true);
 
-      showMessage(
-        selectedLanguage === "auto"
-          ? "Tentando identificar o idioma e consultar o dicionário..."
-          : "Consultando o dicionário..."
-      );
-
       try {
-        let data;
-        let detectedLanguage = selectedLanguage;
+        let englishWord = word;
 
-        if (selectedLanguage === "auto") {
-          const result = await searchAutomatically(word, currentRequest);
+        if (language === "pt-BR") {
+          showMessage(
+            "Encontrando a palavra correspondente em inglês..."
+          );
 
-          if (currentRequest !== requestNumber) return;
-
-          if (!result) {
-            throw new Error(
-              "Não encontramos essa palavra nos idiomas consultados. " +
-              "Tente selecionar o idioma manualmente."
-            );
-          }
-
-          data = result.data;
-          detectedLanguage = result.language;
-        } else {
-          data = await fetchDictionary(word, selectedLanguage);
+          englishWord = await translateText(
+            word,
+            "pt",
+            "en"
+          );
 
           if (currentRequest !== requestNumber) return;
 
-          if (!data) {
+          if (!englishWord) {
             throw new Error(
-              "Não encontramos essa palavra neste idioma. " +
-              "Confira a escrita ou tente outro idioma."
+              "Não conseguimos traduzir essa palavra. Tente novamente."
             );
           }
+
+          englishWord = englishWord
+            .split(/[;,]/)[0]
+            .trim()
+            .replace(/[.!?]+$/, "");
         }
+
+        showMessage(
+          "Buscando definições e exemplos..."
+        );
+
+        const data = await fetchDictionary(englishWord);
+
+        if (currentRequest !== requestNumber) return;
+
+        if (!data) {
+          throw new Error(
+            "Não encontramos essa palavra no dicionário inglês. Confira a escrita ou tente outra palavra."
+          );
+        }
+
+        showMessage(
+          "Preparando as definições bilíngues..."
+        );
+
+        await renderResults(
+          data,
+          language,
+          word,
+          englishWord,
+          currentRequest
+        );
 
         if (currentRequest !== requestNumber) return;
 
         hideMessage();
-        renderResults(data, detectedLanguage);
-        addToHistory(word, detectedLanguage);
+
+        addToHistory(word, language);
 
       } catch (error) {
         if (currentRequest !== requestNumber) return;
 
         showMessage(
           error instanceof TypeError
-            ? "Não foi possível conectar ao dicionário. Verifique sua internet e tente novamente."
-            : error.message || "Ocorreu um erro ao pesquisar.",
+            ? "Não foi possível conectar aos serviços. Verifique sua internet e tente novamente."
+            : error.message || "Ocorreu um erro durante a pesquisa.",
           "error"
         );
 
@@ -1223,6 +1424,7 @@
 
         languageSelect.value = language;
         input.value = word;
+
         searchWord(word);
       });
     });
