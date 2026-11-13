@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <link rel="stylesheet" href="css/mystic.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Dicionário | Mystic</title>
-  <meta name="description" content="Explore palavras, significados, exemplos e pronúncias no Dicionário Mystic.">
+  <meta name="description" content="Explore palavras, significados, exemplos e pronúncias em diversos idiomas no Dicionário Mystic.">
   <meta name="theme-color" content="#100e0b">
+
+  <link rel="stylesheet" href="css/mystic.css">
 
   <style>
     :root {
@@ -292,7 +294,8 @@
       color: var(--danger);
     }
 
-    .message[hidden] {
+    .message[hidden],
+    .results[hidden] {
       display: none;
     }
 
@@ -314,10 +317,6 @@
 
     .results {
       margin-top: 28px;
-    }
-
-    .results[hidden] {
-      display: none;
     }
 
     .result-card {
@@ -360,6 +359,17 @@
       font-family: Arial, sans-serif;
       font-size: 14px;
       margin-top: 8px;
+    }
+
+    .language-badge {
+      display: inline-block;
+      color: var(--gold);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      margin-top: 10px;
     }
 
     .audio-button {
@@ -577,6 +587,15 @@
         gap: 12px;
       }
 
+      .language-control {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .language-select {
+        width: 100%;
+      }
+
       .result-card {
         padding: 19px;
       }
@@ -604,7 +623,7 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Mystic - página inicial">
+      <a class="brand" href="home.html" aria-label="Mystic - página inicial">
         <img
           src="logo-mystic.jpg"
           alt="Logo Mystic"
@@ -616,7 +635,7 @@
         </div>
       </a>
 
-      <a class="header-link" href="index.html">Página inicial</a>
+      <a class="header-link" href="home.html">Página inicial</a>
     </div>
   </header>
 
@@ -626,7 +645,7 @@
       <h1>Dicionário Mystic</h1>
       <p>
         Descubra significados, explore novas palavras e amplie
-        seu conhecimento em português e inglês.
+        seu conhecimento em diversos idiomas.
       </p>
       <div class="ornament" aria-hidden="true">✧ ─ ✦ ─ ✧</div>
     </section>
@@ -658,8 +677,24 @@
           <label class="language-control" for="languageSelect">
             Idioma:
             <select id="languageSelect" class="language-select">
-              <option value="pt-BR">Portuguese (Português)</option>
-              <option value="en">English (Inglês)</option>
+              <option value="auto">Detectar automaticamente</option>
+              <option value="pt-BR">Português (Brasil)</option>
+              <option value="en">Inglês</option>
+              <option value="es">Espanhol</option>
+              <option value="fr">Francês</option>
+              <option value="de">Alemão</option>
+              <option value="it">Italiano</option>
+              <option value="ru">Russo</option>
+              <option value="ar">Árabe</option>
+              <option value="hi">Hindi</option>
+              <option value="ja">Japonês</option>
+              <option value="ko">Coreano</option>
+              <option value="zh">Chinês</option>
+              <option value="tr">Turco</option>
+              <option value="nl">Holandês</option>
+              <option value="sv">Sueco</option>
+              <option value="pl">Polonês</option>
+              <option value="uk">Ucraniano</option>
             </select>
           </label>
 
@@ -671,11 +706,13 @@
 
       <div class="suggestions">
         <span class="suggestions-label">Experimente:</span>
-        <button class="suggestion" type="button" data-word="amor">Amor</button>
-        <button class="suggestion" type="button" data-word="luz">Luz</button>
-        <button class="suggestion" type="button" data-word="sabedoria">Sabedoria</button>
-        <button class="suggestion" type="button" data-word="love">Love</button>
-        <button class="suggestion" type="button" data-word="dream">Dream</button>
+        <button class="suggestion" type="button" data-word="amor" data-language="pt-BR">Amor</button>
+        <button class="suggestion" type="button" data-word="luz" data-language="pt-BR">Luz</button>
+        <button class="suggestion" type="button" data-word="sabedoria" data-language="pt-BR">Sabedoria</button>
+        <button class="suggestion" type="button" data-word="love" data-language="en">Love</button>
+        <button class="suggestion" type="button" data-word="dream" data-language="en">Dream</button>
+        <button class="suggestion" type="button" data-word="amour" data-language="fr">Amour</button>
+        <button class="suggestion" type="button" data-word="amor" data-language="es">Amor (ES)</button>
       </div>
     </section>
 
@@ -729,11 +766,37 @@
     const historyList = document.getElementById("historyList");
     const clearHistoryButton = document.getElementById("clearHistory");
 
-    const API_BASE =
-      "https://api.dictionaryapi.dev/api/v2/entries";
-
-    const HISTORY_KEY = "mystic_dictionary_history_v1";
+    const API_BASE = "https://api.dictionaryapi.dev/api/v2/entries";
+    const HISTORY_KEY = "mystic_dictionary_history_v2";
     const MAX_HISTORY = 8;
+
+    const LANGUAGES = {
+      "pt-BR": "Português (Brasil)",
+      "en": "Inglês",
+      "es": "Espanhol",
+      "fr": "Francês",
+      "de": "Alemão",
+      "it": "Italiano",
+      "ru": "Russo",
+      "ar": "Árabe",
+      "hi": "Hindi",
+      "ja": "Japonês",
+      "ko": "Coreano",
+      "zh": "Chinês",
+      "tr": "Turco",
+      "nl": "Holandês",
+      "sv": "Sueco",
+      "pl": "Polonês",
+      "uk": "Ucraniano"
+    };
+
+    // Idiomas que a API será consultada ao tentar detectar automaticamente.
+    // A ordem é apenas uma prioridade de busca, não uma identificação garantida.
+    const AUTO_LANGUAGES = [
+      "pt-BR", "en", "es", "fr", "de", "it",
+      "nl", "tr", "pl", "sv", "ru", "uk",
+      "ar", "hi", "ja", "ko", "zh"
+    ];
 
     let requestNumber = 0;
     let history = loadHistory();
@@ -752,29 +815,14 @@
 
     function saveHistory() {
       try {
-        localStorage.setItem(
-          HISTORY_KEY,
-          JSON.stringify(history)
-        );
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
       } catch {
-        // O dicionário continua funcionando se o armazenamento estiver bloqueado.
+        // O dicionário continua funcionando sem histórico.
       }
     }
 
-    function escapeHTML(value) {
-      return String(value ?? "").replace(/[&<>"']/g, char => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#039;"
-      })[char]);
-    }
-
     function showMessage(message, type = "") {
-      statusMessage.className = "message" +
-        (type ? " " + type : "");
-
+      statusMessage.className = "message" + (type ? " " + type : "");
       statusMessage.textContent = message;
       statusMessage.hidden = false;
     }
@@ -808,8 +856,9 @@
         const button = document.createElement("button");
         button.type = "button";
         button.className = "history-item";
-        button.textContent = item.word + " · " +
-          (item.language === "en" ? "EN" : "PT");
+
+        const languageName = LANGUAGES[item.language] || item.language;
+        button.textContent = item.word + " · " + languageName;
 
         button.addEventListener("click", () => {
           languageSelect.value = item.language;
@@ -823,8 +872,10 @@
 
     function addToHistory(word, language) {
       history = history.filter(item =>
-        !(item.word.toLowerCase() === word.toLowerCase()
-          && item.language === language)
+        !(
+          item.word.toLowerCase() === word.toLowerCase() &&
+          item.language === language
+        )
       );
 
       history.unshift({ word, language });
@@ -834,7 +885,83 @@
       renderHistory();
     }
 
-    function renderResults(entries) {
+    function detectScriptLanguages(word) {
+      // Caracteres específicos ajudam a reduzir as tentativas.
+      if (/[\u3040-\u30ff]/.test(word)) return ["ja"];
+      if (/[\uac00-\ud7af]/.test(word)) return ["ko"];
+      if (/[\u4e00-\u9fff]/.test(word)) return ["zh"];
+      if (/[\u0600-\u06ff]/.test(word)) return ["ar"];
+      if (/[\u0900-\u097f]/.test(word)) return ["hi"];
+
+      if (/[\u0400-\u04ff]/.test(word)) {
+        return ["ru", "uk"];
+      }
+
+      // Para palavras com alfabeto latino, não é possível
+      // determinar com segurança o idioma apenas pela escrita.
+      const browserLanguage =
+        (navigator.language || "").toLowerCase();
+
+      let preferred = [];
+
+      if (browserLanguage.startsWith("pt")) preferred.push("pt-BR");
+      if (browserLanguage.startsWith("en")) preferred.push("en");
+      if (browserLanguage.startsWith("es")) preferred.push("es");
+      if (browserLanguage.startsWith("fr")) preferred.push("fr");
+      if (browserLanguage.startsWith("de")) preferred.push("de");
+      if (browserLanguage.startsWith("it")) preferred.push("it");
+
+      return [...new Set([...preferred, ...AUTO_LANGUAGES])];
+    }
+
+    async function fetchDictionary(word, language) {
+      const url = API_BASE + "/" + language + "/" +
+        encodeURIComponent(word);
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.status === 404) {
+        return null;
+      }
+
+      if (!response.ok) {
+        throw new Error("O serviço de dicionário está temporariamente indisponível.");
+      }
+
+      const data = await response.json();
+
+      if (!Array.isArray(data) || data.length === 0) {
+        return null;
+      }
+
+      return data;
+    }
+
+    async function searchAutomatically(word, currentRequest) {
+      const languages = detectScriptLanguages(word);
+
+      for (const language of languages) {
+        if (currentRequest !== requestNumber) return null;
+
+        try {
+          const data = await fetchDictionary(word, language);
+
+          if (data) {
+            return { data, language };
+          }
+        } catch (error) {
+          // Uma falha isolada não impede tentar outro idioma.
+          if (currentRequest !== requestNumber) return null;
+        }
+      }
+
+      return null;
+    }
+
+    function renderResults(entries, language) {
       results.replaceChildren();
 
       entries.forEach(entry => {
@@ -851,8 +978,7 @@
         title.textContent = entry.word || "Palavra";
 
         const phoneticText = entry.phonetic ||
-          (entry.phonetics || [])
-            .find(item => item.text)?.text || "";
+          (entry.phonetics || []).find(item => item.text)?.text || "";
 
         const phonetic = document.createElement("p");
         phonetic.className = "phonetic";
@@ -860,7 +986,11 @@
           ? "Pronúncia: " + phoneticText
           : "Pronúncia não disponível.";
 
-        wordInfo.append(title, phonetic);
+        const languageBadge = document.createElement("span");
+        languageBadge.className = "language-badge";
+        languageBadge.textContent = LANGUAGES[language] || language;
+
+        wordInfo.append(title, phonetic, languageBadge);
         heading.appendChild(wordInfo);
 
         const audioUrl = (entry.phonetics || [])
@@ -872,18 +1002,12 @@
         audioButton.className = "audio-button";
         audioButton.textContent = "♫ Ouvir pronúncia";
         audioButton.disabled = !audioUrl;
-        audioButton.setAttribute(
-          "aria-label",
-          "Ouvir pronúncia de " + (entry.word || "palavra")
-        );
 
         if (audioUrl) {
           audioButton.addEventListener("click", async () => {
             try {
               const audio = new Audio(
-                audioUrl.startsWith("//")
-                  ? "https:" + audioUrl
-                  : audioUrl
+                audioUrl.startsWith("//") ? "https:" + audioUrl : audioUrl
               );
 
               await audio.play();
@@ -952,22 +1076,18 @@
             section.appendChild(definitionBlock);
           });
 
-          const synonyms = meaning.synonyms || [];
-          const antonyms = meaning.antonyms || [];
-
-          if (synonyms.length) {
+          if (meaning.synonyms && meaning.synonyms.length) {
             section.appendChild(
-              makeWordList("Sinônimos", synonyms)
+              makeWordList("Sinônimos", meaning.synonyms)
             );
           }
 
-          if (antonyms.length) {
+          if (meaning.antonyms && meaning.antonyms.length) {
             section.appendChild(
-              makeWordList("Antônimos", antonyms)
+              makeWordList("Antônimos", meaning.antonyms)
             );
           }
 
-          results.appendChild(card);
           card.appendChild(section);
         });
 
@@ -979,9 +1099,7 @@
           card.appendChild(empty);
         }
 
-        if (!card.isConnected) {
-          results.appendChild(card);
-        }
+        results.appendChild(card);
       });
 
       results.hidden = false;
@@ -1000,6 +1118,7 @@
         button.type = "button";
         button.className = "word-chip";
         button.textContent = word;
+
         button.addEventListener("click", () => {
           input.value = word;
           searchWord(word);
@@ -1013,7 +1132,7 @@
 
     async function searchWord(rawWord) {
       const word = rawWord.trim();
-      const language = languageSelect.value;
+      const selectedLanguage = languageSelect.value;
       const currentRequest = ++requestNumber;
 
       if (!word) {
@@ -1032,51 +1151,59 @@
       results.replaceChildren();
       setLoading(true);
 
-      showMessage("Consultando o dicionário...");
+      showMessage(
+        selectedLanguage === "auto"
+          ? "Tentando identificar o idioma e consultar o dicionário..."
+          : "Consultando o dicionário..."
+      );
 
       try {
-        const url = API_BASE + "/" + language + "/" +
-          encodeURIComponent(word);
+        let data;
+        let detectedLanguage = selectedLanguage;
 
-        const response = await fetch(url, {
-          method: "GET",
-          headers: { "Accept": "application/json" }
-        });
+        if (selectedLanguage === "auto") {
+          const result = await searchAutomatically(word, currentRequest);
 
-        if (currentRequest !== requestNumber) return;
+          if (currentRequest !== requestNumber) return;
 
-        if (!response.ok) {
-          if (response.status === 404) {
+          if (!result) {
+            throw new Error(
+              "Não encontramos essa palavra nos idiomas consultados. " +
+              "Tente selecionar o idioma manualmente."
+            );
+          }
+
+          data = result.data;
+          detectedLanguage = result.language;
+        } else {
+          data = await fetchDictionary(word, selectedLanguage);
+
+          if (currentRequest !== requestNumber) return;
+
+          if (!data) {
             throw new Error(
               "Não encontramos essa palavra neste idioma. " +
               "Confira a escrita ou tente outro idioma."
             );
           }
-
-          throw new Error(
-            "O serviço de dicionário está temporariamente indisponível. " +
-            "Tente novamente em alguns instantes."
-          );
         }
 
-        const data = await response.json();
-
-        if (!Array.isArray(data) || data.length === 0) {
-          throw new Error("Nenhuma definição foi encontrada.");
-        }
+        if (currentRequest !== requestNumber) return;
 
         hideMessage();
-        renderResults(data);
-        addToHistory(word, language);
+        renderResults(data, detectedLanguage);
+        addToHistory(word, detectedLanguage);
+
       } catch (error) {
         if (currentRequest !== requestNumber) return;
 
-        const message = error instanceof TypeError
-          ? "Não foi possível conectar ao dicionário. " +
-            "Verifique sua conexão com a internet e tente novamente."
-          : error.message || "Ocorreu um erro ao pesquisar.";
+        showMessage(
+          error instanceof TypeError
+            ? "Não foi possível conectar ao dicionário. Verifique sua internet e tente novamente."
+            : error.message || "Ocorreu um erro ao pesquisar.",
+          "error"
+        );
 
-        showMessage(message, "error");
       } finally {
         if (currentRequest === requestNumber) {
           setLoading(false);
@@ -1092,14 +1219,9 @@
     document.querySelectorAll(".suggestion").forEach(button => {
       button.addEventListener("click", () => {
         const word = button.dataset.word;
+        const language = button.dataset.language;
 
-        // Seleciona inglês para as sugestões em inglês.
-        const englishWords = ["love", "dream"];
-
-        languageSelect.value = englishWords.includes(word)
-          ? "en"
-          : "pt-BR";
-
+        languageSelect.value = language;
         input.value = word;
         searchWord(word);
       });
