@@ -15,67 +15,55 @@ const contador = document.getElementById("contador");
 const mensagem = document.getElementById("mensagem");
 
 const botaoSalvar = document.getElementById("botaoSalvar");
+const botaoCorrigir = document.getElementById("botaoCorrigir");
+
+const resultadoPublicacao = document.getElementById("resultadoPublicacao");
+const painelEscrita = document.getElementById("painelEscrita");
 
 
-// ==================================
-// MENSAGENS
-// ==================================
-
-function mostrarMensagem(texto, classe) {
-    mensagem.textContent = texto;
-    mensagem.className = "mensagem " + classe;
-}
-
-
-// ==================================
-// SELEÇÃO DA MODALIDADE
-// ==================================
+// =====================================
+// MODALIDADE
+// =====================================
 
 function atualizarModalidade() {
 
-    const resenhaAtiva = tipo.value === "resenha";
+    const resenha = tipo.value === "resenha";
 
-    avisoResenha.style.display = resenhaAtiva
-        ? "block"
-        : "none";
+    avisoResenha.style.display = resenha ? "block" : "none";
 
-    conteudo.placeholder = resenhaAtiva
+    conteudo.placeholder = resenha
         ? "Escreva sua resenha-desafio aqui..."
         : "Comece a escrever sua redação aqui...";
-
-    conteudo.spellcheck = true;
 
 }
 
 tipo.addEventListener("change", atualizarModalidade);
 
 
-// ==================================
+// =====================================
 // CONTADOR
-// ==================================
+// =====================================
 
 conteudo.addEventListener("input", () => {
     contador.textContent = conteudo.value.length;
 });
 
 
-// ==================================
-// BLOQUEIO DE COPIAR E COLAR
-// ==================================
+// =====================================
+// BLOQUEIO NA RESENHA
+// =====================================
 
-function bloquearAcao(evento) {
+function bloquearClipboard(evento) {
 
-    if (tipo.value !== "resenha") {
-        return;
+    if (tipo.value === "resenha") {
+        evento.preventDefault();
     }
-
-    evento.preventDefault();
 
 }
 
-conteudo.addEventListener("copy", bloquearAcao);
-conteudo.addEventListener("cut", bloquearAcao);
-conteudo.addEventListener("paste", bloquearAcao);
+conteudo.addEventListener("copy", bloquearClipboard);
+conteudo.addEventListener("cut", bloquearClipboard);
+conteudo.addEventListener("paste", bloquearClipboard);
 
 conteudo.addEventListener("contextmenu", evento => {
 
@@ -87,9 +75,7 @@ conteudo.addEventListener("contextmenu", evento => {
 
 conteudo.addEventListener("keydown", evento => {
 
-    if (tipo.value !== "resenha") {
-        return;
-    }
+    if (tipo.value !== "resenha") return;
 
     const tecla = evento.key.toLowerCase();
 
@@ -103,9 +89,28 @@ conteudo.addEventListener("keydown", evento => {
 });
 
 
-// ==================================
-// OBTER DADOS DO FORMULÁRIO
-// ==================================
+// =====================================
+// MENSAGENS
+// =====================================
+
+function mostrarMensagem(texto, classe) {
+
+    mensagem.textContent = texto;
+    mensagem.className = "mensagem " + classe;
+
+}
+
+function limparMensagem() {
+
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
+
+}
+
+
+// =====================================
+// DADOS DO FORMULÁRIO
+// =====================================
 
 function obterDados() {
 
@@ -138,8 +143,9 @@ function validarDados(dados) {
     }
 
     if (dados.conteudo.length < 30) {
+
         mostrarMensagem(
-            "Escreva pelo menos 30 caracteres.",
+            "Seu texto precisa ter pelo menos 30 caracteres.",
             "erro"
         );
 
@@ -151,11 +157,11 @@ function validarDados(dados) {
 }
 
 
-// ==================================
-// LER ARMAZENAMENTO
-// ==================================
+// =====================================
+// LEITURA DO ARMAZENAMENTO
+// =====================================
 
-function lerArmazenamento(chave) {
+function lerDados(chave) {
 
     try {
 
@@ -174,26 +180,22 @@ function lerArmazenamento(chave) {
 }
 
 
-// ==================================
+// =====================================
 // SALVAR RASCUNHO
-// ==================================
+// =====================================
 
 botaoSalvar.addEventListener("click", () => {
 
     const dados = obterDados();
 
-    if (!validarDados(dados)) {
-        return;
-    }
+    if (!validarDados(dados)) return;
 
-    const rascunhos = lerArmazenamento(RASCUNHO_KEY);
+    const rascunhos = lerDados(RASCUNHO_KEY);
 
-    const novoRascunho = {
+    rascunhos.unshift({
         ...dados,
         salvoEm: new Date().toISOString()
-    };
-
-    rascunhos.unshift(novoRascunho);
+    });
 
     try {
 
@@ -203,14 +205,14 @@ botaoSalvar.addEventListener("click", () => {
         );
 
         mostrarMensagem(
-            "Rascunho salvo com sucesso! Você poderá continuar sua escrita depois, neste navegador.",
+            "Sua redação foi salva como rascunho!",
             "sucesso"
         );
 
     } catch (erro) {
 
         mostrarMensagem(
-            "Não foi possível salvar. Verifique o espaço disponível no navegador.",
+            "Não foi possível salvar. Verifique o armazenamento do navegador.",
             "erro"
         );
 
@@ -219,9 +221,36 @@ botaoSalvar.addEventListener("click", () => {
 });
 
 
-// ==================================
+// =====================================
+// CORRIGIR
+// =====================================
+
+botaoCorrigir.addEventListener("click", () => {
+
+    if (!conteudo.value.trim()) {
+
+        mostrarMensagem(
+            "Escreva seu texto antes de solicitar a correção.",
+            "erro"
+        );
+
+        conteudo.focus();
+        return;
+    }
+
+    mostrarMensagem(
+        "O corretor ortográfico do navegador está ativado. As sugestões de escrita aparecem no próprio campo de texto. A correção completa por IA ainda precisa ser conectada a um servidor.",
+        "aviso-mensagem"
+    );
+
+    conteudo.focus();
+
+});
+
+
+// =====================================
 // PUBLICAR
-// ==================================
+// =====================================
 
 form.addEventListener("submit", evento => {
 
@@ -229,11 +258,9 @@ form.addEventListener("submit", evento => {
 
     const dados = obterDados();
 
-    if (!validarDados(dados)) {
-        return;
-    }
+    if (!validarDados(dados)) return;
 
-    const publicacoes = lerArmazenamento(STORAGE_KEY);
+    const publicacoes = lerDados(STORAGE_KEY);
 
     publicacoes.unshift(dados);
 
@@ -244,25 +271,22 @@ form.addEventListener("submit", evento => {
             JSON.stringify(publicacoes)
         );
 
-        mostrarMensagem(
-            "Publicação realizada com sucesso! Abrindo a página de redações...",
-            "sucesso"
-        );
+        // Esconde o formulário após a publicação.
+        form.classList.add("oculto");
 
-        form.reset();
+        mensagem.className = "mensagem";
 
-        contador.textContent = "0";
+        resultadoPublicacao.style.display = "block";
 
-        atualizarModalidade();
-
-        setTimeout(() => {
-            location.href = "redacoes.html";
-        }, 1200);
+        resultadoPublicacao.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 
     } catch (erro) {
 
         mostrarMensagem(
-            "Não foi possível publicar. Verifique o espaço disponível no navegador.",
+            "Não foi possível publicar. Verifique o armazenamento do navegador.",
             "erro"
         );
 
@@ -271,8 +295,45 @@ form.addEventListener("submit", evento => {
 });
 
 
-// ==================================
+// =====================================
+// CRIAR OUTRA PUBLICAÇÃO
+// =====================================
+
+document.getElementById("botaoNova").addEventListener("click", () => {
+
+    form.reset();
+
+    contador.textContent = "0";
+
+    atualizarModalidade();
+
+    limparMensagem();
+
+    resultadoPublicacao.style.display = "none";
+
+    form.classList.remove("oculto");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+});
+
+
+// =====================================
+// VOLTAR AO INÍCIO
+// =====================================
+
+document.getElementById("botaoInicio").addEventListener("click", () => {
+
+    window.location.href = "home.html";
+
+});
+
+
+// =====================================
 // INICIALIZAÇÃO
-// ==================================
+// =====================================
 
 atualizarModalidade();
