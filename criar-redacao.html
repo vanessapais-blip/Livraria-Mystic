@@ -36,7 +36,6 @@
             color: #d2ad69;
             font-size: 28px;
             font-weight: bold;
-            letter-spacing: 1px;
         }
 
         nav {
@@ -48,7 +47,6 @@
         nav a {
             color: #c8c0b3;
             text-decoration: none;
-            transition: .2s;
         }
 
         nav a:hover {
@@ -56,24 +54,24 @@
         }
 
         main {
-            max-width: 950px;
+            max-width: 900px;
             margin: 45px auto;
             padding: 0 22px;
         }
 
-        .cabecalho-pagina {
+        .cabecalho {
             margin-bottom: 30px;
         }
 
-        .cabecalho-pagina h1 {
+        .cabecalho h1 {
             color: #e0c28b;
             font-size: 35px;
             margin-bottom: 10px;
         }
 
-        .cabecalho-pagina p {
+        .cabecalho p {
             color: #aaa;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .painel {
@@ -81,48 +79,6 @@
             border: 1px solid #51432e;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 35px rgba(0,0,0,.2);
-        }
-
-        .modalidades {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .modalidade {
-            background: #29241e;
-            color: #ddd;
-            border: 1px solid #51432e;
-            border-radius: 10px;
-            padding: 18px;
-            text-align: left;
-            cursor: pointer;
-            transition: .2s;
-        }
-
-        .modalidade:hover {
-            border-color: #c5a15a;
-        }
-
-        .modalidade.ativa {
-            background: #3a3021;
-            border-color: #d2ad69;
-            box-shadow: inset 0 0 0 1px #d2ad69;
-        }
-
-        .modalidade strong {
-            display: block;
-            color: #e0c28b;
-            font-size: 17px;
-            margin-bottom: 8px;
-        }
-
-        .modalidade span {
-            color: #aaa;
-            font-size: 13px;
-            line-height: 1.5;
         }
 
         .campo {
@@ -137,6 +93,7 @@
         }
 
         .campo input,
+        .campo select,
         .campo textarea {
             width: 100%;
             background: #171513;
@@ -147,97 +104,92 @@
             font-size: 15px;
             font-family: inherit;
             outline: none;
-            transition: .2s;
         }
 
         .campo input:focus,
+        .campo select:focus,
         .campo textarea:focus {
             border-color: #d2ad69;
-            box-shadow: 0 0 0 2px rgba(210,173,105,.12);
+        }
+
+        .campo select {
+            cursor: pointer;
         }
 
         .campo textarea {
-            min-height: 350px;
+            min-height: 380px;
             resize: vertical;
             line-height: 1.8;
         }
 
-        .campo input::placeholder,
-        .campo textarea::placeholder {
+        .campo textarea::placeholder,
+        .campo input::placeholder {
             color: #777;
         }
 
-        .informacao {
+        .contador {
+            text-align: right;
             color: #999;
             font-size: 12px;
             margin-top: 8px;
-            line-height: 1.5;
         }
 
-        .aviso-resenha {
+        .aviso {
             display: none;
             background: #302719;
             border: 1px solid #80643a;
             color: #dfc18a;
             border-radius: 9px;
             padding: 14px;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
             font-size: 13px;
             line-height: 1.6;
         }
 
-        .contador {
-            color: #999;
-            font-size: 12px;
-            text-align: right;
-            margin-top: 7px;
-        }
-
-        .acoes {
+        .botoes {
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 12px;
             margin-top: 25px;
         }
 
         .botao {
-            border: none;
-            border-radius: 8px;
             padding: 13px 20px;
+            border-radius: 8px;
+            border: none;
             font-weight: bold;
-            font-size: 14px;
             cursor: pointer;
             transition: .2s;
         }
 
-        .botao-publicar {
-            background: #c5a15a;
-            color: #211b10;
-        }
-
-        .botao-publicar:hover {
-            background: #e0bd78;
-        }
-
-        .botao-revisar {
+        .salvar {
             background: #302719;
             color: #dfc18a;
             border: 1px solid #80643a;
         }
 
-        .botao-revisar:hover {
+        .salvar:hover {
             background: #41331f;
         }
 
-        .botao-voltar {
+        .publicar {
+            background: #c5a15a;
+            color: #211b10;
+        }
+
+        .publicar:hover {
+            background: #e0bd78;
+        }
+
+        .voltar {
             background: transparent;
             color: #bbb;
             border: 1px solid #51432e;
         }
 
-        .botao-voltar:hover {
-            color: #e0c28b;
+        .voltar:hover {
             border-color: #c5a15a;
+            color: #e0c28b;
         }
 
         .mensagem {
@@ -245,8 +197,8 @@
             margin-top: 20px;
             padding: 13px;
             border-radius: 8px;
-            font-size: 14px;
             line-height: 1.5;
+            font-size: 14px;
         }
 
         .mensagem.sucesso {
@@ -263,34 +215,6 @@
             color: #efb2b2;
         }
 
-        .mensagem.aviso {
-            display: block;
-            background: #302719;
-            border: 1px solid #80643a;
-            color: #dfc18a;
-        }
-
-        .area-revisao {
-            display: none;
-            background: #191713;
-            border: 1px solid #80643a;
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 25px;
-        }
-
-        .area-revisao h2 {
-            color: #e0c28b;
-            font-size: 19px;
-            margin-top: 0;
-        }
-
-        .area-revisao p {
-            color: #ccc;
-            line-height: 1.7;
-            white-space: pre-wrap;
-        }
-
         footer {
             text-align: center;
             color: #777;
@@ -299,15 +223,11 @@
             border-top: 1px solid #51432e;
         }
 
-        @media (max-width: 700px) {
+        @media(max-width: 700px) {
             header {
                 padding: 18px 20px;
                 flex-direction: column;
                 align-items: flex-start;
-            }
-
-            nav {
-                gap: 13px;
             }
 
             main {
@@ -318,15 +238,11 @@
                 padding: 20px;
             }
 
-            .modalidades {
-                grid-template-columns: 1fr;
-            }
-
-            .cabecalho-pagina h1 {
+            .cabecalho h1 {
                 font-size: 28px;
             }
 
-            .acoes {
+            .botoes {
                 flex-direction: column;
             }
 
@@ -353,53 +269,33 @@
 
 <main>
 
-    <div class="cabecalho-pagina">
-        <h1 id="tituloPagina">Criar publicação</h1>
-
-        <p id="descricaoPagina">
-            Compartilhe suas ideias, opiniões e conhecimentos com a comunidade Mystic.
+    <div class="cabecalho">
+        <h1>Criar publicação</h1>
+        <p>
+            Escreva, salve seus rascunhos e compartilhe suas ideias
+            com a comunidade Mystic.
         </p>
     </div>
 
     <section class="painel">
 
-        <div class="modalidades">
-
-            <button
-                type="button"
-                class="modalidade ativa"
-                id="abaRedacao"
-                data-tipo="redacao"
-            >
-                <strong>✒ Redação</strong>
-                <span>
-                    Produza um texto livre, desenvolva seus argumentos e compartilhe suas ideias.
-                </span>
-            </button>
-
-            <button
-                type="button"
-                class="modalidade"
-                id="abaResenha"
-                data-tipo="resenha"
-            >
-                <strong>📜 Resenha-desafio</strong>
-                <span>
-                    Participe de uma modalidade especial de escrita da comunidade.
-                </span>
-            </button>
-
-        </div>
-
-        <div class="aviso-resenha" id="avisoResenha">
-            <strong>Modo Resenha-desafio ativado.</strong>
-            <br>
-            Nesta modalidade, os comandos comuns de copiar, recortar e colar
-            serão bloqueados dentro do campo de texto. O bloqueio é apenas
-            uma medida básica do navegador e não impede todas as formas de cópia.
-        </div>
-
         <form id="formRedacao">
+
+            <div class="campo">
+                <label for="tipo">Modalidade</label>
+
+                <select id="tipo" name="tipo">
+                    <option value="redacao">Redação</option>
+                    <option value="resenha">Resenha-desafio</option>
+                </select>
+            </div>
+
+            <div class="aviso" id="avisoResenha">
+                <strong>Resenha-desafio ativada.</strong>
+                <br>
+                Os comandos comuns de copiar, recortar e colar
+                serão bloqueados dentro do campo de escrita.
+            </div>
 
             <div class="campo">
                 <label for="autor">Nome do autor</label>
@@ -407,21 +303,19 @@
                 <input
                     type="text"
                     id="autor"
-                    name="autor"
-                    placeholder="Como deseja aparecer na publicação?"
+                    placeholder="Nome que aparecerá na publicação"
                     maxlength="60"
                     required
                 >
             </div>
 
             <div class="campo">
-                <label for="titulo">Título da publicação</label>
+                <label for="titulo">Título</label>
 
                 <input
                     type="text"
                     id="titulo"
-                    name="titulo"
-                    placeholder="Dê um título ao seu texto..."
+                    placeholder="Digite o título da sua produção"
                     maxlength="100"
                     required
                 >
@@ -433,61 +327,50 @@
                 <input
                     type="text"
                     id="tema"
-                    name="tema"
-                    placeholder="Qual é o tema da sua produção?"
+                    placeholder="Informe o tema"
                     maxlength="100"
                     required
                 >
             </div>
 
             <div class="campo">
-
-                <label for="conteudo" id="labelConteudo">
-                    Sua redação
-                </label>
+                <label for="conteudo">Seu texto</label>
 
                 <textarea
                     id="conteudo"
-                    name="conteudo"
-                    placeholder="Comece a escrever sua produção aqui..."
+                    placeholder="Comece a escrever aqui..."
                     minlength="30"
-                    required
                     spellcheck="true"
                     lang="pt-BR"
+                    required
                 ></textarea>
 
                 <div class="contador">
                     <span id="contador">0</span> caracteres
                 </div>
-
-                <p class="informacao" id="informacaoTexto">
-                    Você pode editar, copiar e colar normalmente nesta modalidade.
-                </p>
-
             </div>
 
-            <div class="acoes">
+            <div class="botoes">
 
                 <button
                     type="button"
-                    class="botao botao-revisar"
-                    id="botaoRevisar"
+                    class="botao salvar"
+                    id="botaoSalvar"
                 >
-                    ✨ Revisar com IA
+                    ♧ Salvar redação
                 </button>
 
                 <button
                     type="submit"
-                    class="botao botao-publicar"
-                    id="botaoPublicar"
+                    class="botao publicar"
                 >
                     Publicar na Mystic
                 </button>
 
                 <button
                     type="button"
-                    class="botao botao-voltar"
-                    onclick="window.location.href='redacoes.html'"
+                    class="botao voltar"
+                    onclick="location.href='redacoes.html'"
                 >
                     Voltar
                 </button>
@@ -496,20 +379,18 @@
 
         </form>
 
-        <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
-
-        <section class="area-revisao" id="areaRevisao">
-            <h2>✨ Revisão do seu texto</h2>
-            <p id="resultadoRevisao"></p>
-        </section>
+        <div
+            id="mensagem"
+            class="mensagem"
+            role="status"
+            aria-live="polite"
+        ></div>
 
     </section>
 
 </main>
 
-<footer>
-    Mystic — Livraria
-</footer>
+<footer>Mystic — Livraria</footer>
 
 <script src="./js/escrever-redacao.js"></script>
 
